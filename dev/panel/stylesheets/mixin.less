@@ -1,0 +1,103 @@
+.border-radius(...) {
+    -webkit-border-radius: @arguments;
+    -moz-border-radius: @arguments;
+    border-radius: @arguments;
+}
+
+.opacity(@opacity: 0.5) {
+    -moz-opacity: @opacity;
+    -khtml-opacity: @opacity;
+    -webkit-opacity: @opacity;
+    opacity: @opacity;
+    @opperc: @opacity * 100;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+    filter: ~"alpha(opacity=@{opperc})";
+}
+
+.transform(...) {
+    -webkit-transform: @arguments;
+    -moz-transform: @arguments;
+    -o-transform: @arguments;
+    -ms-transform: @arguments;
+    transform: @arguments;
+}
+
+.rotation(@deg:5deg){
+    .transform(rotate(@deg));
+}
+
+.scale(@ratio:1.5){
+    .transform(scale(@ratio));
+}
+
+.transition(@property:all, @duration:0.2s, @ease:ease-out) {
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -o-transition: @arguments;
+    transition: @arguments
+}
+
+.box-shadow(...){
+    box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    -webkit-box-shadow: @arguments;
+}
+
+.text-shadow(@x:0, @y:0, @blur:1px, @color:#000){
+    text-shadow: @arguments;
+    -moz-text-shadow: @arguments;
+    -webkit-text-shadow: @arguments;
+}
+
+.box-sizing(@sizing: border-box) {
+    -ms-box-sizing: @sizing;
+    -moz-box-sizing: @sizing;
+    -webkit-box-sizing: @sizing;
+    box-sizing: @sizing;
+}
+
+.user-select(@argument: none) {
+    -webkit-user-select: @argument;
+    -moz-user-select: @argument;
+    -ms-user-select: @argument;
+    user-select: @argument;
+}
+
+.background-clip(@argument: padding-box) {
+    -moz-background-clip: @argument;
+    -webkit-background-clip: @argument;
+    background-clip: @argument;
+}
+
+.font(@px, @color, @weight:normal, @font:@font-type, @family:@font-family){
+    font:@weight @px @font,@family;
+    color:@color;
+}
+
+.gradient (@startColor: #eee, @endColor: white) {
+    background-color: @startColor;
+    background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+    background: -webkit-linear-gradient(top, @startColor, @endColor);
+    background: -moz-linear-gradient(top, @startColor, @endColor);
+    background: -ms-linear-gradient(top, @startColor, @endColor);
+    background: -o-linear-gradient(top, @startColor, @endColor);
+}
+.horizontal-gradient (@startColor: #eee, @endColor: white) {
+    background-color: @startColor;
+    background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+    background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+    background-image: -moz-linear-gradient(left, @startColor, @endColor);
+    background-image: -ms-linear-gradient(left, @startColor, @endColor);
+    background-image: -o-linear-gradient(left, @startColor, @endColor);
+}
+.placeholder(@color: #fff) {
+    &:-moz-placeholder {color: @color;}
+    &:-ms-input-placeholder {color: @color;}
+    &::-webkit-input-placeholder {color: @color;}
+}
+.numeric-hidden(){
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+}

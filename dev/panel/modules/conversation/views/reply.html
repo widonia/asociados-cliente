@@ -1,0 +1,38 @@
+<h1>Mensaje de contacto</h1>
+
+<ol class="breadcrumb">
+	<li><a href="#">Inicio</a></li>
+	<li><a href="/#/communication/conversation">Contacto</a></li>
+	<li class="active">Mensaje de contacto</li>
+</ol>
+
+<div ng-show="notification.form.success">
+    <div class="alert alert-success" role="alert">Elemento {{notification.action == "new" ? "creado" : "editado"}} correctamente.</div>
+    <a href="#/communication/notification" class="btn btn-warning">Regresar</a>
+</div>
+
+<div ng-show="!notification.form.success">
+    <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()">
+
+        <div class="row">
+            <div class="form-group col-sm-10">
+                <label for="inputEmail3" class="control-label">Mensaje</label>
+                <textarea name="content" class="form-control" rows="6" ng-model="notification.data.content" required></textarea>
+
+                <div class="error" ng-show="notification.form.content.$invalid && notification.form.submitted">
+                    <small class="error" ng-show="notification.form.content.$error.required">
+                        Ingrese el contenido
+                    </small>
+                </div>
+            </div>
+        </div>
+
+    	<div class="row">
+    		<div class="form-group col-xs-12">
+    			<button type="submit" class="btn btn-primary">Enviar</button>
+                &nbsp;
+    			<a href="#/communication/conversation" class="btn btn-warning">Regresar</a>
+    		</div>
+    	</div>	
+    </form>
+</div>  

@@ -1,0 +1,68 @@
+<h1>Solicitud de actualización</h1>
+
+<ol class="breadcrumb">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#/request/user">Asociados</a></li>
+    <li class="active">Detalle</li>
+</ol>
+
+<div ng-show="userView.type == 1">
+    <h3>Datos personales</h3>
+    <dl class="dl-horizontal">
+        <dt>Estado civil</dt>
+        <dd>{{userView.data.user_data.0.status}}</dd>
+
+        <dt>Fecha de nacimiento</dt>
+        <dd>{{userView.data.user_data.0.birthdate}}</dd>
+
+        <dt>Email</dt>
+        <dd>{{userView.data.user_data.0.email}}</dd>
+
+        <dt>Profesion</dt>
+        <dd>{{userView.data.user_data.0.profession}}</dd>
+
+        <dt>Cargo</dt>
+        <dd>{{userView.data.user_data.0.position}}</dd>
+
+        <dt>Salario</dt>
+        <dd>{{userView.data.user_data.0.salary}}</dd>
+
+        <div class="" ng-repeat="phone in userView.data.user_phone">
+            <dt>{{phone.type}}</dt>
+            <dd>{{phone.number}}</dd> 
+        </div>
+
+    </dl>
+</div>
+
+<div ng-show="userView.type == 2">
+    <h3>Datos bancarios</h3>
+    <dl class="dl-horizontal" ng-repeat="bank in userView.data.user_bank">
+        <dt>Cuenta</dt>
+        <dd>{{bank.account}}</dd>
+
+        <dt>Banco</dt>
+        <dd>{{bank.bank}}</dd>
+
+        <dt>Tipo de cuenta</dt>
+        <dd>{{bank.type | bankType}}</dd>
+    </dl>
+</div>
+
+<div ng-show="userView.type == 3">
+    <h3>Datos familiares</h3>
+    <dl class="dl-horizontal" ng-repeat="family in userView.data.user_family">
+        <dt>Nombre</dt>
+        <dd>{{family.name}}</dd>
+
+        <dt>Relación</dt>
+        <dd>{{family.user_family_relation.name}}</dd>
+
+        <dt>Fecha de nacimiento</dt>
+        <dd>{{family.birthdate}}</dd>
+
+        <dt>Responsable</dt>
+        <dd>{{family.responsible}}</dd>
+    </dl>
+</div>
+

@@ -1,0 +1,30 @@
+#statistic-page .red {
+  color: #e3515e;
+}
+#statistic-page .blue {
+  color: #35b6e0;
+}
+#statistic-page .green {
+  color: #57ad43;
+}
+#statistic-page .orange {
+  color: #f7b547;
+}
+#statistic-page .data-general {
+  list-style: none;
+  padding: 0px;
+  margin: 30px 0px;
+  text-align: center;
+  overflow: hidden;
+}
+#statistic-page .data-general li {
+  width: 25%;
+  float: left;
+}
+#statistic-page .data-general .amount {
+  display: block;
+  font-size: 30px;
+}
+#statistic-page .data-general .item {
+  color: #CCC;
+}

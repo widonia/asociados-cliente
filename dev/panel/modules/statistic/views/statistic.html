@@ -1,0 +1,191 @@
+<div id="statistic-page">
+
+    <h1>Estadisticas</h1>
+
+    <ol class="breadcrumb">
+    	<li><a href="#">Inicio</a></li>
+    	<li class="active">Estadisticas</li>
+    </ol>
+
+    <form class="form-inline">
+        <div class="form-group">
+            <select class="form-control" ng-model="statistic.data.type" ng-change="statistic.onChangeType()">
+                <option value="day">dia</opyion>
+                <option value="month">Mes</opyion>
+                <option value="year">Año</opyion>
+            </select>
+        </div>
+
+        <div class="input-group date year" ng-show="statistic.data.type == 'year'">
+            <input ng-model="statistic.data.date" type="text" class="form-control" readonly><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        </div>
+
+        <div class="input-group date month" ng-show="statistic.data.type == 'month'" >
+            <input ng-model="statistic.data.date" type="text" class="form-control" readonly><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        </div>
+
+        <div class="input-group date day" ng-show="statistic.data.type == 'day'" >
+            <input ng-model="statistic.data.date" type="text" class="form-control" readonly><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+        </div>
+
+        <button class="btn btn-primary" ng-click="statistic.getStatistics()">Ver</button>
+
+    </form>
+
+    <ul class="data-general">
+
+        <li class="red">
+            <span class="amount">4550</span>
+            <span class="item">Asociados totales</span>
+        </li>
+
+        <li class="blue">
+            <span class="amount">4550</span>
+            <span class="item">Asociados activos</span>
+        </li>
+
+        <li class="green">
+            <span class="amount">4550</span>
+            <span class="item">Solicitudes de credito</span>
+        </li>
+
+        <li class="orange">
+            <span class="amount">4550</span>
+            <span class="item">Visitas totales</span>
+        </li>
+
+    </ul>
+
+    <div id="time-chart" style="height: 250px;"></div>
+
+
+    <h3>Informacion de creditos</h3>
+    <table class="table table-hover table-striped">
+
+        <thead>
+            <tr>
+                <th width="40%">Modulo</th>
+                <th>Consultas</th>
+                <th>Solicitudes</th>
+                <th>Simulaciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Otto</td>
+                <td>Otto</td>
+            </tr>
+
+            <tr>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>Thornton</td>
+                <td>Thornton</td>
+            </tr>
+
+            <tr>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>the Bird</td>
+                <td>the Bird</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+    <div class="row">
+        <div class="col-xs-6">
+
+            <h3>Modulos mas visitados</h3>
+            <table class="table table-hover table-striped">
+
+                <thead>
+                    <tr>
+                        <th width="70%">Modulo</th>
+                        <th>Visitas</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                    </tr>
+
+                    <tr>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                    </tr>
+
+                    <tr>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <!--             <h3>Modulos mas visitados</h3>
+            <table class="table table-hover table-striped">
+
+                <thead>
+                    <tr>
+                        <th width="70%">Modulo</th>
+                        <th>Visitas</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                    </tr>
+
+                    <tr>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                    </tr>
+
+                    <tr>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                    </tr>
+                </tbody>
+
+            </table>
+    </div>
+
+<!--             <h3>Modulos mas visitados</h3>
+            <table class="table table-hover table-striped">
+
+                <thead>
+                    <tr>
+                        <th width="70%">Modulo</th>
+                        <th>Visitas</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                    </tr>
+
+                    <tr>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                    </tr>
+
+                    <tr>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                    </tr>
+                </tbody>
+
+            </table>
+ -->
+</div>
