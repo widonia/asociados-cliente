@@ -35,6 +35,12 @@ angular.module('app', [
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'http://s3-us-west-2.amazonaws.com/**',
             'http://localhost:4000/**',
+            'http://localhost:4000/*',
+            'http://localhost:4000/',
+            'http://localhost:4000',
+
+
+
 
         ]);
 
