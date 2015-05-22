@@ -33,7 +33,9 @@ angular.module('app', [
             // Allow same origin resource loads.
             'self',
             // Allow loading from our assets domain.  Notice the difference between * and **.
-            'http://s3-us-west-2.amazonaws.com/**'
+            'http://s3-us-west-2.amazonaws.com/**',
+            'http://localhost:4000/**',
+
         ]);
 
 		//auth interceptor
