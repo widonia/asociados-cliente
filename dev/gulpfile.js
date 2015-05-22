@@ -104,25 +104,17 @@ gulp.task('lib', function() {
 
 
 
-gulp.task('replace', function() {
-    return gulp.src(['../public/index.html'])
-        .pipe(replace(/\/static\/panel\//g, url))
-       
-        .pipe(gulp.dest('../public'));
-});
 
 
 
-
-
-gulp.task('default', ['minify-html', 'lib', 'scripts', 'modules-css', 'modules-js', 'less', 'minify-css', 'watch']);
+gulp.task('default', ['minify-html', 'lib', 'scripts', 'modules-css', 'less', 'minify-css', 'watch']);
 
 gulp.task('watch', function() {
     gulp.watch('panel/modules/**/*.html', ['minify-html']);
     gulp.watch('panel/lib/**/*.js', ['lib']);
     gulp.watch('panel/js/*.js', ['scripts']);
     gulp.watch('panel/modules/**/*.css', ['modules-css']);
-    // gulp.watch('panel/modules/**/*.js', ['modules-js']);
+ 
     gulp.watch('panel/stylesheets/*.less', ['less']);
     gulp.watch('panel/stylesheets/*.css', ['minify-css']);
 });
