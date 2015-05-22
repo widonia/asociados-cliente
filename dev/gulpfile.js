@@ -42,7 +42,7 @@ gulp.task('minify-css', function() {
     gulp.src('panel/stylesheets/*.css')
     .pipe(concat('all.css'))
     .pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(gulp.dest('../public/stylesheets'));
+    .pipe(gulp.dest('../public/css'));
 });
 
 

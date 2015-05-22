@@ -19,9 +19,9 @@ app.listen(4000);
 //Static files web asociados//
 
 app.use('/static/panel', express.static('public'));
-app.use('/static/panel/css', express.static('public/stylesheets'));
+app.use('/static/panel/css', express.static('public/css'));
 app.use('/static/panel/js', express.static('public/js'));
-app.use('/static/panel/img', express.static('public/images'));
+app.use('/static/panel/img', express.static('public/img'));
 app.use('/static/panel/lib', express.static('public/lib'));
 app.use('/static/panel/modules', express.static('public/modules'));
 
