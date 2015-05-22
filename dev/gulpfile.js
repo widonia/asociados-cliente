@@ -6,7 +6,9 @@ var livereload = require('gulp-livereload');
 var minifyHTML = require('gulp-minify-html');
 var less = require('gulp-less');
 var server = require('gulp-server-livereload');
+var replace = require('gulp-replace');
 var watch = require('gulp-watch');
+var url = "https://s3-us-west-2.amazonaws.com/asociados.prod/panel/";
 
 
 
@@ -97,8 +99,19 @@ gulp.task('lib', function() {
     .pipe(uglify())
     .pipe(gulp.dest('../public/lib'))
     .pipe(livereload());
-
+ 
 });
+
+
+
+gulp.task('replace', function() {
+    return gulp.src(['../public/index.html'])
+        .pipe(replace(/\/static\/panel\//g, url))
+       
+        .pipe(gulp.dest('../public'));
+});
+
+
 
 
 
