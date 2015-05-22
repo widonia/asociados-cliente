@@ -69,13 +69,24 @@ gulp.task('modules-css', function() {
 //javascript //
 
 gulp.task('scripts', function() {
-  gulp.src('panel/js/*.js')
+  gulp.src('panel/js/**/*.js')
     .pipe(concat('all.js'))
     .pipe(uglify())
     .pipe(gulp.dest('../public/js'))
     .pipe(livereload());
 
 });
+
+
+
+// gulp.task('modules-js', function() {
+//   gulp.src('panel/modules/**/*.js')
+   
+//     .pipe(uglify())
+//     .pipe(gulp.dest('../public/modules'))
+//     .pipe(livereload());
+
+// });
 
 
 
@@ -91,13 +102,14 @@ gulp.task('lib', function() {
 
 
 
-gulp.task('default', ['minify-html', 'lib', 'scripts', 'modules-css', 'less', 'minify-css', 'watch']);
+gulp.task('default', ['minify-html', 'lib', 'scripts', 'modules-css', 'modules-js', 'less', 'minify-css', 'watch']);
 
 gulp.task('watch', function() {
     gulp.watch('panel/modules/**/*.html', ['minify-html']);
     gulp.watch('panel/lib/**/*.js', ['lib']);
     gulp.watch('panel/js/*.js', ['scripts']);
     gulp.watch('panel/modules/**/*.css', ['modules-css']);
+    // gulp.watch('panel/modules/**/*.js', ['modules-js']);
     gulp.watch('panel/stylesheets/*.less', ['less']);
     gulp.watch('panel/stylesheets/*.css', ['minify-css']);
 });

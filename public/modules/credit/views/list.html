@@ -1,1 +1,42 @@
-<h1>Solicitud de creditos</h1><ol class=breadcrumb><li><a href=#>Inicio</a></li><li class=active>Creditos</li></ol><table class="table table-hover"><thead><tr><th>Asociado</th><th>Credito</th><th>Monto</th><th>Fecha</th><th></th></tr></thead><tbody><tr ng-repeat="credit in creditList.list"><td>{{credit.user}}</td><td>{{credit.credit.name}}</td><td>{{credit.amount}}</td><td>{{credit.add_date}}</td><td class=text-right><a href=#/request/credit/view/{{credit.id}} class="btn btn-primary btn-sm">Ver mas</a></td></tr></tbody></table><div class=text-center><pagination items-per-page=10 total-items=creditList.count ng-model=creditList.page max-size=5 class=pagination-lg ng-change=creditList.setPage()></pagination></div>
+<h1>Solicitud de creditos</h1>
+
+<ol class="breadcrumb">
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Creditos</li>
+</ol>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Asociado</th>
+            <th>Credito</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="credit in creditList.list">
+            <td>{{credit.user}}</td>
+            <td>{{credit.credit.name}}</td>
+            <td>{{credit.amount}}</td>
+            <td>{{credit.add_date}}</td>
+            <td class="text-right">
+                <a href="#/request/credit/view/{{credit.id}}" class="btn btn-primary btn-sm">
+                    Ver mas
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text-center">
+    <pagination 
+    items-per-page="10" 
+    total-items="creditList.count" 
+    ng-model="creditList.page" 
+    max-size="5" 
+    class="pagination-lg" 
+    ng-change="creditList.setPage()">
+    </pagination>
+</div>

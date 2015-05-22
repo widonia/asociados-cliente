@@ -1,1 +1,46 @@
-<h1>Notificaciones</h1><ol class=breadcrumb><li><a href=#>Inicio</a></li><li class=active>Notificaciones</li></ol><p class=pull-right><a href=#/content/notification/new class="btn btn-success">Nueva notificacion</a></p><table class="table table-hover"><thead><tr><th width=40%>Titulo</th><th>Fecha</th><th></th></tr></thead><tbody><tr ng-repeat="notificaion in notificationList.list"><td>{{notificaion.title}}</td><td>{{notificaion.add_date}}</td><td class=text-right><button ng-click="notificationList.delete(notificaion.id, $event)" type=button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td></tr></tbody></table><div class=text-center><pagination items-per-page=10 total-items=notificationList.count ng-model=notificationList.page max-size=5 class=pagination-lg ng-change=notificationList.setPage()></pagination></div>
+<h1>Notificaciones</h1>
+
+<ol class="breadcrumb">
+	<li><a href="#">Inicio</a></li>
+	<li class="active">Notificaciones</li>
+</ol>
+
+<p class="pull-right">
+	<a href="#/content/notification/new" class="btn btn-success">Nueva notificacion</a>
+</p>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th width="40%">Titulo</th>
+			<th>Fecha</th>
+            <th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="notificaion in notificationList.list">
+            <td>{{notificaion.title}}</td>
+			<td>{{notificaion.add_date}}</td>
+            <td class="text-right">
+<!--                 <a href="#/content/notification/edit/{{notificaion.id}}" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a> -->
+
+                <button ng-click="notificationList.delete(notificaion.id, $event)" type="button" class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="text-center">
+    <pagination 
+    items-per-page="10" 
+    total-items="notificationList.count" 
+    ng-model="notificationList.page" 
+    max-size="5" 
+    class="pagination-lg" 
+    ng-change="notificationList.setPage()">
+    </pagination>
+</div>

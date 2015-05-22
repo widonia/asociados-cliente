@@ -1,1 +1,47 @@
-<h1>{{document.action == "new" ? "Nuevo" : "Editar"}} documento</h1><ol class=breadcrumb><li><a href=#>Inicio</a></li><li><a href=#/content/document>Documentos</a></li><li class=active>{{document.action == "new" ? "Nueva" : "Editar"}}</li></ol><form novalidate="" name=document.document_form class=form role=form ng-submit=document.submit()><div class=row><div class="form-group col-sm-8"><label for=inputEmail3 class=control-label>Titulo</label> <input name=title type=input class=form-control ng-model=document.data.title required=""><div class=error ng-show="document.document_form.title.$invalid && document.document_form.submitted"><small class=error ng-show=document.document_form.title.$error.required>Ingrese un titulo</small></div></div></div><div class=row><div class="form-group col-sm-10"><label for=inputEmail3 class=control-label>Archivo</label> <input type=file ng-file-select="update.onFileSelect($files, 'file_associated')"><div class=error ng-show="document.document_form.content.$invalid && document.document_form.submitted"><small class=error ng-show=document.document_form.content.$error.required>Ingrese el contenido</small></div></div></div><div class=row><div class="form-group col-xs-12"><button type=submit class="btn btn-primary">{{document.action == "new" ? "Enviar" : "Editar"}}</button> &nbsp; <a href=#/content/document class="btn btn-warning">Regresar</a></div></div></form>
+<h1>{{document.action == "new" ? "Nuevo" : "Editar"}} documento</h1>
+
+<ol class="breadcrumb">
+	<li><a href="#">Inicio</a></li>
+	<li><a href="#/content/document">Documentos</a></li>
+	<li class="active">{{document.action == "new" ? "Nueva" : "Editar"}}</li>
+</ol>
+
+<form novalidate name="document.document_form" class="form" role="form" ng-submit="document.submit()">
+
+	<div class="row">
+		<div class="form-group col-sm-8">
+			<label for="inputEmail3" class="control-label">Titulo</label>
+			<input name="title" type="input" class="form-control" ng-model="document.data.title" required>
+		
+            <div class="error" ng-show="document.document_form.title.$invalid && document.document_form.submitted">
+                <small class="error" ng-show="document.document_form.title.$error.required">
+                    Ingrese un titulo
+                </small>
+            </div>
+
+        </div>
+
+	</div>
+
+	<div class="row">
+		<div class="form-group col-sm-10">
+			<label for="inputEmail3" class="control-label">Archivo</label>
+			<input type="file" ng-file-select="update.onFileSelect($files, 'file_associated')">
+
+            <div class="error" ng-show="document.document_form.content.$invalid && document.document_form.submitted">
+                <small class="error" ng-show="document.document_form.content.$error.required">
+                    Ingrese el contenido
+                </small>
+            </div>
+        </div>
+
+	</div>
+
+	<div class="row">
+		<div class="form-group col-xs-12">
+			<button type="submit" class="btn btn-primary">{{document.action == "new" ? "Enviar" : "Editar"}}</button>
+            &nbsp;
+			<a href="#/content/document" class="btn btn-warning">Regresar</a>
+		</div>
+	</div>	
+</form>
