@@ -1,1 +1,0 @@
-window.XMLHttpRequest&&window.FormData&&(XMLHttpRequest=function(t){return function(){var e=new t;return e.setRequestHeader=function(t){return function(n,u){if("__setXHR_"===n){var s=u(e);s instanceof Function&&s(e)}else t.apply(e,arguments)}}(e.setRequestHeader),e}}(XMLHttpRequest),window.XMLHttpRequest.__isShim=!0);

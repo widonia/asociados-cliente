@@ -1,7 +1,0 @@
-<!doctype html><head><script src=http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js></script><script src=http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js></script><script src=../morris.js></script><script src=http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js></script><script src=lib/example.js></script><link rel=stylesheet href=lib/example.css><link rel=stylesheet href=http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css><link rel=stylesheet href=../morris.css></head><body><h1>Updating data</h1><div id=graph></div><div id=reloadStatus><pre id=code class="prettyprint linenums">
-
-var nReloads = 0;
-function data(offset) {
-  var ret = [];
-  for (var x = 0; x <= 360;="" x="" +=10) {="" var="" v=(offset x)="" %="" ret.push({="" x:="" x,="" y:="" math.sin(math.pi="" *="" 180).tofixed(4),="" z:="" math.cos(math.pi="" 180).tofixed(4)="" });="" }="" return="" ret;="" graph=Morris.Line({ element:="" 'graph',="" data:="" data(0),="" xkey:="" 'x',="" ykeys:="" ['y',="" 'z'],="" labels:="" ['sin()',="" 'cos()'],="" parsetime:="" false,="" ymin:="" -1.0,="" ymax:="" 1.0,="" hidehover:="" true="" function="" update()="" nreloads++;="" graph.setdata(data(5="" nreloads));="" $('#reloadstatus').text(nreloads="" '="" reloads');="" setinterval(update,="" 100);="" <="" pre="">
-</=></pre></div></body>

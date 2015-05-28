@@ -1,0 +1,13 @@
+body {
+  padding-top: 50px;
+}
+.breadcrumb {
+  background: transparent;
+  padding: 0px;
+}
+.navbar-brand {
+  padding: 10px;
+}
+.navbar-brand img {
+  height: 30px;
+}
