@@ -34,6 +34,7 @@ angular.module('app', [
             'self',
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'https://s3-us-west-2.amazonaws.com/**',
+            
           
             
 

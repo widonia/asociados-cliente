@@ -7,5 +7,5 @@
 angular.module('app.common.services').constant('Config', {
     // REST: 'http://localhost:8000',
     REST: 'http://52.11.113.25',
-    STATIC: 'http://s3-us-west-2.amazonaws.com/asociados.prod/panel/',
+    STATIC: 'http://s3-us-west-2.amazonaws.com/asociados-client/public/',
 });
