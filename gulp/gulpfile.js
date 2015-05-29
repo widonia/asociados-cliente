@@ -1,7 +1,8 @@
+
 var gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     watch       = require('gulp-watch'),
-    less        = require('gulp-less');
+    less        = require('gulp-less'),
     minifyCss   = require('gulp-minify-css'),
     uglify      = require('gulp-uglify'),
     livereload  = require('gulp-livereload'),
@@ -10,6 +11,8 @@ var gulp        = require('gulp'),
     htmlreplace = require('gulp-html-replace');
 
 livereload({ start: true });
+
+var url = "https://s3-us-west-2.amazonaws.com/asociados-client/public/";
 
 /**
  * Common functions
