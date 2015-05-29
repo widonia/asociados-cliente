@@ -9,10 +9,11 @@ var gulp        = require('gulp'),
     useref      = require('gulp-useref'),
     minifyHTML  = require('gulp-minify-html'),
     htmlreplace = require('gulp-html-replace');
+    
 
 livereload({ start: true });
 
-var url = "https://s3-us-west-2.amazonaws.com/asociados-client/public/";
+
 
 /**
  * Common functions
