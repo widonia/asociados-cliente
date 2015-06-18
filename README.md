@@ -1,4 +1,4 @@
-Asociados-landing
+Asociados-panel
 ==================
 
 # Run

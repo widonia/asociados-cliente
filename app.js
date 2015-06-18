@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'assets')));
 
 
-
 /* start app */
 app.listen(4000, function(){
     console.log('server running');
