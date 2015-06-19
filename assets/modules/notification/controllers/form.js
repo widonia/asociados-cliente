@@ -1,12 +1,12 @@
 "use strict";
 
-function NotificationFormCtrl($routeParams, NotificationService, action, UserService){
+function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, action, UserService, Config){
 
     this.autocomplete = {'key':'', 'suggest':[], 'list':[]};
     this.data = {'public':true, 'users':[]};
     this.action = action;
     this.form = false;
-
+    $scope.image = false;
 
     // this.tinymceOptions = {
     //     selector: "textarea",
@@ -47,6 +47,31 @@ function NotificationFormCtrl($routeParams, NotificationService, action, UserSer
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){
+
+                // var fd = new FormData();
+
+                // for( var value in this.data){fd.append(value, this.data[value])}
+
+                // fd.append('image', $scope.image);
+
+                // $http.post(Config.REST + '/api/notification_client/', fd,
+                // {   
+                //     transformRequest:angular.identity,
+                //     headers:{'Content-Type':undefined}
+                // })
+                // .success(this.onSubmitOk.bind(this))
+                // .error(this.onSubmitError.bind(this));
+
+                //append image
+                // fd.append('image', $scope.image);
+                // console.log(fd);
+                // NotificationService.post({hola:'chao'},
+                //     this.onSubmitOk.bind(this),
+                //     this.onSubmitError.bind(this)
+                // );
+            //     
+                //send request
+                // UserService.save(this.data, this.onSubmitOk.bind(this), this.onSubmitError.bind(this)); 
                 NotificationService.post({}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -70,10 +95,43 @@ function NotificationFormCtrl($routeParams, NotificationService, action, UserSer
     }
 
     this.onSuggestOk = function(response){
-        this.autocomplete.suggest = response.data;
+        this.autocomplete.suggest = response.data;   
     }
 
     this.onSuggestError = function(response){
+
+    }
+
+
+    this.onSubmitOk = function(response){
+        if($scope.image != false){
+            var fd = new FormData();
+
+            fd.append('file', $scope.image);
+
+            $http.put(Config.REST + '/api/notification_client/'+response.id+'/add_image', fd,
+            {   
+                transformRequest:angular.identity,
+                headers:{'Content-Type':undefined}
+            })
+            .success(this.onImageOk.bind(this))
+            .error(this.onImageError.bind(this));  
+        }else{
+            this.form.success = true;
+        }
+    }
+
+    this.onSubmitError = function(response){
+        this.form.success = false;
+    }
+
+
+    this.onImageOk = function(response){    
+        this.form.success = true;
+    }
+
+    this.onImageError = function(response){
+        this.form.success = false;
     }
 
     this.addUser = function(user){
@@ -111,14 +169,6 @@ function NotificationFormCtrl($routeParams, NotificationService, action, UserSer
 
     this.onPopulateError = function(response){
 
-    }
-
-    this.onSubmitOk = function(response){
-        this.form.success = true;
-    }
-
-    this.onSubmitError = function(response){
-        this.form.success = false;
     }
 
     this.init();

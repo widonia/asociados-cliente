@@ -1,12 +1,13 @@
 "use strict";
 
 function NotificationService($resource, Config){
-    var _url = Config.REST + '/api/notifications/:id/';
+    var _url = Config.REST + '/api/notification_client/:id/';
     
     return $resource(_url + '?fn=none', {}, {
         get: { method:'GET'},
         post: { method:'POST'},
         put: { method:'PUT'},
+        // add_image: { method:'PUT', url:_url + 'add_image'},
         delete: { method:'DELETE'}
     })
 }
