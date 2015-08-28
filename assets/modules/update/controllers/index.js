@@ -1,6 +1,6 @@
 "use strict";
 
-function UpdateIndexCtrl(UpdateService, $upload, $http, Config){
+function UpdateIndexCtrl(UpdateService, $http, Config){
 
     var self = '';
     this.type = 'simple';

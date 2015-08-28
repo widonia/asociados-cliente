@@ -1,11 +1,12 @@
 "use strict";
 
-function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, action, UserService, Config){
+function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, action, UserService, Config, GroupsService){
 
     this.autocomplete = {'key':'', 'suggest':[], 'list':[]};
     this.data = {'public':true, 'users':[]};
     this.action = action;
     this.form = false;
+    this.groups = {};
     $scope.image = false;
 
     // this.tinymceOptions = {
@@ -34,6 +35,17 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
 
             toolbar1 : "bold italic underline,formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
         };
+        GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
+    }
+
+    this.onGroups = function(response){
+        this.groups = response.results;
+        console.log(this.groups);
+        // console.log(this.groups.list);
+    }
+
+    this.onGroupsErr = function(){
+
     }
 
     this.populate = function(){
@@ -132,6 +144,12 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
 
     this.onImageError = function(response){
         this.form.success = false;
+    }
+
+    this.addUserByGroup = function(){    
+        for(var user in this.groups[this.data.group].users){
+            this.addUser(this.groups[this.data.group].users[user]);
+        }
     }
 
     this.addUser = function(user){

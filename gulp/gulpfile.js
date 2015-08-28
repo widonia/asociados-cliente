@@ -1,84 +1,66 @@
-
 var gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     watch       = require('gulp-watch'),
     less        = require('gulp-less'),
+    connect     = require('gulp-connect'),
     minifyCss   = require('gulp-minify-css'),
     uglify      = require('gulp-uglify'),
-    livereload  = require('gulp-livereload'),
     useref      = require('gulp-useref'),
-    minifyHTML  = require('gulp-minify-html'),
-    htmlreplace = require('gulp-html-replace');
-    
+    minifyHTML  = require('gulp-minify-html');
 
-livereload({ start: true });
-
-
-
-/**
- * Common functions
- *
- */
-function reload(file){
-    livereload.reload(file.path);
-}
 
 gulp.task('less', function(){
-    gulp.src(['../assets/css/less/*.less'])
+    gulp.src(['../assets/css/main.less'])
         .pipe(less())
         .pipe(gulp.dest('../assets/css/'))
-        .pipe(livereload());
+        .pipe(connect.reload());
 });
 
 
-/**
- * Develop functions
- * 
- */
 gulp.task('watch', function(){
-    livereload.listen();
-    gulp.watch('../assets/css/less/*.less', ['less']);
-    gulp.watch('../assets/js/**/*.js').on('change', reload);
-    gulp.watch('../assets/**/*.html').on('change', reload);
+    gulp.watch('../assets/css/*.less', ['less']);
 });
 
 
-
-/**
- * Production functions
- * 
- */
-gulp.task('clean', function () {
-    del(['./../public/**/*'], {force:true});
+gulp.task('connect', function() {
+    connect.server({
+        port: 4000,
+        root: '../assets/',
+        livereload: true
+    });
 });
 
 
 gulp.task('index', function(){
-
     var assets = useref.assets();
-
     gulp.src(['../assets/index.html'])
         .pipe(assets)
-        .pipe(gulpif('*.css', minifyCss()))
-        // .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', minifyCss({keepSpecialComments:0})))
+        .pipe(gulpif('*.js', uglify()))
         .pipe(assets.restore())
         .pipe(useref())
         .pipe(gulp.dest('../public'));
 });
 
 
-gulp.task('html', function() {
-    var opts = {
-        conditionals: true,
-        spare:true
-    };
- 
-    gulp.src(['../assets/modules/**/*.html'])
-        .pipe(minifyHTML(opts))
-        .pipe(gulp.dest('../public/modules'))
-        .pipe(livereload());
+gulp.task('fonts', function(){
+    gulp.src(['../assets/fonts/*'])
+        .pipe(gulp.dest('../public/fonts'));
 });
 
 
-gulp.task('dev', ['less', 'watch']);
-gulp.task('prod', ['less', 'index', 'html']);
+gulp.task('images', function(){
+    gulp.src(['../assets/img/*'])
+        .pipe(gulp.dest('../public/img'));
+});
+
+
+gulp.task('views', function() {
+    gulp.src(['../assets/modules/**/*.html'])
+        .pipe(minifyHTML({conditionals: true, spare:true}))
+        .pipe(gulp.dest('../public/modules'))
+});
+
+
+gulp.task('dev', ['watch', 'connect']);
+gulp.task('prod', ['less', 'index', 'fonts', 'images', 'views']);

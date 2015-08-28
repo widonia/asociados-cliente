@@ -12,24 +12,11 @@
         <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
         <!-- build:css ../public/css/css.min.css -->
-        
         <!-- main module -->
         <link rel="stylesheet" href="css/main.css">
 
         <!-- bootstrap module -->
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
-
-        <!-- auth module -->
-        <link rel="stylesheet" href="css/auth.css">
-
-        <!-- update module -->
-        <link rel="stylesheet" href="css/update.css">
-
-        <!-- notification module -->
-        <link rel="stylesheet" href="css/notification.css">
-
-        <!-- statistic module -->
-        <link rel="stylesheet" href="css/statistic.css">
 
         <!-- datepicker bootstrap -->
         <link rel="stylesheet" href="lib/datepicker/css/datepicker.css">
@@ -66,7 +53,8 @@
         <script src="lib/angular/angular-resource.js"></script>
         <script src="lib/angular/angular-sanitize.js"></script>
         <script src="lib/angular/angular-uibootstrap.js"></script>
-        <script src="lib/angular/angular-file-upload.js"></script>
+        <script src="lib/angular/angular-file-model.js"></script>
+        <!--<script src="lib/angular/angular-file-upload.js"></script>-->
 
         <script src="js/util.js"></script>
         <script src="js/app.js"></script>
@@ -131,19 +119,19 @@
         <script src="modules/notification/services/notificationService.js"></script>
         <script src="modules/notification/directives/ngFile.js"></script>
 
-
         <script src="modules/statistic/module.js"></script>
         <script src="modules/statistic/controllers/statistic.js"></script>
         <script src="modules/statistic/services/statisticService.js"></script>
+
+        <script src="modules/groups/module.js"></script>
+        <script src="modules/groups/controllers/list.js"></script>
+        <script src="modules/groups/controllers/form.js"></script>
+        <script src="modules/groups/controllers/fill.js"></script>
+        <script src="modules/groups/services/groupsService.js"></script>
         <!-- endbuild -->
 
         <!-- jquery scripts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
-        <!-- build:delete -->
-        <script src="http://localhost:35729/livereload.js?snipver=1"></script>
-        <!-- endbuild -->
-
 </body>
 </html>

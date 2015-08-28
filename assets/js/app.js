@@ -6,7 +6,8 @@ angular.module('app', [
 	'ngRoute', 
     'ui.bootstrap', 
 	'ngResource', 
-    'angularFileUpload',
+    'file-model',
+    //'angularFileUpload',
     'ui.tinymce',
 
 	// app modules
@@ -21,6 +22,7 @@ angular.module('app', [
     'app.common',
     'app.cooperative',
     'app.statistic',
+    'app.groups',
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
@@ -34,10 +36,6 @@ angular.module('app', [
             'self',
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'https://s3-us-west-2.amazonaws.com/**',
-            
-          
-            
-
         ]);
 
 		//auth interceptor
@@ -93,6 +91,33 @@ angular.module('app', [
                     action: function(){return 'edit';}
                 }
             })
+
+            // cooperative groups
+            .when('/cooperative/groups', {
+                templateUrl: Config.STATIC + 'modules/groups/views/list.html',
+                controller: 'GroupsListCtrl', controllerAs: 'groupList', role:AUTH_ROLES.admin
+            })            
+
+            .when('/cooperative/groups/new', {
+                templateUrl: Config.STATIC + 'modules/groups/views/form.html',
+                controller: 'GroupsFormCtrl', controllerAs: 'group', role:AUTH_ROLES.admin,
+                resolve: {
+                    action: function(){return 'new';}
+                }
+            })                 
+
+            .when('/cooperative/groups/edit/:id', {
+                templateUrl: Config.STATIC + 'modules/groups/views/form.html',
+                controller: 'GroupsFormCtrl', controllerAs: 'group', role:AUTH_ROLES.admin,
+                resolve: {
+                    action: function(){return 'edit';}
+                }
+            })            
+
+            .when('/cooperative/groups/fill/:id', {
+                templateUrl: Config.STATIC + 'modules/groups/views/Fill.html',
+                controller: 'GroupsFillCtrl', controllerAs: 'groupFill', role:AUTH_ROLES.admin
+            })  
 
             // cooperative url
             .when('/cooperative/email', {

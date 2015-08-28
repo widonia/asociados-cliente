@@ -82,6 +82,15 @@
             <div ng-hide="notification.data.public">
                 <div class="row">
                     <div class="form-group col-sm-6">
+                        <label for="inputEmail3" class="control-label">Agregar asociados por grupo</label>
+                        <select class="form-control" ng-model="notification.data.group" ng-change="notification.addUserByGroup()">
+                            <option value="{{key}}" ng-repeat="(key,val) in notification.groups">{{val.name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
                         <label for="inputEmail3" class="control-label">Buscar asociados por cedula</label>
                         <input ng-change="notification.onChange()" type="input" class="form-control" ng-model="notification.autocomplete.key">
                         

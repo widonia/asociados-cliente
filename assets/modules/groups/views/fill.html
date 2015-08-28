@@ -1,0 +1,37 @@
+<h1>Grupo de usuarios</h1>
+
+<ol class="breadcrumb">
+	<li><a href="#">Inicio</a></li>
+	<li><a href="#/cooperative/groups">Grupos</a></li>
+	<li class="active">Usuarios</li>
+</ol>
+
+<div ng-show="groupFill.form.success">
+    <div class="alert alert-success" role="alert">Usuarios actualizados correctamente.</div>
+    <a href="#/cooperative/groups" class="btn btn-warning">Regresar</a>
+</div>
+
+<div ng-show="!groupFill.form.success">
+    <form novalidate name="groupFill.form" class="form" role="form" ng-submit="groupFill.submit()">
+
+        <div class="row">
+            <div class="form-group col-sm-8">
+                <label for="inputEmail3" class="control-label">Cargr nuevo CSV de cedulas</label>
+                <input name="name" type="file" file-model='file'>
+            </div>
+        </div>
+
+    	<div class="row">
+    		<div class="form-group col-xs-12">
+    			<button type="submit" class="btn btn-primary">Cargar usuarios</button>
+                &nbsp;
+    			<a href="#/cooperative/groups" class="btn btn-warning">Regresar</a>
+    		</div>
+    	</div>	
+
+        <h4>Usuarios actualmente en este grupo</h4>
+        
+        <div ng-repeat="user in groupFill.data.users">{{user.username}}</div>
+
+    </form>
+</div>  

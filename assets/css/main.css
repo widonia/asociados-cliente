@@ -1,3 +1,97 @@
+.form-signin {
+  max-width: 240px;
+  margin: auto;
+}
+#notification-page .autocomplete {
+  border: 1px #CCC solid;
+  border-top: 0px;
+  margin: -3px 0 0 0;
+  padding: 3px 0 0 0;
+  width: 100%;
+  background-color: #FFF;
+  list-style: none;
+}
+#notification-page .autocomplete li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+#notification-page .autocomplete li span {
+  display: inline-block;
+  min-width: 100px;
+}
+#notification-page .autocomplete li:hover {
+  background-color: #f9f9f9;
+}
+#notification-page .user-list {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+#notification-page .user-list li {
+  padding: 5px 0;
+  margin: 5px 0;
+}
+#notification-page .user-list li > span {
+  display: inline-block;
+  min-width: 100px;
+}
+#notification-page .user-list li button {
+  float: right;
+}
+#statistic-page .red {
+  color: #e3515e;
+}
+#statistic-page .blue {
+  color: #35b6e0;
+}
+#statistic-page .green {
+  color: #57ad43;
+}
+#statistic-page .orange {
+  color: #f7b547;
+}
+#statistic-page .data-general {
+  list-style: none;
+  padding: 0px;
+  margin: 30px 0px;
+  text-align: center;
+  overflow: hidden;
+}
+#statistic-page .data-general li {
+  width: 25%;
+  float: left;
+}
+#statistic-page .data-general .amount {
+  display: block;
+  font-size: 30px;
+}
+#statistic-page .data-general .item {
+  color: #CCC;
+}
+.update-page #drag-zone {
+  border: 2px dashed #bbb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 25px;
+  text-align: center;
+  font: 20pt bold 'Vollkorn';
+  color: #bbb;
+  margin: 20px 0;
+}
+.update-page .files {
+  margin: 20px 0;
+  overflow: hidden;
+}
+.update-page .files .row {
+  font-size: 16px;
+}
+.update-page .files i {
+  color: #CCC;
+}
+.update-page .files i.success {
+  color: #66cc33;
+}
 body {
   padding-top: 50px;
 }
