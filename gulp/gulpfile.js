@@ -13,16 +13,17 @@ var gulp        = require('gulp'),
     s3          = require("gulp-s3");
 
 
+
 var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
 var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';
 var ENV = { 
-    'stage': '/stage/',
-    'prod': '/prod/',
+    'Stage': '/stage/',
+    'Prod': '/prod/',
 }
 
 
 gulp.task('less', function(){
-    gulp.src(['../assets/css/main.less'])
+    return gulp.src(['../assets/css/main.less'])
         .pipe(less())
         .pipe(gulp.dest('../assets/css/'))
         .pipe(connect.reload());
@@ -30,14 +31,14 @@ gulp.task('less', function(){
 
 
 gulp.task('js', function () {
-    gulp.src('../assets/**/*.js')
-    .pipe(connect.reload());
+    return ggulp.src('../assets/**/*.js')
+        .pipe(connect.reload());
 });
 
 
 gulp.task('html', function () {
-    gulp.src(['../assets/**/*.html', '../assets/*.html'])
-    .pipe(connect.reload());
+    return ggulp.src(['../assets/**/*.html', '../assets/*.html'])
+        .pipe(connect.reload());
 });
 
 
