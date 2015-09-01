@@ -6,7 +6,19 @@ var gulp        = require('gulp'),
     minifyCss   = require('gulp-minify-css'),
     uglify      = require('gulp-uglify'),
     useref      = require('gulp-useref'),
-    minifyHTML  = require('gulp-minify-html');
+    minifyHTML  = require('gulp-minify-html'),
+    replace     = require('gulp-replace'),
+    argv        = require('yargs').argv,
+    fs          = require("fs"),
+    s3          = require("gulp-s3");
+
+
+var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
+var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';
+var ENV = { 
+    'stage': '/stage/',
+    'prod': '/prod/',
+}
 
 
 gulp.task('less', function(){
@@ -33,7 +45,7 @@ gulp.task('connect', function() {
 
 gulp.task('index', function(){
     var assets = useref.assets();
-    gulp.src(['../assets/index.html'])
+    return gulp.src(['../assets/index.html'])
         .pipe(assets)
         .pipe(gulpif('*.css', minifyCss({keepSpecialComments:0})))
         .pipe(gulpif('*.js', uglify()))
@@ -44,23 +56,42 @@ gulp.task('index', function(){
 
 
 gulp.task('fonts', function(){
-    gulp.src(['../assets/fonts/*'])
+    return gulp.src(['../assets/fonts/*'])
         .pipe(gulp.dest('../public/fonts'));
 });
 
 
 gulp.task('images', function(){
-    gulp.src(['../assets/img/*'])
+    return gulp.src(['../assets/img/*'])
         .pipe(gulp.dest('../public/img'));
 });
 
 
 gulp.task('views', function() {
-    gulp.src(['../assets/modules/**/*.html'])
+    return gulp.src(['../assets/modules/**/*.html'])
         .pipe(minifyHTML({conditionals: true, spare:true}))
         .pipe(gulp.dest('../public/modules'))
 });
 
 
+gulp.task('replace', ['build'], function(){
+    return gulp.src('../public/index.html')
+        .pipe(replace('../public/', awsUrl + ENV[argv.env]))
+        .pipe(replace('../assets/', awsUrl + ENV[argv.env]))
+        .pipe(replace("var ENV = 'dev'", "var ENV = '"+ argv.env +"'"))
+        .pipe(gulp.dest('../public/'));
+});
+
+gulp.task("aws", function(){
+    return gulp.src('../public/**')
+        .pipe(s3(awsCredentials, {
+            uploadPath: ENV[argv.env],
+            headers: {
+                'x-amz-acl': 'public-read'
+            }
+        }));
+})
+
 gulp.task('dev', ['watch', 'connect']);
-gulp.task('prod', ['less', 'index', 'fonts', 'images', 'views']);
+gulp.task('build', ['less', 'index', 'fonts', 'images', 'views']);
+gulp.task('deploy', ['replace', 'aws']);
