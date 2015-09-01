@@ -29,8 +29,22 @@ gulp.task('less', function(){
 });
 
 
+gulp.task('js', function () {
+    gulp.src('../assets/**/*.js')
+    .pipe(connect.reload());
+});
+
+
+gulp.task('html', function () {
+    gulp.src(['../assets/**/*.html', '../assets/*.html'])
+    .pipe(connect.reload());
+});
+
+
 gulp.task('watch', function(){
     gulp.watch('../assets/css/*.less', ['less']);
+    gulp.watch('../assets/**/*.js', ['js']);
+    gulp.watch(['../assets/**/*.html', '../assets/*.html'], ['html']);
 });
 
 
