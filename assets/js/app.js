@@ -44,18 +44,18 @@ angular.module('app', [
 		$routeProvider
 
             .when('/', {
-                templateUrl: Config.STATIC + 'modules/home/views/home.html',
+                templateUrl: Config.STATIC + '/modules/home/views/home.html',
                 controller: 'HomeCtrl', controllerAs: 'home', role:AUTH_ROLES.monitor
             })
 
             //news urls
 			.when('/content/news', {
-                templateUrl: Config.STATIC + 'modules/news/views/list.html',
+                templateUrl: Config.STATIC + '/modules/news/views/list.html',
                 controller: 'NewsListCtrl', controllerAs: 'newsList', role:AUTH_ROLES.monitor
 			})
 
             .when('/content/news/new', {
-                templateUrl: Config.STATIC + 'modules/news/views/form.html',
+                templateUrl: Config.STATIC + '/modules/news/views/form.html',
                 controller: 'NewsFormCtrl', controllerAs: 'news', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'new';}
@@ -63,7 +63,7 @@ angular.module('app', [
             })
             
             .when('/content/news/edit/:id', {
-                templateUrl: Config.STATIC + 'modules/news/views/form.html',
+                templateUrl: Config.STATIC + '/modules/news/views/form.html',
                 controller: 'NewsFormCtrl', controllerAs: 'news', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'edit';}
@@ -72,12 +72,12 @@ angular.module('app', [
 
             //page urls
 			.when('/content/page', {
-				templateUrl: Config.STATIC + 'modules/page/views/list.html',
+				templateUrl: Config.STATIC + '/modules/page/views/list.html',
                 controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
 			})
 
             .when('/content/page/new', {
-                templateUrl: Config.STATIC + 'modules/page/views/form.html',
+                templateUrl: Config.STATIC + '/modules/page/views/form.html',
                 controller: 'PageFormCtrl', controllerAs: 'page', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'new';}
@@ -85,7 +85,7 @@ angular.module('app', [
             })
             
             .when('/content/page/edit/:id', {
-                templateUrl: Config.STATIC + 'modules/page/views/form.html',
+                templateUrl: Config.STATIC + '/modules/page/views/form.html',
                 controller: 'PageFormCtrl', controllerAs: 'page', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'edit';}
@@ -94,12 +94,12 @@ angular.module('app', [
 
             // cooperative groups
             .when('/cooperative/groups', {
-                templateUrl: Config.STATIC + 'modules/groups/views/list.html',
+                templateUrl: Config.STATIC + '/modules/groups/views/list.html',
                 controller: 'GroupsListCtrl', controllerAs: 'groupList', role:AUTH_ROLES.admin
             })            
 
             .when('/cooperative/groups/new', {
-                templateUrl: Config.STATIC + 'modules/groups/views/form.html',
+                templateUrl: Config.STATIC + '/modules/groups/views/form.html',
                 controller: 'GroupsFormCtrl', controllerAs: 'group', role:AUTH_ROLES.admin,
                 resolve: {
                     action: function(){return 'new';}
@@ -107,7 +107,7 @@ angular.module('app', [
             })                 
 
             .when('/cooperative/groups/edit/:id', {
-                templateUrl: Config.STATIC + 'modules/groups/views/form.html',
+                templateUrl: Config.STATIC + '/modules/groups/views/form.html',
                 controller: 'GroupsFormCtrl', controllerAs: 'group', role:AUTH_ROLES.admin,
                 resolve: {
                     action: function(){return 'edit';}
@@ -115,18 +115,18 @@ angular.module('app', [
             })            
 
             .when('/cooperative/groups/fill/:id', {
-                templateUrl: Config.STATIC + 'modules/groups/views/Fill.html',
+                templateUrl: Config.STATIC + '/modules/groups/views/Fill.html',
                 controller: 'GroupsFillCtrl', controllerAs: 'groupFill', role:AUTH_ROLES.admin
             })  
 
             // cooperative url
             .when('/cooperative/email', {
-                templateUrl: Config.STATIC + 'modules/cooperative/views/email.html',
+                templateUrl: Config.STATIC + '/modules/cooperative/views/email.html',
                 controller: 'EmailListCtrl', controllerAs: 'emailList', role:AUTH_ROLES.admin
             })
 
             .when('/cooperative/email/new', {
-                templateUrl: Config.STATIC + 'modules/cooperative/views/email-form.html',
+                templateUrl: Config.STATIC + '/modules/cooperative/views/email-form.html',
                 controller: 'EmailFormCtrl', controllerAs: 'email', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'new';}
@@ -134,7 +134,7 @@ angular.module('app', [
             })
             
             .when('/cooperative/email/edit/:id', {
-                templateUrl: Config.STATIC + 'modules/cooperative/views/email-form.html',
+                templateUrl: Config.STATIC + '/modules/cooperative/views/email-form.html',
                 controller: 'EmailFormCtrl', controllerAs: 'email', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'edit';}
@@ -142,27 +142,27 @@ angular.module('app', [
             })
 
             .when('/cooperative/social', {
-                templateUrl: Config.STATIC + 'modules/cooperative/views/social-form.html',
+                templateUrl: Config.STATIC + '/modules/cooperative/views/social-form.html',
                 controller: 'SocialFormCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
             })
 
             .when('/cooperative/update', {
-                templateUrl: Config.STATIC + 'modules/update/views/index.html',
+                templateUrl: Config.STATIC + '/modules/update/views/index.html',
                 controller: 'UpdateIndexCtrl', controllerAs: 'update', role:AUTH_ROLES.admin
             })
 
             .when('/cooperative/statistic', {
-                templateUrl: Config.STATIC + 'modules/statistic/views/statistic.html',
+                templateUrl: Config.STATIC + '/modules/statistic/views/statistic.html',
                 controller: 'StatisticCtrl', controllerAs: 'statistic', role:AUTH_ROLES.monitor
             })
 
             .when('/content/notification', {
-                templateUrl: Config.STATIC + 'modules/notification/views/list.html',
+                templateUrl: Config.STATIC + '/modules/notification/views/list.html',
                 controller: 'NotificationListCtrl', controllerAs: 'notificationList', role:AUTH_ROLES.monitor
             })
 
             .when('/content/notification/new', {
-                templateUrl: Config.STATIC + 'modules/notification/views/form.html',
+                templateUrl: Config.STATIC + '/modules/notification/views/form.html',
                 controller: 'NotificationFormCtrl', controllerAs: 'notification', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'new';}
@@ -170,7 +170,7 @@ angular.module('app', [
             })
 
             .when('/content/notification/edit/:id', {
-                templateUrl: Config.STATIC + 'modules/notification/views/form.html',
+                templateUrl: Config.STATIC + '/modules/notification/views/form.html',
                 controller: 'NotificationFormCtrl', controllerAs: 'notification', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'edit';}
@@ -179,28 +179,28 @@ angular.module('app', [
 
             //credit urls
             .when('/request/credit', {
-                templateUrl: Config.STATIC + 'modules/credit/views/list.html',
+                templateUrl: Config.STATIC + '/modules/credit/views/list.html',
                 controller: 'CreditListCtrl', controllerAs: 'creditList', role:AUTH_ROLES.monitor
             })
 
             .when('/request/credit/view/:id', {
-                templateUrl: Config.STATIC + 'modules/credit/views/view.html',
+                templateUrl: Config.STATIC + '/modules/credit/views/view.html',
                 controller: 'CreditViewCtrl', controllerAs: 'creditView', role:AUTH_ROLES.editor
             })
 
             //user urls
             .when('/request/user', {
-                templateUrl: Config.STATIC + 'modules/user/views/list.html',
+                templateUrl: Config.STATIC + '/modules/user/views/list.html',
                 controller: 'UserListCtrl', controllerAs: 'userList', role:AUTH_ROLES.monitor
             })
 
             .when('/request/user/view/:id/:type', {
-                templateUrl: Config.STATIC + 'modules/user/views/view.html',
+                templateUrl: Config.STATIC + '/modules/user/views/view.html',
                 controller: 'UserViewCtrl', controllerAs: 'userView', role:AUTH_ROLES.editor
             })
 
             .when('/login', {
-				templateUrl: Config.STATIC + 'modules/auth/views/login.html',
+				templateUrl: Config.STATIC + '/modules/auth/views/login.html',
 			    controller: 'LoginCtrl', controllerAs: 'login', role:AUTH_ROLES.guest
             })
 

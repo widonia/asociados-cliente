@@ -10,9 +10,8 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
         'advanced':{
             'DB_asociado.csv': false,
             'DB_familia_asociado.csv': false,
-            'DB_balance.csv': false,
             'DB_credito.csv': false,
-            'DB_obligacion.csv': false,
+            'DB_extracto_asociado.csv': false,
             'DB_obligacion_asociado.csv': false,
         },
         'simple':{
@@ -74,7 +73,7 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
         }
         
         if(this.type == 'advanced'){
-            if(Object.keys(this.files[this.type]).length != 6){
+            if(Object.keys(this.files[this.type]).length != 5){
                 this.sendFilesError();
                 return false;            
             }

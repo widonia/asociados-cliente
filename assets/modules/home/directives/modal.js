@@ -6,7 +6,7 @@ function modal(AUTH_EVENTS, Config){
         
         restrict: 'A',
 
-        templateUrl: Config.STATIC + 'modules/home/views/modal.html',
+        templateUrl: Config.STATIC + '/modules/home/views/modal.html',
 
         link: function(scope, element){
 
