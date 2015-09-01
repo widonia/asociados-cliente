@@ -93,7 +93,7 @@ gulp.task('replace', ['build'], function(){
     return gulp.src('../public/index.html')
         .pipe(replace('../public/', awsUrl + ENV[argv.env]))
         .pipe(replace('../assets/', awsUrl + ENV[argv.env]))
-        .pipe(replace("var ENV = 'dev'", "var ENV = '"+ argv.env +"'"))
+        .pipe(replace("var ENV = 'Dev'", "var ENV = '"+ argv.env +"'"))
         .pipe(gulp.dest('../public/'));
 });
 
