@@ -48,7 +48,7 @@ gulp.task('index', function(){
     return gulp.src(['../assets/index.html'])
         .pipe(assets)
         .pipe(gulpif('*.css', minifyCss({keepSpecialComments:0})))
-        .pipe(gulpif('*.js', uglify()))
+        //.pipe(gulpif('*.js', uglify()))
         .pipe(assets.restore())
         .pipe(useref())
         .pipe(gulp.dest('../public'));
