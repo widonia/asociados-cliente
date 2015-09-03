@@ -16,7 +16,7 @@ var gulp        = require('gulp'),
 
 var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
 var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';
-var ENV = { 
+var ENV = {
     'Stage': '/stage/',
     'Prod': '/prod/',
 }
