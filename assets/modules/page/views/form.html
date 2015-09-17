@@ -18,27 +18,44 @@
     		<div class="form-group col-sm-8">
     			<label for="inputEmail3" class="control-label">Titulo</label>
     			<input name="title" type="input" class="form-control" ng-model="page.data.title" required>
-    		
                 <div class="error" ng-show="page.form.title.$invalid && page.form.submitted">
                     <small class="error" ng-show="page.form.title.$error.required">
                         Ingrese un titulo
                     </small>
                 </div>
-
             </div>
-
     	</div>
 
-        <div class="row">
-            <div class="form-group col-sm-10">
-                <label for="inputEmail3" class="control-label">Contenido</label>
-                <textarea ui-tinymce="page.tinymceOptions" ui-tinymce name="content" class="form-control" rows="6" ng-model="page.data.content" required></textarea>
-
-                <div class="error" ng-show="page.form.content.$invalid && page.form.submitted">
-                    <small class="error" ng-show="page.form.content.$error.required">
-                        Ingrese el contenido
+    	<div class="row">
+    		<div class="form-group col-sm-8">
+    			<label for="inputEmail3" class="control-label">Tipo</label>
+				<select name="type" ng-model="page.data.type" class="form-control" required>
+					<option value="">Selecicone</option>
+					<option value="1">Categoria</option>
+					<option value="2">Contenido</option>
+				</select>
+				<div class="error" ng-show="page.form.type.$invalid && page.form.submitted">
+                    <small class="error" ng-show="page.form.type.$error.required">
+                        Seleccione un tipo
                     </small>
                 </div>
+    		</div>
+    	</div>
+
+    	<div class="row" ng-show="page.data.type == 2">
+    		<div class="form-group col-sm-8">
+    			<label for="inputEmail3" class="control-label">Pagina padre</label>
+				<select class="form-control" ng-model="page.data.parent">
+					<option value="">Sin padre</option>
+					<option value="{{val.id}}" ng-repeat="(key,val) in page.categories">{{val.title}}</option>
+				</select>
+    		</div>
+    	</div>
+
+        <div class="row" ng-show="page.data.type == 2">
+            <div class="form-group col-sm-10">
+                <label for="inputEmail3" class="control-label">Contenido</label>
+                <textarea ui-tinymce="page.tinymceOptions" ui-tinymce name="content" class="form-control" rows="6" ng-model="page.data.content"></textarea>
             </div>
         </div>
 
@@ -58,6 +75,6 @@
                 &nbsp;
     			<a href="#/content/page" class="btn btn-warning">Regresar</a>
     		</div>
-    	</div>	
+    	</div>
     </form>
-</div>  
+</div>

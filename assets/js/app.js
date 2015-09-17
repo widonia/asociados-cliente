@@ -3,16 +3,16 @@
 angular.module('app', [
 
 	// angular modules
-	'ngRoute', 
-    'ui.bootstrap', 
-	'ngResource', 
+	'ngRoute',
+    'ui.bootstrap',
+	'ngResource',
     'file-model',
     //'angularFileUpload',
     'ui.tinymce',
 
 	// app modules
 	'app.auth',
-	'app.page', 
+	'app.page',
     'app.news',
     'app.document',
     'app.update',
@@ -36,6 +36,8 @@ angular.module('app', [
             'self',
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'https://s3-us-west-2.amazonaws.com/**',
+
+						'http://127.0.0.1:4000',
         ]);
 
 		//auth interceptor
@@ -61,7 +63,7 @@ angular.module('app', [
                     action: function(){return 'new';}
                 }
             })
-            
+
             .when('/content/news/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/news/views/form.html',
                 controller: 'NewsFormCtrl', controllerAs: 'news', role:AUTH_ROLES.editor,
@@ -83,7 +85,7 @@ angular.module('app', [
                     action: function(){return 'new';}
                 }
             })
-            
+
             .when('/content/page/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/page/views/form.html',
                 controller: 'PageFormCtrl', controllerAs: 'page', role:AUTH_ROLES.editor,
@@ -96,7 +98,7 @@ angular.module('app', [
             .when('/cooperative/groups', {
                 templateUrl: Config.STATIC + '/modules/groups/views/list.html',
                 controller: 'GroupsListCtrl', controllerAs: 'groupList', role:AUTH_ROLES.admin
-            })            
+            })
 
             .when('/cooperative/groups/new', {
                 templateUrl: Config.STATIC + '/modules/groups/views/form.html',
@@ -104,7 +106,7 @@ angular.module('app', [
                 resolve: {
                     action: function(){return 'new';}
                 }
-            })                 
+            })
 
             .when('/cooperative/groups/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/groups/views/form.html',
@@ -112,12 +114,12 @@ angular.module('app', [
                 resolve: {
                     action: function(){return 'edit';}
                 }
-            })            
+            })
 
             .when('/cooperative/groups/fill/:id', {
                 templateUrl: Config.STATIC + '/modules/groups/views/Fill.html',
                 controller: 'GroupsFillCtrl', controllerAs: 'groupFill', role:AUTH_ROLES.admin
-            })  
+            })
 
             // cooperative url
             .when('/cooperative/email', {
@@ -132,7 +134,7 @@ angular.module('app', [
                     action: function(){return 'new';}
                 }
             })
-            
+
             .when('/cooperative/email/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/cooperative/views/email-form.html',
                 controller: 'EmailFormCtrl', controllerAs: 'email', role:AUTH_ROLES.editor,
@@ -204,6 +206,7 @@ angular.module('app', [
 			    controller: 'LoginCtrl', controllerAs: 'login', role:AUTH_ROLES.guest
             })
 
+
 			.otherwise({redirectTo: '/'});
 	}
 ])
@@ -227,7 +230,7 @@ angular.module('app', [
     $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
         e.preventDefault();
         if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
-    });    
+    });
 
     $rootScope.$on('$routeChangeStart', function(event, current, prev){
         AuthManager.check(current, prev);

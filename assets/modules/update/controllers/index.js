@@ -2,26 +2,97 @@
 
 function UpdateIndexCtrl(UpdateService, $http, Config){
 
-    var self = '';
-    this.type = 'simple';
-    this.show = {'files':false, 'send':false}
-    this.success = false;
-    this.files = {  
-        'advanced':{
-            'DB_asociado.csv': false,
-            'DB_familia_asociado.csv': false,
-            'DB_credito.csv': false,
-            'DB_extracto_asociado.csv': false,
-            'DB_obligacion_asociado.csv': false,
-        },
-        'simple':{
-            'DB_asociado.csv': false,
-            'DB_credito.csv': false,
-        }
-    }
+    var self = this;
 
+    // server populate data
+    this.data = {
+
+        // array with db properties
+        db:[ 
+            {
+                id: 1,
+                name:'asociados',
+            },
+
+            {
+                id: 2,
+                name:'familiares',
+            },
+
+            {
+                id: 3,
+                name:'creditos',
+            },
+
+            {
+                id: 4,
+                name:'obligaciones',
+            },
+
+            {
+                id: 5,
+                name:'extractos',
+            },
+        ],
+    };
+
+    this.file = null;
+
+    // show loader indicator
+    this.show = {'files':false, 'send':false}
+
+    // current file selected
+    this.current = this.data.db[0];
+
+    // current error
     this.error = '';
 
+    // current status
+    this.status = '';
+
+    this.init = function(){
+
+    }
+
+    this.onDBSelect = function(db){
+        this.current = db;
+    }
+
+    this.uploadFile = function(){
+        var fd = new FormData();
+        console.log(this.file);
+        fd.append('file', this.file);
+        fd.append('date', 'test');
+
+        //send file
+        $http.post(Config.REST + '/api/update/', fd,
+        {   
+            transformRequest:angular.identity,
+            headers:{'Content-Type':undefined}
+        })
+        .success(this.onUploadFile.bind(this))
+        .error(this.onUploadFileErr.bind(this));
+    }
+
+    this.onUploadFile = function(response){
+
+    }
+
+    this.onUploadFileErr = function(response){
+
+    }
+
+    this.downloadFile = function(){
+
+    }
+
+    // add file to send to the server
+    this.addFile = function(e){
+        self.file = e.dataTransfer.files[0];
+    }
+
+
+/*
     this.init = function(){
         self = this;
     }
@@ -118,6 +189,7 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
     }
 
     this.init();
+    */
 }
 
 angular

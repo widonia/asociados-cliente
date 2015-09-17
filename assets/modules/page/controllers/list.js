@@ -1,7 +1,7 @@
 "use strict";
 
 function PageListCtrl(PageService){
-    
+
     this.count = 0;
     this.page = 1;
     this.list = [];
@@ -15,18 +15,18 @@ function PageListCtrl(PageService){
     };
 
     this.getList = function(){
-        PageService.get({page:this.page}, this.onGetList.bind(this));   
+        PageService.get({page:this.page, paginate:1}, this.onGetList.bind(this));
     }
 
     this.onGetList = function(response){
         this.count = response.count;
-        this.list = response.data.results;
+        this.list = response.results;
         window.scrollTo(0, 0);
     }
 
     this.delete = function(page_id){
-        event.preventDefault();   
-        var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');   
+        event.preventDefault();
+        var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
 
         if (confirmDelete) {
             PageService.delete({id:page_id}, this.onDelete.bind(this));
