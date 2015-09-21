@@ -14,7 +14,8 @@ var gulp        = require('gulp'),
 
 
 
-var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
+var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
+// var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
 var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';
 var ENV = {
     'Stage': '/stage/',
@@ -99,7 +100,7 @@ gulp.task('replace', ['build'], function(){
 
 gulp.task("aws", function(){
     return gulp.src('../public/**')
-        .pipe(s3(awsCredentials, {
+        .pipe(s3(awsCredentials.S3, {
             uploadPath: ENV[argv.env],
             headers: {
                 'x-amz-acl': 'public-read'
