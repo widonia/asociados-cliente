@@ -15,8 +15,8 @@ var gulp        = require('gulp'),
 
 
 var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
+awsCredentials.S3.bucket = "asociados-client";
 
-console.log(awsCredentials.S3);
 // var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
 var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';
 var ENV = {
