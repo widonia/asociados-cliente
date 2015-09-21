@@ -50,12 +50,16 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
     // current status
     this.status = '';
 
+    // status for modal type, 1 upload or 2 download
+    this.modalType = 1;
+
     this.init = function(){
 
     }
 
-    this.onDBSelect = function(db){
+    this.onDBSelect = function(db, upload){
         this.current = db;
+        this.modalType = upload;
     }
 
     this.uploadFile = function(){
