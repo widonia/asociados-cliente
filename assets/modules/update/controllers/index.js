@@ -4,8 +4,13 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
 
     var self = this;
 
+    this.error = false;
+    this.success = false;
+    this.loading = false;
+
     // server populate data
     this.data = {
+        separator : ';',
 
         // array with db properties
         db:[ 
@@ -57,16 +62,22 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
 
     }
 
-    this.onDBSelect = function(db, upload){
+    this.onDBSelect = function(db, type){
         this.current = db;
-        this.modalType = upload;
+        this.modalType = type;
+        this.success = false;
+        this.error = false;
+        this.file = null;
     }
 
     this.uploadFile = function(){
+        this.error = false;
+        this.loading = true;
         var fd = new FormData();
         console.log(this.file);
         fd.append('file', this.file);
-        fd.append('date', 'test');
+        fd.append('date', this.data.date);
+        fd.append('separator', this.data.separator);
 
         //send file
         $http.post(Config.REST + '/api/update/', fd,
@@ -79,121 +90,24 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
     }
 
     this.onUploadFile = function(response){
-
+        this.success = true;
+        this.loading = false;
+        this.file = null;
     }
 
     this.onUploadFileErr = function(response){
-
+        this.error = 'el archivo contiene errores que no permiten subirlo';
+        this.loading = false;
     }
 
     this.downloadFile = function(){
-
+        $('#data-modal').modal('hide')
     }
 
     // add file to send to the server
     this.addFile = function(e){
         self.file = e.dataTransfer.files[0];
     }
-
-
-/*
-    this.init = function(){
-        self = this;
-    }
-
-    this.setType = function(type){
-        this.clearFiles(this.type);
-        this.type = type;
-    }
-
-    this.addFile = function(e){
-        self.readFiles(e.dataTransfer.files);
-    }
-
-    this.clearFiles = function(){
-        for(var f in this.files[this.type]){
-            this.files[this.type][f] = false;
-        }
-    }
-
-    this.readFiles = function(_files){
-        this.show.files = true;
-        for (var i = 0, f; f = _files[i]; i++) {
-            if(this.files[this.type][f.name] != undefined){ 
-                this.files[this.type][f.name] = f;
-            }
-        }
-
-        this.checkFiles();
-    }
-
-    this.checkFiles = function(){
-        var send = true;
-        for(var f in this.files[this.type]){
-            if(this.files[this.type][f] == false){
-                send = false; 
-            }
-        }
-        this.show.send = send; 
-    }
-
-    this.sendFiles = function(){
-
-        if(this.type == 'simple'){
-
-            if(Object.keys(this.files[this.type]).length != 2){
-                this.sendFilesError();
-                return false;            
-            }
-        }
-        
-        if(this.type == 'advanced'){
-            if(Object.keys(this.files[this.type]).length != 5){
-                this.sendFilesError();
-                return false;            
-            }
-        }
-        
-
-        //form data append files
-        var fd = new FormData();
-        var file;
-        for( file in this.files[this.type]){
-            fd.append(file, this.files[this.type][file]);
-        }
-
-        fd.append('type', this.type);
-
-        //send file
-        $http.post(Config.REST + '/api/update/', fd,
-        {   
-            transformRequest:angular.identity,
-            headers:{'Content-Type':undefined}
-        })
-        .success(this.sendFilesOk.bind(this))
-        .error(this.sendFilesError.bind(this));
-        
-    }
-
-    this.sendFilesOk = function(){
-        this.success = true;
-        this.error = false;
-    }
-
-    this.sendFilesError = function(response){
-        this.error = true;
-        this.success = false;
-        if(response.file != undefined){ 
-            this.error = response.msg;
-            this.files[this.type][response.file] = false;
-            this.checkFiles();
-        }else{
-            this.error = "Ha ocurrido un error inesperado, contacte a soporte@asociados.com"
-        }
-    }
-
-    this.init();
-    */
 }
 
 angular
