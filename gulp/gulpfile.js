@@ -13,9 +13,12 @@ var gulp        = require('gulp'),
     s3          = require("gulp-s3");
 
 
-
-var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
-awsCredentials.S3.bucket = "asociados-client";
+try {
+    var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
+    awsCredentials.S3.bucket = "asociados-client";
+}catch(err) {
+    var awsCredentials = {};
+}
 
 // var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
 var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';

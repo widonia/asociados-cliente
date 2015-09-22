@@ -3,19 +3,29 @@
 function LoginCtrl($rootScope, $routeParams, $location, AuthService, AuthManager, UserService, AUTH_EVENTS){
 
     this.form = false;
-    this.coop = false;
+    this.error = false;
+
+    // this.coop = false;
     this.coopList = [];
     this.username = '';
     this.password = '';
 
+
     this.init = function(){;
         AuthService.check({},
             this.onLoginOk.bind(this),
-            this.onLoginError.bind(this)
+            this.onCheckError.bind(this)
         );
     }
 
+    this.onCheckError = function(){
+        this.error = false;
+        this.form = true;
+    }
+
     this.login = function(){
+        this.error = false;
+        this.form = false;
         AuthService.post({'username': this.username, 'password':this.password},
             this.onLoginOk.bind(this),
             this.onLoginError.bind(this) 
@@ -23,8 +33,13 @@ function LoginCtrl($rootScope, $routeParams, $location, AuthService, AuthManager
     }
 
     this.onLoginOk = function(response){
-        this.form = false;
         this.get_coopList();
+    }
+
+    this.onLoginError = function(response){
+        this.error = true;
+        this.form = true;
+        AuthManager.logout();
     }
 
     this.get_coopList = function(){
@@ -34,21 +49,16 @@ function LoginCtrl($rootScope, $routeParams, $location, AuthService, AuthManager
     }
 
     this.onCoopListOk = function(response){
-        var size = Object.keys(response.data).length;
+        this.selectCoop(response.data[0].cooperative.id, response.data[0].role);
+        // var size = Object.keys(response.data).length;
 
-        if(size == 1){
-            this.selectCoop(response.data[0].cooperative.id, response.data[0].role);
-            return true;
-        }
+        // if(size == 1){
+        //     this.selectCoop(response.data[0].cooperative.id, response.data[0].role);
+        //     return true;
+        // }
 
-        this.coop = true;
-        this.coopList = response.data
-    }
-
-    this.onLoginError = function(response){
-        this.form = true;
-        this.coop = false;
-        AuthManager.logout();
+        // this.coop = true;
+        // this.coopList = response.data
     }
 
     this.selectCoop = function(cooperative, role){
