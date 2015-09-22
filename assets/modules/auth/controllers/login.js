@@ -1,6 +1,6 @@
 "use strict";
 
-function LoginCtrl($rootScope, $routeParams, $location, AuthService, AuthManager, UserService, AUTH_EVENTS){
+function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, AuthManager, UserService, AUTH_EVENTS){
 
     this.form = false;
     this.error = false;
@@ -9,7 +9,7 @@ function LoginCtrl($rootScope, $routeParams, $location, AuthService, AuthManager
     this.coopList = [];
     this.username = '';
     this.password = '';
-
+    this.static = Config.STATIC;
 
     this.init = function(){;
         AuthService.check({},
