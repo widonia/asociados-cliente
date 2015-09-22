@@ -90,7 +90,7 @@ gulp.task('images', function(){
 
 gulp.task('views', function() {
     return gulp.src(['../assets/modules/**/*.html'])
-        .pipe(minifyHTML({conditionals: true, spare:true}))
+        .pipe(minifyHTML({conditionals: true, spare:true, empty:true}))
         .pipe(gulp.dest('../public/modules'))
 });
 
