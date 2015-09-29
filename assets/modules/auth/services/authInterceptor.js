@@ -12,11 +12,13 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
                     request.headers['Authorization'] = 'token '+AuthManager.get('token');
                 }
             }
-            
+
             return request;
         },
 
         response: function(response){
+            console.log(response.status)
+            console.log(response.data.code);
             if(response.data.code == '01'){
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
             }

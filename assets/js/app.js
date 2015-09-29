@@ -229,6 +229,14 @@ angular.module('app', [
     // not authenticasted event
     $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
         e.preventDefault();
+		AuthManager.logout();
+        if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
+    });
+
+	// not authenticasted event
+    $rootScope.$on(AUTH_EVENTS.notAuthorized, function(e){
+        e.preventDefault();
+		AuthManager.logout();
         if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
     });
 
