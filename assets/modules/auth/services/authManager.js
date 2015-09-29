@@ -29,6 +29,7 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
     }
 
     this.logout = function(){
+        console.log("entraras");
         this.isLogin = false;
         this.isAuth = false;
         this.del('role');
@@ -51,7 +52,6 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
 
             //do redirection if the user is login or the role of the page page if guest
             if(this.isAuth == false && current.$$route.role < AUTH_ROLES.guest ){
-
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated, current.$$route.originalPath);
                 return true;
             }

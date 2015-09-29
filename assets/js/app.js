@@ -36,8 +36,7 @@ angular.module('app', [
             'self',
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'https://s3-us-west-2.amazonaws.com/**',
-
-						'http://127.0.0.1:4000',
+			'http://127.0.0.1:4000',
         ]);
 
 		//auth interceptor
@@ -211,36 +210,86 @@ angular.module('app', [
 	}
 ])
 
-.run(['$rootScope', '$location', 'AuthManager', 'AUTH_EVENTS', function($rootScope, $location, AuthManager, AUTH_EVENTS){
+.run(['$rootScope', '$location', 'AuthManager', 'AuthService', 'AUTH_EVENTS',
+	function($rootScope, $location, AuthManager, AuthService, AUTH_EVENTS){
 
-    // fix data transfer bug
-    $.event.props.push('dataTransfer');
+		// finish loading page
+	    try {
+	        loading_screen.finish();
+	    } catch (e) {
+	        console.log("Error on finnish Screen loading.")
+	    }
 
-    // login success event
-    $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
-        AuthManager.login(data.data.token);
-    });
+		// Firs of all check if is authenticated
+	    AuthService.check(
+	        function success(){
+	            AuthManager.isLogin = true;
+				console.log("Loging");
+	        },
+	        function onError(){
+	            AuthManager.isLogin = false;
+	            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+	        }
+	    );
 
-    // logout succes event
-    $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
-        AuthManager.logout();
-    });
+		// fix data transfer bug
+	    $.event.props.push('dataTransfer');
 
-    // not authenticasted event
-    $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
-        e.preventDefault();
-		AuthManager.logout();
-        if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
-    });
+	    // login success event
+	    $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
+			console.log("Succes login");
+	        AuthManager.login(data.data.token);
+	    });
 
-	// not authenticasted event
-    $rootScope.$on(AUTH_EVENTS.notAuthorized, function(e){
-        e.preventDefault();
-		AuthManager.logout();
-        if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
-    });
+	    // logout succes event
+	    $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
+			console.log("Succes logout");
+	        AuthManager.logout();
+	    });
 
-    $rootScope.$on('$routeChangeStart', function(event, current, prev){
-        AuthManager.check(current, prev);
-    });
-}]);
+	    // not authenticasted event
+	    $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
+			console.log("No authenticated");
+	        e.preventDefault();
+			// AuthManager.logout();
+	        if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
+	    });
+
+		// not authenticasted event
+	    $rootScope.$on(AUTH_EVENTS.notAuthorized, function(e){
+			console.log("No authorized")
+	        e.preventDefault();
+			// AuthManager.logout();
+	        // if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
+	    });
+
+	    $rootScope.$on('$routeChangeStart', function(event, current, prev){
+	        AuthManager.check(current, prev);
+	    });
+
+		// $rootScope.$on('$stateChangeStart',
+		// 	function(event, toState, toParams, fromState, fromParams){
+		// 		console.log("Entra");
+		// 		if (toState.authenticate && !AuthManager.isLogin ){
+		// 			event.preventDefault();
+		// 			if(fromState.name !='login'){
+		// 				console.log(AuthManager.isLogin);
+		// 				$state.transitionTo('login');
+		// 			}
+		// 		}
+		// 		//Seteamos las variables de errores
+		// 		$rootScope.succes = {
+		// 			'status': false,
+		// 			'data': null
+		// 		}
+		//
+		// 		$rootScope.error = {
+		// 			'status': false,
+		// 			'msg':null,
+		// 			'data': null,
+		// 			'hint':null
+		// 		}
+		// 	}
+		// );
+	}
+]);

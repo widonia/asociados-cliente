@@ -17,8 +17,6 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
         },
 
         response: function(response){
-            console.log(response.status)
-            console.log(response.data.code);
             if(response.data.code == '01'){
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
             }
@@ -31,6 +29,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
         },
 
         responseError:function(response){
+            console.log("error");
             if(response.status == 401){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
             }
