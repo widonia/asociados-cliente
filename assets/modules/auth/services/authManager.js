@@ -1,22 +1,26 @@
 "use strict";
 
-function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
 
+
+function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
     //lifecycle indicator
     this.isAuth = false;
     this.isLogin = false;
     this.prevUrl = false;
 
+    var prefix = "client_"
+
     this.del = function(key){
-        return localStorage.removeItem(key);
+        return localStorage.removeItem(prefix+key);
     }
 
-    this.get = function(value){
-        return localStorage[value];
+    this.get = function(key){
+        return window.localStorage.getItem(prefix+key);
+        // return localStorage[value];
     }
 
     this.set = function(key, value){
-        return localStorage[key] = value;
+        return localStorage[prefix+key] = value;
     }
 
     this.login = function(token){
@@ -25,6 +29,7 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
     }
 
     this.logout = function(){
+        console.log("entraras");
         this.isLogin = false;
         this.isAuth = false;
         this.del('role');
@@ -44,10 +49,9 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
         if(this.get('role') == undefined) { this.get('role', AUTH_ROLES.guest); }
 
         if(current.$$route != undefined){
-            
+
             //do redirection if the user is login or the role of the page page if guest
             if(this.isAuth == false && current.$$route.role < AUTH_ROLES.guest ){
-
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated, current.$$route.originalPath);
                 return true;
             }
