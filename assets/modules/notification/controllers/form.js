@@ -135,6 +135,7 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
 
     this.onSubmitError = function(response){
         this.form.success = false;
+        // $scope.image = false;
     }
 
 
