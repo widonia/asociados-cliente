@@ -56,6 +56,7 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
     }
 
     this.submit = function(){
+        this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){

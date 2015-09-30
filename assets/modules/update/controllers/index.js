@@ -17,26 +17,31 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
             {
                 id: 1,
                 name:'asociados',
+                method: 'user_data',
             },
 
             {
                 id: 2,
                 name:'familiares',
+                method: 'user_family',
             },
 
             {
                 id: 3,
                 name:'creditos',
+                method: 'credit',
             },
 
             {
                 id: 4,
                 name:'obligaciones',
+                method: 'obligations',
             },
 
             {
                 id: 5,
                 name:'extractos',
+                method: 'statement',
             },
         ],
     };
@@ -80,7 +85,7 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
         fd.append('separator', this.data.separator);
 
         //send file
-        $http.post(Config.REST + '/api/update/', fd,
+        $http.post(Config.REST + '/api/update/'+this.current.method+ '/', fd,
         {   
             transformRequest:angular.identity,
             headers:{'Content-Type':undefined}

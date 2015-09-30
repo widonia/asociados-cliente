@@ -10,9 +10,15 @@ function PageFormCtrl($routeParams, $q, $http,  PageService, action){
         this.getCategories();
         this.populate();
         this.tinymceOptions = {
-           plugins: [
-                "advlist autolink autosave link image lists textcolor paste textcolor"
+           //  // apply_source_formatting : true,
+           //  // keep_styles: true,
+           //  // valid_elements: "span",
+           //  extended_valid_elements: "*[*]",
+           //  // add_filter('tiny_mce_before_init', 'override_mce_options'),
+            plugins: [
+                "advlist autolink autosave link image lists textcolor paste media"
             ],
+            theme: "modern",
             toolbar1 : "bold italic underline,formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image",
         };
     }
@@ -37,6 +43,7 @@ function PageFormCtrl($routeParams, $q, $http,  PageService, action){
     }
 
     this.submit = function(){
+        this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){
