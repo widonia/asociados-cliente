@@ -104,7 +104,7 @@ gulp.task('replace', ['build'], function(){
 });
 
 gulp.task("aws", function(){
-    return gulp.src('../public/**')
+    return gulp.src('../public/**/*')
         .pipe(s3(awsCredentials.S3, {
             uploadPath: ENV[argv.env],
             headers: {

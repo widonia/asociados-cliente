@@ -11,6 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
 
+        <!-- build:css ../public/css/please-wait/please-wait.min.css -->
+            <link rel="stylesheet" href="lib/please-wait/please-wait.css" />
+        <!-- endbuild -->
+
         <!-- build:css ../public/css/css.min.css -->
         <!-- main module -->
         <link rel="stylesheet" href="css/main.css">
@@ -38,7 +42,23 @@
 
         <div class="container" ng-view></div>
 
-        <script>var ENV = 'Dev';</script>
+        <!-- Add pleasewait lib -->
+        <!-- build:js ../public/js/please-wait/please-wait.min.js -->
+            <script type="text/javascript" src="lib/please-wait/please-wait.min.js"></script>
+        <!-- endbuild -->
+
+        <script type="text/javascript">
+            var ENV = 'Dev';
+            var loading_screen = pleaseWait({
+                  logo:  "http://i.imgur.com/iHf1TWN.png",
+                  backgroundColor: '#22ba64',
+                  loadingHtml: "<p class='loading-message' style='color: white; font-size: 2.5em;'>Bienvenido<br><br> <p style='font-size: 1.5em;color: white;'>...Cargando...</p> </p>",
+                  loaded: true,
+                  finishing: true,
+                  finishing: true
+            });
+        </script>
+
 
         <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 

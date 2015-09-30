@@ -12,7 +12,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
                     request.headers['Authorization'] = 'token '+AuthManager.get('token');
                 }
             }
-            
+
             return request;
         },
 
@@ -29,6 +29,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
         },
 
         responseError:function(response){
+            console.log("error");
             if(response.status == 401){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
             }
