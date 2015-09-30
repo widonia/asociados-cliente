@@ -8,22 +8,6 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
     this.form = false;
     this.groups = {};
     $scope.image = false;
-
-    // this.tinymceOptions = {
-    //     selector: "textarea",
-    //     theme: "modern",
-    //     plugins: [
-    //         "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-    //         "searchreplace wordcount visualblocks visualchars code fullscreen",
-    //         "insertdatetime media nonbreaking save table contextmenu directionality",
-    //         "emoticons template paste textcolor"
-    //     ],
-    //     toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-    //     templates: [
-    //         {title: 'Test template 1', content: 'Test 1'},
-    //         {title: 'Test template 2', content: 'Test 2'}
-    //     ]
-    // };
     
     this.init = function(){
         if(this.action == 'edit'){ this.populate(); }
@@ -59,44 +43,19 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
-            if(this.action == 'new'){
-
-                // var fd = new FormData();
-
-                // for( var value in this.data){fd.append(value, this.data[value])}
-
-                // fd.append('image', $scope.image);
-
-                // $http.post(Config.REST + '/api/notification_client/', fd,
-                // {   
-                //     transformRequest:angular.identity,
-                //     headers:{'Content-Type':undefined}
-                // })
-                // .success(this.onSubmitOk.bind(this))
-                // .error(this.onSubmitError.bind(this));
-
-                //append image
-                // fd.append('image', $scope.image);
-                // console.log(fd);
-                // NotificationService.post({hola:'chao'},
-                //     this.onSubmitOk.bind(this),
-                //     this.onSubmitError.bind(this)
-                // );
-            //     
-                //send request
-                // UserService.save(this.data, this.onSubmitOk.bind(this), this.onSubmitError.bind(this)); 
+            if(this.action == 'new'){; 
                 NotificationService.post({}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
                 );
             }
 
-            // if(this.action == 'edit'){
-            //     NotificationService.put({id:$routeParams.id}, this.data,
-            //         this.onSubmitOk.bind(this),
-            //         this.onSubmitError.bind(this)
-            //     );
-            // }
+            if(this.action == 'edit'){
+                NotificationService.put({id:$routeParams.id}, this.data,
+                    this.onSubmitOk.bind(this),
+                    this.onSubmitError.bind(this)
+                );
+            }
         }
     }
 
@@ -182,9 +141,7 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
     }
 
     this.onPopulateOk = function(response){
-        this.data.title = response.data.title;
-        this.data.content = response.data.content;
-        this.data.public = response.data.public;
+        this.data = response;
     }
 
     this.onPopulateError = function(response){
