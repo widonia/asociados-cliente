@@ -11,16 +11,13 @@ var gulp        = require('gulp'),
     argv        = require('yargs').argv,
     fs          = require("fs"),
     s3          = require("gulp-s3");
-    awspublish  = require('gulp-awspublish');
 
 
 try {
     var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
     awsCredentials.S3.bucket = "asociados-client";
 }catch(err) {
-    var awsCredentials = {
-        
-    }
+    var awsCredentials = {};
 }
 
 // var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
@@ -29,6 +26,7 @@ var ENV = {
     'Stage': '/stage/',
     'Prod': '/prod/',
 }
+
 
 gulp.task('less', function(){
     return gulp.src(['../assets/css/main.less'])
@@ -106,17 +104,13 @@ gulp.task('replace', ['build'], function(){
 });
 
 gulp.task("aws", function(){
-    var options = {
-        headers: {'x-amz-acl': 'public-read'},
-        gzippedOnly: true,
-        uploadPath: ENV[argv.env]
-    }
-    console.log(ENV[argv.env]);
-    return gulp.src('../public/**')
-        .pipe(s3(awsCredentials.S3, options));
-        // .pipe(awspublish.gzip({ ext: '.gz' }))
-        
-
+    return gulp.src('../public/**/*')
+        .pipe(s3(awsCredentials.S3, {
+            uploadPath: ENV[argv.env],
+            headers: {
+                'x-amz-acl': 'public-read'
+            }
+        }));
 })
 
 gulp.task('dev', ['watch', 'connect']);
