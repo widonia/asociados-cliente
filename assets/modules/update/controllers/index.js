@@ -10,7 +10,7 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
 
     // server populate data
     this.data = {
-        separator : ';',
+        delimiter : ';',
 
         // array with db properties
         db:[ 
@@ -79,10 +79,9 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
         this.error = false;
         this.loading = true;
         var fd = new FormData();
-        console.log(this.file);
         fd.append('file', this.file);
         fd.append('date', this.data.date);
-        fd.append('separator', this.data.separator);
+        fd.append('delimiter', this.data.delimiter);
 
         //send file
         $http.post(Config.REST + '/api/update/'+this.current.method+ '/', fd,
