@@ -2,7 +2,7 @@
 
 function CreditService($resource, Config){
     
-    var _url = Config.REST + '/api/credit/request/:id/';
+    var _url = Config.REST + '/api/credit_request/:id/';
     
     return $resource(_url, {}, {
         get: { method:'GET'},
