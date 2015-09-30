@@ -106,8 +106,6 @@ gulp.task('replace', ['build'], function(){
 });
 
 gulp.task("aws", function(){
-<<<<<<< HEAD
-
     var options = {
         headers: {'x-amz-acl': 'public-read'},
         gzippedOnly: true,
@@ -117,15 +115,7 @@ gulp.task("aws", function(){
     return gulp.src('../public/**')
         .pipe(awspublish.gzip({ ext: '.gz' }))
         .pipe(s3(awsCredentials.S3, options));
-=======
-    return gulp.src('../public/**/*')
-        .pipe(s3(awsCredentials.S3, {
-            uploadPath: ENV[argv.env],
-            headers: {
-                'x-amz-acl': 'public-read'
-            }
-        }));
->>>>>>> master
+
 })
 
 gulp.task('dev', ['watch', 'connect']);
