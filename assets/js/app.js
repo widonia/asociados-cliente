@@ -116,7 +116,7 @@ angular.module('app', [
             })
 
             .when('/cooperative/groups/fill/:id', {
-                templateUrl: Config.STATIC + '/modules/groups/views/Fill.html',
+                templateUrl: Config.STATIC + '/modules/groups/views/fill.html',
                 controller: 'GroupsFillCtrl', controllerAs: 'groupFill', role:AUTH_ROLES.admin
             })
 

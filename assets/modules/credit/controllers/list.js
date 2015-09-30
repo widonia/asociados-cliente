@@ -19,8 +19,8 @@ function CreditListCtrl(CreditService){
     }
 
     this.onGetList = function(response){
-        this.count = response.data.count;
-        this.list = response.data.results;
+        this.count = response.count;
+        this.list = response.results;
         console.log(this.list);
         window.scrollTo(0, 0);
     }
