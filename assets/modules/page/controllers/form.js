@@ -20,6 +20,7 @@ function PageFormCtrl($routeParams, $q, $http,  PageService, action){
             ],
             theme: "modern",
             toolbar1 : "bold italic underline,formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image",
+            min_height: 500
         };
     }
 
