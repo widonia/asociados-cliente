@@ -16,7 +16,7 @@ function CreditViewCtrl($routeParams, CreditService){
     }
 
     this.onPopulateOk = function(response){
-        this.data = response.data;
+        this.data = response;
     }
 
     this.onPopulateError = function(response){
