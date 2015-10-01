@@ -34,7 +34,7 @@ function GroupsFillCtrl($scope, $http, $routeParams, Config, GroupsService){
         $http.post(Config.REST + '/api/group/' + $routeParams.id + '/fill_users/', fd,
         {   
             transformRequest:angular.identity,
-            headers:{'Content-Type':'text/csv'}
+            headers:{'Content-Type':undefined}
         })
         .success(this.onSubmit.bind(this))
         .error(this.onSubmitErr.bind(this));;
