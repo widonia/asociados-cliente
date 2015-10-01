@@ -12,16 +12,24 @@
 	<thead>
 		<tr>
 			<th width="40%">Titulo</th>
+            <th>Tipo</th>
 			<th>Fecha</th>
 			<th>Publicada</th>
             <th></th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="page in pageList.list">
+		<tr ng-repeat="page in pageList.list | orderBy:'title'">
             <td>{{page.title}}</td>
-			<td>{{page.add_date}}</td>
-			<td>{{page.published}}</td>
+            <td>
+                <span  ng-if="page.type == 2">Contenido</span>
+                <span ng-if="page.type == 1">*Categoría*</span>
+            </td>            
+			<td>{{page.add_date | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+			<td>
+                <span  ng-if="page.published">SI</span>
+                <span ng-if="!page.published">NO</span>
+            </td>
             <td class="text-right">
                 <a href="#/content/page/edit/{{page.id}}" class="btn btn-primary btn-sm">
                     <span class="glyphicon glyphicon-pencil"></span>
