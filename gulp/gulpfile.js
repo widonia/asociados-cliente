@@ -13,7 +13,7 @@ var gulp        = require('gulp'),
     s3          = require("gulp-s3"),
     gzip        = require("gulp-gzip"),
     runSequence = require('run-sequence'),
-    gzip        = require("6"),
+    gzip        = require("gulp-gzip"),
     awspublish  = require('gulp-awspublish');
 
 try {
@@ -115,7 +115,7 @@ gulp.task("aws", function(){
     return gulp.src('../public/**/*')    
         .pipe(awspublish.gzip({ ext: '.gz' }))
         .pipe(s3(awsCredentials.S3, options));
-        // 
+        // .pipe(awspublish.gzip({ ext: '.gz' }))
 })
 
 
