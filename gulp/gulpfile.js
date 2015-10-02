@@ -113,7 +113,6 @@ gulp.task("aws", function(){
         uploadPath: ENV[argv.env]
     }
     return gulp.src('../public/**/*')    
-        .pipe(awspublish.gzip({ ext: '.gz' }))
         .pipe(s3(awsCredentials.S3, options));
         // .pipe(awspublish.gzip({ ext: '.gz' }))
 })
