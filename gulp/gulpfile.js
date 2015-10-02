@@ -15,10 +15,18 @@ var gulp        = require('gulp'),
     runSequence = require('run-sequence'),
     awspublish = require('gulp-awspublish');
 
-
 try {
     var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
     awsCredentials.S3.bucket = "asociados-client";
+
+    var publisher = awspublish.create({
+        "params": {
+            "Bucket": awsCredentials.S3.bucket
+        },
+        "accessKeyId": awsCredentials.S3.key,
+        "secretAccessKey": wsCredentials.S3.secret
+    });
+    
 }catch(err) {
     var awsCredentials = {};
 }
