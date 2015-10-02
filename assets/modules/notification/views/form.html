@@ -62,73 +62,78 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group col-sm-10">
-                    <label for="inputEmail3" class="control-label">Tipo de notificación</label>
 
-                    <div class="radio">
-                        <label class="radio-inline">
-                            <input type="radio" ng-model="notification.data.public" name="type" value="1"> Publica
-                         </label>
-
-                       <label class="radio-inline">
-                            <input type="radio" ng-model="notification.data.public" name="type" value="0"> Privada
-                        </label>
-                    </div>
-
-                </div>
-            </div>
-
-            <div ng-hide="notification.data.public">
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        <label for="inputEmail3" class="control-label">Agregar asociados por grupo</label>
-                        <select class="form-control" ng-model="notification.data.group" ng-change="notification.addUserByGroup()">
-                            <option value="{{key}}" ng-repeat="(key,val) in notification.groups">{{val.name}}</option>
-                        </select>
-                    </div>
-                </div>
+            <div ng-show="notification.action == 'new'">
 
                 <div class="row">
-                    <div class="form-group col-sm-6">
-                        <label for="inputEmail3" class="control-label">Buscar asociados por cedula</label>
-                        <input ng-change="notification.onChange()" type="input" class="form-control" ng-model="notification.autocomplete.key">
-                        
-                        <ul ng-show="notification.autocomplete.suggest" class="autocomplete">
-                            <li ng-click="notification.addUser(user)" ng-repeat="user in notification.autocomplete.suggest"><span>{{user.username}}</span> {{user.name}}</li>
-                        </ul>
-                        
+                    <div class="form-group col-sm-10">
+                        <label for="inputEmail3" class="control-label">Tipo de notificación</label>
+
+                        <div class="radio">
+                            <label class="radio-inline">
+                                <input type="radio" ng-model="notification.data.public" name="type" value="1"> Publica
+                             </label>
+
+                           <label class="radio-inline">
+                                <input type="radio" ng-model="notification.data.public" name="type" value="0"> Privada
+                            </label>
+                        </div>
+
                     </div>
                 </div>
 
-                <div ng-show="notification.autocomplete.list.0">
+                <div ng-hide="notification.data.public">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="inputEmail3" class="control-label">Lista de destinatarios</label>
+                            <label for="inputEmail3" class="control-label">Agregar asociados por grupo</label>
+                            <select class="form-control" ng-model="notification.data.group" ng-change="notification.addUserByGroup()">
+                                <option value="{{key}}" ng-repeat="(key,val) in notification.groups">{{val.name}}</option>
+                            </select>
+                        </div>
+                    </div>
 
-                            <ul class="user-list">
-                                <li ng-repeat="user in notification.autocomplete.list">
-                                    <span>{{user.username}}</span> 
-                                    {{user.name}}
-                                    <button ng-click="notification.removeUser(user.username)" type="button" class="btn btn-danger btn-sm">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    </button>
-                                </li>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="inputEmail3" class="control-label">Buscar asociados por cedula</label>
+                            <input ng-change="notification.onChange()" type="input" class="form-control" ng-model="notification.autocomplete.key">
+                            
+                            <ul ng-show="notification.autocomplete.suggest" class="autocomplete">
+                                <li ng-click="notification.addUser(user)" ng-repeat="user in notification.autocomplete.suggest"><span>{{user.username}}</span> {{user.name}}</li>
                             </ul>
                             
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-sm-8">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" ng-model="notification.data.send_notification" value="1"> Enviar al celular
-                        </label>
+                    <div ng-show="notification.autocomplete.list.0">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="inputEmail3" class="control-label">Lista de destinatarios</label>
+
+                                <ul class="user-list">
+                                    <li ng-repeat="user in notification.autocomplete.list">
+                                        <span>{{user.username}}</span> 
+                                        {{user.name}}
+                                        <button ng-click="notification.removeUser(user.username)" type="button" class="btn btn-danger btn-sm">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="notification.data.send_notification" value="1"> Enviar al celular
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         	<div class="row">
