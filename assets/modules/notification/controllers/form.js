@@ -16,7 +16,7 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
             plugins: [
                 "advlist autolink autosave link image lists textcolor paste textcolor"
             ],
-
+            min_height: 500,
             toolbar1 : "bold italic underline,formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
@@ -107,8 +107,9 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
         this.form.success = false;
     }
 
-    this.addUserByGroup = function(){    
+    this.addUserByGroup = function(){            
         for(var user in this.groups[this.data.group].users){
+            console.log("iterando", user);
             this.addUser(this.groups[this.data.group].users[user]);
         }
     }
@@ -122,8 +123,8 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
         }
         
         if (exists == false){
-            this.autocomplete.list.push(user);
-            this.data.users.push(user.user_id);
+            this.autocomplete.list.push(user);            
+            this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
         }
 
         this.autocomplete.key = '';

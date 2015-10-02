@@ -30,7 +30,7 @@ function GroupsListCtrl(GroupsService){
         var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');   
 
         if (confirmDelete) {
-            NotificationService.delete({id:id}, this.onDelete.bind(this));
+            GroupsService.delete({id:id}, this.onDelete.bind(this));
         }
     }
 
