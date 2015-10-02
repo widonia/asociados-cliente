@@ -12,7 +12,8 @@ var gulp        = require('gulp'),
     fs          = require("fs"),
     s3          = require("gulp-s3"),
     gzip        = require("gulp-gzip"),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    awspublish = require('gulp-awspublish');
 
 
 try {
