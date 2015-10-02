@@ -10,11 +10,8 @@ var gulp        = require('gulp'),
     replace     = require('gulp-replace'),
     argv        = require('yargs').argv,
     fs          = require("fs"),
-    s3          = require("gulp-s3"),
-    gzip        = require("gulp-gzip"),
-    runSequence = require('run-sequence'),
-    gzip        = require("gulp-gzip"),
-    awspublish  = require('gulp-awspublish');
+    s3          = require("gulp-s3");
+
 
 try {
     var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
@@ -107,23 +104,15 @@ gulp.task('replace', ['build'], function(){
 });
 
 gulp.task("aws", function(){
-    var options = {
-        headers: {'x-amz-acl': 'public-read'},
-        // gzippedOnly: true,
-        uploadPath: ENV[argv.env]
-    }
-    return gulp.src('../public/**/*')    
-        .pipe(s3(awsCredentials.S3, options));
-        // .pipe(awspublish.gzip({ ext: '.gz' }))
+    return gulp.src('../public/**/*')
+        .pipe(s3(awsCredentials.S3, {
+            uploadPath: ENV[argv.env],
+            headers: {
+                'x-amz-acl': 'public-read'
+            }
+        }));
 })
 
-
 gulp.task('dev', ['watch', 'connect']);
-
-gulp.task('build', function() {
-    runSequence('less','index', 'fonts', 'images', 'views');
-});
-
-gulp.task('deploy', function() {
-    runSequence('less','index', 'fonts', 'images', 'views','replace', 'aws');
-});
+gulp.task('build', ['less', 'index', 'fonts', 'images', 'views']);
+gulp.task('deploy', ['replace', 'aws']);
