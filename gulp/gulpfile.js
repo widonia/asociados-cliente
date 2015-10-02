@@ -98,10 +98,6 @@ gulp.task('views', function() {
 });
 
 
-gulp.task('build', function() {
-    runSequence('less','index', 'fonts', 'images', 'views');
-});
-
 gulp.task('replace', ['build'], function(){
     return gulp.src('../public/index.html')
         .pipe(replace('../public/', awsUrl + ENV[argv.env]))
@@ -124,8 +120,10 @@ gulp.task("aws", function(){
 
 gulp.task('dev', ['watch', 'connect']);
 
-
+gulp.task('build', function() {
+    runSequence('less','index', 'fonts', 'images', 'views');
+});
 
 gulp.task('deploy', function() {
-    runSequence('replace', 'aws');
+    runSequence('less','index', 'fonts', 'images', 'views','replace', 'aws');
 });
