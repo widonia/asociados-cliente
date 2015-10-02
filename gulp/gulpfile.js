@@ -127,10 +127,10 @@ gulp.task('upload-s3-prod', function () {
 
 gulp.task('dev', ['watch', 'connect']);
 
-gulp.task('build', function() {
-    runSequence('less','index', 'fonts', 'images', 'views');
+gulp.task('build', function(callback) {
+    runSequence('less','index', 'fonts', 'images', 'views', callback);
 });
 
-gulp.task('deploy', function() {
-    runSequence('build','replace', 'aws');
+gulp.task('deploy', function(callback) {
+    runSequence('less','index', 'fonts', 'images', 'views','replace', 'aws', callback);
 });
