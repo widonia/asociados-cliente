@@ -128,8 +128,8 @@ gulp.task("aws", function(){
 
 gulp.task('upload-s3-prod', function () {
     return gulp.src(DEST_FOLDER.concat("/**/*"))
-    // .pipe(awspublish.gzip({ ext: '.gz' }))
     .pipe( s3( S3SECRET ,options ) );
+    // .pipe(awspublish.gzip({ ext: '.gz' }))    
 })
 
 
