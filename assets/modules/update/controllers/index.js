@@ -35,7 +35,7 @@ function UpdateIndexCtrl(UpdateService, $http, Config){
             {
                 id: 4,
                 name:'obligaciones',
-                method: 'obligations',
+                method: 'obligation',
             },
 
             {
