@@ -24,9 +24,9 @@ try {
             "Bucket": awsCredentials.S3.bucket
         },
         "accessKeyId": awsCredentials.S3.key,
-        "secretAccessKey": wsCredentials.S3.secret
+        "secretAccessKey": awsCredentials.S3.secret
     });
-    
+
 }catch(err) {
     var awsCredentials = {};
 }
