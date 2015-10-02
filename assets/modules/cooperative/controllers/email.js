@@ -1,6 +1,6 @@
 "use strict";
 
-function EmailListCtrl(EmailService){
+function EmailListCtrl($rootScope, EmailService){
     
     this.count = 0;
     this.page = 1;
@@ -15,12 +15,13 @@ function EmailListCtrl(EmailService){
     };
 
     this.getList = function(){
+        $rootScope.$broadcast('loading-show');
         EmailService.get({page:this.page}, this.onGetList.bind(this));   
     }
 
     this.onGetList = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.list = response.data;
-        console.log(response.data);
         window.scrollTo(0, 0);
     }
 
@@ -29,6 +30,7 @@ function EmailListCtrl(EmailService){
         var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');   
 
         if (confirmDelete) {
+            $rootScope.$broadcast('loading-show');
             EmailService.delete({id:id}, this.onDelete.bind(this));
         }
     }

@@ -3,7 +3,7 @@
 function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
     return {
         request:function(request){
-
+            $rootScope.$broadcast('loading-show2');
             if(!request.cache){
                 request.url = fixURL(request.url);
                 request.url = addParameter(request.url, 'cooperative_id=' + AuthManager.get('cooperative'));
@@ -17,6 +17,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
         },
 
         response: function(response){
+            $rootScope.$broadcast('loading-hide2');
             if(response.data.code == '01'){
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
             }
@@ -29,7 +30,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
         },
 
         responseError:function(response){
-            console.log("error");
+            $rootScope.$broadcast('loading-hide2');
             if(response.status == 401){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
             }

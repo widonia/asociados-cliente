@@ -1,6 +1,6 @@
 "use strict";
 
-function PageFormCtrl($routeParams, $q, $http,  PageService, action){
+function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action){
     this.data = {};
     this.action = action;
     this.form = false;
@@ -10,11 +10,6 @@ function PageFormCtrl($routeParams, $q, $http,  PageService, action){
         this.getCategories();
         this.populate();
         this.tinymceOptions = {
-           //  // apply_source_formatting : true,
-           //  // keep_styles: true,
-           //  // valid_elements: "span",
-           //  extended_valid_elements: "*[*]",
-           //  // add_filter('tiny_mce_before_init', 'override_mce_options'),
             plugins: [
                 "advlist autolink autosave link image lists textcolor paste media"
             ],
@@ -36,14 +31,17 @@ function PageFormCtrl($routeParams, $q, $http,  PageService, action){
     }
 
     this.populate = function(){
+        $rootScope.$broadcast('loading-show');
         PageService.get({id:$routeParams.id}, this.onPopulate.bind(this));
     }
 
     this.onPopulate = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.data = response;
     }
 
     this.submit = function(){
+        $rootScope.$broadcast('loading-show');
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
@@ -64,10 +62,12 @@ function PageFormCtrl($routeParams, $q, $http,  PageService, action){
     }
 
     this.onSubmit = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.form.success = true;
     }
 
     this.onSubmitErr = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.form.success = false;
     }
 

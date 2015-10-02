@@ -1,6 +1,6 @@
 "use strict";
 
-function GroupsListCtrl(GroupsService){
+function GroupsListCtrl($rootScope, GroupsService){
     
     this.count = 0;
     this.page = 1;
@@ -15,11 +15,12 @@ function GroupsListCtrl(GroupsService){
     };
 
     this.getList = function(){
+        $rootScope.$broadcast('loading-show');
         GroupsService.get({page:this.page}, this.onGetList.bind(this));   
     }
 
     this.onGetList = function(response){
-        console.log(response);
+        $rootScope.$broadcast('loading-hide');
         this.count = response.count;
         this.list = response.results;
         window.scrollTo(0, 0);
@@ -30,6 +31,7 @@ function GroupsListCtrl(GroupsService){
         var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');   
 
         if (confirmDelete) {
+            $rootScope.$broadcast('loading-show');
             GroupsService.delete({id:id}, this.onDelete.bind(this));
         }
     }

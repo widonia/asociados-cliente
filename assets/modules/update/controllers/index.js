@@ -1,6 +1,6 @@
 "use strict";
 
-function UpdateIndexCtrl(UpdateService, $http, Config){
+function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
 
     var self = this;
 
