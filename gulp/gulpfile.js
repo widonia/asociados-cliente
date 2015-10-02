@@ -13,8 +13,8 @@ var gulp        = require('gulp'),
     s3          = require("gulp-s3"),
     gzip        = require("gulp-gzip"),
     runSequence = require('run-sequence'),
-    gzip = require("gulp-gzip"),
-    awspublish = require('gulp-awspublish');
+    gzip        = require("6"),
+    awspublish  = require('gulp-awspublish');
 
 try {
     var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
@@ -113,8 +113,9 @@ gulp.task("aws", function(){
         uploadPath: ENV[argv.env]
     }
     return gulp.src('../public/**/*')    
+        .pipe(awspublish.gzip({ ext: '.gz' }))
         .pipe(s3(awsCredentials.S3, options));
-        // .pipe(awspublish.gzip({ ext: '.gz' }))
+        // 
 })
 
 
