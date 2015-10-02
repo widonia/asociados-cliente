@@ -120,25 +120,18 @@ gulp.task("aws", function(){
         gzippedOnly: true,
         uploadPath: ENV[argv.env]
     }
-    return gulp.src('../public/**/*')
-        .pipe(awspublish.gzip({ ext: '.gz' }))
+    return gulp.src('../public/**/*')    
         .pipe(s3(awsCredentials.S3, options));
-})
-
-
-gulp.task('upload-s3-prod', function () {
-    return gulp.src(DEST_FOLDER.concat("/**/*"))
-    .pipe( s3( S3SECRET ,options ) );
-    // .pipe(awspublish.gzip({ ext: '.gz' }))    
+        // .pipe(awspublish.gzip({ ext: '.gz' }))
 })
 
 
 gulp.task('dev', ['watch', 'connect']);
 
-gulp.task('build', function(callback) {
-    runSequence('less','index', 'fonts', 'images', 'views', callback);
+gulp.task('build', function() {
+    runSequence('less','index', 'fonts', 'images', 'views');
 });
 
-gulp.task('deploy', function(callback) {
-    runSequence('build','replace', 'aws', callback);
+gulp.task('deploy', function() {
+    runSequence('build','replace', 'aws');
 });
