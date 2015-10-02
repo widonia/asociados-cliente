@@ -18,15 +18,6 @@ var gulp        = require('gulp'),
 try {
     var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
     awsCredentials.S3.bucket = "asociados-client";
-
-    var publisher = awspublish.create({
-        "params": {
-            "Bucket": awsCredentials.S3.bucket
-        },
-        "accessKeyId": awsCredentials.S3.key,
-        "secretAccessKey": awsCredentials.S3.secret
-    });
-
 }catch(err) {
     var awsCredentials = {};
 }
@@ -117,7 +108,7 @@ gulp.task('replace',  function(){
 gulp.task("aws", function(){
     var options = {
         headers: {'x-amz-acl': 'public-read'},
-        gzippedOnly: true,
+        // gzippedOnly: true,
         uploadPath: ENV[argv.env]
     }
     return gulp.src('../public/**/*')    
