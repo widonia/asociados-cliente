@@ -123,8 +123,8 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
         }
         
         if (exists == false){
-            this.autocomplete.list.push(user);
-            this.data.users.push(user.id);
+            this.autocomplete.list.push(user);            
+            this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
         }
 
         this.autocomplete.key = '';

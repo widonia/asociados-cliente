@@ -10,7 +10,9 @@ var gulp        = require('gulp'),
     replace     = require('gulp-replace'),
     argv        = require('yargs').argv,
     fs          = require("fs"),
-    s3          = require("gulp-s3");
+    s3          = require("gulp-s3"),
+    gzip        = require("gulp-gzip"),
+    runSequence = require('run-sequence');
 
 
 try {
@@ -95,7 +97,7 @@ gulp.task('views', function() {
 });
 
 
-gulp.task('replace', ['build'], function(){
+gulp.task('replace',  function(){
     return gulp.src('../public/index.html')
         .pipe(replace('../public/', awsUrl + ENV[argv.env]))
         .pipe(replace('../assets/', awsUrl + ENV[argv.env]))
@@ -104,15 +106,30 @@ gulp.task('replace', ['build'], function(){
 });
 
 gulp.task("aws", function(){
+    var options = {
+        headers: {'x-amz-acl': 'public-read'},
+        gzippedOnly: true,
+        uploadPath: ENV[argv.env]
+    }
     return gulp.src('../public/**/*')
-        .pipe(s3(awsCredentials.S3, {
-            uploadPath: ENV[argv.env],
-            headers: {
-                'x-amz-acl': 'public-read'
-            }
-        }));
+        .pipe(awspublish.gzip({ ext: '.gz' }))
+        .pipe(s3(awsCredentials.S3, options));
 })
 
+
+gulp.task('upload-s3-prod', function () {
+    return gulp.src(DEST_FOLDER.concat("/**/*"))
+    .pipe(awspublish.gzip({ ext: '.gz' }))
+    .pipe( s3( S3SECRET ,options ) );
+})
+
+
 gulp.task('dev', ['watch', 'connect']);
-gulp.task('build', ['less', 'index', 'fonts', 'images', 'views']);
-gulp.task('deploy', ['replace', 'aws']);
+
+gulp.task('build', function() {
+    runSequence('less','index', 'fonts', 'images', 'views');
+});
+
+gulp.task('deploy', function() {
+    runSequence('build','replace', 'aws');
+});
