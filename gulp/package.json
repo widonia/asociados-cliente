@@ -9,6 +9,7 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^3.8.11",
+    "gulp-awspublish": "^3.0.1",
     "gulp-concat": "^2.5.2",
     "gulp-minify-css": "^1.1.1",
     "gulp-replace": "^0.5.3",
