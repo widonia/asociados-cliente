@@ -128,7 +128,7 @@ gulp.task("aws", function(){
 
 gulp.task('upload-s3-prod', function () {
     return gulp.src(DEST_FOLDER.concat("/**/*"))
-    .pipe(awspublish.gzip({ ext: '.gz' }))
+    // .pipe(awspublish.gzip({ ext: '.gz' }))
     .pipe( s3( S3SECRET ,options ) );
 })
 
@@ -140,5 +140,5 @@ gulp.task('build', function(callback) {
 });
 
 gulp.task('deploy', function(callback) {
-    runSequence('less','index', 'fonts', 'images', 'views','replace', 'aws', callback);
+    runSequence('build','replace', 'aws', callback);
 });
