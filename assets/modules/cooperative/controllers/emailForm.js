@@ -1,6 +1,6 @@
 "use strict";
 
-function EmailFormCtrl($routeParams, EmailService, action){
+function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
     this.data = {};
     this.action = action;
     this.form = false;
@@ -10,13 +10,25 @@ function EmailFormCtrl($routeParams, EmailService, action){
     }
 
     this.populate = function(){
+        $rootScope.$broadcast('loading-show');
         EmailService.get({id:$routeParams.id},
             this.onPopulateOk.bind(this),
             this.onPopulateError.bind(this)
         );
     }
 
+    this.onPopulateOk = function(response){
+        $rootScope.$broadcast('loading-hide');
+        this.data.name = response.data.name;
+        this.data.email = response.data.email;
+    }
+
+    this.onPopulateError = function(response){
+        $rootScope.$broadcast('loading-hide');
+    }
+
     this.submit = function(){
+        $rootScope.$broadcast('loading-show');
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){
@@ -35,20 +47,14 @@ function EmailFormCtrl($routeParams, EmailService, action){
         }
     }
 
-    this.onPopulateOk = function(response){
-        this.data.name = response.data.name;
-        this.data.email = response.data.email;
-    }
-
-    this.onPopulateError = function(response){
-
-    }
 
     this.onSubmitOk = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.form.success = true;
     }
 
     this.onSubmitError = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.form.success = false;
     }
 

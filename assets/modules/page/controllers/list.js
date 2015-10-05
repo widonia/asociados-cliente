@@ -1,6 +1,6 @@
 "use strict";
 
-function PageListCtrl(PageService){
+function PageListCtrl($rootScope, PageService){
 
     this.count = 0;
     this.page = 1;
@@ -15,10 +15,12 @@ function PageListCtrl(PageService){
     };
 
     this.getList = function(){
+        $rootScope.$broadcast('loading-show');
         PageService.get({page:this.page, paginate:1}, this.onGetList.bind(this));
     }
 
     this.onGetList = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.count = response.count;
         this.list = response.results;
         window.scrollTo(0, 0);
@@ -29,6 +31,7 @@ function PageListCtrl(PageService){
         var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
 
         if (confirmDelete) {
+            $rootScope.$broadcast('loading-show');
             PageService.delete({id:page_id}, this.onDelete.bind(this));
         }
     }

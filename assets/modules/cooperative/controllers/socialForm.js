@@ -1,6 +1,6 @@
 "use strict";
 
-function SocialFormCtrl($routeParams, SocialService){
+function SocialFormCtrl($rootScope, $routeParams, SocialService){
     this.data = {'facebook':'', 'twitter':''};
     this.form = false;
 
@@ -9,13 +9,27 @@ function SocialFormCtrl($routeParams, SocialService){
     }
 
     this.populate = function(){
+        $rootScope.$broadcast('loading-show');
         SocialService.get({},
             this.onPopulateOk.bind(this),
             this.onPopulateError.bind(this)
         );
     }
 
+    this.onPopulateOk = function(response){
+        var self = this;
+        $rootScope.$broadcast('loading-hide');
+        response.data.forEach(function(entry) {
+            self.data[entry.type] = entry.page
+        });
+    }
+
+    this.onPopulateError = function(response){
+        $rootScope.$broadcast('loading-hide');
+    }
+
     this.submit = function(){
+        $rootScope.$broadcast('loading-show');
         this.form.submitted = true;
         SocialService.put({}, this.data,
             this.onSubmitOk.bind(this),
@@ -24,22 +38,14 @@ function SocialFormCtrl($routeParams, SocialService){
 
     }
 
-    this.onPopulateOk = function(response){
-        var self = this;
-        response.data.forEach(function(entry) {
-            self.data[entry.type] = entry.page
-        });
-    }
-
-    this.onPopulateError = function(response){
-
-    }
 
     this.onSubmitOk = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.form.success = true;
     }
 
     this.onSubmitError = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.form.success = false;
     }
 

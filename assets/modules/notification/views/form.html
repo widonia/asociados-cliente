@@ -14,7 +14,7 @@
     </div>
 
     <div ng-show="!notification.form.success">
-        <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()">
+        <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()" ng-disabled="!isSaving">
 
             <div class="row">
                 <div class="form-group col-sm-8">

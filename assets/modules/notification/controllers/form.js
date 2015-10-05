@@ -1,6 +1,6 @@
 "use strict";
 
-function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, action, UserService, Config, GroupsService){
+function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, NotificationService, action, UserService, Config, GroupsService){
 
     this.autocomplete = {'key':'', 'suggest':[], 'list':[]};
     this.data = {'public':true, 'users':[]};
@@ -10,6 +10,7 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
     $scope.image = false;
     
     this.init = function(){
+
         if(this.action == 'edit'){ this.populate(); }
         
         this.tinymceOptions = {
@@ -22,10 +23,19 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
     }
 
+
+    this.onPopulateOk = function(response){
+        $rootScope.$broadcast('loading-hide');
+        this.data = response;
+    }
+
+    this.onPopulateError = function(response){
+        $rootScope.$broadcast('loading-hide');
+    }
+
+
     this.onGroups = function(response){
         this.groups = response.results;
-        console.log(this.groups);
-        // console.log(this.groups.list);
     }
 
     this.onGroupsErr = function(){
@@ -33,6 +43,7 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
     }
 
     this.populate = function(){
+        $rootScope.$broadcast('loading-show');
         NotificationService.get({id:$routeParams.id},
             this.onPopulateOk.bind(this),
             this.onPopulateError.bind(this)
@@ -40,6 +51,7 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
     }
 
     this.submit = function(){
+        $rootScope.$broadcast('loading-show');
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
@@ -91,11 +103,12 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
         }else{
             this.form.success = true;
         }
+        $rootScope.$broadcast('loading-hide');
     }
 
     this.onSubmitError = function(response){
         this.form.success = false;
-        // $scope.image = false;
+        $rootScope.$broadcast('loading-hide');
     }
 
 
@@ -139,14 +152,6 @@ function NotificationFormCtrl($scope, $routeParams, $http, NotificationService, 
                 break;
             }
         }
-    }
-
-    this.onPopulateOk = function(response){
-        this.data = response;
-    }
-
-    this.onPopulateError = function(response){
-
     }
 
     this.init();

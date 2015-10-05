@@ -1,6 +1,6 @@
 "use strict";
 
-function CreditViewCtrl($routeParams, CreditService){
+function CreditViewCtrl($rootScope, $routeParams, CreditService){
 
     this.data = {};
 
@@ -9,6 +9,7 @@ function CreditViewCtrl($routeParams, CreditService){
     }
 
     this.populate = function(){
+        $rootScope.$broadcast('loading-show');
         CreditService.get({id:$routeParams.id},
             this.onPopulateOk.bind(this),
             this.onPopulateError.bind(this)
@@ -16,10 +17,12 @@ function CreditViewCtrl($routeParams, CreditService){
     }
 
     this.onPopulateOk = function(response){
+        $rootScope.$broadcast('loading-hide');
         this.data = response;
     }
 
     this.onPopulateError = function(response){
+        $rootScope.$broadcast('loading-hide');
         console.log(response);
     }
 
