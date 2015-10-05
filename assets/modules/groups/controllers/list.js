@@ -25,7 +25,7 @@ function GroupsListCtrl(GroupsService){
         window.scrollTo(0, 0);
     }
 
-    this.delete = function(id){
+    this.delete = function(id, event){
         event.preventDefault();   
         var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');   
 

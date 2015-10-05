@@ -24,7 +24,7 @@ function PageListCtrl(PageService){
         window.scrollTo(0, 0);
     }
 
-    this.delete = function(page_id){
+    this.delete = function(page_id, event){
         event.preventDefault();
         var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
 
