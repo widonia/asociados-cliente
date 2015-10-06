@@ -33,7 +33,7 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
     }
 
     this.onLoginOk = function(response){
-        this.get_coopList();
+        this.get_coopList(response.data.username, response.data.last_login);
     }
 
     this.onLoginError = function(response){
@@ -42,14 +42,17 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
         AuthManager.logout();
     }
 
-    this.get_coopList = function(){
+    this.get_coopList = function(username, last_login){
+        var self = this;
         UserService.cooperative({}, 
-            this.onCoopListOk.bind(this)
+            function(response){                
+                self.onCoopListOk(response, username, last_login)
+            }            
         )
     }
 
-    this.onCoopListOk = function(response){
-        this.selectCoop(response.data[0].cooperative.id, response.data[0].role);
+    this.onCoopListOk = function(response, username, last_login){
+        this.selectCoop(response.data[0].cooperative.id, response.data[0].role, username, last_login);
         // var size = Object.keys(response.data).length;
 
         // if(size == 1){
@@ -61,9 +64,9 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
         // this.coopList = response.data
     }
 
-    this.selectCoop = function(cooperative, role){
+    this.selectCoop = function(cooperative, role, username, last_login){
         if(role < 5){
-            AuthManager.auth(cooperative, role);
+            AuthManager.auth(cooperative, role, username, last_login);
             this.goNext();
         }else{
             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {title:'Error', content: 'No posee permisos para esta accion'});

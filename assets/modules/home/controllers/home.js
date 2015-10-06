@@ -1,7 +1,8 @@
 "use strict";
 
-function HomeCtrl(){
-
+function HomeCtrl(AuthManager){
+    this.username = AuthManager.username;
+    this.last_login = AuthManager.last_login;
 }
 
 angular

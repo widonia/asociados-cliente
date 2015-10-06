@@ -222,9 +222,10 @@ angular.module('app', [
 
 		// Firs of all check if is authenticated
 	    AuthService.check(
-	        function success(){
+	        function success(response){
 	            AuthManager.isLogin = true;
-				console.log("Loging");
+                AuthManager.username = response.data.username;
+                AuthManager.last_login = response.data.last_login;
 	        },
 	        function onError(){
 	            AuthManager.isLogin = false;

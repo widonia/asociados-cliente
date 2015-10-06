@@ -7,6 +7,8 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
     this.isAuth = false;
     this.isLogin = false;
     this.prevUrl = false;
+    this.username = null;
+    this.last_login = null;
 
     var prefix = "client_"
 
@@ -32,16 +34,19 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
         console.log("entraras");
         this.isLogin = false;
         this.isAuth = false;
+        this.username = null;
+        this.last_login = null;
         this.del('role');
         this.del('token');
         this.del('cooperative');
     }
 
-    this.auth = function(cooperative, role){
+    this.auth = function(cooperative, role, username, last_login){
         this.isAuth = true;
+        this.username = username;
+        this.last_login = last_login;
         this.set('cooperative', cooperative);
         this.set('role', role);
-
         $rootScope.$broadcast(AUTH_EVENTS.authSuccess);
     }
 
