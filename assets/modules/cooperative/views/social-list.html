@@ -1,0 +1,48 @@
+<h1>Redes sociales</h1>
+
+<ol class="breadcrumb">
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Social Networks</li>
+</ol>
+
+<p class="pull-right">
+    <a href="#/cooperative/social/new" class="btn btn-success">Nueva Red Social</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>         
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <!-- <th>Campo Util</th> -->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="socialNetworok in social.data ">
+            <td></td>
+            <td>{{socialNetworok.type}}</td>
+            <!-- <td></td> -->
+            <td>{{socialNetworok.page}}</td>          
+            <td class="text-right">
+                <a href="#/cooperative/social/edit/{{socialNetworok.id}}" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+
+                <button ng-click="social.delete(socialNetworok.id, $event)" type="button" class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text-center">
+    <pagination 
+    items-per-page="20" 
+    total-items="pageList.count" 
+    ng-model="pageList.page" 
+    max-size="5" 
+    class="pagination-lg" 
+    ng-change="pageList.setPage()">
+    </pagination>
+</div>
