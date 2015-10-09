@@ -26,6 +26,13 @@
     <form  name="social.form" class="form-horizontal" role="form" ng-submit="social.submit()">
         
         <div class="form-group">            
+            <label for="inputEmail3" class="col-sm-2 control-label"> Nombre:</label>
+            <div class="col-sm-5">
+                <input ng-model="social.data.name" type="text" class="form-control" placeholder="Nombre de la nueva Red Social" required="true" >
+            </div>            
+        </div>
+
+        <div class="form-group">            
             <label for="inputEmail3" class="col-sm-2 control-label"> Página:</label>
             <div class="col-sm-5">
                 <input ng-model="social.data.page" type="text" class="form-control" placeholder="Url o nombre de la página" required="true" >
@@ -33,9 +40,11 @@
         </div>
 
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Tipo de Red</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">Tipo de Red {{social.data.type}}</label>
             <div class="col-sm-10">
-                <select class="form-control" ng-options="item as item.display_name for item in social.data.options track by item.value" ng-model="social.data.type"  required="true"></select>
+                <select class="form-control" ng-options="item as item.display_name for item in social.data.options track by item.value" ng-model="social.data.type_selected"  required="true">                    
+                    <option value="">Seleccione una red social</option>
+                </select>
             </div>
         </div>
 

@@ -29,8 +29,9 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
 
     this.onPopulateOk = function(response){
         var self = this;
-        this.data.type = this.data.options.filter(function(v){ return v.value==response.type;})[0]
+        this.data.type_selected = this.data.options.filter(function(v){ return v.value==response.type;})[0]
         this.data.page = response.page;
+        this.data.name = response.name;
         $rootScope.$broadcast('loading-hide');
     }
 
@@ -41,9 +42,8 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
     this.submit = function(){
         // $rootScope.$broadcast('loading-show');
         // this.form.submitted = true;
-        this.data.type = this.data.type.value;
-
-        if(this.action == 'new'){
+        this.data.type = this.data.type_selected.value;
+        if(this.action == 'new'){            
             console.log("Cambia todo new")
             SocialService.post({}, this.data,
                 this.onSubmitOk.bind(this),

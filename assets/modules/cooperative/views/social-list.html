@@ -19,9 +19,8 @@
     </thead>
     <tbody>
         <tr ng-repeat="socialNetworok in social.data ">
-            <td></td>
+            <td>{{socialNetworok.name}}</td>
             <td>{{socialNetworok.type}}</td>
-            <!-- <td></td> -->
             <td>{{socialNetworok.page}}</td>          
             <td class="text-right">
                 <a href="#/cooperative/social/edit/{{socialNetworok.id}}" class="btn btn-primary btn-sm">
