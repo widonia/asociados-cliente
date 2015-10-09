@@ -29,7 +29,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
             return response;
         },
 
-        responseError:function(response){
+        responseError:function(response){            
             $rootScope.$broadcast('loading-hide2');
             if(response.status == 401){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
@@ -47,6 +47,15 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
                     {
                         title:'Error Interno', 
                         content: "El reporte se generó."
+                    }
+                );
+            }
+
+            if(response.status == 0){
+                $rootScope.$broadcast("ERROR", 
+                    {
+                        title:'No Internet', 
+                        content: "Error no hay conexión a internet."
                     }
                 );
             }
