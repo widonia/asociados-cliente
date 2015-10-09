@@ -288,6 +288,12 @@ angular.module('app', [
 	        AuthManager.check(current, prev);
 	    });
 
+
+        $rootScope.$on("ERROR", function(e){
+            console.log("ENtra a este error");
+            e.preventDefault();
+        });
+
 		// $rootScope.$on('$stateChangeStart',
 		// 	function(event, toState, toParams, fromState, fromParams){
 		// 		console.log("Entra");

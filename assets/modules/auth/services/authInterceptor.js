@@ -33,10 +33,22 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
             $rootScope.$broadcast('loading-hide2');
             if(response.status == 401){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            }
-
-            if(response.status == 403){
+            }else if(response.status == 403){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {title:'Error', content: 'No posee permisos para esta accion'});
+            }else if(response.status == 400){
+                $rootScope.$broadcast("ERROR", 
+                    {
+                        title:'Request Error', 
+                        content: JSON.stringify(response.data,null, '\n')
+                    }
+                );
+            }else if(response.status == 500){
+                $rootScope.$broadcast("ERROR", 
+                    {
+                        title:'Error Interno', 
+                        content: "El reporte se generó."
+                    }
+                );
             }
 
             return $q.reject(response);

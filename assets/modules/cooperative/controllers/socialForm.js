@@ -5,18 +5,23 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
     this.form = false;
     this.action = action;
 
-    this.init = function(){       
+    this.init = function(){    
         this.getSocialCategories()
     }
 
     this.getSocialCategories = function(){
+        $rootScope.$broadcast('loading-show');
         SocialService.options({}, this.onSocialCategoriesOk.bind(this))
     }
 
     this.onSocialCategoriesOk =  function(response){
         this.data.options = response.actions.POST.type.choices;           
-        if(this.action == 'edit'){this.populate(); }
-        $rootScope.$broadcast('loading-hide');
+        if(this.action == 'edit'){
+            this.populate(); 
+        }else{
+            $rootScope.$broadcast('loading-hide');
+        }
+        
     }
 
     this.populate = function(){
@@ -43,6 +48,7 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
         // $rootScope.$broadcast('loading-show');
         // this.form.submitted = true;
         this.data.type = this.data.type_selected.value;
+        $rootScope.$broadcast('loading-show');
         if(this.action == 'new'){            
             console.log("Cambia todo new")
             SocialService.post({}, this.data,
