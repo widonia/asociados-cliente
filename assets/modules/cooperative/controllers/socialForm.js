@@ -1,16 +1,32 @@
 "use strict";
 
-function SocialFormCtrl($rootScope, $routeParams, SocialService){
-    this.data = {'facebook':'', 'twitter':''};
+function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
+    this.data = {};
     this.form = false;
+    this.action = action;
 
-    this.init = function(){
-        this.populate();
+    this.init = function(){    
+        this.getSocialCategories()
+    }
+
+    this.getSocialCategories = function(){
+        $rootScope.$broadcast('loading-show');
+        SocialService.options({}, this.onSocialCategoriesOk.bind(this))
+    }
+
+    this.onSocialCategoriesOk =  function(response){
+        this.data.options = response.actions.POST.type.choices;           
+        if(this.action == 'edit'){
+            this.populate(); 
+        }else{
+            $rootScope.$broadcast('loading-hide');
+        }
+        
     }
 
     this.populate = function(){
         $rootScope.$broadcast('loading-show');
-        SocialService.get({},
+        SocialService.get({'id':$routeParams.id},
             this.onPopulateOk.bind(this),
             this.onPopulateError.bind(this)
         );
@@ -18,10 +34,10 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService){
 
     this.onPopulateOk = function(response){
         var self = this;
+        this.data.type_selected = this.data.options.filter(function(v){ return v.value==response.type;})[0]
+        this.data.page = response.page;
+        this.data.name = response.name;
         $rootScope.$broadcast('loading-hide');
-        response.data.forEach(function(entry) {
-            self.data[entry.type] = entry.page
-        });
     }
 
     this.onPopulateError = function(response){
@@ -29,12 +45,24 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService){
     }
 
     this.submit = function(){
+        // $rootScope.$broadcast('loading-show');
+        // this.form.submitted = true;
+        this.data.type = this.data.type_selected.value;
         $rootScope.$broadcast('loading-show');
-        this.form.submitted = true;
-        SocialService.put({}, this.data,
-            this.onSubmitOk.bind(this),
-            this.onSubmitError.bind(this)
-        );
+        if(this.action == 'new'){            
+            console.log("Cambia todo new")
+            SocialService.post({}, this.data,
+                this.onSubmitOk.bind(this),
+                this.onSubmitError.bind(this)
+            );
+        }
+        else if(this.action == 'edit'){
+            console.log("Cambia todo edit")
+            SocialService.put({'id':$routeParams.id}, this.data,
+                this.onSubmitOk.bind(this),
+                this.onSubmitError.bind(this)
+            );
+        }
 
     }
 

@@ -142,11 +142,30 @@ angular.module('app', [
                 }
             })
 
+            // Social URL
+
             .when('/cooperative/social', {
-                templateUrl: Config.STATIC + '/modules/cooperative/views/social-form.html',
-                controller: 'SocialFormCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
+                templateUrl: Config.STATIC + '/modules/cooperative/views/social-list.html',
+                controller: 'SocialListCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
             })
 
+            .when('/cooperative/social/new', {
+                templateUrl: Config.STATIC + '/modules/cooperative/views/social-form.html',
+                controller: 'SocialFormCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'new';}
+                }
+            })
+
+            .when('/cooperative/social/edit/:id', {
+                templateUrl: Config.STATIC + '/modules/cooperative/views/social-form.html',
+                controller: 'SocialFormCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
+                resolve: {                    
+                    action: function(){return 'edit';}
+                }
+            })
+
+            //Update
             .when('/cooperative/update', {
                 templateUrl: Config.STATIC + '/modules/update/views/index.html',
                 controller: 'UpdateIndexCtrl', controllerAs: 'update', role:AUTH_ROLES.admin
@@ -156,6 +175,7 @@ angular.module('app', [
                 templateUrl: Config.STATIC + '/modules/statistic/views/statistic.html',
                 controller: 'StatisticCtrl', controllerAs: 'statistic', role:AUTH_ROLES.monitor
             })
+
 
             .when('/content/notification', {
                 templateUrl: Config.STATIC + '/modules/notification/views/list.html',
@@ -222,9 +242,10 @@ angular.module('app', [
 
 		// Firs of all check if is authenticated
 	    AuthService.check(
-	        function success(){
+	        function success(response){
 	            AuthManager.isLogin = true;
-				console.log("Loging");
+                AuthManager.username = response.data.username;
+                AuthManager.last_login = response.data.last_login;
 	        },
 	        function onError(){
 	            AuthManager.isLogin = false;
@@ -266,6 +287,12 @@ angular.module('app', [
 	    $rootScope.$on('$routeChangeStart', function(event, current, prev){
 	        AuthManager.check(current, prev);
 	    });
+
+
+        $rootScope.$on("ERROR", function(e){
+            console.log("ENtra a este error");
+            e.preventDefault();
+        });
 
 		// $rootScope.$on('$stateChangeStart',
 		// 	function(event, toState, toParams, fromState, fromParams){

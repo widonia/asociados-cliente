@@ -35,13 +35,13 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
             {
                 id: 4,
                 name:'obligaciones',
-                method: 'obligations',
+                method: 'obligation',
             },
 
             {
                 id: 5,
                 name:'extractos',
-                method: 'statement',
+                method: 'statament',
             },
         ],
     };

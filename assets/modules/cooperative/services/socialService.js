@@ -2,11 +2,16 @@
 
 function SocialService($resource, Config){
 
-    var _url = Config.REST + '/api/cooperative/social';
+    var _url = Config.REST + '/api/social/:id';
+
     
-    return $resource(_url, {}, {
+    return $resource(_url + '?fn=none', {}, {
         get: { method:'GET' },
-        put: { method:'PUT' }
+        query: { method:'GET' , isArray:true},
+        put: { method:'PUT' },
+        post: { method:'POST' },
+        'delete' : { method:'DELETE' },
+        options: { method:'OPTIONS' },
     })
 }
 
