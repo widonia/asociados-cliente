@@ -35,7 +35,7 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
     this.onPopulateOk = function(response){
         var self = this;
         this.data.type_selected = this.data.options.filter(function(v){ return v.value==response.type;})[0]
-        this.data.page = response.page;
+        this.data.url = response.url;
         this.data.name = response.name;
         $rootScope.$broadcast('loading-hide');
     }
