@@ -1,6 +1,6 @@
 "use strict";
 
-function CommonListCtrl($rootScope, CRUDService){
+function CRUDListCtrl($rootScope, CRUDService, settings){
 
     this.count = 0;
     this.page = 1;
@@ -16,7 +16,7 @@ function CommonListCtrl($rootScope, CRUDService){
 
     this.getList = function(){
         $rootScope.$broadcast('loading-show');
-        CRUDService.get({page:this.page}, this.onGetList.bind(this));
+        CRUDService.get({object:settings.object, page:this.page}, this.onGetList.bind(this));
     }
 
     this.onGetList = function(response){
@@ -33,7 +33,7 @@ function CommonListCtrl($rootScope, CRUDService){
 
         if (confirmDelete) {
             $rootScope.$broadcast('loading-show');
-            CRUDService.delete({id:id}, this.onDelete.bind(this));
+            CRUDService.delete({object:settings.object, id:id}, this.onDelete.bind(this));
         }
     }
 
@@ -45,5 +45,5 @@ function CommonListCtrl($rootScope, CRUDService){
 }
 
 angular
-    .module('app.notification.controllers')
-    .controller('CommonListCtrl', CommonListCtrl);
+    .module('app.common.controllers')
+    .controller('CRUDListCtrl', CRUDListCtrl);

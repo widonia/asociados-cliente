@@ -6,8 +6,6 @@ function loading(Config){
         
         restrict: 'A',  
         
-        scope: { drop:'&drop' },
-        
         templateUrl: Config.STATIC + '/modules/common/views/loading.html',
 
         link: function(scope, element, attrs){
