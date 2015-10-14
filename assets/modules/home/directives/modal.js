@@ -20,6 +20,7 @@ function modal(AUTH_EVENTS, Config){
             scope.content = ''; 
 
             scope.$on(AUTH_EVENTS.notAuthorized, show);
+            scope.$on("ERROR", show);
         }
     }
 }

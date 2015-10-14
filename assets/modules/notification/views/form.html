@@ -15,13 +15,21 @@
 
     <div ng-show="!notification.form.success">
         <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()" ng-disabled="!isSaving">
+            
+            <div class="row"  ng-if="notification.data.image">
+                <div class="col-sm-4">
+                    <img src="{{notification.MEDIA}}/{{notification.data.image}}" alt="">
+                </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-sm-8">
                     <label for="inputEmail3" class="control-label">Imagen</label>
                     <input name="image" type="file" ng-file="image" required>
-                </div>
+                </div>                
             </div>
+
+
 
             <div class="row">
                 <div class="form-group col-sm-8">

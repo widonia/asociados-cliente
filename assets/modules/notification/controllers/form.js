@@ -8,6 +8,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.form = false;
     this.groups = {};
     $scope.image = false;
+    this.MEDIA = Config.MEDIA;
     
     this.init = function(){
 
@@ -27,6 +28,13 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.onPopulateOk = function(response){
         $rootScope.$broadcast('loading-hide');
         this.data = response;
+
+        // Set image thumbnail if exist
+        console.log(this.data.image)
+        if (this.data.image != undefined  && this.data.image != ""){
+            // $scope.image = this.data.image;
+            this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
+        }
     }
 
     this.onPopulateError = function(response){

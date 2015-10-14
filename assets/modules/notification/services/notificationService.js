@@ -6,7 +6,7 @@ function NotificationService($resource, Config){
     return $resource(_url + '?fn=none', {}, {
         get: { method:'GET'},
         post: { method:'POST'},
-        put: { method:'PUT'},
+        put: { method:'PATCH'},
         // add_image: { method:'PUT', url:_url + 'add_image'},
         delete: { method:'DELETE'}
     })

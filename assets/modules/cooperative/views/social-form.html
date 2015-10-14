@@ -3,39 +3,56 @@
 
 <ol class="breadcrumb">
     <li><a href="#/">Inicio</a></li>
-    <li class="active">Redes sociales</li>
+    <li><a href="#/cooperative/social">Redes Sociales</a></li>
+    <li class="active">Social network</li>
 </ol>
 
 
+<div class="row">
+    <div class="col-md-12">
+        <p>
+
+        </p>
+    </div>
+</div>
+
 <div ng-show="social.form.success">
     <div class="alert alert-success" role="alert">Elemento editado correctamente.</div>
-    <a href="#/" class="btn btn-warning">Regresar</a>
+    <a href="#/cooperative/social" class="btn btn-warning">Regresar</a>
 </div>
 
 <div ng-show="!social.form.success">
 
-    <form novalidate name="social.form" class="form" role="form" ng-submit="social.submit()">
-
-        <div class="row">
-            <div class="form-group col-sm-8">
-                <label for="inputEmail3" class="control-label">Facebook</label>
-                <input name="title" type="input" class="form-control" ng-model="social.data.facebook" required>
-            </div>
-        </div>
+    <form  name="social.form" class="form-horizontal" role="form" ng-submit="social.submit()">
         
-        <div class="row">
-            <div class="form-group col-sm-8">
-                <label for="inputEmail3" class="control-label">Twitter</label>
-                <input name="title" type="input" class="form-control" ng-model="social.data.twitter" required>
+        <div class="form-group">            
+            <label for="inputEmail3" class="col-sm-2 control-label"> Nombre:</label>
+            <div class="col-sm-5">
+                <input ng-model="social.data.name" type="text" class="form-control" placeholder="Nombre de la nueva Red Social" required="true" >
+            </div>            
+        </div>
+
+        <div class="form-group">            
+            <label for="inputEmail3" class="col-sm-2 control-label"> Página:</label>
+            <div class="col-sm-5">
+                <input ng-model="social.data.page" type="text" class="form-control" placeholder="Url o nombre de la página" required="true" >
+            </div>            
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Tipo de Red {{social.data.type}}</label>
+            <div class="col-sm-10">
+                <select class="form-control" ng-options="item as item.display_name for item in social.data.options track by item.value" ng-model="social.data.type_selected"  required="true">                    
+                    <option value="">Seleccione una red social</option>
+                </select>
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-xs-12">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                &nbsp;
-                <a href="#/" class="btn btn-warning">Regresar</a>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" >Guardar</button>
             </div>
-        </div>  
+        </div>
+
     </form>
 </div>  
