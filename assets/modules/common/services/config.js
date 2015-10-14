@@ -6,7 +6,7 @@ if(ENV == 'Dev'){
         // MEDIA: 'http://localhost:8000/media',
         // 
         REST: 'http://54.187.171.36',
-        STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage',        
+        STATIC: 'http://localhost:4000',    
         MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
 }
