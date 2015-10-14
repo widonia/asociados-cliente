@@ -1,4 +1,3 @@
-
 if(ENV == 'Dev'){
     angular.module('app.common.services').constant('Config', {
         // REST: 'http://localhost:8000',
@@ -10,7 +9,6 @@ if(ENV == 'Dev'){
         MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
 }
-
 
 if(ENV == 'Stage'){
     angular.module('app.common.services').constant('Config', {
