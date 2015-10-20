@@ -6,28 +6,28 @@ function loading(Config){
         
         restrict: 'A',  
         
-        scope: { drop:'&drop' },
-        
         templateUrl: Config.STATIC + '/modules/common/views/loading.html',
 
         link: function(scope, element, attrs){
-            var isShow = false;
+            console.log('aja');
+            var request = 0
 
             var show = function(){ 
-                if(isShow == false){
-                    isShow = true;
+                if(request == 0){
                     $('#loading-panel').addClass('display');
                 }
-                
+                request += 1;
             }
 
+
             var hide = function(){
-                if(isShow == true){
-                    isShow = false;
-                    setTimeout(function(){
+                setTimeout(function(){
+                    if(request == 0){
                         $('#loading-panel').removeClass('display');
-                    }, 500);   
-                }
+                    }
+                }, 500); 
+                
+                request -= (request == 0) ? 0 : 1;
             }
 
             scope.$on('loading-show2', show);

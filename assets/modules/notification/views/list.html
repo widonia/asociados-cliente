@@ -5,44 +5,16 @@
 	<li class="active">Notificaciones</li>
 </ol>
 
-<p class="pull-right">
-	<a href="#/content/notification/new" class="btn btn-success">Nueva notificacion</a>
-</p>
 
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th width="40%">Titulo</th>
-			<th>Fecha</th>
-            <th>Tipo</th>
-            <th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="notificaion in notificationList.list | orderBy:'-add_date'">
-            <td>{{notificaion.title}}</td>
-			<td>{{notificaion.add_date | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-            <td > <span ng-if="notificaion.public">Publica</span> <span ng-if="!notificaion.public">Privada</span></td>
-            <td class="text-right">
-                <a href="#/content/notification/edit/{{notificaion.id}}" class="btn btn-primary btn-sm">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </a>
+<list-view 
+    fields="[
+        {'name':'title', 'label':'Titulo', 'type': 'string', width:'40'},
+        {'name':'add_date', 'label':'Fecha', 'type': 'date'},
+        {'name':'public', 'label':'Publicado', 'type': 'bool'},
+    ]"
+    label="notificación"
+    module="notification"
+    url="notification_client">
+    
+</list-view>
 
-                <button ng-click="notificationList.delete(notificaion.id, $event)" type="button" class="btn btn-danger btn-sm">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-            </td>
-		</tr>
-	</tbody>
-</table>
-
-<div class="text-center">
-    <pagination 
-    items-per-page="20" 
-    total-items="notificationList.count" 
-    ng-model="notificationList.page" 
-    max-size="5" 
-    class="pagination-lg" 
-    ng-change="notificationList.setPage()">
-    </pagination>
-</div>

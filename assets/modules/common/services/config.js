@@ -1,9 +1,12 @@
 if(ENV == 'Dev'){
     angular.module('app.common.services').constant('Config', {
-        REST: 'http://localhost:8000',
-        // REST: 'http://52.11.113.25',
-        STATIC: 'http://localhost:4000',
-        MEDIA: 'http://localhost:8000/media',
+        // REST: 'http://localhost:8000',
+        // STATIC: 'http://localhost:4000',
+        // MEDIA: 'http://localhost:8000/media',
+        // 
+        REST: 'http://54.187.171.36',
+        STATIC: 'http://localhost:4000',    
+        MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
 }
 
