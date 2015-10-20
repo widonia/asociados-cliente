@@ -1,47 +1,21 @@
-<h1>Solicitud de creditos</h1>
+<h1>Créditos</h1>
 
 <ol class="breadcrumb">
     <li><a href="#">Inicio</a></li>
-    <li class="active">Creditos</li>
+    <li class="active">Créditos</li>
 </ol>
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Asociados</th>
-            <th>Credito</th>
-            <th>Monto</th>
-            <th>Fecha</th>
-            <th>Estatdo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="credit in creditList.list">
-            <td>({{credit.user.username }}) {{credit.user.name }}</td>
-            <td>{{credit.credit.name}}</td>
-            <td>{{credit.amount}}</td>
-            <td>{{credit.add_date}}</td>
-            <td> 
-                <span ng-if="credit.processed==true">Procesado</span>
-                <span ng-if="credit.processed==false">NO Procesado</span>
-            </td>
-            
-            <td class="text-right">
-                <a href="#/request/credit/view/{{credit.id}}" class="btn btn-primary btn-sm">
-                    Ver mas
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
 
-<div class="text-center">
-    <pagination 
-    items-per-page="10" 
-    total-items="creditList.count" 
-    ng-model="creditList.page" 
-    max-size="5" 
-    class="pagination-lg" 
-    ng-change="creditList.setPage()">
-    </pagination>
-</div>
+<list-view 
+    fields="[
+        {'name':'code', 'label':'Código', 'type': 'string'},
+        {'name':'name', 'label':'Nombre', 'type': 'string', width:'40'},
+        {'name':'rate', 'label':'rate', 'type': 'string'},
+    ]"
+    label="credito"
+    module="credits"
+    url="cooperative/credits"
+    rest="credit">
+
+</list-view>
+

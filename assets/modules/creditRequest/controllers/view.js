@@ -1,6 +1,6 @@
 "use strict";
 
-function CreditViewCtrl($rootScope, $routeParams, CreditService){
+function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService){
 
     this.data = {};
 
@@ -10,7 +10,7 @@ function CreditViewCtrl($rootScope, $routeParams, CreditService){
 
     this.populate = function(){
         $rootScope.$broadcast('loading-show');
-        CreditService.get({id:$routeParams.id},
+        CreditRequestService.get({id:$routeParams.id},
             this.onPopulateOk.bind(this),
             this.onPopulateError.bind(this)
         );
@@ -39,10 +39,10 @@ function CreditViewCtrl($rootScope, $routeParams, CreditService){
             }
         }
 
-        var confirmDelete = confirm('¿Esta seguro que desea cambiar el ?');
+        var confirmDelete = confirm('¿Está seguro que desea cambiar el estado?');
 
         if (confirmDelete) {
-            CreditService.proccess({'id':$routeParams.id}, 
+            CreditRequestService.proccess({'id':$routeParams.id}, 
                 onSuccess.bind(this), 
                 onError.bind(this)
             );
@@ -59,5 +59,5 @@ function CreditViewCtrl($rootScope, $routeParams, CreditService){
 }
 
 angular
-    .module('app.credit.controllers')
-    .controller('CreditViewCtrl', CreditViewCtrl);
+    .module('app.creditRequest.controllers')
+    .controller('CreditRequestViewCtrl', CreditRequestViewCtrl);

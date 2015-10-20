@@ -17,6 +17,7 @@ angular.module('app', [
     'app.document',
     'app.update',
     'app.credit',
+    'app.creditRequest',
     'app.user',
     'app.notification',
     'app.common',
@@ -89,6 +90,28 @@ angular.module('app', [
             .when('/content/page/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/page/views/form.html',
                 controller: 'PageFormCtrl', controllerAs: 'page', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'edit';}
+                }
+            })
+
+            //credit urls
+            .when('/cooperative/credits', {
+                templateUrl: Config.STATIC + '/modules/credit/views/list.html',
+                role:AUTH_ROLES.monitor
+            })
+
+            .when('/cooperative/credits/new', {
+                templateUrl: Config.STATIC + '/modules/credit/views/form.html',
+                controller: 'CreditFormCtrl', controllerAs: 'credit', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'new';}
+                }
+            })
+
+            .when('/cooperative/credits/edit/:id', {
+                templateUrl: Config.STATIC + '/modules/credit/views/form.html',
+                controller: 'CreditFormCtrl', controllerAs: 'credit', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'edit';}
                 }
@@ -217,15 +240,15 @@ angular.module('app', [
                 }
             })
 
-            //credit urls
+            //credit request urls
             .when('/request/credit', {
-                templateUrl: Config.STATIC + '/modules/credit/views/list.html',
-                controller: 'CreditListCtrl', controllerAs: 'creditList', role:AUTH_ROLES.monitor
+                templateUrl: Config.STATIC + '/modules/creditRequest/views/list.html',
+                controller: 'CreditRequestListCtrl', controllerAs: 'creditList', role:AUTH_ROLES.monitor
             })
 
             .when('/request/credit/view/:id', {
-                templateUrl: Config.STATIC + '/modules/credit/views/view.html',
-                controller: 'CreditViewCtrl', controllerAs: 'creditView', role:AUTH_ROLES.editor
+                templateUrl: Config.STATIC + '/modules/creditRequest/views/view.html',
+                controller: 'CreditRequestViewCtrl', controllerAs: 'creditView', role:AUTH_ROLES.editor
             })
 
             //user urls
