@@ -26,6 +26,35 @@ function CreditViewCtrl($rootScope, $routeParams, CreditService){
         console.log(response);
     }
 
+    this.process = function(){
+        console.log("Hola que hace");
+
+        var onSuccess = function(response){
+           
+        }
+
+        var onError = function(response){
+            if (this.data.processed != undefined){
+                this.data.processed = !this.data.processed;
+            }
+        }
+
+        var confirmDelete = confirm('¿Esta seguro que desea cambiar el ?');
+
+        if (confirmDelete) {
+            CreditService.proccess({'id':$routeParams.id}, 
+                onSuccess.bind(this), 
+                onError.bind(this)
+            );
+        }else{
+            if (this.data.processed != undefined){
+                this.data.processed = !this.data.processed;
+            }
+        }
+
+        
+    }
+
     this.init();
 }
 

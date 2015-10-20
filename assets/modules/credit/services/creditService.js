@@ -8,7 +8,8 @@ function CreditService($resource, Config){
         get: { method:'GET'},
         post: { method:'POST'},
         put: { method:'PUT'},
-        delete: { method:'DELETE'}
+        delete: { method:'DELETE'},
+        proccess: { method:'POST', url:_url + 'processed' , params: {id: "@id"}},
     })
 }
 
