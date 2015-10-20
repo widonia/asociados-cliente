@@ -1,4 +1,3 @@
-
 <h1>Lista de correos</h1>
 
 <ol class="breadcrumb">
@@ -6,6 +5,21 @@
     <li class="active">Lista de correos</li>
 </ol>
 
+
+<list-view 
+    fields="[
+        {'name':'name', 'label':'Titulo', 'type': 'string', width:'40'},
+        {'name':'email', 'label':'Fecha', 'type': 'string'},
+    ]"
+    label="email"
+    module="cooperative/email"
+    url="cooperative/email"
+    rest="cooperative/email">
+    
+</list-view>
+
+
+<!-- 
 <p class="pull-right">
     <a href="#/cooperative/email/new" class="btn btn-success">Nuevo correo</a>
 </p>
@@ -34,3 +48,4 @@
         </tr>
     </tbody>
 </table>
+ -->

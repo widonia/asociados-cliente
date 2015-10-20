@@ -11,8 +11,14 @@
     <dt>Credito</dt>
     <dd>{{creditView.data.credit.name}}</dd>
 
-    <dt>Asociados</dt>
-    <dd>{{creditView.data.user}}</dd>
+    <dt>Asociado</dt>
+    <dd>
+        <ul>
+            <li>{{creditView.data.user.username}}</li>
+            <li>{{creditView.data.user.name}}</li>
+            <li>{{creditView.data.user.email}}</li>
+        </ul>
+    </dd>
 
     <dt>Monto</dt>
     <dd>{{creditView.data.amount}}</dd>
@@ -22,4 +28,9 @@
 
     <dt>Fecha de envio</dt>
     <dd>{{creditView.data.add_date}}</dd>
+    
+    <dt>Procesado:</dt>
+    <dd>
+        <input type="checkbox" ng-model="creditView.data.processed" ng-change="creditView.process()"/>
+    </dd>
 </dl>

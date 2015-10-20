@@ -1,0 +1,39 @@
+<p class="pull-right">
+    <a href="#/content/{{listView.module}}/new" class="btn btn-success">Nueva {{listView.label}}</a>
+</p>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th width="{{field.width}}%" ng-repeat="field in listView.fields">{{field.label}}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="element in listView.list | orderBy:'-add_date'">
+            <td ng-repeat="field in listView.fields">{{element[field.name] | fieldType: field.type }}</td>
+
+            <td class="text-right">
+                <a href="#/{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+
+                <button ng-click="listView.delete(element.id, $event)" type="button" class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text-center">
+    <pagination 
+    items-per-page="20" 
+    total-items="listView.count" 
+    ng-model="listView.page" 
+    max-size="5" 
+    class="pagination-lg" 
+    ng-change="listView.setPage()">
+    </pagination>
+</div>

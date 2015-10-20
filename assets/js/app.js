@@ -74,7 +74,8 @@ angular.module('app', [
             //page urls
 			.when('/content/page', {
 				templateUrl: Config.STATIC + '/modules/page/views/list.html',
-                controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
+                role:AUTH_ROLES.monitor
+                // controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
 			})
 
             .when('/content/page/new', {
@@ -123,7 +124,8 @@ angular.module('app', [
             // cooperative url
             .when('/cooperative/email', {
                 templateUrl: Config.STATIC + '/modules/cooperative/views/email.html',
-                controller: 'EmailListCtrl', controllerAs: 'emailList', role:AUTH_ROLES.admin
+                role:AUTH_ROLES.admin
+                // controller: 'EmailListCtrl', controllerAs: 'emailList', role:AUTH_ROLES.admin
             })
 
             .when('/cooperative/email/new', {
@@ -179,7 +181,24 @@ angular.module('app', [
 
             .when('/content/notification', {
                 templateUrl: Config.STATIC + '/modules/notification/views/list.html',
-                controller: 'NotificationListCtrl', controllerAs: 'notificationList', role:AUTH_ROLES.monitor
+                role:AUTH_ROLES.monitor
+                // controller: 'CRUDListCtrl', controllerAs: 'notificationList', role:AUTH_ROLES.monitor
+                // resolve: {
+                //     settings: function(){
+                //         return {
+                //             object: 'notification_client',
+                //             name: 'Notificacion',
+                //             title: 'Notificaciones',
+                //             path: [
+                //                 { 'Inicio' :'/' },
+                //                 { 'Notificaciones' :false },
+                //             ],
+                //             fields: [
+                //                 {'title': 'string' }
+                //             ]
+                //         }
+                //     }
+                // }
             })
 
             .when('/content/notification/new', {

@@ -5,7 +5,22 @@
 	<li class="active">Paginas</li>
 </ol>
 
-<p class="pull-right">
+
+<list-view 
+    fields="[
+        {'name':'title', 'label':'Titulo', 'type': 'string', width:'40'},
+        {'name':'add_date', 'label':'Fecha', 'type': 'date'},
+        {'name':'public', 'label':'Publicado', 'type': 'bool'},
+    ]"
+    label="pagína"
+    module="page"
+    url="content/page"
+    rest="pages">
+    
+</list-view>
+
+
+<!-- <p class="pull-right">
 	<a href="#/content/page/new" class="btn btn-success">Nueva pagina</a>
 </p>
 <table class="table table-hover">
@@ -52,4 +67,4 @@
     class="pagination-lg" 
     ng-change="pageList.setPage()">
     </pagination>
-</div>
+</div> -->

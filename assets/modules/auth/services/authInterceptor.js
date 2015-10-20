@@ -3,6 +3,7 @@
 function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
     return {
         request:function(request){
+            // console.log(" request " + request);
             $rootScope.$broadcast('loading-show2');
             if(!request.cache){
                 request.url = fixURL(request.url);
@@ -17,6 +18,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
         },
 
         response: function(response){
+            // console.log(" response " + response);
             $rootScope.$broadcast('loading-hide2');
             if(response.data.code == '01'){
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);

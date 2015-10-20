@@ -12,15 +12,20 @@
             <th>Credito</th>
             <th>Monto</th>
             <th>Fecha</th>
-            <th></th>
+            <th>Estatdo</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="credit in creditList.list">
-            <td>{{credit.user}}</td>
+            <td>({{credit.user.username }}) {{credit.user.name }}</td>
             <td>{{credit.credit.name}}</td>
             <td>{{credit.amount}}</td>
             <td>{{credit.add_date}}</td>
+            <td> 
+                <span ng-if="credit.processed==true">Procesado</span>
+                <span ng-if="credit.processed==false">NO Procesado</span>
+            </td>
+            
             <td class="text-right">
                 <a href="#/request/credit/view/{{credit.id}}" class="btn btn-primary btn-sm">
                     Ver mas
