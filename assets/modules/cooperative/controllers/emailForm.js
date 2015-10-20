@@ -19,8 +19,8 @@ function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
 
     this.onPopulateOk = function(response){
         $rootScope.$broadcast('loading-hide');
-        this.data.name = response.data.name;
-        this.data.email = response.data.email;
+        this.data.name = response.name;
+        this.data.email = response.email;
     }
 
     this.onPopulateError = function(response){
