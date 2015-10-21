@@ -15,31 +15,21 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
         // array with db properties
         db:[ 
             {
-                id: 1,
                 name:'asociados',
                 method: 'user_data',
             },
 
             {
-                id: 2,
-                name:'familiares',
-                method: 'user_family',
-            },
-
-            {
-                id: 3,
                 name:'creditos',
                 method: 'credit',
             },
 
             {
-                id: 4,
                 name:'obligaciones',
                 method: 'obligation',
             },
 
             {
-                id: 5,
                 name:'extractos',
                 method: 'statement',
             },
@@ -64,12 +54,31 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
     this.modalType = 1;
 
     this.init = function(){
+        this.getList();
+    };
 
+    this.getList = function(){
+        UpdateService.info({}, this.onGetList.bind(this));
     }
 
-    this.onDBSelect = function(db, type){
+    this.onGetList = function(response){
+        this.info = response;
+
+        for(var element in this.data.db){
+            for(var element2 in  this.info){
+                if(this.info[element2].file){
+                    if(this.data.db[element].name == this.info[element2].file.name){
+                        this.data.db[element].update = this.info[element2].update;
+                    }
+                }
+            }
+        }
+
+        console.log(this.data);
+    }
+
+    this.onDBSelect = function(db){
         this.current = db;
-        this.modalType = type;
         this.success = false;
         this.error = false;
         this.file = null;
@@ -84,7 +93,7 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
         fd.append('delimiter', this.data.delimiter);
 
         //send file
-        $http.post(Config.REST + '/api/update/'+this.current.method+ '/', fd,
+        $http.post(Config.REST + '/api/update/load/'+this.current.method+ '/', fd,
         {   
             transformRequest:angular.identity,
             headers:{'Content-Type':undefined}
@@ -104,14 +113,12 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
         this.loading = false;
     }
 
-    this.downloadFile = function(){
-        $('#data-modal').modal('hide')
-    }
-
     // add file to send to the server
     this.addFile = function(e){
         self.file = e.dataTransfer.files[0];
     }
+
+    this.init();
 }
 
 angular

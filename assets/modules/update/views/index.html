@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{update.modalType === 1 ? "Actualización" : "Descargar"}} de {{update.current.name}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">Actualizar {{update.current.name}}</h4>
                 </div>
 
 
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label >{{update.modalType === 1 ? "Fecha de corte" : "Desde la fecha"}} </label>
-                                    <input type="date" class="form-control" placeholder="AAAA-MM-DD" ng-model="update.data.date">
+                                    <input type="date" class="form-control" placeholder="AAAA-MM-DD" ng-model="update.data.court_date">
                                 </div>
                             </form>
 
@@ -55,8 +55,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button ng-show="update.modalType == 1" type="button" class="btn btn-primary" ng-click="update.uploadFile()">Actualizar</button>
-                            <button ng-show="update.modalType == 2" type="button" class="btn btn-primary" ng-click="update.downloadFile()">Descargar</button>
+                            <button type="button" class="btn btn-primary" ng-click="update.uploadFile()">Actualizar</button>
                         </div>
                     </div>
                 
@@ -79,27 +78,22 @@
             <thead>
                 <tr>
                     <th>Archivo</th>
-                    <th>Última carga</th>
-                    <th>Última descarga</th>
+                    <th>Última actualización</th>
                     <th class="text-right"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="db in update.data.db">
                     <td>{{db.name}}</td>
-                    <td>2015-02-02 12:30</td>
-                    <td>2015-02-02 12:30</td>
+                    <td>{{db.update || 'Aun no se carga' }}</td>
                     <td class="text-right">
 
-                        <button ng-click="update.onDBSelect(db, 1)" data-toggle="modal" data-target="#data-modal" type="button" class="btn btn-primary btn-sm">
+                        <button ng-click="update.onDBSelect(db)" data-toggle="modal" data-target="#data-modal" type="button" class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-arrow-up"></span>
                         </button>
-<!-- 
-                        <button ng-click="update.onDBSelect(db, 2)" data-toggle="modal" data-target="#data-modal" type="button" class="btn btn-warning btn-sm">
-                            <span class="glyphicon glyphicon-arrow-down"></span>
-                        </button> -->
 
                     </td>
+
                 </tr>
  
             </tbody>
@@ -107,4 +101,5 @@
         </table>
 
     </div>
+
 </div>
