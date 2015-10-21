@@ -95,6 +95,28 @@ angular.module('app', [
                 }
             })
 
+            //user urls
+            .when('/cooperative/users', {
+                templateUrl: Config.STATIC + '/modules/user/views/list.html',
+                role:AUTH_ROLES.monitor
+            })
+
+            .when('/cooperative/users/new', {
+                templateUrl: Config.STATIC + '/modules/user/views/form.html',
+                controller: 'UserFormCtrl', controllerAs: 'user', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'new';}
+                }
+            })
+
+            .when('/cooperative/users/edit/:id', {
+                templateUrl: Config.STATIC + '/modules/user/views/form.html',
+                controller: 'UserFormCtrl', controllerAs: 'user', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'edit';}
+                }
+            })
+
             //credit urls
             .when('/cooperative/credits', {
                 templateUrl: Config.STATIC + '/modules/credit/views/list.html',
@@ -252,15 +274,15 @@ angular.module('app', [
             })
 
             //user urls
-            .when('/request/user', {
-                templateUrl: Config.STATIC + '/modules/user/views/list.html',
-                controller: 'UserListCtrl', controllerAs: 'userList', role:AUTH_ROLES.monitor
-            })
+            // .when('/request/user', {
+            //     templateUrl: Config.STATIC + '/modules/user/views/list.html',
+            //     controller: 'UserListCtrl', controllerAs: 'userList', role:AUTH_ROLES.monitor
+            // })
 
-            .when('/request/user/view/:id/:type', {
-                templateUrl: Config.STATIC + '/modules/user/views/view.html',
-                controller: 'UserViewCtrl', controllerAs: 'userView', role:AUTH_ROLES.editor
-            })
+            // .when('/request/user/view/:id/:type', {
+            //     templateUrl: Config.STATIC + '/modules/user/views/view.html',
+            //     controller: 'UserViewCtrl', controllerAs: 'userView', role:AUTH_ROLES.editor
+            // })
 
             .when('/login', {
 				templateUrl: Config.STATIC + '/modules/auth/views/login.html',

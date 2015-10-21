@@ -2,13 +2,14 @@
 
 function UserService($resource, Config){
 
-    var _url = Config.REST + '/api/user/';
+    var _url = Config.REST + '/api/user/:id/';
     
     return $resource(_url, {}, {
         cooperative: { method:'GET', url:_url+'cooperative/?fn=none'},
-        request: { method:'GET', url:_url+'request/:id/?fn=none'},
-        data: { method:'GET', url:_url+'?fn=none'},
+        // request: { method:'GET', url:_url+'request/:id/?fn=none'},
+        // data: { method:'GET', url:_url+'?fn=none'},
         suggest: { method:'GET', url:_url+'suggest/?fn=none'},
+        put: { method:'PUT'},
     })
 }
 
