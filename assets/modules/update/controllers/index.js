@@ -41,7 +41,7 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
             {
                 id: 5,
                 name:'extractos',
-                method: 'statements',
+                method: 'statement',
             },
         ],
     };
