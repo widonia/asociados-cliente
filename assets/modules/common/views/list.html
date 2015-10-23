@@ -1,3 +1,13 @@
+
+<form class="input-group crud-search pull-left" ng-submit="listView.search()">
+    <input ng-model="listView.searchText" type="text" class="form-control" placeholder="busqueda">
+    <span class="input-group-btn">
+        <button title="Buscar" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+        <button title="Limpiar busqueda" ng-class="{disabled : listView.searchText == ''}" class="btn btn-default" type="button" ng-click="listView.clear()"><span class="glyphicon glyphicon-remove"></span></button>
+    </span>
+</form>
+
+
 <p class="pull-right">
     <a href="#/{{listView.url}}/new" class="btn btn-success">Agregar {{listView.label}}</a>
 </p>
