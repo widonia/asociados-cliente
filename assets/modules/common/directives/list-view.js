@@ -10,7 +10,8 @@ function listView(Config){
             url: '@', 
             module: '@', 
             label: '@', 
-            rest: '@'
+            rest: '@',
+            queryparams: '@'
         },
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
@@ -37,6 +38,8 @@ function listView(Config){
             /* rest module url */
             this.rest = $scope.rest;
 
+            this.queryparams = $scope.queryparams;
+
             this.module = $scope.module;
             this.label = $scope.label;
             this.url = $scope.url;
@@ -51,7 +54,11 @@ function listView(Config){
             };
 
             this.getList = function(){
-                $http.get(Config.REST + '/api/' + this.rest + '/?page='+this.page + this.getQuery())
+                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + this.getQuery();
+                if (this.queryparams != undefined){
+                    request += '&'+this.queryparams;
+                }                
+                $http.get(request)
                 .success(this.onGetList.bind(this))
                 .error(this.onGetListErr.bind(this));
             }
