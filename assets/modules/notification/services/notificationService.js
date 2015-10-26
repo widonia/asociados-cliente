@@ -3,7 +3,7 @@
 function NotificationService($resource, Config){
     var _url = Config.REST + '/api/notification_client/:id/';
     
-    return $resource(_url + '?fn=none', {}, {
+    return $resource(_url + '?fn=none&type=1', {}, {
         get: { method:'GET'},
         post: { method:'POST'},
         put: { method:'PATCH'},
