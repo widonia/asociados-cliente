@@ -79,7 +79,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         }
     }
 
-    this.onChange = function(e){
+    this.suggest = function(){
         UserService.suggest({suggest:this.autocomplete.key},
             this.onSuggestOk.bind(this),
             this.onSuggestError.bind(this)
