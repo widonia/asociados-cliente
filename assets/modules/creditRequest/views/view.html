@@ -1,0 +1,36 @@
+<h1>Solicitud de credito</h1>
+
+<ol class="breadcrumb">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#/request/credit">Solicitudes de credito</a></li>
+    <li class="active">Credito</li>
+</ol>
+
+
+<dl class="dl-horizontal">
+    <dt>Credito</dt>
+    <dd>{{creditView.data.credit.name}}</dd>
+
+    <dt>Asociado</dt>
+    <dd>
+        <ul>
+            <li>{{creditView.data.user.username}}</li>
+            <li>{{creditView.data.user.name}}</li>
+            <li>{{creditView.data.user.email}}</li>
+        </ul>
+    </dd>
+
+    <dt>Monto</dt>
+    <dd>{{creditView.data.amount}}</dd>
+
+    <dt>Cantidad de mesess</dt>
+    <dd>{{creditView.data.months}}</dd>
+
+    <dt>Fecha de envio</dt>
+    <dd>{{creditView.data.add_date}}</dd>
+    
+    <dt>Procesado:</dt>
+    <dd>
+        <input type="checkbox" ng-model="creditView.data.processed" ng-change="creditView.process()"/>
+    </dd>
+</dl>

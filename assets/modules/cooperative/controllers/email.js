@@ -21,7 +21,7 @@ function EmailListCtrl($rootScope, EmailService){
 
     this.onGetList = function(response){
         $rootScope.$broadcast('loading-hide');
-        this.list = response.data;
+        this.list = response.results;
         window.scrollTo(0, 0);
     }
 

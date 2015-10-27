@@ -1,5 +1,5 @@
 <p class="pull-right">
-    <a href="#/content/{{listView.module}}/new" class="btn btn-success">Nueva {{listView.label}}</a>
+    <a href="#/{{listView.url}}/new" class="btn btn-success">Agregar {{listView.label}}</a>
 </p>
 
 
@@ -15,7 +15,7 @@
             <td ng-repeat="field in listView.fields">{{element[field.name] | fieldType: field.type }}</td>
 
             <td class="text-right">
-                <a href="#/content/{{listView.module}}/edit/{{element.id}}" class="btn btn-primary btn-sm">
+                <a href="#/{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
 

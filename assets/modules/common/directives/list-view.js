@@ -4,7 +4,7 @@ function listView(Config){
 
     return {
         restrict: 'E',
-        scope: { fields: '=', url: '@', module: '@', label: '@'},
+        scope: { fields: '=', url: '@', module: '@', label: '@', rest: '@'},
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
         controller: function($scope, $rootScope, $http, CRUDService){
@@ -17,6 +17,7 @@ function listView(Config){
             this.module = $scope.module;
             this.label = $scope.label;
             this.url = $scope.url;
+            this.rest = $scope.rest;
 
 
             this.init = function(){
@@ -31,7 +32,7 @@ function listView(Config){
                 $rootScope.$broadcast('loading-show');
 
                 //send file
-                $http.get(Config.REST + '/api/' + this.url + '/?page='+this.page)
+                $http.get(Config.REST + '/api/' + this.rest + '/?page='+this.page)
                 .success(this.onGetList.bind(this));
                 // .error(this.onUploadFileErr.bind(this));
 
@@ -53,7 +54,7 @@ function listView(Config){
 
                 if (confirmDelete) {
                     $rootScope.$broadcast('loading-show');
-                    CRUDService.delete({object:this.url, id:id}, this.onDelete.bind(this));
+                    CRUDService.delete({object:this.rest, id:id}, this.onDelete.bind(this));
                 }
             }
 
