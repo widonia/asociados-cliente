@@ -1,7 +1,49 @@
-<div class="row">
-    <div id="col-sm-12">
-        <h1 class="text-center">Bienvenido Asociado {{home.username}}</h1>    
-        <h4 class="text-center"> Su ultimo inicio de sesión fue el {{home.last_login | date:'dd/MM/yyyy  HH:mm:ss'}}</h4>
-    </div>    
+<div class="user-box">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+    <h1>Bienvenido {{home.username}}</h1>
+    <p>Su ultimo inicio de sesión fue el {{home.last_login | date:'dd/MM/yyyy  HH:mm:ss'}}</p>
 </div>
 
+<div id="statistic-page">
+ 
+    <ul class="data-general">
+
+        <li class="red">
+            <span class="amount">{{home.stats.total_users}}</span>
+            <span class="item">Asociados totales</span>
+        </li>
+
+        <li class="blue">
+            <span class="amount">{{home.stats.active_users}}</span>
+            <span class="item">Asociados activados</span>
+        </li>
+
+        <li class="green">
+            <span class="amount">{{home.stats.credit_request}}</span>
+            <span class="item">Solicitudes de credito</span>
+        </li>
+
+        <li class="orange">
+            <span class="amount">{{home.stats.notifications}}</span>
+            <span class="item">Notificaciones leidas</span>
+        </li>
+
+    </ul>
+
+    <h3>Inicio de sessión
+
+        <form class="form-inline pull-right">
+            <div class="input-group input-daterange">
+                <input type="text" class="form-control" ng-model="home.data.start">
+                <span class="input-group-addon">to</span>
+                <input type="text" class="form-control" ng-model="home.data.end">
+            </div>
+
+            <button class="btn btn-primary" ng-click="home.getStatistics()">Ver</button>
+
+        </form>
+    </h3>
+     
+    <div id="time-chart" style="height: 250px;"></div>
+
+</div>

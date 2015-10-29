@@ -218,32 +218,14 @@ angular.module('app', [
                 controller: 'UpdateIndexCtrl', controllerAs: 'update', role:AUTH_ROLES.admin
             })
 
-            .when('/cooperative/statistic', {
-                templateUrl: Config.STATIC + '/modules/statistic/views/statistic.html',
-                controller: 'StatisticCtrl', controllerAs: 'statistic', role:AUTH_ROLES.monitor
-            })
-
+            // .when('/cooperative/statistic', {
+            //     templateUrl: Config.STATIC + '/modules/statistic/views/statistic.html',
+            //     controller: 'StatisticCtrl', controllerAs: 'statistic', role:AUTH_ROLES.monitor
+            // })
 
             .when('/content/notification', {
                 templateUrl: Config.STATIC + '/modules/notification/views/list.html',
                 role:AUTH_ROLES.monitor
-                // controller: 'CRUDListCtrl', controllerAs: 'notificationList', role:AUTH_ROLES.monitor
-                // resolve: {
-                //     settings: function(){
-                //         return {
-                //             object: 'notification_client',
-                //             name: 'Notificacion',
-                //             title: 'Notificaciones',
-                //             path: [
-                //                 { 'Inicio' :'/' },
-                //                 { 'Notificaciones' :false },
-                //             ],
-                //             fields: [
-                //                 {'title': 'string' }
-                //             ]
-                //         }
-                //     }
-                // }
             })
 
             .when('/content/notification/new', {

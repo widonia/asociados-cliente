@@ -1,76 +1,57 @@
 "use strict";
 
-function StatisticCtrl(StatisticService){
+function StatisticCtrl($rootScope, StatisticService, CooperativeService, AuthManager){
 
     this.data = {};
+    this.stats = {};
     this.chart = null;
-
-    this.onChangeType = function(){
-        this.data.date = '';
+    this.cooperative = AuthManager.get('cooperative');
+    
+    this.init = function(){
+        this.data = {
+            start: moment().startOf('month').format('YYYY-MM-DD'),
+            end: moment().endOf("month").format('YYYY-MM-DD'),
+        }
+        this.getStatistics();
     }
 
     this.getStatistics = function(){
-        StatisticService.get({date:this.data.date}, this.onGetStatisticsSuccess.bind(this), this.onGetStatisticsError.bind(this));
+        $rootScope.$broadcast('loading-show2');
+        CooperativeService.stats({id:this.cooperative}, this.onGetStatsSuccess.bind(this), this.onGetStatsError.bind(this));
+        StatisticService.get({start:this.data.start, end:this.data.end, cooperative:this.cooperative}, this.onGetStatisticsSuccess.bind(this), this.onGetStatisticsError.bind(this));
+    }
+
+    this.onGetStatsSuccess = function(response){
+        this.stats = response;
+    }
+
+    this.onGetStatsError = function(response){
+        $rootScope.$broadcast('loading-hide2');
+        console.log(response)
     }
 
     this.onGetStatisticsSuccess = function(response){
+        $rootScope.$broadcast('loading-hide2');
         if(response.data != null){
             console.log(response)
-            this.updateChart(response.data.visitas);
+            this.updateChart(response.data);
         }
     }
 
     this.onGetStatisticsError = function(response){
+        $rootScope.$broadcast('loading-hide2');
         console.log(response)
     }
 
-    this.updateChart = function(response){
-        var monts = {
-            1:'Enero',
-            2:'Febrero',
-            3:'Marzo',
-            4:'Abril',
-            5:'Mayo',
-            6:'Junio',
-            7:'Julio',
-            8:'Agosto',
-            9:'Septiembre',
-            10:'Octubre',
-            11:'Noviembre',
-            12:'Diciembre',
-        }
+    this.updateChart = function(data){
         var new_data = [];
-        var element = 'hora'
 
-        if( this.data.type == 'month'){
-            element = 'dia'
-        }
-        if( this.data.type == 'year'){
-            element = 'mes'
-        }
-
-        for (var key in response[element]){
-            if(this.data.type == 'year'){ 
-                new_data.push({
-                    'key':monts[key],
-                    'value':parseInt(response['mes'][key]),
-                });
-            }
-
-            if(this.data.type == 'month'){ 
-                new_data.push({
-                    'key':key,
-                    'value':parseInt(response[element][key]),
-                });
-            }
-
-            if(this.data.type == 'day'){ 
-                new_data.push({
-                    'key': (parseInt(key) < 10) ? '0' + key +':00' : key+':00',
-                    'value':parseInt(response[element][key]),
-                });
-            }
-
+        for (var login in data.login){
+            console.log(login);
+            new_data.push({
+                'key':login,
+                'value':parseInt(data.login[login]),
+            });
         }
 
         this.chart.setData(new_data);
@@ -79,13 +60,6 @@ function StatisticCtrl(StatisticService){
     this.chart = new Morris.Area({
         // ID of the element in which to draw the chart.
         element: 'time-chart',
-        data: [
-            { key: '2012 02 24 15:00', value: 10 },
-            { key: '2012 02 24 16:00', value: 2 },
-            { key: '2012 02 24 17:00', value: 6 },
-            { key: '2012 02 24 18:00', value: 3 },
-            { key: '2012 02 24 19:00', value: 10 }
-        ],
         xkey: 'key',
         ykeys: ['value'],
         labels: ['Visitas'],
@@ -104,21 +78,21 @@ function StatisticCtrl(StatisticService){
         // yLabelFormat: function (y) { return y.toString().split(".")[0]}
     });
 
-    $('.date.year').datepicker({
-        format: " yyyy",
-        viewMode: "years", 
-        minViewMode: "years"
-    });
-
-    $('.date.month').datepicker({
-        format: "yyyy/mm",
-        viewMode: "months", 
-        minViewMode: "months"
-    });
-
-    $('.date.day').datepicker({
+    $('.input-daterange input').datepicker({
+        autoclose:true,
         format: "yyyy/mm/dd",
     });
+
+    // $('.date.start').datepicker({
+    //     orientation: "bottom",
+    //     format: "yyyy/mm/dd",
+    // });
+
+    // $('.date.end').datepicker({
+    //     format: "yyyy/mm/dd",
+    // });
+
+    this.init();
 }
 
 angular

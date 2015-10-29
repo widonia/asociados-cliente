@@ -5,34 +5,49 @@
     <ol class="breadcrumb">
     	<li><a href="#">Inicio</a></li>
     	<li class="active">Estadisticas</li>
-    </ol>
-
-    <form class="form-inline">
-        <div class="form-group">
-            <select class="form-control" ng-model="statistic.data.type" ng-change="statistic.onChangeType()">
-                <option value="day">dia</opyion>
-                <option value="month">Mes</opyion>
-                <option value="year">Año</opyion>
-            </select>
-        </div>
-
-        <div class="input-group date year" ng-show="statistic.data.type == 'year'">
-            <input ng-model="statistic.data.date" type="text" class="form-control" readonly><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-        </div>
-
-        <div class="input-group date month" ng-show="statistic.data.type == 'month'" >
-            <input ng-model="statistic.data.date" type="text" class="form-control" readonly><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-        </div>
-
-        <div class="input-group date day" ng-show="statistic.data.type == 'day'" >
-            <input ng-model="statistic.data.date" type="text" class="form-control" readonly><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-        </div>
-
-        <button class="btn btn-primary" ng-click="statistic.getStatistics()">Ver</button>
-
-    </form>
-
+   </ol>
+ 
     <ul class="data-general">
+
+        <li class="red">
+            <span class="amount">{{statistic.stats.total_users}}</span>
+            <span class="item">Asociados totales</span>
+        </li>
+
+        <li class="blue">
+            <span class="amount">{{statistic.stats.active_users}}</span>
+            <span class="item">Asociados activados</span>
+        </li>
+
+        <li class="green">
+            <span class="amount">{{statistic.stats.credit_request}}</span>
+            <span class="item">Solicitudes de credito</span>
+        </li>
+
+        <li class="orange">
+            <span class="amount">{{statistic.stats.notifications}}</span>
+            <span class="item">Notificaciones leidas</span>
+        </li>
+
+    </ul>
+
+    <h3>Inicio de sessión
+
+        <form class="form-inline pull-right">
+            <div class="input-group input-daterange">
+                <input type="text" class="form-control" ng-model="statistic.data.start">
+                <span class="input-group-addon">to</span>
+                <input type="text" class="form-control" ng-model="statistic.data.end">
+            </div>
+
+            <button class="btn btn-primary" ng-click="statistic.getStatistics()">Ver</button>
+
+        </form>
+    </h3>
+
+
+
+<!--     <ul class="data-general">
 
         <li class="red">
             <span class="amount">4550</span>
@@ -54,12 +69,15 @@
             <span class="item">Visitas totales</span>
         </li>
 
-    </ul>
+    </ul> -->
 
+     
     <div id="time-chart" style="height: 250px;"></div>
 
 
-    <h3>Informacion de creditos</h3>
+
+
+<!--     <h3>Informacion de creditos</h3>
     <table class="table table-hover table-striped">
 
         <thead>
@@ -128,7 +146,7 @@
                 </tbody>
 
             </table>
-        </div>
+        </div> -->
         <!--             <h3>Modulos mas visitados</h3>
             <table class="table table-hover table-striped">
 

@@ -19,7 +19,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
                 "advlist autolink autosave link image lists textcolor paste textcolor"
             ],
             min_height: 500,
-            toolbar1 : "bold italic underline,formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
+            toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
     }

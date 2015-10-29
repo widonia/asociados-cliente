@@ -1,3 +1,22 @@
+.user-box {
+  margin: 40px 0 ;
+  position: relative;
+  padding-left: 70px;
+}
+.user-box .glyphicon {
+  left: 0px;
+  position: absolute;
+  font-size: 50px;
+  color: #DDD;
+}
+.user-box h1 {
+  font-size: 24px;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+.user-box p {
+  color: #999;
+}
 .login-page {
   width: 260px;
   margin: auto;
@@ -59,10 +78,11 @@
 }
 #statistic-page .data-general {
   list-style: none;
-  padding: 0px;
+  padding: 30px 0;
   margin: 30px 0px;
   text-align: center;
   overflow: hidden;
+  border-top: 1px #DDD solid;
 }
 #statistic-page .data-general li {
   width: 25%;
@@ -140,7 +160,7 @@ body {
 }
 .loading-panel-loader {
   opacity: 0;
-  margin-top: 20px;
+  margin-top: 1px;
   text-align: center;
   font-size: 30px;
   transition: margin-top 0.2s linear, opacity 0.2s linear;
