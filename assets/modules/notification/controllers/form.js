@@ -26,11 +26,16 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
 
     this.onPopulateOk = function(response){
-        $rootScope.$broadcast('loading-hide');
+        $rootScope.$broadcast('loading-hide');        
         this.data = response;
+        
+        // add actually users
+        for (var i = this.data.users.length - 1; i >= 0; i--) {
+            this.addUser(this.data.users[i]);
+        };
+        
 
         // Set image thumbnail if exist
-        console.log(this.data.image)
         if (this.data.image != undefined  && this.data.image != ""){
             // $scope.image = this.data.image;
             this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
@@ -148,6 +153,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
         }
 
+        console.log(this.data.users);
+        
         this.autocomplete.key = '';
         this.autocomplete.suggest = {};
     }
