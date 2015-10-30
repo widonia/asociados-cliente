@@ -5,9 +5,10 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
         request:function(request){
             // console.log(" request " + request);
             // 
+            $rootScope.$broadcast('loading-show2');
             var n = request.url.indexOf(Config.REST);
             if(n > -1){ 
-                $rootScope.$broadcast('loading-show2');
+                
                 if(!request.cache){
                     request.url = fixURL(request.url);
                     request.url = addParameter(request.url, 'cooperative_id=' + AuthManager.get('cooperative'));
