@@ -2,7 +2,7 @@
 
 function StatisticService($resource, Config){
     
-    var _url = 'http://localhost:1337/daily';
+    var _url = Config.DATA  + '/daily';
     
     return $resource(_url, {}, {
         get: { method:'GET'},

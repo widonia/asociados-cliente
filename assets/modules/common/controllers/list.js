@@ -15,12 +15,12 @@ function CRUDListCtrl($rootScope, CRUDService, settings){
     };
 
     this.getList = function(){
-        $rootScope.$broadcast('loading-show');
+        // $rootScope.$broadcast('loading-show');
         CRUDService.get({object:settings.object, page:this.page}, this.onGetList.bind(this));
     }
 
     this.onGetList = function(response){
-        $rootScope.$broadcast('loading-hide');
+        // $rootScope.$broadcast('loading-hide');
 
         this.count = response.count;
         this.list = response.results;
@@ -32,7 +32,7 @@ function CRUDListCtrl($rootScope, CRUDService, settings){
         var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
 
         if (confirmDelete) {
-            $rootScope.$broadcast('loading-show');
+            // $rootScope.$broadcast('loading-show');
             CRUDService.delete({object:settings.object, id:id}, this.onDelete.bind(this));
         }
     }
