@@ -30,8 +30,24 @@
     	</div>	
 
         <h4>Usuarios actualmente en este grupo</h4>
-        
-        <div ng-repeat="user in groupFill.data.users">{{user.username}}</div>
-
+        <div class="table-scroll table-responsive" >
+                <table  class="table  table-striped ">
+                    <thead>                                        
+                        <tr>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in groupFill.data.users">
+                            <td>{{user.username}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.email}}</td>                                           
+                        </tr>
+                    </tbody>  
+                </table>
+            </div>                                
+        </div>
     </form>
 </div>  
