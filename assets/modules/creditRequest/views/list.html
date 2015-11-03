@@ -5,6 +5,36 @@
     <li class="active">Solicitudes de credito</li>
 </ol>
 
+<list-view 
+    fields="[
+        {'name':'user.username', 'label':'Cedula', 'type': 'string'},
+        {'name':'user.name', 'label':'Nombre', 'type': 'string', width:'30'},
+        {'name':'credit.name', 'label':'Credito', 'type': 'string'},
+        {'name':'amount', 'label':'Monto', 'type': 'currency'},
+        {'name':'add_date', 'label':'Fecha', 'type': 'date'},
+        {'name':'processed', 'label':'Proc.', 'type': 'bool'},
+    ]"
+    filters="['title', 'observation', 'user__username', 'user__name']" 
+    label="Solicitud de credito"
+    module="Solicitud de credito"
+    url="request/credit"
+    rest="credit_request"
+    add="false"
+    queryparams="type=1">
+
+</list-view>
+
+
+<!-- 
+
+        fields="[
+        {'name':'user.username', 'label':'Cedula', 'type': 'string', width:'10'},
+        {'name':'user.name', 'label':'Nombre', 'type': 'string', width:'30'},
+        {'name':'credit.name', 'label':'Credito', 'type': 'string'},
+        {'name':'amount', 'label':'Fecha', 'type': 'string'},
+        {'name':'add_date', 'label':'Fecha', 'type': 'date'},
+        {'name':'processed', 'label':'Procesado', 'type': 'bool'},
+    ]"
 <table class="table table-hover">
     <thead>
         <tr>
@@ -44,4 +74,4 @@
     class="pagination-lg" 
     ng-change="creditList.setPage()">
     </pagination>
-</div>
+</div> -->

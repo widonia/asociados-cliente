@@ -11,7 +11,8 @@ function listView(Config){
             module: '@', 
             label: '@', 
             rest: '@',
-            queryparams: '@'
+            queryparams: '@',
+            add: '@',
         },
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
@@ -39,6 +40,8 @@ function listView(Config){
             this.rest = $scope.rest;
 
             this.queryparams = $scope.queryparams;
+
+            this.add = $scope.add || true;
 
             this.module = $scope.module;
             this.label = $scope.label;

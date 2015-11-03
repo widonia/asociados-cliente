@@ -8,7 +8,7 @@
 </form>
 
 
-<p class="pull-right">
+<p class="pull-right" ng-show="listView.add">
     <a href="#/{{listView.url}}/new" class="btn btn-success">Agregar {{listView.label}}</a>
 </p>
 
@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="element in listView.list | orderBy:'-add_date'">
-            <td ng-repeat="field in listView.fields">{{element[field.name] | fieldType: field.type }}</td>
+            <td ng-repeat="field in listView.fields">{{element | fieldValue: field.name | fieldType: field.type }}</td>
 
             <td class="text-right">
                 <a href="#/{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm">
