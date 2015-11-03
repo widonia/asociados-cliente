@@ -14,64 +14,13 @@
         {'name':'add_date', 'label':'Fecha', 'type': 'date'},
         {'name':'processed', 'label':'Proc.', 'type': 'bool'},
     ]"
-    filters="['title', 'observation', 'user__username', 'user__name']" 
-    label="Solicitud de credito"
-    module="Solicitud de credito"
-    url="request/credit"
+
+    filters="['title', 'observation', 'auth_user__username']" 
+    
+    actions="['edit', 'delete']"
+
     rest="credit_request"
-    add="false"
+
     queryparams="type=1">
 
 </list-view>
-
-
-<!-- 
-
-        fields="[
-        {'name':'user.username', 'label':'Cedula', 'type': 'string', width:'10'},
-        {'name':'user.name', 'label':'Nombre', 'type': 'string', width:'30'},
-        {'name':'credit.name', 'label':'Credito', 'type': 'string'},
-        {'name':'amount', 'label':'Fecha', 'type': 'string'},
-        {'name':'add_date', 'label':'Fecha', 'type': 'date'},
-        {'name':'processed', 'label':'Procesado', 'type': 'bool'},
-    ]"
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Asociados</th>
-            <th>Credito</th>
-            <th>Monto</th>
-            <th>Fecha</th>
-            <th>Estatdo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="credit in creditList.list">
-            <td>({{credit.user.username }}) {{credit.user.name }}</td>
-            <td>{{credit.credit.name}}</td>
-            <td>{{credit.amount}}</td>
-            <td>{{credit.add_date}}</td>
-            <td> 
-                <span ng-if="credit.processed==true">Procesado</span>
-                <span ng-if="credit.processed==false">NO Procesado</span>
-            </td>
-            
-            <td class="text-right">
-                <a href="#/request/credit/view/{{credit.id}}" class="btn btn-primary btn-sm">
-                    Ver mas
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="text-center">
-    <pagination 
-    items-per-page="10" 
-    total-items="creditList.count" 
-    ng-model="creditList.page" 
-    max-size="5" 
-    class="pagination-lg" 
-    ng-change="creditList.setPage()">
-    </pagination>
-</div> -->

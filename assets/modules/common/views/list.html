@@ -8,8 +8,8 @@
 </form>
 
 
-<p class="pull-right" ng-show="listView.add">
-    <a href="#/{{listView.url}}/new" class="btn btn-success">Agregar {{listView.label}}</a>
+<p class="pull-right" ng-if="listView.actions.add">
+    <a href="#{{listView.url}}/new" class="btn btn-success">Agregar</a>
 </p>
 
 
@@ -25,11 +25,11 @@
             <td ng-repeat="field in listView.fields">{{element | fieldValue: field.name | fieldType: field.type }}</td>
 
             <td class="text-right">
-                <a href="#/{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm">
+                <a href="#{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm" ng-if="listView.actions.edit">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
 
-                <button ng-click="listView.delete(element.id, $event)" type="button" class="btn btn-danger btn-sm">
+                <button ng-click="listView.delete(element.id, $event)" type="button" class="btn btn-danger btn-sm" ng-if="listView.actions.delete">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

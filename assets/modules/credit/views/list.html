@@ -13,9 +13,11 @@
         {'name':'rate', 'label':'Tasa', 'type': 'string'},
         {'name':'insurance', 'label':'Seguro', 'type': 'string'},
     ]"
-    label="credito"
-    module="credits"
-    url="cooperative/credits"
+
+    filters="['code', 'name']" 
+
+    actions="['add', 'edit', 'delete']"
+
     rest="credit">
 
 </list-view>

@@ -5,7 +5,6 @@
 	<li class="active">Notificaciones</li>
 </ol>
 
-
 <list-view 
     fields="[
         {'name':'title', 'label':'Titulo', 'type': 'string', width:'40'},
@@ -13,12 +12,14 @@
         {'name':'add_date', 'label':'Fecha', 'type': 'date'},
         {'name':'public', 'label':'Publicado', 'type': 'bool'},        
     ]"
+
     filters="['title', 'observation']" 
-    label="notificación"
-    module="notification"
-    url="content/notification"
+
+    actions="['add', 'edit', 'delete']"
+
     rest="notification_client"
-    queryparams="type=1">
+
+    query-params="type=1">
 
 </list-view>
 

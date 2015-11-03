@@ -7,16 +7,16 @@ function listView(Config){
         scope: { 
             fields: '=', 
             filters: '=', 
+            actions: '=',
             url: '@', 
-            module: '@', 
             label: '@', 
             rest: '@',
-            queryparams: '@',
-            add: '@',
+            queryParams: '@',
+            
         },
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
-        controller: function($scope, $rootScope, $http, CRUDService){
+        controller: function($scope, $rootScope, $http, $location, CRUDService){
 
             /* total elements */
             this.count = 0;
@@ -36,20 +36,27 @@ function listView(Config){
             /* text to find  */
             this.searchText = '';
 
+            /* new, edit, delete and download */
+            this.actions = {};
+
             /* rest module url */
             this.rest = $scope.rest;
 
-            this.queryparams = $scope.queryparams;
+            this.queryParams = $scope.queryParams;
 
-            this.add = $scope.add || true;
-
-            this.module = $scope.module;
-            this.label = $scope.label;
-            this.url = $scope.url;
+            this.url = $location.$$path;
 
 
             this.init = function(){
                 this.getList();
+                this.initActions();
+                // console.log($state.href($state.current.name, $state.params, {absolute: true}));
+            }
+
+            this.initActions = function(){
+                for(var action in $scope.actions){
+                    this.actions[$scope.actions[action]] = true
+                }
             }
 
             this.setPage = function () {
@@ -57,13 +64,10 @@ function listView(Config){
             };
 
             this.getList = function(){
-                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + this.getQuery();
-                if (this.queryparams != undefined){
-                    request += '&'+this.queryparams;
-                }                
+                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + this.getQuery();             
                 $http.get(request)
-                .success(this.onGetList.bind(this))
-                .error(this.onGetListErr.bind(this));
+                    .success(this.onGetList.bind(this))
+                    .error(this.onGetListErr.bind(this));
             }
 
             this.onGetList = function(response){
@@ -102,9 +106,16 @@ function listView(Config){
 
             this.getQuery = function(){
                 var query = '';
+
+                // add filters
                 for(var field in this.searchFilters){
                     query += '&' + this.searchFilters[field] + '__icontains=' + encodeURIComponent(this.searchText);
                 }
+
+                // add query params
+                if (this.queryParams != undefined){
+                    query += '&'+this.queryParams;
+                }   
 
                 return query;
             }
