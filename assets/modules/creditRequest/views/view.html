@@ -21,10 +21,20 @@
     </dd>
 
     <dt>Monto</dt>
-    <dd>{{creditView.data.amount}}</dd>
+    <dd>{{creditView.data.data.amount | currency:"$ ":4}}</dd>
 
     <dt>Cantidad de mesess</dt>
-    <dd>{{creditView.data.months}}</dd>
+    <dd>{{creditView.data.data.months}}</dd>
+
+    <dt>Tasa de ínteres</dt>
+    <dd>{{creditView.data.data.rate}}</dd>
+
+     <dt>Tasa de seguros</dt>
+    <dd>{{creditView.data.data.insurance}}</dd>
+
+    <dt>Valor Cuota</dt>
+    <dd>{{creditView.data.data.fee | currency:"$ ":4}}</dd>
+
 
     <dt>Fecha de envio</dt>
     <dd>{{creditView.data.add_date}}</dd>
