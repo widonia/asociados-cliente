@@ -14,6 +14,13 @@ function listView(Config){
             queryParams: '@',
             callback: '&'
         },
+
+        // link: function(scope, element, attrs) {
+        //     if(!"callback" in attrs){
+        //         console.log('no existe');
+        //     }
+        // },
+
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
         controller: function($scope, $rootScope, $http, $location, CRUDService){
@@ -73,8 +80,9 @@ function listView(Config){
 
             this.onGetList = function(response){
                 this.count = response.count;
+
                 // apply callback to make specific modifications to the result list
-                this.list = (this.callback) ? this.callback()(response.results) : response.results;
+                this.list = (this.callback()) ? this.callback()(response.results) : response.results;
                 window.scrollTo(0, 0);
             }
 
