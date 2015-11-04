@@ -75,8 +75,7 @@ angular.module('app', [
             //page urls
 			.when('/content/page', {
 				templateUrl: Config.STATIC + '/modules/page/views/list.html',
-                role:AUTH_ROLES.monitor
-                // controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
+                controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
 			})
 
             .when('/content/page/new', {
@@ -168,7 +167,7 @@ angular.module('app', [
 
             // cooperative url
             .when('/cooperative/email', {
-                templateUrl: Config.STATIC + '/modules/cooperative/views/email.html',
+                templateUrl: Config.STATIC + '/modules/cooperative/views/email-list.html',
                 role:AUTH_ROLES.admin
                 // controller: 'EmailListCtrl', controllerAs: 'emailList', role:AUTH_ROLES.admin
             })

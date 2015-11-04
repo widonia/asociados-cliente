@@ -8,10 +8,12 @@
 <list-view 
     fields="[
         {'name':'title', 'label':'Titulo', 'type': 'string', width:'40'},
-        {'name':'type', 'label':'Tipo', 'type': 'string'},
         {'name':'add_date', 'label':'Fecha', 'type': 'date'},
+        {'name':'type', 'label':'Tipo', 'type': 'string'},
         {'name':'public', 'label':'Publicado', 'type': 'bool'},
     ]"
+
+    callback="pageList.convertType"
 
     filters="['title']" 
 

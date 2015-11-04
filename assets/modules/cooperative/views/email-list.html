@@ -5,15 +5,16 @@
     <li class="active">Lista de correos</li>
 </ol>
 
-
 <list-view 
     fields="[
         {'name':'name', 'label':'Titulo', 'type': 'string', width:'40'},
         {'name':'email', 'label':'Fecha', 'type': 'string'},
     ]"
-    label="email"
-    module="cooperative/email"
-    url="cooperative/email"
+
+    filters="['name, email']" 
+
+    actions="['add', 'edit', 'delete']"
+    
     rest="cooperative/email">
     
 </list-view>

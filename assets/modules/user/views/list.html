@@ -5,17 +5,17 @@
     <li class="active">Asociados</li>
 </ol>
 
-
 <list-view 
     fields="[
         {'name':'username', 'label':'Cedula', 'type': 'string'},
         {'name':'name', 'label':'Nombre', 'type': 'string', width:'40'},
         {'name':'email', 'label':'Email', 'type': 'string'},
     ]"
+
     filters="['user_cooperative__auth_user__username']" 
-    label="Usuario"
-    module="users"
-    url="cooperative/users"
+
+    actions="['add', 'edit', 'delete']"
+    
     rest="user">
 
 </list-view>

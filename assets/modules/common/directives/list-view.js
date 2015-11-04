@@ -12,7 +12,7 @@ function listView(Config){
             label: '@', 
             rest: '@',
             queryParams: '@',
-            
+            callback: '&'
         },
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
@@ -46,6 +46,7 @@ function listView(Config){
 
             this.url = $location.$$path;
 
+            this.callback = $scope.callback;
 
             this.init = function(){
                 this.getList();
@@ -72,7 +73,8 @@ function listView(Config){
 
             this.onGetList = function(response){
                 this.count = response.count;
-                this.list = response.results;
+                // apply callback to make specific modifications to the result list
+                this.list = (this.callback) ? this.callback()(response.results) : response.results;
                 window.scrollTo(0, 0);
             }
 
