@@ -1,6 +1,6 @@
 if(ENV == 'Dev'){
     angular.module('app.common.services').constant('Config', {
-        REST: 'http://54.187.171.36',
+        REST: 'http://localhost:8000',
         DATA: 'http://localhost:1337',
         STATIC: 'http://localhost:4000',
         MEDIA: 'http://localhost:8000/media',
