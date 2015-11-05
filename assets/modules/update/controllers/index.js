@@ -89,7 +89,7 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
         this.loading = true;
         var fd = new FormData();
         fd.append('file', this.file);
-        fd.append('date', this.data.date);
+        fd.append('court_date', this.data.date);
         fd.append('delimiter', this.data.delimiter);
 
         //send file

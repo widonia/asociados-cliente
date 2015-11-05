@@ -15,12 +15,6 @@ function listView(Config){
             callback: '&'
         },
 
-        // link: function(scope, element, attrs) {
-        //     if(!"callback" in attrs){
-        //         console.log('no existe');
-        //     }
-        // },
-
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
         controller: function($scope, $rootScope, $http, $location, CRUDService){
@@ -58,7 +52,6 @@ function listView(Config){
             this.init = function(){
                 this.getList();
                 this.initActions();
-                // console.log($state.href($state.current.name, $state.params, {absolute: true}));
             }
 
             this.initActions = function(){
