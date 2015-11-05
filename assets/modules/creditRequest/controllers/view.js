@@ -5,7 +5,6 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService){
     this.data = {};
     this.form = {};
 
-
     this.init = function(){
         this.populate();
     }
@@ -19,7 +18,7 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService){
     }
 
     this.onPopulateOk = function(response){
-        $rootScope.$broadcast('loading-hide');
+        $rootScope.$broadcast('loading-hide');  
         this.data = response;
         this.data.data.amount =  parseFloat(this.data.data.amount); 
         this.data.data.months =  parseInt(this.data.data.months); 
@@ -55,7 +54,6 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService){
         }        
     }
 
-
    this.onSubmit = function(response){
         this.form.success = true;
     }
@@ -65,7 +63,6 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService){
     }
 
     this.submit = function(){
-        // this.form.submitted = true;
         if (this.form.$valid) {
             CreditRequestService.put({id:$routeParams.id}, this.data,
                 this.onSubmit.bind(this),
