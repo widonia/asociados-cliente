@@ -249,7 +249,7 @@ angular.module('app', [
                 controller: 'CreditRequestListCtrl', controllerAs: 'creditList', role:AUTH_ROLES.monitor
             })
 
-            .when('/request/credit/view/:id', {
+            .when('/request/credit/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/creditRequest/views/view.html',
                 controller: 'CreditRequestViewCtrl', controllerAs: 'creditView', role:AUTH_ROLES.editor
             })

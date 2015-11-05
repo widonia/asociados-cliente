@@ -8,11 +8,13 @@
 <list-view 
     fields="[
         {'name':'user.username', 'label':'Cedula', 'type': 'string'},
+        {'name':'observation', 'label':'Observación', 'type': 'string'},
         {'name':'user.name', 'label':'Nombre', 'type': 'string', width:'30'},
         {'name':'credit.name', 'label':'Credito', 'type': 'string'},
-        {'name':'amount', 'label':'Monto', 'type': 'currency'},
+        {'name':'data.amount', 'label':'Monto', 'type': 'currency'},
         {'name':'add_date', 'label':'Fecha', 'type': 'date'},
         {'name':'processed', 'label':'Proc.', 'type': 'bool'},
+        
     ]"
 
     filters="['title', 'observation', 'auth_user__username']" 

@@ -7,40 +7,87 @@
 </ol>
 
 
-<dl class="dl-horizontal">
-    <dt>Credito</dt>
-    <dd>{{creditView.data.credit.name}}</dd>
+<h3 class="text-center">Solicitud de Crédito</h3>
 
-    <dt>Asociado</dt>
-    <dd>
-        <ul>
-            <li>{{creditView.data.user.username}}</li>
-            <li>{{creditView.data.user.name}}</li>
-            <li>{{creditView.data.user.email}}</li>
-        </ul>
-    </dd>
+<form class="form-horizontal" name="creditView.form" role="form" ng-submit="creditView.submit()">
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Crédito</label>
+        <div class="col-sm-10">
+            <h4>{{creditView.data.credit.name}}</h4>
+        </div>
+    </div>
 
-    <dt>Monto</dt>
-    <dd>{{creditView.data.data.amount | currency:"$ ":4}}</dd>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Tasa de interes</label>
+        <div class="col-sm-10">
+            <h6>{{creditView.data.data.rate}}</h6>
+        </div>
+    </div>
 
-    <dt>Cantidad de mesess</dt>
-    <dd>{{creditView.data.data.months}}</dd>
-
-    <dt>Tasa de ínteres</dt>
-    <dd>{{creditView.data.data.rate}}</dd>
-
-     <dt>Tasa de seguros</dt>
-    <dd>{{creditView.data.data.insurance}}</dd>
-
-    <dt>Valor Cuota</dt>
-    <dd>{{creditView.data.data.fee | currency:"$ ":4}}</dd>
-
-
-    <dt>Fecha de envio</dt>
-    <dd>{{creditView.data.add_date}}</dd>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Interes seguros</label>
+        <div class="col-sm-10">
+            <h6>{{creditView.data.data.insurance}}</h6>
+        </div>
+    </div>
     
-    <dt>Procesado:</dt>
-    <dd>
-        <input type="checkbox" ng-model="creditView.data.processed" ng-change="creditView.process()"/>
-    </dd>
-</dl>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Procesado</label>
+        <div class="col-sm-10">
+            <input type="checkbox" ng-model="creditView.data.processed" ng-change="creditView.process()"/>
+        </div>
+    </div>
+   
+    <hr>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Solicitante</label>
+        <div class="col-sm-10" ng-if="creditView.data.user.username">            
+            <li><b>Cédula:</b> {{creditView.data.user.username}}</li>
+            <li><b>Nombre:</b> {{creditView.data.user.name}}</li>
+            <li><b>E-mail:</b> {{creditView.data.user.email}}</li>            
+        </div>
+
+        <div class="col-sm-10" ng-if="!creditView.data.user.username">            
+            <h6>Solicitante Vacio.</h6>       
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Fecha de envío solicitud:</label>
+        <div class="col-sm-10">
+            <h5>{{creditView.data.add_date}}</h5>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Monto: </label>
+        <div class="col-sm-10">
+            <input type="number" step="0.1"  required="true" class="form-control" ng-model="creditView.data.data.amount" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Periodo (Meses):</label>
+        <div class="col-sm-10">
+            <input type="number" step="1" required="true" class="form-control" ng-model="creditView.data.data.months"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Cuota:</label>
+        <div class="col-sm-10">
+            <h5 ng-if="creditView.data.data.fee">{{creditView.data.data.fee | currency:"$ ":4}}</h5>
+            <h5 ng-if="!creditView.data.data.fee">No calculado</h5>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Editar</button>
+            <a href="#/request/credit" class="btn btn-warning">Regresar</a>                
+        </div>
+    </div>
+</form>
+
+

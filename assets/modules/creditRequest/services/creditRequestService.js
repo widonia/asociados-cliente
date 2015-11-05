@@ -7,6 +7,7 @@ function CreditRequestService($resource, Config){
     return $resource(_url, {}, {
         get: { method:'GET'},
         proccess: { method:'POST', url:_url + 'processed' , params: {id: "@id"}},
+        put: { method:'PUT', url:_url , params: {id: "@id"}},
         // post: { method:'POST'},
         // put: { method:'PUT'},
         // delete: { method:'DELETE'},
