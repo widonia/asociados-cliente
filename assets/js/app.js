@@ -192,7 +192,8 @@ angular.module('app', [
 
             .when('/cooperative/social', {
                 templateUrl: Config.STATIC + '/modules/cooperative/views/social-list.html',
-                controller: 'SocialListCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
+                role:AUTH_ROLES.editor
+                // controller: 'SocialListCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
             })
 
             .when('/cooperative/social/new', {
