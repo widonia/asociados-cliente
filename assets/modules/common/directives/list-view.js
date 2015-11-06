@@ -112,7 +112,12 @@ function listView(Config){
 
                 // add filters
                 for(var field in this.searchFilters){
-                    query += '&' + this.searchFilters[field] + '__icontains=' + encodeURIComponent(this.searchText);
+                    if (this.searchFilters[field] == 'search'){
+                        query += '&' + this.searchFilters[field] + '=' + encodeURIComponent(this.searchText);    
+                    }else{
+                        query += '&' + this.searchFilters[field] + '__icontains=' + encodeURIComponent(this.searchText);
+                    }
+                    
                 }
 
                 // add query params
