@@ -14,6 +14,7 @@ function listView(Config){
             queryParams: '@',
             callback: '&',
             defaultOrder: '@',
+            showSearchBox: '@',
         },
 
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
@@ -54,6 +55,13 @@ function listView(Config){
             this.order = {}
             this.order.predicate = $scope.defaultOrder;
             this.order.reverse = false;
+
+            /* Show search box*/
+            if ($scope.showSearchBox == undefined){
+                this.showSearchBox = true;
+            }else{
+                this.showSearchBox = $scope.showSearchBox;
+            };
 
             this.init = function(){
                 this.getList();
