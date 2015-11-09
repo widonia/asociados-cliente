@@ -74,7 +74,7 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
             }
         }
 
-        console.log(this.data);
+        // console.log(this.data);
     }
 
     this.onDBSelect = function(db){

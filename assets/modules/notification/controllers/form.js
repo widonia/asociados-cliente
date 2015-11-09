@@ -135,7 +135,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
     this.addUserByGroup = function(){            
         for(var user in this.groups[this.data.group].users){
-            console.log("iterando", user);
+            // console.log("iterando", user);
             this.addUser(this.groups[this.data.group].users[user]);
         }
     }
@@ -153,7 +153,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
         }
 
-        console.log(this.data.users);
+        // console.log(this.data.users);
         
         this.autocomplete.key = '';
         this.autocomplete.suggest = {};
