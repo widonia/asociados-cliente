@@ -1,9 +1,11 @@
 "use strict";
 
-function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService){
+function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService, Config){
 
     this.data = {};
     this.form = {};
+
+    this.MEDIA = Config.MEDIA;
 
     this.init = function(){
         this.populate();
