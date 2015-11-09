@@ -13,8 +13,7 @@ function listView(Config){
             rest: '@',
             queryParams: '@',
             callback: '&',
-            defaultOrder: '@',
-            showSearchBox: '@',
+            defaultOrder: '@'
         },
 
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
@@ -70,7 +69,7 @@ function listView(Config){
 
             this.initActions = function(){
                 for(var action in $scope.actions){
-                    this.actions[$scope.actions[action]] = true
+                    this.actions[$scope.actions[action]] = true;
                 }
             }
 
