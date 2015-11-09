@@ -12,7 +12,8 @@ function listView(Config){
             label: '@', 
             rest: '@',
             queryParams: '@',
-            callback: '&'
+            callback: '&',
+            defaultOrder: '@',
         },
 
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
@@ -48,6 +49,11 @@ function listView(Config){
             this.url = $location.$$path;
 
             this.callback = $scope.callback;
+
+            /* orders */
+            this.order = {}
+            this.order.predicate = $scope.defaultOrder;
+            this.order.reverse = false;
 
             this.init = function(){
                 this.getList();
@@ -126,6 +132,11 @@ function listView(Config){
                 }   
 
                 return query;
+            }
+
+            this.order_column = function(string){
+                this.order.reverse = (this.order.predicate === string) ? !this.order.reverse : false;        
+                this.order.predicate = string;
             }
 
             this.init();
