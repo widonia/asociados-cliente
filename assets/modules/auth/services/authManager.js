@@ -43,6 +43,10 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
 
     this.auth = function(cooperative, role, username, last_login){
         this.isAuth = true;
+        $rootScope.user = {}
+        $rootScope.user.username = username;
+        $rootScope.user.last_login = last_login;
+        
         this.username = username;
         this.last_login = last_login;
         this.set('cooperative', cooperative);
