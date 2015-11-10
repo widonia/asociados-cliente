@@ -1,19 +1,23 @@
 "use strict";
 
-function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager){
-    this.username = AuthManager.username;
+function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager, Config){
+    this.username = $rootScope.user.username;
     this.last_login = AuthManager.last_login;
 
     this.data = {};
     this.stats = {};
     this.chart = null;
+
     this.cooperative = AuthManager.get('cooperative');
+    this.cooperative_data = {}
+    this.MEDIA = Config.MEDIA;
     
     this.init = function(){
         this.data = {
             start: moment().startOf('month').format('YYYY-MM-DD'),
             end: moment().endOf("month").format('YYYY-MM-DD'),
         }
+        this.getCooperative();
         this.getStatistics();
     }
 
@@ -21,6 +25,18 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager)
         $rootScope.$broadcast('loading-show2');
         CooperativeService.stats({id:this.cooperative}, this.onGetStatsSuccess.bind(this), this.onGetStatsError.bind(this));
         StatisticService.get({start:this.data.start, end:this.data.end, cooperative:this.cooperative}, this.onGetStatisticsSuccess.bind(this), this.onGetStatisticsError.bind(this));
+    }
+
+    this.getCooperative = function(){
+        CooperativeService.get({id:this.cooperative}, this.onGetCooperativeSucces.bind(this), this.onGetCooperativeError.bind(this));
+    }
+
+    this.onGetCooperativeSucces = function(response){        
+        this.cooperative_data = response;
+    }
+
+     this.onGetCooperativeError = function(response){
+        $rootScope.$broadcast('loading-hide2');
     }
 
     this.onGetStatsSuccess = function(response){

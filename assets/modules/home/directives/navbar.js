@@ -9,6 +9,7 @@ function navBar(AUTH_EVENTS, Config){
         template: '<div ng-if="visible" class="navbar navbar-default navbar-fixed-top" role="navigation" ng-include="\''+Config.STATIC+'/modules/home/views/navbar.html\'">',
 
         controller: function($scope, $location, AuthService, AuthManager, $rootScope, AUTH_EVENTS, Config){
+
             $scope.logout = function(){
                 AuthService.get();
             }

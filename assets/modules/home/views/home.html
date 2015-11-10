@@ -1,8 +1,13 @@
-<div class="user-box">
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-    <h1>Bienvenido {{home.username}}</h1>
+
+<div class="user-box">    
+    <img src="{{home.MEDIA}}/{{home.cooperative_data.logo}}" alt="Logo" class="pull-right"/>        
+</div>
+<div class="user-box ">    
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>     
+    <h1>Bienvenido {{home.username}} </h1>
     <p>Su ultimo inicio de sesión fue el {{home.last_login | date:'dd/MM/yyyy  HH:mm:ss'}}</p>
 </div>
+
 
 <div id="statistic-page">
  

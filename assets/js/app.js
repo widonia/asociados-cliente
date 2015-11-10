@@ -292,6 +292,10 @@ angular.module('app', [
 	            AuthManager.isLogin = true;
                 AuthManager.username = response.data.username;
                 AuthManager.last_login = response.data.last_login;
+
+                $rootScope.user = {};
+                $rootScope.user.username = AuthManager.username.charAt(0).toUpperCase() +  AuthManager.username.substr(1).toLowerCase();
+                
 	        },
 	        function onError(){
 	            AuthManager.isLogin = false;
@@ -303,10 +307,10 @@ angular.module('app', [
 	    $.event.props.push('dataTransfer');
 
 	    // login success event
-	    $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
-			console.log("Succes login");
-	        AuthManager.login(data.data.token);
-	    });
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
+            console.log("Succes login");
+            AuthManager.login(data.data.token);
+        });
 
 	    // logout succes event
 	    $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){

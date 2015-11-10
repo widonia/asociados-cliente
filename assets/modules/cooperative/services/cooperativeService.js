@@ -6,6 +6,7 @@ function CooperativeService($resource, Config){
     
     return $resource(_url, {}, {
         stats: { method:'GET', url:_url + 'stats'},
+        get: { method:'GET', url:_url},
     })
 }
 
