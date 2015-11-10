@@ -1,7 +1,7 @@
 "use strict";
 
 function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager, Config){
-    this.username = $rootScope.user.username;
+    this.username = AuthManager.username;
     this.last_login = AuthManager.last_login;
 
     this.data = {};
