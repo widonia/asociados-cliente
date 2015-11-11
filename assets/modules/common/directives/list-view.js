@@ -77,8 +77,12 @@ function listView(Config){
                 this.getList();
             };
 
-            this.getList = function(){
-                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + this.getQuery();             
+            this.getList = function(query){
+                if (query == undefined){
+                    query = this.getQuery();
+                }
+
+                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + query;             
                 $http.get(request)
                     .success(this.onGetList.bind(this))
                     .error(this.onGetListErr.bind(this));
@@ -144,6 +148,13 @@ function listView(Config){
             this.order_column = function(string){
                 this.order.reverse = (this.order.predicate === string) ? !this.order.reverse : false;        
                 this.order.predicate = string;
+
+                var order_direction = ""
+                if (this.order.reverse){
+                    order_direction = "-"
+                }
+                var query = this.getQuery()+"&ordering="+order_direction+string;
+                this.getList(query);
             }
 
             this.init();
