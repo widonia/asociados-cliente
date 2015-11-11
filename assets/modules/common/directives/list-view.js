@@ -54,6 +54,7 @@ function listView(Config){
             this.order = {}
             this.order.predicate = $scope.defaultOrder;
             this.order.reverse = false;
+            this.order.status = null;
 
             /* Show search box*/
             if ($scope.showSearchBox == undefined){
@@ -142,19 +143,23 @@ function listView(Config){
                     query += '&'+this.queryParams;
                 }   
 
+                // ordering
+                var order_direction = ""
+                if (this.order.reverse){
+                    order_direction = "-"
+                }                
+                if (this.order.status != null){
+                    query += "&ordering="+order_direction+this.order.predicate;                    
+                }
+
                 return query;
             }
 
             this.order_column = function(string){
                 this.order.reverse = (this.order.predicate === string) ? !this.order.reverse : false;        
                 this.order.predicate = string;
-
-                var order_direction = ""
-                if (this.order.reverse){
-                    order_direction = "-"
-                }
-                var query = this.getQuery()+"&ordering="+order_direction+string;
-                this.getList(query);
+                this.order.status = true;
+                this.getList();
             }
 
             this.init();
