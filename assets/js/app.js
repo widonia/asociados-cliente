@@ -340,7 +340,6 @@ angular.module('app', [
 
 
         $rootScope.$on("ERROR", function(e){
-            console.log("ENtra a este error");
             e.preventDefault();
         });
 

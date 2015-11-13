@@ -43,12 +43,12 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
             }else if(response.status == 403){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {title:'Error', content: 'No posee permisos para esta accion'});
             }else if(response.status == 400){
-                $rootScope.$broadcast("ERROR", 
-                    {
-                        title:'Request Error', 
-                        content: JSON.stringify(response.data,null, '\n')
-                    }
-                );
+                // $rootScope.$broadcast("ERROR", 
+                //     {
+                //         title:'Request Error', 
+                //         content: JSON.stringify(response.data,null, '\n')
+                //     }
+                // );
             }else if(response.status == 500){
                 $rootScope.$broadcast("ERROR", 
                     {

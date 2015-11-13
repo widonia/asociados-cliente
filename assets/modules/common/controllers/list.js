@@ -29,7 +29,7 @@ function CRUDListCtrl($rootScope, CRUDService, settings){
 
     this.delete = function(id){
         event.preventDefault();
-        var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
+        var confirmDelete = confirm('¿Está seguro de borrar este elemento?');
 
         if (confirmDelete) {
             // $rootScope.$broadcast('loading-show');

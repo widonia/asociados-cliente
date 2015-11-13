@@ -3,7 +3,7 @@
 <ol class="breadcrumb">
     <li><a href="#">Inicio</a></li>
     <li><a href="#/request/credit">Solicitudes de credito</a></li>
-    <li class="active">Credito</li>
+    <li class="active">Crédito</li>
 </ol>
 
 <div ng-show="creditView.form.success">
@@ -21,14 +21,14 @@
         </div>
 
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Tasa de interes</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">Tasa de interés</label>
             <div class="col-sm-10">
                 <h6>{{creditView.data.data.rate}}</h6>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Interes seguros</label>
+            <label for="inputEmail3" class="col-sm-2 control-label">Interés seguros</label>
             <div class="col-sm-10">
                 <h6>{{creditView.data.data.insurance}}</h6>
             </div>
@@ -46,7 +46,7 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Solicitante</label>
             <div class="col-sm-10" ng-if="creditView.data.user.username">            
-                <li><b>Cédula:</b> {{creditView.data.user.username}}</li>
+                <li><b>Documento:</b> {{creditView.data.user.username}}</li>
                 <li><b>Nombre:</b> {{creditView.data.user.name}}</li>
                 <li><b>E-mail:</b> {{creditView.data.user.email}}</li>            
             </div>
@@ -71,7 +71,7 @@
         </div>
 
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Periodo (Meses):</label>
+            <label for="inputPassword3" class="col-sm-2 control-label">Período (Meses):</label>
             <div class="col-sm-10">
                 <input type="number" step="1" required="true" class="form-control" ng-model="creditView.data.data.months"/>
             </div>
