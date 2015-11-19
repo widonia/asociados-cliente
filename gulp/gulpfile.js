@@ -115,4 +115,4 @@ gulp.task("aws", function(){
 
 gulp.task('dev', ['watch', 'connect']);
 gulp.task('build', ['less', 'index', 'fonts', 'images', 'views']);
-gulp.task('deploy', ['replace', 'aws']);
+gulp.task('deploy', ['aws']);
