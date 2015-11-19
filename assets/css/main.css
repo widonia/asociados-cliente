@@ -19,7 +19,7 @@
 }
 .user-box img {
   background: #959393;
-  box-shadow: 0 8px 6px -6px #000;
+  box-shadow: 0 8px 6px -6px #000000;
 }
 .login-page {
   width: 260px;
@@ -50,7 +50,7 @@
   min-width: 100px;
 }
 #notification-page .autocomplete li:hover {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 #notification-page .user-list {
   margin: 0px;
@@ -69,16 +69,16 @@
   float: right;
 }
 #statistic-page .red {
-  color: #E3515E;
+  color: #e3515e;
 }
 #statistic-page .blue {
-  color: #35B6E0;
+  color: #35b6e0;
 }
 #statistic-page .green {
-  color: #57AD43;
+  color: #57ad43;
 }
 #statistic-page .orange {
-  color: #F7B547;
+  color: #f7b547;
 }
 #statistic-page .data-general {
   list-style: none;

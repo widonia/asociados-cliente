@@ -95,7 +95,7 @@ gulp.task('views', function() {
 });
 
 
-gulp.task('replace', ['build'], function(){
+gulp.task('replace', function(){
     return gulp.src('../public/index.html')
         .pipe(replace('../public/', awsUrl + ENV[argv.env]))
         .pipe(replace('../assets/', awsUrl + ENV[argv.env]))
