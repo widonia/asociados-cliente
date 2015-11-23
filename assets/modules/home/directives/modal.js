@@ -21,6 +21,7 @@ function modal(AUTH_EVENTS, Config){
 
             scope.$on(AUTH_EVENTS.notAuthorized, show);
             scope.$on("ERROR", show);
+            scope.$on("INFO", show);
         }
     }
 }

@@ -26,6 +26,18 @@ function CreditRequestListCtrl($rootScope, CreditRequestService){
         window.scrollTo(0, 0);
     }
 
+    this.onDonwnloadSucces = function(response){
+       $rootScope.$broadcast("INFO", {title:'Correo envíado', content: "Se envío la información al correo de administración"});
+    }
+
+    this.onDonwnloadError = function(response){
+       $rootScope.$broadcast("INFO", {title:'Error al enviar', content: "Ocurrió un error."});
+    }
+
+    this.download_data = function(){
+        CreditRequestService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+    }
+
     this.init();
 }
 

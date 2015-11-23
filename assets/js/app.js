@@ -97,6 +97,7 @@ angular.module('app', [
             //user urls
             .when('/cooperative/users', {
                 templateUrl: Config.STATIC + '/modules/user/views/list.html',
+                controller: 'UserListCtrl', controllerAs: 'userctrl', role:AUTH_ROLES.monitor,
                 role:AUTH_ROLES.monitor
             })
 

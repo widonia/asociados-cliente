@@ -9,6 +9,7 @@ function UserService($resource, Config){
         // request: { method:'GET', url:_url+'request/:id/?fn=none'},
         // data: { method:'GET', url:_url+'?fn=none'},
         suggest: { method:'GET', url:_url+'suggest/?fn=none'},
+        download_data: { method:'GET', url:_url+'download/'},
         put: { method:'PUT'},
     })
 }
