@@ -39,19 +39,6 @@ function CreditRequestListCtrl($rootScope, CreditRequestService){
     }
 
     this.init();
-
-
-    this.onDonwnloadSucces2 = function(response){
-       $rootScope.$broadcast("INFO", {title:'Correo envíado', content: "Se envío la información al correo de administración"});
-    }
-
-    this.onDonwnloadError2 = function(response){
-       $rootScope.$broadcast("INFO", {title:'Error al enviar', content: "Ocurrió un error."});
-    }
-
-    this.download_data2 = function(){
-        CreditRequestService.download_data_test(this.onDonwnloadSucces2.bind(this), this.onDonwnloadError2.bind(this));
-    }
 }
 
 angular
