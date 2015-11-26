@@ -3,4 +3,3 @@ node_modules
 gulp/deploy
 dev/node_modules
 gulp/aws.json
-public/

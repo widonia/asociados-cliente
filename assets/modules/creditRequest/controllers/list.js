@@ -26,7 +26,32 @@ function CreditRequestListCtrl($rootScope, CreditRequestService){
         window.scrollTo(0, 0);
     }
 
+    this.onDonwnloadSucces = function(response){
+       $rootScope.$broadcast("INFO", {title:'Correo envíado', content: "Se envío la información al correo de administración"});
+    }
+
+    this.onDonwnloadError = function(response){
+       $rootScope.$broadcast("INFO", {title:'Error al enviar', content: "Ocurrió un error."});
+    }
+
+    this.download_data = function(){
+        CreditRequestService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+    }
+
     this.init();
+
+
+    this.onDonwnloadSucces2 = function(response){
+       $rootScope.$broadcast("INFO", {title:'Correo envíado', content: "Se envío la información al correo de administración"});
+    }
+
+    this.onDonwnloadError2 = function(response){
+       $rootScope.$broadcast("INFO", {title:'Error al enviar', content: "Ocurrió un error."});
+    }
+
+    this.download_data2 = function(){
+        CreditRequestService.download_data_test(this.onDonwnloadSucces2.bind(this), this.onDonwnloadError2.bind(this));
+    }
 }
 
 angular

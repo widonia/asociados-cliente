@@ -14,7 +14,7 @@ function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action)
                 "advlist autolink autosave link image lists textcolor paste media"
             ],
             theme: "modern",
-            toolbar1 : "bold italic underline,formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image",
+            toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
             min_height: 500
         };
     }

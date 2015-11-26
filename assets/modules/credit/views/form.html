@@ -1,8 +1,8 @@
-<h1>{{credit.action == "new" ? "Nuevo" : "Editar"}} credito</h1>
+<h1>{{credit.action == "new" ? "Nuevo" : "Editar"}} crédito</h1>
 
 <ol class="breadcrumb">
 	<li><a href="#">Inicio</a></li>
-	<li><a href="#/cooperative/credits">Creditos</a></li>
+	<li><a href="#/cooperative/credits">Créditos</a></li>
 	<li class="active">{{credit.action == "new" ? "Nuevo" : "Editar"}}</li>
 </ol>
 
@@ -39,6 +39,13 @@
         </div>
 
         <div class="row">
+            <div class="form-group col-sm-1">
+                <label for="inputEmail3" class="control-label">Posición</label>
+                <input name="position" type="input" class="form-control" ng-model="credit.data.position" placeholder="0">
+            </div>
+        </div>
+        
+        <div class="row">
             <div class="form-group col-sm-8">
                 <label class="control-label">Tasa</label>
                 <input name="rate" type="input" class="form-control" ng-model="credit.data.rate" required>
@@ -62,6 +69,15 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-group col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="credit.data.amortization"> Mostrar amortización
+                    </label>
+                </div>
+            </div>
+        </div>
 
         <div class="dinamyc-forms">
 

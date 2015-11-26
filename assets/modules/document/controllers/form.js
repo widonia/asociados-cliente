@@ -46,17 +46,17 @@ function DocumentFormCtrl($routeParams, DocumentService, action){
     }
 
     this.onPopulateError = function(response){
-        console.log(response);
+        // console.log(response);
     }
 
     this.onSubmitOk = function(response){
-        console.log(response);
-        console.log('ok');
+        // console.log(response);
+        // console.log('ok');
     }
 
     this.onSubmitError = function(response){
-        console.log(response);
-        console.log('error');
+        // console.log(response);
+        // console.log('error');
     }
 
     this.init();

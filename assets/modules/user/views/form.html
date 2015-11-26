@@ -16,11 +16,11 @@
 
         <div class="row" ng-show="user.action == 'new'">
             <div class="form-group col-sm-8">
-                <label class="control-label">Cédula</label>
+                <label class="control-label">Documento</label>
                 <input name="username" type="input" class="form-control" ng-model="user.data.username" required>
                 <div class="error" ng-show="user.form.username.$invalid && user.form.submitted">
                     <small class="error" ng-show="user.form.username.$error.required">
-                        Ingrese una cedula para el asociado
+                        Ingrese un documento para el asociado
                     </small>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <input name="email" type="input" class="form-control" ng-model="user.data.email" required>
                 <div class="error" ng-show="user.form.email.$invalid && user.form.submitted">
                     <small class="error" ng-show="user.form.email.$error.required">
-                        Ingrese un email
+                        Ingrese un E-mail
                     </small>
                 </div>
             </div>
@@ -51,14 +51,14 @@
 
         <div class="row">
             <div class="form-group col-sm-8">
-                <label class="control-label">Genero</label>
+                <label class="control-label">Género</label>
                 <select name="gender" class="form-control" ng-model="user.data.gender" required>
                     <option value="F">Femenino</option>
                     <option value="M">Masculino</option>
                 </select>
                 <div class="error" ng-show="user.form.gender.$invalid && user.form.submitted">
                     <small class="error" ng-show="user.form.gender.$error.required">
-                        Seleccione un genero
+                        Seleccione un género
                     </small>
                 </div>
             </div>

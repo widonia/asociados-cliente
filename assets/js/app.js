@@ -75,8 +75,7 @@ angular.module('app', [
             //page urls
 			.when('/content/page', {
 				templateUrl: Config.STATIC + '/modules/page/views/list.html',
-                role:AUTH_ROLES.monitor
-                // controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
+                controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
 			})
 
             .when('/content/page/new', {
@@ -98,6 +97,7 @@ angular.module('app', [
             //user urls
             .when('/cooperative/users', {
                 templateUrl: Config.STATIC + '/modules/user/views/list.html',
+                controller: 'UserListCtrl', controllerAs: 'userctrl', role:AUTH_ROLES.monitor,
                 role:AUTH_ROLES.monitor
             })
 
@@ -168,7 +168,7 @@ angular.module('app', [
 
             // cooperative url
             .when('/cooperative/email', {
-                templateUrl: Config.STATIC + '/modules/cooperative/views/email.html',
+                templateUrl: Config.STATIC + '/modules/cooperative/views/email-list.html',
                 role:AUTH_ROLES.admin
                 // controller: 'EmailListCtrl', controllerAs: 'emailList', role:AUTH_ROLES.admin
             })
@@ -193,7 +193,8 @@ angular.module('app', [
 
             .when('/cooperative/social', {
                 templateUrl: Config.STATIC + '/modules/cooperative/views/social-list.html',
-                controller: 'SocialListCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
+                role:AUTH_ROLES.editor
+                // controller: 'SocialListCtrl', controllerAs: 'social', role:AUTH_ROLES.editor,
             })
 
             .when('/cooperative/social/new', {
@@ -218,32 +219,14 @@ angular.module('app', [
                 controller: 'UpdateIndexCtrl', controllerAs: 'update', role:AUTH_ROLES.admin
             })
 
-            .when('/cooperative/statistic', {
-                templateUrl: Config.STATIC + '/modules/statistic/views/statistic.html',
-                controller: 'StatisticCtrl', controllerAs: 'statistic', role:AUTH_ROLES.monitor
-            })
-
+            // .when('/cooperative/statistic', {
+            //     templateUrl: Config.STATIC + '/modules/statistic/views/statistic.html',
+            //     controller: 'StatisticCtrl', controllerAs: 'statistic', role:AUTH_ROLES.monitor
+            // })
 
             .when('/content/notification', {
                 templateUrl: Config.STATIC + '/modules/notification/views/list.html',
                 role:AUTH_ROLES.monitor
-                // controller: 'CRUDListCtrl', controllerAs: 'notificationList', role:AUTH_ROLES.monitor
-                // resolve: {
-                //     settings: function(){
-                //         return {
-                //             object: 'notification_client',
-                //             name: 'Notificacion',
-                //             title: 'Notificaciones',
-                //             path: [
-                //                 { 'Inicio' :'/' },
-                //                 { 'Notificaciones' :false },
-                //             ],
-                //             fields: [
-                //                 {'title': 'string' }
-                //             ]
-                //         }
-                //     }
-                // }
             })
 
             .when('/content/notification/new', {
@@ -268,7 +251,7 @@ angular.module('app', [
                 controller: 'CreditRequestListCtrl', controllerAs: 'creditList', role:AUTH_ROLES.monitor
             })
 
-            .when('/request/credit/view/:id', {
+            .when('/request/credit/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/creditRequest/views/view.html',
                 controller: 'CreditRequestViewCtrl', controllerAs: 'creditView', role:AUTH_ROLES.editor
             })
@@ -310,6 +293,10 @@ angular.module('app', [
 	            AuthManager.isLogin = true;
                 AuthManager.username = response.data.username;
                 AuthManager.last_login = response.data.last_login;
+
+                $rootScope.user = {};
+                $rootScope.user.username = AuthManager.username.charAt(0).toUpperCase() +  AuthManager.username.substr(1).toLowerCase();
+                
 	        },
 	        function onError(){
 	            AuthManager.isLogin = false;
@@ -321,10 +308,10 @@ angular.module('app', [
 	    $.event.props.push('dataTransfer');
 
 	    // login success event
-	    $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
-			console.log("Succes login");
-	        AuthManager.login(data.data.token);
-	    });
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
+            console.log("Succes login");
+            AuthManager.login(data.data.token);
+        });
 
 	    // logout succes event
 	    $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
@@ -354,7 +341,6 @@ angular.module('app', [
 
 
         $rootScope.$on("ERROR", function(e){
-            console.log("ENtra a este error");
             e.preventDefault();
         });
 

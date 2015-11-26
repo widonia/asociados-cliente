@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="app"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Clientes - Asociados</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+        <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/asociados-client/stage/css/please-wait/please-wait.min.css">
+
+        <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/asociados-client/stage/css/css.min.css">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
+    </head>
+
+    <body>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- loading directive -->
+        <div loading></div>
+
+        <!-- modal directive -->
+        <div modal></div>
+
+        <!-- nav ba directive -->
+        <div nav-bar></div>
+
+        <!-- view directive -->
+        <div class="container" ng-view></div>
+
+        <!-- Add pleasewait lib -->
+        <script src="https://s3-us-west-2.amazonaws.com/asociados-client/stage/js/please-wait/please-wait.min.js"></script>
+
+        <script type="text/javascript">
+            var ENV = 'Stage';
+            var loading_screen = pleaseWait({
+                  logo:  "http://i.imgur.com/iHf1TWN.png",
+                  backgroundColor: '#22ba64',
+                  loadingHtml: "<p class='loading-message' style='color: white; font-size: 2.5em;'>Bienvenido<br><br> <p style='font-size: 1.5em;color: white;'>...Cargando...</p> </p>",
+                  loaded: true,
+                  finishing: true,
+                  finishing: true
+            });
+        </script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.2.5/tinymce.min.js"></script>
+
+        <script src="https://s3-us-west-2.amazonaws.com/asociados-client/stage/js/js.min.js"></script>
+
+        <!-- jquery scripts -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+</body>
+</html>

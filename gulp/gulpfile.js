@@ -17,10 +17,11 @@ try {
     var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
     awsCredentials.S3.bucket = "asociados-client";
 }catch(err) {
-    var awsCredentials = {};
+    // var awsCredentials = {};
+    var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
 }
 
-// var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
+
 var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';
 var ENV = {
     'Stage': '/stage/',
@@ -95,7 +96,7 @@ gulp.task('views', function() {
 });
 
 
-gulp.task('replace', ['build'], function(){
+gulp.task('replace', function(){
     return gulp.src('../public/index.html')
         .pipe(replace('../public/', awsUrl + ENV[argv.env]))
         .pipe(replace('../assets/', awsUrl + ENV[argv.env]))
@@ -115,4 +116,4 @@ gulp.task("aws", function(){
 
 gulp.task('dev', ['watch', 'connect']);
 gulp.task('build', ['less', 'index', 'fonts', 'images', 'views']);
-gulp.task('deploy', ['replace', 'aws']);
+gulp.task('deploy', ['aws']);

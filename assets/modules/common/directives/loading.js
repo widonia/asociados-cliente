@@ -9,7 +9,7 @@ function loading(Config){
         templateUrl: Config.STATIC + '/modules/common/views/loading.html',
 
         link: function(scope, element, attrs){
-            console.log('aja');
+            // console.log('aja');
             var request = 0
 
             var show = function(){ 

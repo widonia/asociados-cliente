@@ -1,16 +1,21 @@
 "use strict";
 
-function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
+function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
     return {
         request:function(request){
             // console.log(" request " + request);
+            // 
             $rootScope.$broadcast('loading-show2');
-            if(!request.cache){
-                request.url = fixURL(request.url);
-                request.url = addParameter(request.url, 'cooperative_id=' + AuthManager.get('cooperative'));
+            var n = request.url.indexOf(Config.REST);
+            if(n > -1){ 
+                
+                if(!request.cache){
+                    request.url = fixURL(request.url);
+                    request.url = addParameter(request.url, 'cooperative_id=' + AuthManager.get('cooperative'));
 
-                if(AuthManager.get('token') != undefined){
-                    request.headers['Authorization'] = 'token '+AuthManager.get('token');
+                    if(AuthManager.get('token') != undefined){
+                        request.headers['Authorization'] = 'token '+AuthManager.get('token');
+                    }
                 }
             }
 
@@ -38,12 +43,12 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager){
             }else if(response.status == 403){
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {title:'Error', content: 'No posee permisos para esta accion'});
             }else if(response.status == 400){
-                $rootScope.$broadcast("ERROR", 
-                    {
-                        title:'Request Error', 
-                        content: JSON.stringify(response.data,null, '\n')
-                    }
-                );
+                // $rootScope.$broadcast("ERROR", 
+                //     {
+                //         title:'Request Error', 
+                //         content: JSON.stringify(response.data,null, '\n')
+                //     }
+                // );
             }else if(response.status == 500){
                 $rootScope.$broadcast("ERROR", 
                     {

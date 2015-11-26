@@ -7,15 +7,18 @@ function listView(Config){
         scope: { 
             fields: '=', 
             filters: '=', 
+            actions: '=',
             url: '@', 
-            module: '@', 
             label: '@', 
             rest: '@',
-            queryparams: '@'
+            queryParams: '@',
+            callback: '&',
+            defaultOrder: '@'
         },
+
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
-        controller: function($scope, $rootScope, $http, CRUDService){
+        controller: function($scope, $rootScope, $http, $location, CRUDService){
 
             /* total elements */
             this.count = 0;
@@ -35,37 +38,62 @@ function listView(Config){
             /* text to find  */
             this.searchText = '';
 
+            /* new, edit, delete and download */
+            this.actions = {};
+
             /* rest module url */
             this.rest = $scope.rest;
 
-            this.queryparams = $scope.queryparams;
+            this.queryParams = $scope.queryParams;
 
-            this.module = $scope.module;
-            this.label = $scope.label;
-            this.url = $scope.url;
+            this.url = $location.$$path;
 
+            this.callback = $scope.callback;
+
+            /* orders */
+            this.order = {}
+            this.order.predicate = $scope.defaultOrder;
+            this.order.reverse = false;
+            this.order.status = null;
+
+            /* Show search box*/
+            if ($scope.showSearchBox == undefined){
+                this.showSearchBox = true;
+            }else{
+                this.showSearchBox = $scope.showSearchBox;
+            };
 
             this.init = function(){
                 this.getList();
+                this.initActions();
+            }
+
+            this.initActions = function(){
+                for(var action in $scope.actions){
+                    this.actions[$scope.actions[action]] = true;
+                }
             }
 
             this.setPage = function () {
                 this.getList();
             };
 
-            this.getList = function(){
-                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + this.getQuery();
-                if (this.queryparams != undefined){
-                    request += '&'+this.queryparams;
-                }                
+            this.getList = function(query){
+                if (query == undefined){
+                    query = this.getQuery();
+                }
+
+                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + query;             
                 $http.get(request)
-                .success(this.onGetList.bind(this))
-                .error(this.onGetListErr.bind(this));
+                    .success(this.onGetList.bind(this))
+                    .error(this.onGetListErr.bind(this));
             }
 
             this.onGetList = function(response){
                 this.count = response.count;
-                this.list = response.results;
+
+                // apply callback to make specific modifications to the result list
+                this.list = (this.callback()) ? this.callback()(response.results) : response.results;
                 window.scrollTo(0, 0);
             }
 
@@ -99,11 +127,39 @@ function listView(Config){
 
             this.getQuery = function(){
                 var query = '';
+
+                // add filters
                 for(var field in this.searchFilters){
-                    query += '&' + this.searchFilters[field] + '__icontains=' + encodeURIComponent(this.searchText);
+                    if (this.searchFilters[field] == 'search'){
+                        query += '&' + this.searchFilters[field] + '=' + encodeURIComponent(this.searchText);    
+                    }else{
+                        query += '&' + this.searchFilters[field] + '__icontains=' + encodeURIComponent(this.searchText);
+                    }
+                    
+                }
+
+                // add query params
+                if (this.queryParams != undefined){
+                    query += '&'+this.queryParams;
+                }   
+
+                // ordering
+                var order_direction = ""
+                if (this.order.reverse){
+                    order_direction = "-"
+                }                
+                if (this.order.status != null){
+                    query += "&ordering="+order_direction+this.order.predicate;                    
                 }
 
                 return query;
+            }
+
+            this.order_column = function(string){
+                this.order.reverse = (this.order.predicate === string) ? !this.order.reverse : false;        
+                this.order.predicate = string;
+                this.order.status = true;
+                this.getList();
             }
 
             this.init();

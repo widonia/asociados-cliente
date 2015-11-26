@@ -1,35 +1,37 @@
 
-<form class="input-group crud-search pull-left" ng-submit="listView.search()">
-    <input ng-model="listView.searchText" type="text" class="form-control" placeholder="busqueda"/>
+<form class="input-group crud-search pull-left" ng-submit="listView.search()" ng-if="listView.actions.search">
+    <input ng-model="listView.searchText" type="text" class="form-control" placeholder="Búsqueda"/>
     <span class="input-group-btn">
         <button title="Buscar" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-        <button title="Limpiar busqueda" ng-class="{disabled : listView.searchText == ''}" class="btn btn-default" type="button" ng-click="listView.clear()"><span class="glyphicon glyphicon-remove"></span></button>
+        <button title="Limpiar búsqueda" ng-class="{disabled : listView.searchText == ''}" class="btn btn-default" type="button" ng-click="listView.clear()"><span class="glyphicon glyphicon-remove"></span></button>
     </span>
 </form>
 
 
-<p class="pull-right">
-    <a href="#/{{listView.url}}/new" class="btn btn-success">Agregar {{listView.label}}</a>
+<p class="pull-right" ng-if="listView.actions.add">
+    <a href="#{{listView.url}}/new" class="btn btn-success">Agregar </a>
 </p>
 
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th width="{{field.width}}%" ng-repeat="field in listView.fields">{{field.label}}</th>
+            <th width="{{field.width}}%" ng-repeat="field in listView.fields ">
+                <a href="" ng-click="listView.order_column(field.name)">{{field.label}}</a>               
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="element in listView.list | orderBy:'-add_date'">
-            <td ng-repeat="field in listView.fields">{{element[field.name] | fieldType: field.type }}</td>
+        <tr ng-repeat="element in listView.list | orderBy:listView.order.predicate:listView.order.reverse">
+            <td ng-repeat="field in listView.fields">{{element | fieldValue: field.name | fieldType: field.type }}</td>
 
             <td class="text-right">
-                <a href="#/{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm">
+                <a href="#{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm" ng-if="listView.actions.edit">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
 
-                <button ng-click="listView.delete(element.id, $event)" type="button" class="btn btn-danger btn-sm">
+                <button ng-click="listView.delete(element.id, $event)" type="button" class="btn btn-danger btn-sm" ng-if="listView.actions.delete">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

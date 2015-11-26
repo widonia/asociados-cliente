@@ -30,21 +30,29 @@
             </li>
 
             <li class="dropdown">
-                <a href="" data-toggle="dropdown">Cooperativa <span class="caret"></span></a>
+                <a href="" data-toggle="dropdown">Entidad <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#/cooperative/credits">Créditos</a></li>
                     <li><a href="#/cooperative/users">Asociados</a></li>
                     <li><a href="#/cooperative/groups">Grupos</a></li>
+
+                    <li><a href="#/cooperative/credits">Créditos</a></li>
                     <li><a href="#/cooperative/email">Correos</a></li>
+                    
                     <li><a href="#/cooperative/social">Redes Sociales</a></li>
                     <li><a href="#/cooperative/update">Base de Datos</a></li>
-                    <!-- <li><a href="#/cooperative/statistic">Estadisticas</a></li> -->
                 </ul>
             </li>
-
-            <li><a href="" ng-click="logout()">Salir</a></li>
-
         </ul>
+        
+        <ul class="nav navbar-nav navbar-right" >
+            <li class="dropdown">
+                <a href="" data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>({{user.username}}) <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="" ng-click="logout()">Salir</a></li>
+                </ul>
+            </li>
+        </ul>
+
     </div>
 
 </div>

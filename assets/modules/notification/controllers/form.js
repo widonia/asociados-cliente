@@ -19,18 +19,23 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
                 "advlist autolink autosave link image lists textcolor paste textcolor"
             ],
             min_height: 500,
-            toolbar1 : "bold italic underline,formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
+            toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
     }
 
 
     this.onPopulateOk = function(response){
-        $rootScope.$broadcast('loading-hide');
+        $rootScope.$broadcast('loading-hide');        
         this.data = response;
+        
+        // add actually users
+        for (var i = this.data.users.length - 1; i >= 0; i--) {
+            this.addUser(this.data.users[i]);
+        };
+        
 
         // Set image thumbnail if exist
-        console.log(this.data.image)
         if (this.data.image != undefined  && this.data.image != ""){
             // $scope.image = this.data.image;
             this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
@@ -130,7 +135,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
     this.addUserByGroup = function(){            
         for(var user in this.groups[this.data.group].users){
-            console.log("iterando", user);
+            // console.log("iterando", user);
             this.addUser(this.groups[this.data.group].users[user]);
         }
     }
@@ -148,6 +153,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
         }
 
+        // console.log(this.data.users);
+        
         this.autocomplete.key = '';
         this.autocomplete.suggest = {};
     }

@@ -1,21 +1,30 @@
-<h1>Asociados</h1>
+<h1>Asociados 
+    <button class="btn btn-primary btn-sm ng-scope" ng-disabled="false" ng-click="userctrl.download_data()">
+         <span class="glyphicon glyphicon-download"></span> Enviar información .xslx
+    </button>
+</h1>
+
+
 
 <ol class="breadcrumb">
     <li><a href="#">Inicio</a></li>
     <li class="active">Asociados</li>
 </ol>
 
-
 <list-view 
     fields="[
-        {'name':'username', 'label':'Cedula', 'type': 'string'},
+        {'name':'username', 'label':'Documento', 'type': 'string'},
         {'name':'name', 'label':'Nombre', 'type': 'string', width:'40'},
-        {'name':'email', 'label':'Email', 'type': 'string'},
+        {'name':'email', 'label':'E-mail', 'type': 'string'},
     ]"
-    label="Usuario"
-    module="users"
-    url="cooperative/users"
+
+    filters="['search']" 
+
+    actions="['add', 'edit', 'delete', 'search']"
+    
     rest="user">
 
 </list-view>
+
+
 

@@ -15,6 +15,7 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
     }
 
     this.onPopulate = function(response){
+        // console.log(response);
         $rootScope.$broadcast('loading-hide');
         this.data = response;
         this.parseHStore();
@@ -70,7 +71,7 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
     }
 
     this.changeHstore = function(a,b){
-        console.log(a,b);
+        // console.log(a,b);
     }
 
     this.init();

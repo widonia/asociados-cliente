@@ -2,45 +2,12 @@
 
 function PageListCtrl($rootScope, PageService){
 
-    this.count = 0;
-    this.page = 1;
-    this.list = [];
-
-    this.init = function(){
-        this.getList();
-    }
-
-    this.setPage = function () {
-        this.getList();
-    };
-
-    this.getList = function(){
-        $rootScope.$broadcast('loading-show');
-        PageService.get({page:this.page, paginate:1}, this.onGetList.bind(this));
-    }
-
-    this.onGetList = function(response){
-        $rootScope.$broadcast('loading-hide');
-        this.count = response.count;
-        this.list = response.results;
-        window.scrollTo(0, 0);
-    }
-
-    this.delete = function(page_id, event){
-        event.preventDefault();
-        var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
-
-        if (confirmDelete) {
-            $rootScope.$broadcast('loading-show');
-            PageService.delete({id:page_id}, this.onDelete.bind(this));
+    this.convertType = function(results){
+        for(var result in results){
+            results[result]['type'] = (results[result]['type'] == 1) ? 'categoria' : 'contenido';
         }
+        return results;
     }
-
-    this.onDelete = function(){
-        this.getList();
-    }
-
-    this.init();
 }
 
 angular
