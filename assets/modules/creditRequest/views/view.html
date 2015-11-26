@@ -59,7 +59,7 @@
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">Fecha de envío solicitud:</label>
             <div class="col-sm-10">
-                <h5>{{creditView.data.add_date}}</h5>
+                <h5>{{creditView.data.add_date | date:'medium'}}</h5>
             </div>
         </div>
 
@@ -87,7 +87,7 @@
         <div class="form-group" ng-if="creditView.data.file != '' && creditView.data.file != null">
             <label for="inputPassword3" class="col-sm-2 control-label">Archivo:</label>
             <div class="col-sm-10">
-                <a href="{{creditView.MEDIA}}/{{creditView.data.file}}"  target="_blank"><h5>{{creditView.data.file}}</h5></a>
+                <a href="{{creditView.MEDIA}}/{{creditView.data.file}}"  target="_blank" download ><h5> Descargar archivo adjunto<span class="glyphicon glyphicon-download"></span></h5></a>
             </div>
         </div>
 

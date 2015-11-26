@@ -2,10 +2,6 @@
     <button class="btn btn-primary btn-sm ng-scope" ng-disabled="false" ng-click="creditList.download_data()">
          <span class="glyphicon glyphicon-download"></span> Enviar información .xslx
     </button>
-
-    <button class="btn btn-primary btn-sm ng-scope" ng-disabled="false" ng-click="creditList.download_data()">
-         <span class="glyphicon glyphicon-download"></span> Enviar información 2.xslx
-    </button>
 </h1>
 
 
@@ -33,7 +29,10 @@
 
     rest="credit_request"
 
-    queryparams="type=1">
+    queryparams="type=1"
+
+    default-order="-add_date"
+    >
 
 </list-view>
 
