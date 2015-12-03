@@ -8,6 +8,7 @@ function EmailService($resource, Config){
         get: { method:'GET'},
         post: { method:'POST'},
         put: { method:'PUT'},
+        options: { method:'OPTIONS'},
         delete: { method:'DELETE'}
     })
 }
