@@ -45,6 +45,21 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-group col-sm-8">
+                <label class="control-label">Tipo </label>
+                <select class="form-control" ng-options="item as item.display_name for item in email.data.options_type track by item.value" ng-model="email.data.type_selected"  required="true">
+                    <option value="">Seleccione tipo</option>
+                </select>
+                <div class="error" ng-show="email.form.email.$invalid && email.form.submitted">
+                    <small class="error" ng-show="email.form.email.$error.required">
+                        Seleccione un tipo de correo
+                    </small>
+                </div>
+            </div>
+        </div>
+
+
     	<div class="row">
     		<div class="form-group col-xs-12">
     			<button type="submit" class="btn btn-primary">{{email.action == "new" ? "Enviar" : "Editar"}}</button>

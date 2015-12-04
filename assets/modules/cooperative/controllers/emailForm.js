@@ -6,8 +6,23 @@ function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
     this.form = false;
 
     this.init = function(){
-        if(this.action == 'edit'){ this.populate(); }
+                
+        var onOptionsOk = function(response){
+            this.data.options_type = response.actions.POST.type.choices
+            if(this.action == 'edit'){ this.populate(); }
+        };
+
+        var onOptionsError = function(response){
+
+        }
+        EmailService.options({}, onOptionsOk.bind(this), onOptionsError.bind(this));
+
+
+        
     }
+
+
+
 
     this.populate = function(){
         $rootScope.$broadcast('loading-show');
@@ -21,6 +36,8 @@ function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
         $rootScope.$broadcast('loading-hide');
         this.data.name = response.name;
         this.data.email = response.email;
+        this.data.type_selected = this.data.options_type.filter(function(v){ return v.value==response.type;})[0]
+
     }
 
     this.onPopulateError = function(response){
@@ -30,6 +47,7 @@ function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
     this.submit = function(){
         $rootScope.$broadcast('loading-show');
         this.form.submitted = true;
+        this.data.type = this.data.type_selected.value;
         if (this.form.$valid) {
             if(this.action == 'new'){
                 EmailService.post({}, this.data,

@@ -15,7 +15,7 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
     }
 
     this.onSocialCategoriesOk =  function(response){
-        this.data.options = response.actions.POST.type.choices;           
+        this.data.options = response.actions.POST.type.choices;                   
         if(this.action == 'edit'){
             this.populate(); 
         }else{
