@@ -24,7 +24,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="element in listView.list | orderBy:listView.order.predicate:listView.order.reverse">
-            <td ng-repeat="field in listView.fields">{{element | fieldValue: field.name | fieldType: field.type }}</td>
+            <td ng-repeat="field in listView.fields">{{element | fieldValue: field.name | fieldType: field.type | truncate:field.truncate}}</td>
 
             <td class="text-right">
                 <a href="#{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm" ng-if="listView.actions.edit">
@@ -46,6 +46,8 @@
     ng-model="listView.page" 
     max-size="5" 
     class="pagination-lg" 
-    ng-change="listView.setPage()">
+    ng-change="listView.setPage()"
+    previous-text="Anterior"
+    next-text="Siguiente">
     </pagination>
 </div>

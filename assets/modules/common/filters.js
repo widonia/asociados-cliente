@@ -33,8 +33,28 @@ function fieldValue(){
     };
 }
 
+function truncate() {
+    return function (text, length, end) {
+        if (isNaN(length))
+            return text
+
+        if (end === undefined)
+            end = "...";
+
+        if (text.length <= length || text.length - end.length <= length) {
+            return text;
+        }
+        else {
+            return String(text).substring(0, length-end.length) + end;
+        }
+
+    };
+}
+
+
 
 angular
     .module('app.common.filters')
     .filter('fieldType', fieldType)
-    .filter('fieldValue', fieldValue);
+    .filter('fieldValue', fieldValue)
+    .filter('truncate', truncate);
