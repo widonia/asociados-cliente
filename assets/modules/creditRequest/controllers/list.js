@@ -27,7 +27,11 @@ function CreditRequestListCtrl($rootScope, CreditRequestService){
     }
 
     this.onDonwnloadSucces = function(response){
-        var msg = "Se envío la información a: "+response.data.emails.join(",\n"); 
+        var emails = response.data.emails;
+        if (Array.isArray(emails)){
+            emails = emails.join(",\n");
+        }
+        var msg = "Se envío la información a: "+emails; 
         $rootScope.$broadcast("INFO", {title:'Correo envíado', content: msg});
     }
 
