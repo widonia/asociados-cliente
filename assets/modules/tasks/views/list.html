@@ -5,7 +5,7 @@
     <li class="active">Tareas</li>
 </ol>
 
-<h4 class="text-center" ng-show="taskList.data == null">No se han procesado tareas</h4>
+<h4 class="text-center" ng-show="taskList.data.length <= 0">No se han procesado tareas</h4>
 
 <table class="table table-hover" ng-show="taskList.data">
     <thead>
