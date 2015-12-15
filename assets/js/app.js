@@ -24,6 +24,7 @@ angular.module('app', [
     'app.cooperative',
     'app.statistic',
     'app.groups',
+    'app.tasks'
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
@@ -272,6 +273,12 @@ angular.module('app', [
 			    controller: 'LoginCtrl', controllerAs: 'login', role:AUTH_ROLES.guest
             })
 
+
+            // Tasks
+            .when('/tasks/status', {
+                templateUrl: Config.STATIC + '/modules/tasks/views/list.html',
+                controller: 'TaskController', controllerAs: 'taskList', role:AUTH_ROLES.monitor
+            })
 
 			.otherwise({redirectTo: '/'});
 	}

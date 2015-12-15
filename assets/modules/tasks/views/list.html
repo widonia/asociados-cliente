@@ -1,0 +1,33 @@
+<h1>Tareas</h1>
+
+<ol class="breadcrumb">
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Tareas</li>
+</ol>
+
+<h4 class="text-center" ng-show="taskList.data == null">No se han procesado tareas</h4>
+
+<table class="table table-hover" ng-show="taskList.data">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha Procesado</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="element in taskList.data | orderBy:'-date_done'">
+           <td>{{element.id}}</td>
+           <td>{{element.date_done | date:'medium'}}</td>
+           <td>{{element.name}}</td>
+            <td>
+                <span ng-show="element.status == 'SUCCESS'" class="label label-success">Finalizado</span>
+                <span ng-show="element.status == 'FAILURE'" class="label label-danger">Error</span>
+                <span ng-show="element.status == 'STARTED'" class="label label-info">Procesando...</span>
+                <span ng-show="element.status == 'RETRY'" class="label label-info">Procesando...</span>
+                <span ng-show="element.status == 'PENDING'" class="label label-default">En cola</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
