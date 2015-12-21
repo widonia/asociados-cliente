@@ -16,7 +16,9 @@ function UserListCtrl($rootScope, UserService){
     }
 
     this.download_data = function(){
-        UserService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+        if (confirm('¿Está seguro que desea descarga la información de los asociados?.\nEsto tardara un tiempo en completarse.')) { 
+            UserService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+        }        
     }
 }
 
