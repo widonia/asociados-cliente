@@ -69,12 +69,13 @@
                 </accordion-heading>
                 <div class="row">
                     <div class="col-md-12">
-                        <p>Solo se muestran los ultimos 1000 mensajes enviados en los ultimos 7 dias</p>
+                        <p>Solo se muestran los ultimos 1000 mensajes enviados en los ultimos 7 dias
                         <button type="button" class="btn btn-info" ng-click="home.getBadEmails()">Consultar estados</button>
+                        </p>
                     </div>
                     
                     <div class="col-md-12" >
-                        <table class="table table-hover" ng-if="home.bad_emails.bounced || home.bad_emails.soft-bounced">
+                        <table class="table table-hover" ng-if="home.bad_emails">
                             <thead>                            
                                 <th>E-mail</th>
                                 <th>Estado</th>
@@ -82,21 +83,20 @@
                             </thead>
 
                             <tbody >
-                                <tr ng-repeat="element in home.bad_emails.bounced">
+                                <tr ng-repeat="element in home.bad_emails">
                                     <td>{{element.email}}</td>
-                                    <td>{{<span class="label label-danger">Bounced</span>}}</td>
-                                    <td>{{element.subject}}</td>
-                                </tr>
-                                <tr ng-repeat="element in home.bad_emails.soft-bounced">
-                                    <td>{{element.email}}</td>
-                                    <td><span class="label label-warning">Soft-Bounced</span></td>
+                                    <td>
+                                        <span ng-if="element.state == 'rejected'" class="label label-danger">Rejected</span>
+                                        <span ng-if="element.state == 'bounced'" class="label label-danger">Bounced</span>
+                                        <span ng-if="element.state == 'soft-bounced'" class="label label-danger">Soft-Bounced</span>
+                                    </td>
                                     <td>{{element.subject}}</td>
                                 </tr>
                             </tbody>
                         </table>
                         
                         <!-- when all is ok -->
-                        <div class="col-md-12" ng-if="!home.bad_emails.bounced || !home.bad_emails.soft-bounced">
+                        <div class="col-md-12" ng-show="!home.bad_emails">
                             <h1>Actualmente no hay información de envios fallidos.</h1>
                         </div>
                     </div>      
