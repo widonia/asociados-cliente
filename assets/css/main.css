@@ -133,11 +133,11 @@ body {
   background: transparent;
   padding: 0px;
 }
-.navbar-brand {
+.navbar-brand-header {
   padding-top: 8px;
   display: inline-flex;
 }
-.navbar-brand img {
+.navbar-brand-header img {
   height: 30px;
 }
 .loading {
@@ -220,9 +220,10 @@ body {
   height: 70px;
 }
 .asociados-logo {
-  width: 32px;
-  height: 32px;
+  width: 37px;
+  height: 37px;
 }
+.navbar-brand-header:hover .asociados-logo,
 .asociados-logo:hover {
   -webkit-animation: spin 4s linear infinite;
   animation: spin 4s linear infinite;
