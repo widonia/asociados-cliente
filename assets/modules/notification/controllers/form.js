@@ -48,7 +48,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
 
     this.onGroups = function(response){
-        this.groups = response.results;
+        this.groups = response.data;
     }
 
     this.onGroupsErr = function(){

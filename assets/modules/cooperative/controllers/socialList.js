@@ -19,7 +19,7 @@ function SocialListCtrl($rootScope, $routeParams, SocialService){
         // console.log("Entra por aca");
         // $rootScope.$broadcast('loading-hide');
         // this.count = response.count;
-        // this.list = response.results;
+        // this.list = response.data;
         // window.scrollTo(0, 0);
     }
 
@@ -62,7 +62,7 @@ function SocialListCtrl($rootScope, $routeParams, SocialService){
     // this.onGetList = function(response){
     //     $rootScope.$broadcast('loading-hide');
     //     this.count = response.count;
-    //     this.list = response.results;
+    //     this.list = response.data;
     //     window.scrollTo(0, 0);
     // }
 

@@ -19,8 +19,8 @@ function NewsListCtrl(NewsService){
     }
 
     this.onGetList = function(response){
-        this.count = response.data.count;
-        this.list = response.data.results;
+        this.count = response.count;
+        this.list = response.data;
         window.scrollTo(0, 0);
     }
 

@@ -24,7 +24,7 @@ function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action)
     }
 
     this.onGetCategories = function(response){
-        this.categories = response.results;
+        this.categories = response.data;
         if(this.action == 'edit'){
             this.populate();
         }

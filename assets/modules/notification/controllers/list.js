@@ -23,7 +23,7 @@ function NotificationListCtrl($rootScope, NotificationService){
         $rootScope.$broadcast('loading-hide');
 
         this.count = response.count;
-        this.list = response.results;
+        this.list = response.data;
         window.scrollTo(0, 0);
     }
 

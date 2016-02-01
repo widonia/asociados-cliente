@@ -93,7 +93,7 @@ function listView(Config){
                 this.count = response.count;
 
                 // apply callback to make specific modifications to the result list
-                this.list = (this.callback()) ? this.callback()(response.results) : response.results;
+                this.list = (this.callback()) ? this.callback()(response.data) : response.data;
                 window.scrollTo(0, 0);
             }
 
