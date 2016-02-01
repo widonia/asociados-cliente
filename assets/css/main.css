@@ -212,7 +212,7 @@ body {
   height: 400px;
 }
 #loading-logo {
-  stroke-width: 0.9px ;
+  stroke-width: 1.6px ;
   stroke-dasharray: 100;
   -webkit-animation: dash 4s linear infinite;
   animation: dash 4s linear infinite;
