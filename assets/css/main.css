@@ -133,10 +133,11 @@ body {
   background: transparent;
   padding: 0px;
 }
-.navbar-brand {
-  padding: 10px;
+.navbar-brand-header {
+  padding-top: 8px;
+  display: inline-flex;
 }
-.navbar-brand img {
+.navbar-brand-header img {
   height: 30px;
 }
 .loading {
@@ -209,4 +210,47 @@ body {
 .table-scroll {
   overflow: scroll;
   height: 400px;
+}
+#loading-logo {
+  stroke-width: 0.9px ;
+  stroke-dasharray: 100;
+  -webkit-animation: dash 4s linear infinite;
+  animation: dash 4s linear infinite;
+  width: 70px;
+  height: 70px;
+}
+.asociados-logo {
+  width: 37px;
+  height: 37px;
+}
+.navbar-brand-header:hover .asociados-logo,
+.asociados-logo:hover {
+  -webkit-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+  -webkit-animation: bounceIn 0.6s;
+  animation: bounceIn 0.6s;
+  -webkit-transition: all 0.6s cubic-bezier(0.8, 1.8, 0.75, 0.75);
+  transition: all 0.6s cubic-bezier(0.8, 1.8, 0.75, 0.75);
+  cursor: pointer;
+  -webkit-transform: rotate(720deg) scale(1);
+  -ms-transform: rotate(720deg) scale(1);
+  transform: rotate(720deg) scale(1);
+  stroke-width: 1px;
+  stroke-dasharray: 100;
+}
+@-webkit-keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }

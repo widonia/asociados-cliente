@@ -6,5 +6,5 @@ angular.module('app.groups.directives', []);
 angular.module('app.groups', [
     'app.groups.services',
     'app.groups.controllers',
-    'app.groups.directives',
+    'app.groups.directives'    
 ]);

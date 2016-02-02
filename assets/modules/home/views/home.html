@@ -50,5 +50,62 @@
     </h3>
      
     <div id="time-chart" style="height: 250px;"></div>
+   
+</div>
+
+<!-- Email information -->
+<div class="col-md-12">
+    <h3>Email</h3>    
+    <hr>
+
+    <div class="col-md-12">
+        <accordion close-others="true">
+            <accordion-group is-open="home.accordion.email" >
+                <accordion-heading>
+                    Información de E-mails enviados
+                    <i ng-show="home.accordion.email">(Abierto)</i>
+                    <i ng-show="!home.accordion.email">(Cerrado)</i>
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': home.accordion.email, 'glyphicon-chevron-right': !home.accordion.email}"></i>
+                </accordion-heading>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Solo se muestran los ultimos 1000 mensajes enviados en los ultimos 7 dias
+                        <button type="button" class="btn btn-info" ng-click="home.getBadEmails()">Consultar estados</button>
+                        </p>
+                    </div>
+                    
+                    <div class="col-md-12" >
+                        <table class="table table-hover" ng-if="home.bad_emails">
+                            <thead>                            
+                                <th>E-mail</th>
+                                <th>Estado</th>
+                                <th>Asunto</th>
+                            </thead>
+
+                            <tbody >
+                                <tr ng-repeat="element in home.bad_emails">
+                                    <td>{{element.email}}</td>
+                                    <td>
+                                        <span ng-if="element.state == 'rejected'" class="label label-danger">Rejected</span>
+                                        <span ng-if="element.state == 'bounced'" class="label label-danger">Bounced</span>
+                                        <span ng-if="element.state == 'soft-bounced'" class="label label-danger">Soft-Bounced</span>
+                                    </td>
+                                    <td>{{element.subject}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <!-- when all is ok -->
+                        <div class="col-md-12" ng-show="!home.bad_emails">
+                            <h1>Actualmente no hay información de envios fallidos.</h1>
+                        </div>
+                    </div>      
+
+                </div>
+
+            </accordion-group>
+        </accordion>
+    </div>
+
 
 </div>

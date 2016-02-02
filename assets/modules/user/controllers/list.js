@@ -3,7 +3,12 @@
 function UserListCtrl($rootScope, UserService){
 
     this.onDonwnloadSucces = function(response){
-        $rootScope.$broadcast("INFO", {title:'Correo envíado', content: "Se envío la información al correo de administración"});
+        var emails = response.data.emails;
+        if (Array.isArray(emails)){
+            emails = emails.join(",\n");
+        }
+        var msg = "Se envío la información a: "+emails; 
+        $rootScope.$broadcast("INFO", {title:'Correo envíado', content: msg});
     }
 
     this.onDonwnloadError = function(response){
@@ -11,7 +16,9 @@ function UserListCtrl($rootScope, UserService){
     }
 
     this.download_data = function(){
-        UserService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+        if (confirm('¿Está seguro que desea descarga la información de los asociados?.\nEsto tardara un tiempo en completarse.')) { 
+            UserService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+        }        
     }
 }
 

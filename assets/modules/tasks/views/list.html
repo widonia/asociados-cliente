@@ -1,0 +1,56 @@
+<h1>Tareas</h1>
+
+<ol class="breadcrumb">
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Tareas</li>
+</ol>
+
+<div class="row" ng-show="taskList.data.actives.length <= 0  && taskList.data.waiting.length <= 0 ">
+    <div class="alert alert-success" role="alert">Todas las tareas se han completado</div>
+</div>
+
+<div class="row" ng-show="taskList.data.actives.length > 0 ">
+    <h3>
+    Se esta <span  class="label label-warning">Procesando</span> la siguiente tarea:   
+    </h3>
+    <p>Cúando esta halla finalizado se le enviará un email.</p>
+    <table class="table table-hover" ng-show="taskList.data">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tipo de tarea</th>
+                <th>Tiempo de ejecución (seg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="element in taskList.data.actives">
+               <td>{{element.id}}</td>
+               <td>{{element.name}}</td>
+               <td>{{element.time_start}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="row" ng-show="taskList.data.waiting.length > 0 ">
+    <h3>
+    Tareas en cola para <span  class="label label-default">Procesar </span>:   
+    </h3>
+    <table class="table table-hover" ng-show="taskList.data">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tipo de tarea</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="element in taskList.data.waiting">
+               <td>{{element.id}}</td>
+               <td>{{element.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

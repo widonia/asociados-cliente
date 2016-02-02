@@ -39,6 +39,7 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
     }
 
     this.removeHStore = function(index){
+        index = this.hstore.indexOf(index);
         this.hstore.splice(index, 1);
     }
 

@@ -8,6 +8,11 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     this.stats = {};
     this.chart = null;
 
+    this.accordion = {
+        email: false
+    };
+    this.bad_emails = {};
+
     this.cooperative = AuthManager.get('cooperative');
     this.cooperative_data = {}
     this.MEDIA = Config.MEDIA;
@@ -18,7 +23,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
             end: moment().endOf("month").format('YYYY-MM-DD'),
         }
         this.getCooperative();
-        this.getStatistics();
+        this.getStatistics();   
     }
 
     this.getStatistics = function(){
@@ -100,6 +105,18 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
         autoclose:true,
         format: "yyyy/mm/dd",
     });
+
+
+    this.onGetBadEmails = function(res){
+        this.bad_emails = res.data;
+    }
+    this.onGetBadEmailsError = function(res){    
+        console.log("Error");
+    }
+
+    this.getBadEmails = function(){
+        CooperativeService.bad_emails({id:this.cooperative}, this.onGetBadEmails.bind(this), this.onGetBadEmailsError.bind(this));
+    }
 
     this.init();
 

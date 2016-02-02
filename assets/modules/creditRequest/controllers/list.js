@@ -26,8 +26,13 @@ function CreditRequestListCtrl($rootScope, CreditRequestService){
         window.scrollTo(0, 0);
     }
 
-    this.onDonwnloadSucces = function(response){
-       $rootScope.$broadcast("INFO", {title:'Correo envíado', content: "Se envío la información al correo de administración"});
+    this.onDonwnloadSucces = function(response){        
+        var emails = response.data.emails;
+        if (Array.isArray(emails)){
+            emails = emails.join(",\n");
+        }
+        var msg = "Se envío la información a: "+emails; 
+        $rootScope.$broadcast("INFO", {title:'Correo envíado', content: msg});
     }
 
     this.onDonwnloadError = function(response){
@@ -35,7 +40,9 @@ function CreditRequestListCtrl($rootScope, CreditRequestService){
     }
 
     this.download_data = function(){
-        CreditRequestService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+        if (confirm('¿Está seguro que desea descarga la información de la solitudes de créditos?.\nEsto tardara un tiempo en completarse.')) { 
+            CreditRequestService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));
+        }        
     }
 
     this.init();

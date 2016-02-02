@@ -7,7 +7,7 @@
 </ol>
 
 <div ng-show="groupFill.form.success">
-    <div class="alert alert-success" role="alert">Usuarios actualizados correctamente.</div>
+    <div class="alert alert-success" role="alert">Usuarios actualizados correctamente.  </div>
     <a href="#/cooperative/groups" class="btn btn-warning">Regresar</a>
 </div>
 
@@ -29,7 +29,7 @@
     		</div>
     	</div>	
 
-        <h4>Usuarios actualmente en este grupo</h4>
+        <h4>Usuarios actualmente en este grupo ({{groupFill.data.users.length}}):</h4>
         <div class="table-scroll table-responsive" >
                 <table  class="table  table-striped ">
                     <thead>                                        
