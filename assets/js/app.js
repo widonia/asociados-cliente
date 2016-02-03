@@ -24,7 +24,8 @@ angular.module('app', [
     'app.cooperative',
     'app.statistic',
     'app.groups',
-    'app.tasks'
+    'app.tasks',
+    'app.terms'
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
@@ -255,6 +256,15 @@ angular.module('app', [
             .when('/request/credit/edit/:id', {
                 templateUrl: Config.STATIC + '/modules/creditRequest/views/view.html',
                 controller: 'CreditRequestViewCtrl', controllerAs: 'creditView', role:AUTH_ROLES.editor
+            })
+
+            //Terms urls
+            .when('/cooperative/terms', {
+                templateUrl: Config.STATIC + '/modules/terms&conditions/views/fill.html',
+                controller: 'TermsFillCtrl', controllerAs: 'ctrl', role:AUTH_ROLES.editor,
+                resolve: {                    
+                    action: function(){return 'edit';}
+                }
             })
 
             //user urls
