@@ -17,8 +17,8 @@ try {
     var awsCredentials = require((process.env.HOME || process.env.HOMEPATH) + '/.ssh/authorized.json');
     awsCredentials.S3.bucket = "asociados-client";
 }catch(err) {
-    // var awsCredentials = {};
-    var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
+    var awsCredentials = {};
+    // var awsCredentials = JSON.parse(fs.readFileSync('./aws.json'));
 }
 
 

@@ -238,6 +238,15 @@ body {
   stroke-width: 1px;
   stroke-dasharray: 100;
 }
+.bg-danger.error {
+  padding-left: 5px;
+  color: #C58686;
+  border-top: 1px solid #C58686;
+  position: relative;
+  top: -1px;
+  border-radius: 0 0 3px 3px;
+  line-height: 21px;
+}
 @-webkit-keyframes dash {
   from {
     stroke-dashoffset: 1000;

@@ -18,8 +18,8 @@
             <div class="form-group col-sm-8">
                 <label class="control-label">Código</label>
                 <input name="code" type="input" class="form-control" ng-model="credit.data.code" required>
-                <div class="error" ng-show="credit.form.code.$invalid && credit.form.submitted">
-                    <small class="error" ng-show="credit.form.code.$error.required">
+                <div class="bg-danger error" ng-show="credit.form.code.$invalid && credit.form.submitted">
+                    <small ng-show="credit.form.code.$error.required">
                         Ingrese un código
                     </small>
                 </div>
@@ -30,8 +30,8 @@
             <div class="form-group col-sm-8">
                 <label class="control-label">Nombre</label>
                 <input name="name" type="input" class="form-control" ng-model="credit.data.name" required>
-                <div class="error" ng-show="credit.form.name.$invalid && credit.form.submitted">
-                    <small class="error" ng-show="credit.form.name.$error.required">
+                <div class="bg-danger error" ng-show="credit.form.name.$invalid && credit.form.submitted">
+                    <small ng-show="credit.form.name.$error.required">
                         Ingrese un nombre
                     </small>
                 </div>
@@ -49,8 +49,8 @@
             <div class="form-group col-sm-8">
                 <label class="control-label">Tasa</label>
                 <input name="rate" type="input" class="form-control" ng-model="credit.data.rate" required>
-                <div class="error" ng-show="credit.form.rate.$invalid && credit.form.submitted">
-                    <small class="error" ng-show="credit.form.rate.$error.required">
+                <div class="bg-danger error" ng-show="credit.form.rate.$invalid && credit.form.submitted">
+                    <small ng-show="credit.form.rate.$error.required">
                         Ingrese una tasa
                     </small>
                 </div>
@@ -61,8 +61,8 @@
             <div class="form-group col-sm-8">
                 <label class="control-label">Tasa de seguro</label>
                 <input name="insurance" type="input" class="form-control" ng-model="credit.data.insurance" required>
-                <div class="error" ng-show="credit.form.insurance.$invalid && credit.form.submitted">
-                    <small class="error" ng-show="credit.form.insurance.$error.required">
+                <div class="bg-danger error" ng-show="credit.form.insurance.$invalid && credit.form.submitted">
+                    <small ng-show="credit.form.insurance.$error.required">
                         Ingrese una tasa de seguro
                     </small>
                 </div>
@@ -85,23 +85,23 @@
 
         	<div class="row" ng-repeat="item in credit.hstore">
                 <div class="form-group col-xs-3">
-                    <input name="insurance" type="input" class="form-control" ng-model="item.key" placeholder="nombre">
+                    <input name="key" type="input" class="form-control" ng-model="item.key" placeholder="Nombre">
                 </div>
                 <div class="form-group col-xs-4">
-                    <input name="insurance" type="input" class="form-control" ng-model="item.value" placeholder="valor">
+                    <input name="value" type="input" class="form-control" ng-model="item.value" placeholder="Valor">
                 </div>
-                <div class="form-group col-xs-1">
+                <div class="form-group col-xs-2">
                     <button ng-click="credit.removeHStore(item)" type="button" class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
-                </div>
-        	</div>
-
-            <div class="row">
-                <div class="form-group col-xs-8">
                     <button ng-click="credit.addHStore()" type="button" class="btn btn-success btn-sm">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xs-8">
                 </div>
             </div>
 
