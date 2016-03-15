@@ -327,6 +327,7 @@ angular.module('app', [
 	    // login success event
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
             console.log("Succes login");
+            document.body.style.background = "transparent";
             AuthManager.login(data.token);
         });
 

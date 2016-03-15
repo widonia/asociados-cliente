@@ -23,7 +23,9 @@
 }
 .login-page {
   width: 260px;
+  height: 100%;
   margin: auto;
+  top: 100%;
 }
 .login-page h3 {
   margin: 40px auto 20px;
@@ -31,6 +33,10 @@
 }
 .login-page .form-signin {
   margin: 25px auto;
+}
+h5 {
+  font-weight: 400 !important;
+  font-size: 15.5px !important;
 }
 #notification-page .autocomplete {
   border: 1px #CCC solid;
@@ -125,6 +131,15 @@
 }
 .update-page .files i.success {
   color: #66cc33;
+}
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+.container {
+  min-height: 100%;
 }
 body {
   padding-top: 50px;
@@ -222,6 +237,10 @@ body {
 .asociados-logo {
   width: 37px;
   height: 37px;
+}
+.btn-login {
+  background-color: #D8852E !important;
+  border-color: transparent  !important;
 }
 .navbar-brand-header:hover .asociados-logo,
 .asociados-logo:hover {

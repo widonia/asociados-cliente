@@ -27,6 +27,7 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
 
     this.login = function(token){
         this.isLogin = true;
+        document.body.style.background = "transparent";
         this.set('token', token);
     }
 

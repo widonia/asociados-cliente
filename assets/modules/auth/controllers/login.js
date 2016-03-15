@@ -16,7 +16,22 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
             this.onLoginOk.bind(this),
             this.onCheckError.bind(this)
         );
+
+        var colorFunc = function(x, y) {
+            return 'hsl('+Math.floor(Math.abs(x*y)*360)+',80%,60%)';
+        };
+
+        var pattern = Trianglify({
+            width: window.innerWidth,
+            height: window.innerHeight,
+            variance: "1",
+            x_colors: ["#fe9929", "#e5f5e0","#a1d99b","#31a354"],
+            cell_size: 100,
+        });        
+        document.body.style.background = "url('"+pattern.png()+"') repeat-x center";
     }
+
+    // ["#fbb4ae","#b3cde3","#ccebc5"]
 
     this.onCheckError = function(){
         this.error = false;
