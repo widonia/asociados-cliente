@@ -22,7 +22,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
-        console.log('Init');
     }
 
 
@@ -41,7 +40,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // $scope.image = this.data.image;
             this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
         }
-        console.log('onPopulateOk');
+        console.log(response);
     }
 
     this.onPopulateError = function(response){
@@ -52,6 +51,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
     this.onGroups = function(response){
         this.groups = response.results;
+        console.log(response);
     }
 
     this.onGroupsErr = function(){
