@@ -25,13 +25,11 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
         response: function(response){
             // console.log(" response " + response);
             $rootScope.$broadcast('loading-hide2');
-            if(response.data.code == '01'){
-                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
-            }
+            // $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
 
-            if(response.data.code == '03'){
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            }
+            // if(response.data.code == '03'){
+            //     $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            // }
 
             return response;
         },
@@ -58,14 +56,25 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
                 );
             }
 
-            if(response.status == 0){
+            if (response.config.url.indexOf(Config.DATA) > -1){
+                console.log("hoñla");
                 $rootScope.$broadcast("ERROR", 
                     {
-                        title:'No Internet', 
-                        content: "Error no hay conexión a internet."
+                        title:'Estadisticas no disponibles', 
+                        content: "Las estadisiticas no estan disponibles por el momento, intentenlo de nuevo más tarde."
                     }
                 );
+            }else{
+                if(response.status == 0){
+                    $rootScope.$broadcast("ERROR", 
+                        {
+                            title:'No Internet', 
+                            content: "Error no hay conexión a internet."
+                        }
+                    );
+                }    
             }
+            
 
             return $q.reject(response);
 

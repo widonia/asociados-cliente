@@ -327,7 +327,7 @@ angular.module('app', [
 	    // login success event
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
             console.log("Succes login");
-            AuthManager.login(data.data.token);
+            AuthManager.login(data.token);
         });
 
 	    // logout succes event
@@ -338,9 +338,8 @@ angular.module('app', [
 
 	    // not authenticasted event
 	    $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
-			console.log("No authenticated");
-	        e.preventDefault();
-			// AuthManager.logout();
+			console.log("No authenticated");                        
+	        e.preventDefault();			
 	        if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
 	    });
 
@@ -360,30 +359,5 @@ angular.module('app', [
         $rootScope.$on("ERROR", function(e){
             e.preventDefault();
         });
-
-		// $rootScope.$on('$stateChangeStart',
-		// 	function(event, toState, toParams, fromState, fromParams){
-		// 		console.log("Entra");
-		// 		if (toState.authenticate && !AuthManager.isLogin ){
-		// 			event.preventDefault();
-		// 			if(fromState.name !='login'){
-		// 				console.log(AuthManager.isLogin);
-		// 				$state.transitionTo('login');
-		// 			}
-		// 		}
-		// 		//Seteamos las variables de errores
-		// 		$rootScope.succes = {
-		// 			'status': false,
-		// 			'data': null
-		// 		}
-		//
-		// 		$rootScope.error = {
-		// 			'status': false,
-		// 			'msg':null,
-		// 			'data': null,
-		// 			'hint':null
-		// 		}
-		// 	}
-		// );
 	}
 ]);

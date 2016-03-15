@@ -33,6 +33,7 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
     }
 
     this.onLoginOk = function(response){
+        AuthManager.login(response.data.token);
         this.get_coopList(response.data.username, response.data.last_login);
     }
 
