@@ -22,10 +22,11 @@
   box-shadow: 0 8px 6px -6px #000;
 }
 .login-page {
-  width: 260px;
-  height: 100%;
+  width: 21em;
   margin: auto;
-  top: 100%;
+  position: absolute;
+  left: 40%;
+  top: 20%;
 }
 .login-page h3 {
   margin: 40px auto 20px;
@@ -137,6 +138,7 @@ html {
 }
 body {
   min-height: 100%;
+  background: url("http://api.thumbr.it/whitenoise-300x300.png?background=f2f2f2ff&noise=cccccc&density=7&opacity=48");
 }
 .container {
   min-height: 100%;

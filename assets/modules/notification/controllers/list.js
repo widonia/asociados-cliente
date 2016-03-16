@@ -1,12 +1,13 @@
 "use strict";
 
-function NotificationListCtrl($rootScope, NotificationService){
+function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
 
     this.count = 0;
     this.page = 1;
     this.list = [];
 
     this.init = function(){
+        console.log("ntra");
         this.getList();
     }
 
@@ -29,12 +30,25 @@ function NotificationListCtrl($rootScope, NotificationService){
 
     this.delete = function(id, event){
         event.preventDefault();
-        var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
-
-        if (confirmDelete) {
+        // var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
+        SweetAlert.swal({
+           title: "¿Está seguro?",
+           text: "Se eliminará este elemento, esta seguro?",
+           type: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#DD6B55",confirmButtonText: "Si, ¡quiero eliminarlo!",
+           cancelButtonText: "No, ¡cancelar ya!",
+           closeOnConfirm: false,
+           closeOnCancel: false }, 
+        function(isConfirm){ 
+           if (isConfirm) {
             $rootScope.$broadcast('loading-show');
             NotificationService.delete({id:id}, this.onDelete.bind(this));
-        }
+              SweetAlert.swal("¡Eliminado!", "Notificación eliminada correctamente.", "success");
+           } else {
+              SweetAlert.swal("Canecelado", "No se eliminó nada.", "error");
+           }
+        });
     }
 
     this.onDelete = function(){

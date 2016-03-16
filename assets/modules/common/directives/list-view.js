@@ -18,7 +18,7 @@ function listView(Config){
 
         templateUrl: Config.STATIC + '/modules/common/views/list.html',
         controllerAs: 'listView',
-        controller: function($scope, $rootScope, $http, $location, CRUDService){
+        controller: function($scope, $rootScope, $http, $location, CRUDService, SweetAlert){
 
             /* total elements */
             this.count = 0;
@@ -105,11 +105,32 @@ function listView(Config){
 
             this.delete = function(id){
                 event.preventDefault();
-                var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
-
-                if (confirmDelete) {
-                    CRUDService.delete({object:this.rest, id:id}, this.onDelete.bind(this));
+                var confirmation = function(isConfirm){ 
+                   if (isConfirm) {
+                        CRUDService.delete({object:this.rest, id:id}, this.onDelete.bind(this));
+                        SweetAlert.swal("¡Eliminado!", "Elemento eliminado correctamente.", "success");
+                    } else {
+                        SweetAlert.swal({
+                            title: "Canecelado", 
+                            text: "No se eliminó nada.", 
+                            type: "error",
+                            timer: 2000
+                        });
+                    }
                 }
+                SweetAlert.swal({
+                   title: "¿Está seguro?",
+                   text: "Se eliminará este elemento, ¿Esta seguro?",
+                   type: "warning",
+                   showCancelButton: true,
+                   confirmButtonColor: "#DD6B55",
+                   confirmButtonText: "Si, ¡quiero eliminarlo!",
+                   cancelButtonText: "Cancelar",
+                   closeOnConfirm: false,
+                   closeOnCancel: false 
+                },                    
+                    confirmation.bind(this)
+                );
             }
 
             this.onDelete = function(){

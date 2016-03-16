@@ -1,6 +1,6 @@
 "use strict";
 
-function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, NotificationService, action, UserService, Config, GroupsService){
+function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, NotificationService, action, UserService, Config, GroupsService, SweetAlert){
 
     this.autocomplete = {'key':'', 'suggest':[], 'list':[]};
     this.data = {'public':true, 'users':[]};
@@ -169,6 +169,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             .error(this.onImageError.bind(this));  
         }else{
             this.form.success = true;
+            SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
         }
         $rootScope.$broadcast('loading-hide');
     }
@@ -176,15 +177,18 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.onSubmitError = function(response){
         this.form.success = false;
         $rootScope.$broadcast('loading-hide');
+        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
     }
 
 
     this.onImageOk = function(response){    
         this.form.success = true;
+        SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
 
     this.onImageError = function(response){
         this.form.success = false;
+        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error");        
     }
 
     this.addUserByGroup = function(){            

@@ -8,10 +8,9 @@
 
 <div ng-show="page.form.success">
     <div class="alert alert-success" role="alert">Elemento {{page.action == "new" ? "creado" : "editado"}} correctamente.</div>
-    <a href="#/content/page" class="btn btn-warning">Regresar</a>
 </div>
 
-<div ng-show="!page.form.success">
+<div >
     <h3>{{page.data.title}}</h3>
     <form novalidate name="page.form" class="form" role="form" ng-submit="page.submit()">
     	<div class="row">
