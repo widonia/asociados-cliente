@@ -6,7 +6,9 @@
 </ol>
 
 <div class="row" ng-show="taskList.data.actives.length <= 0  && taskList.data.waiting.length <= 0 ">
-    <div class="alert alert-success" role="alert">Todas las tareas se han completado</div>
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert">Todas las tareas se han completado</div>
+    </div>   
 </div>
 
 <div class="row" ng-show="taskList.data.actives.length > 0 ">

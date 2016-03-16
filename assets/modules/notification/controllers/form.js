@@ -76,6 +76,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // images_upload_url: 'postAcceptor.php'
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
+        console.log('Init');
     }
 
 
@@ -94,10 +95,12 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // $scope.image = this.data.image;
             this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
         }
+        console.log('onPopulateOk');
     }
 
     this.onPopulateError = function(response){
         $rootScope.$broadcast('loading-hide');
+        console.log('onPopulateError');
     }
 
 
@@ -106,7 +109,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onGroupsErr = function(){
-
+        console.log('On groups Err')
     }
 
     this.populate = function(){
@@ -123,6 +126,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){; 
+                console.log('new')
                 NotificationService.post({}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -130,6 +134,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }
 
             if(this.action == 'edit'){
+                console.log('edit')
                 NotificationService.put({id:$routeParams.id}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -172,6 +177,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
         }
         $rootScope.$broadcast('loading-hide');
+        console.log('onSubmitOk')
     }
 
     this.onSubmitError = function(response){
