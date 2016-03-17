@@ -8,9 +8,8 @@
 
 <div ng-show="user.form.success">
     <div class="alert alert-success" role="alert">Elemento {{user.action == "new" ? "creado" : "editado"}} correctamente.</div>
-    <a href="#/cooperative/users" class="btn btn-warning">Regresar</a>
 </div>
-<div ng-show="!user.form.success">
+<div >
 
     <form novalidate name="user.form" class="form" role="form" ng-submit="user.submit()">
 

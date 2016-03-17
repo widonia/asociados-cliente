@@ -30,7 +30,6 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
 
     this.delete = function(id, event){
         event.preventDefault();
-        // var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
         SweetAlert.swal({
            title: "¿Está seguro?",
            text: "Se eliminará este elemento, esta seguro?",

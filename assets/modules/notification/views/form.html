@@ -15,64 +15,87 @@
     <div >
         <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()" ng-disabled="!isSaving">
             
-            <div class="row"  ng-if="notification.data.image">
-                <div class="col-sm-4">
-                    <img src="{{notification.MEDIA}}/{{notification.data.image}}" alt="">
-                </div>
-            </div>
 
             <div class="row">
-                <div class="form-group col-sm-8">
-                    <label for="inputEmail3" class="control-label">Imágen</label>
-                    <input name="image" type="file" ng-file="image" required>
-                    <div class="bg-danger error" ng-show="notification.form.image.$invalid && notification.form.submitted">
-                        <small ng-show="notification.form.image.$error.required">
-                            Debes subir una imágen.
-                        </small>
-                    </div>
-                </div>                
-            </div>
-
-            <div class="row">
-                <div class="form-group col-sm-8">
-                    <label for="inputEmail3" class="control-label">Título</label>
-                    <input name="title" type="input" class="form-control" ng-model="notification.data.title" required>
                 
-                    <div class="bg-danger error" ng-show="notification.form.title.$invalid && notification.form.submitted">
-                        <small ng-show="notification.form.title.$error.required">
-                            Debes ingresar un título.
-                        </small>
+                <div class="col-sm-3">
+                    <label for="inputEmail3" class="control-label">Imágen (pre-visualización)</label>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            
+                        </div>
+                        <div class="col-sm-9">                            
+                            <div ng-if="notification.data.image">                        
+                                <img class="img-thumbnail"  src="{{notification.MEDIA}}/{{notification.data.image}}" alt="">
+                            </div>
+
+                            <div ng-if="!notification.data.image">                        
+                                <div style="width:160px; height:160px; border-style: dashed; border-color: currentColor;"> <h3 class="text-center">Imágen no cargada</h3></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-12">                            
+                            <input name="image" type="file" ng-file="image" required>
+                            <div class="bg-danger error" ng-show="notification.form.image.$invalid && notification.form.submitted">
+                                <small ng-show="notification.form.image.$error.required">
+                                    Debes subir una imágen.
+                                </small>
+                            </div>
+                        </div>                
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-sm-8">
-                    <label for="inputEmail3" class="control-label">Descripción</label>
-                    <textarea name="description" class="form-control" rows="3" ng-model="notification.data.description" required>{{notification.data.description}}</textarea>
-
-                    <div class="bg-danger error" ng-show="notification.form.description.$invalid && notification.form.submitted">
-                        <small ng-show="notification.form.description.$error.required">
-                            Debes ingresar una descripción.
-                        </small>
+                
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="inputEmail3" class="control-label">Título</label>
+                            <input name="title" type="input" class="form-control" ng-model="notification.data.title" required>
+                        
+                            <div class="bg-danger error" ng-show="notification.form.title.$invalid && notification.form.submitted">
+                                <small ng-show="notification.form.title.$error.required">
+                                    Debes ingresar un título.
+                                </small>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-sm-8">
-                    <label for="inputEmail3" class="control-label">Observación</label>
-                    <input name="observation" type="input" class="form-control" ng-model="notification.data.observation" required>
-                    <div class="bg-danger error" ng-show="notification.form.observation.$invalid && notification.form.submitted">
-                        <small ng-show="notification.form.observation.$error.required">
-                            Debes ingresar una observación.
-                        </small>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="inputEmail3" class="control-label">Descripción</label>
+                            <textarea name="description" class="form-control" rows="3" ng-model="notification.data.description" required>{{notification.data.description}}</textarea>
+
+                            <div class="bg-danger error" ng-show="notification.form.description.$invalid && notification.form.submitted">
+                                <small ng-show="notification.form.description.$error.required">
+                                    Debes ingresar una descripción.
+                                </small>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="inputEmail3" class="control-label">Observación</label>
+                            <input name="observation" type="input" class="form-control" ng-model="notification.data.observation" required>
+                            <div class="bg-danger error" ng-show="notification.form.observation.$invalid && notification.form.submitted">
+                                <small ng-show="notification.form.observation.$error.required">
+                                    Debes ingresar una observación.
+                                </small>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
+
             </div>
 
+                      
+
+            
+
             <div class="row">
-                <div class="form-group col-sm-8">
+                <div class="form-group col-sm-12">
                     <label for="inputEmail3" class="control-label">Contenido</label>
                     <textarea ui-tinymce="notification.tinymceOptions" name="content" class="form-control" rows="6" ng-model="notification.data.content" required>{{notification.data.content}}</textarea>
 

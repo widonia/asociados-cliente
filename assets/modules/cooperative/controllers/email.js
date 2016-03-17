@@ -1,6 +1,6 @@
 "use strict";
 
-function EmailListCtrl($rootScope, EmailService){
+function EmailListCtrl($rootScope, EmailService, SweetAlert){
     
     this.count = 0;
     this.page = 1;
@@ -27,12 +27,33 @@ function EmailListCtrl($rootScope, EmailService){
 
     this.delete = function(id, event){
         event.preventDefault();   
-        var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');   
-
-        if (confirmDelete) {
-            $rootScope.$broadcast('loading-show');
-            EmailService.delete({id:id}, this.onDelete.bind(this));
+        var confirmation = function(isConfirm){ 
+           if (isConfirm) {
+                $rootScope.$broadcast('loading-show');
+                EmailService.delete({id:id}, this.onDelete.bind(this));
+                SweetAlert.swal("¡Eliminado!", "Elemento eliminado correctamente.", "success");
+            } else {
+                SweetAlert.swal({
+                    title: "Canecelado", 
+                    text: "No se eliminó nada.", 
+                    type: "error",
+                    timer: 2000
+                });
+            }
         }
+        SweetAlert.swal({
+           title: "¿Está seguro?",
+           text: "Se eliminará este elemento, ¿Esta seguro?",
+           type: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#DD6B55",
+           confirmButtonText: "Si, ¡quiero eliminarlo!",
+           cancelButtonText: "Cancelar",
+           closeOnConfirm: false,
+           closeOnCancel: false 
+        },                    
+            confirmation.bind(this)
+        );
     }
 
     this.onDelete = function(){

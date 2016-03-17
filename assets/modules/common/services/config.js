@@ -6,9 +6,9 @@ if(ENV == 'Dev'){
         DATA: 'http://localhost:1337',
         STATIC: 'http://localhost:4000',
         // STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage',        
-        MEDIA: 'http://localhost:8000/media',
+        // MEDIA: 'http://localhost:8000/media',
         // MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.prod'
-        // MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
+        MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
 }
 

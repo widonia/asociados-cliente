@@ -1,6 +1,6 @@
 "use strict";
 
-function CRUDListCtrl($rootScope, CRUDService, settings){
+function CRUDListCtrl($rootScope, CRUDService, settings, SweetAlert){
 
     this.count = 0;
     this.page = 1;
@@ -29,12 +29,32 @@ function CRUDListCtrl($rootScope, CRUDService, settings){
 
     this.delete = function(id){
         event.preventDefault();
-        var confirmDelete = confirm('¿Está seguro de borrar este elemento?');
-
-        if (confirmDelete) {
-            // $rootScope.$broadcast('loading-show');
-            CRUDService.delete({object:settings.object, id:id}, this.onDelete.bind(this));
+        var confirmation = function(isConfirm){ 
+           if (isConfirm) {
+                CRUDService.delete({object:settings.object, id:id}, this.onDelete.bind(this));
+                SweetAlert.swal("¡Eliminado!", "Elemento eliminado correctamente.", "success");
+            } else {
+                SweetAlert.swal({
+                    title: "Canecelado", 
+                    text: "No se eliminó nada.", 
+                    type: "error",
+                    timer: 2000
+                });
+            }
         }
+        SweetAlert.swal({
+           title: "¿Está seguro?",
+           text: "Se eliminará este elemento, ¿Esta seguro?",
+           type: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#DD6B55",
+           confirmButtonText: "Si, ¡quiero eliminarlo!",
+           cancelButtonText: "Cancelar",
+           closeOnConfirm: false,
+           closeOnCancel: false 
+        },                    
+            confirmation.bind(this)
+        );
     }
 
     this.onDelete = function(){

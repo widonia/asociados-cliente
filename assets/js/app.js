@@ -7,7 +7,6 @@ angular.module('app', [
     'ui.bootstrap',
 	'ngResource',
     'file-model',
-    //'angularFileUpload',
     'ui.tinymce',
     'oitozero.ngSweetAlert',
 
