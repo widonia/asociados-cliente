@@ -75,6 +75,13 @@ h5 {
 #notification-page .user-list li button {
   float: right;
 }
+#notification-page .thumbs-notification-blanck {
+  width: 160px;
+  height: 160px;
+  border-style: dotted;
+  border-color: currentColor;
+  border-radius: 20px;
+}
 #statistic-page .red {
   color: #E3515E;
 }
