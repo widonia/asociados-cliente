@@ -9,7 +9,8 @@ angular.module('app', [
     'file-model',
     'ui.tinymce',
     'oitozero.ngSweetAlert',
-
+    'ui.tree',
+    
 	// app modules
 	'app.auth',
 	'app.page',
