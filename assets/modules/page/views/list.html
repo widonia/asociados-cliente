@@ -5,10 +5,6 @@
 	<li class="active">Páginas</li>
 </ol>
 
-<p class="pull-right" >
-    <a href="#content/page/new" class="btn btn-success">Agregar página principal</a>
-</p>
-
 <!-- Nested node template -->
 <script type="text/ng-template" id="nodes_renderer2.html">
   <div ui-tree-handle class="tree-node tree-node-content">
@@ -27,7 +23,7 @@
         class="glyphicon glyphicon-remove"></span></a>
     <a class="pull-right btn btn-primary btn-xs" data-nodrag  ng-click="pageList.edit(this, node.id)" style="margin-right: 8px;"><span
         class="glyphicon glyphicon-pencil"></span></a>
-    <a class="pull-right btn btn-primary btn-xs" ng-if="node.type==1" data-nodrag ng-click="pageList.newSubItem(this, node.id)" style="margin-right: 8px;"><span
+    <a class="pull-right btn btn-primary btn-xs" ng-if="node.type==1" data-nodrag ng-click="pageList.newSubItem(this)" style="margin-right: 8px;"><span
         class="glyphicon glyphicon-plus"></span></a>
     
   </div>
@@ -41,6 +37,9 @@
 
 
 <div class="row" ng-show="!pageList.status.is_form">
+  <p class="pull-right" >
+    <a  class="btn btn-success" ng-click="pageList.newSubItem()">Agregar página principal</a>
+  </p>
   <div class="col-sm-12">
     <div ui-tree id="tree-root">
       <ol ui-tree-nodes ng-model="pageList.data_nodes" data-nodrop-enabled="false" data-clone-enabled="false" data-drag-enabled="false" data-drag-delay="1" data-empty-placeholder-enabled="false">
@@ -55,24 +54,24 @@
 <!--  Form Update or create pageList --> 
 <div class="row" ng-show="pageList.status.is_form">
   <div class="col-sm-12">
-    <h3>{{pageList.data.title}} </h3>
+    <h3>{{pageList.data.title}}</h3>
     <form novalidate name="pageList.form" class="form" role="form" ng-submit="pageList.submit()">
-      <div class="row">
+      
         <div class="form-group col-sm-8">
-                <label for="inputEmail3" class="control-label">Título</label>
-                <input name="title" type="input" class="form-control" ng-model="pageList.data.title" required>
-                <div class="bg-danger error" ng-show="pageList.form.title.$invalid && pageList.form.submitted">
-                    <small ng-show="pageList.form.title.$error.required">
-                        Ingrese un título
-                    </small>
-                </div>
+            <label for="inputEmail3" class="control-label">Título</label>
+            <input name="title" type="input" class="form-control" ng-model="pageList.data.title" required>
+            <div class="bg-danger error" ng-show="pageList.form.title.$invalid && pageList.form.submitted">
+                <small ng-show="pageList.form.title.$error.required">
+                    Ingrese un título
+                </small>
             </div>
-      </div>
+        </div>
+      
 
-      <div class="row">
-        <div class="form-group col-sm-8">
+      
+        <div class="form-group col-sm-4">
           <label for="inputEmail3" class="control-label">Tipo</label>
-        <div class="error" ng-show="pageList.form.type.$invalid && pageList.form.submitted">
+          <div class="error" ng-show="pageList.form.type.$invalid && pageList.form.submitted">
                     <small class="error" ng-show="pageList.form.type.$error.required">
                         Seleccione un tipo
                     </small>
@@ -83,38 +82,36 @@
                     <option value="2">Contenido</option>
                 </select>
         </div>
-      </div>
-
-        <div class="row">
-            <div class="form-group col-sm-1">
-                <label for="inputEmail3" class="control-label">Posición</label>
-                <input name="position" type="input" class="form-control" ng-model="pageList.data.position" placeholder="0">
-            </div>
+              
+        <div class="form-group col-sm-3">
+            <label for="inputEmail3" class="control-label">Posición</label>
+            <input name="position" type="input" class="form-control" ng-model="pageList.data.position" placeholder="0">
+        </div>
+        
+        
+        <div  ng-if="pageList.data.parent">
+          <div class="form-group col-sm-9">
+            <label for="inputEmail3" class="control-label">Página padre</label>
+            <input name="title" type="input" class="form-control" ng-model="pageList.data.parentName" ng-readonly="true" >
+          </div>
         </div>
 
-      <div class="row" ng-if="pageList.data.parent">
-        <div class="form-group col-sm-8">
-          <label for="inputEmail3" class="control-label">Página padre</label>
-          <input name="title" type="input" class="form-control" ng-model="pageList.data.parentName" ng-readonly="true" >
+        <div class="form-group col-sm-12">
+            <label for="inputEmail3" class="control-label">Visible</label>
+            <input type="checkbox" ng-model="pageList.data.published">
         </div>
-      </div>
 
-        <div class="row" ng-show="pageList.data.type == 2">
-            <div class="form-group col-sm-10">
+
+        <div  ng-show="pageList.data.type == 2">
+            <div class="form-group col-sm-12">
                 <label for="inputEmail3" class="control-label">Contenido</label>
                 <textarea ui-tinymce="pageList.tinymceOptions" name="content" class="form-control" rows="6" ng-model="page.data.content"></textarea>
             </div>
         </div>
 
-      <div class="row">
-            <div class="form-group col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" ng-model="pageList.data.published"> Visible
-                    </label>
-                </div>
-            </div>
-      </div>
+     
+        
+     
 
       <div class="row">
         <div class="form-group col-xs-12">
@@ -124,10 +121,8 @@
         </div>
       </div>
     </form>
+  </div>
 </div>
-
-</div>
-
 
 
 

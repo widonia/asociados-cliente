@@ -80,9 +80,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     }
     
 
-    this.newSubItem = function(scope, node){
-      var scope = scope;
-      this.nodeData = scope.$modelValue;      
+    this.newSubItem = function(scope){
       this.data = {
         content: "",
         parent: null,
@@ -91,9 +89,15 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         type: null,
         published: true
       };
-      this.status.is_form = true;
-      this.data.parent = this.nodeData.id;
-      this.data.parentName = this.nodeData.title;
+      if (scope != undefined){
+        var scope = scope;  
+        this.nodeData = scope.$modelValue; 
+        this.data.parent = this.nodeData.id;
+        this.data.parentName = this.nodeData.title;
+      }else{
+        this.nodeData = null;
+      }
+      this.status.is_form = true;            
       this.action = "new";
       // console.log(id);
     }
@@ -168,7 +172,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
 
 
     /// forms     
-    this.form = false;
+    // this.form = false;
     
     // this.init = function(){
     //     this.getCategories();
@@ -231,7 +235,11 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         this.form.success = true;
         this.status.is_form=false;
         if(this.action == 'new'){
-          this.nodeData.nodes.push(response);
+          if (this.nodeData == null){
+            this.data_nodes.push(response);  
+          }else{
+            this.nodeData.nodes.push(response);  
+          }          
         }
     }
 
