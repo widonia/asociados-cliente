@@ -9,7 +9,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.groups = {};
     $scope.image = false;
     this.MEDIA = Config.MEDIA;
-    
+    this.no_form_show = false;
+
     this.init = function(){
 
         if(this.action == 'edit'){ this.populate(); }
@@ -177,7 +178,11 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
         }
         $rootScope.$broadcast('loading-hide');
-        console.log('onSubmitOk')
+        if (this.action == "new"){
+            this.no_form_show = true;
+        }else{
+            this.no_form_show = false;
+        }
     }
 
     this.onSubmitError = function(response){

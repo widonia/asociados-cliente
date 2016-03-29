@@ -2,14 +2,15 @@
 
 <ol class="breadcrumb">
 	<li><a href="#">Inicio</a></li>
-	<li><a href="#/cooperative/user">Asociados</a></li>
+	<li><a href="#/cooperative/users">Asociados</a></li>
 	<li class="active">{{user.action == "new" ? "Nuevo" : "Editar"}}</li>
 </ol>
 
 <div ng-show="user.form.success">
     <div class="alert alert-success" role="alert">Elemento {{user.action == "new" ? "creado" : "editado"}} correctamente.</div>
+    <a ng-show="user.no_form_show" href="#/cooperative/users" class="btn btn-warning">Regresar</a>
 </div>
-<div >
+<div ng-show="!user.no_form_show">
 
     <form novalidate name="user.form" class="form" role="form" ng-submit="user.submit()">
 

@@ -10,14 +10,14 @@
 
     <div ng-show="notification.form.success">
         <div class="alert alert-success" role="alert">Elemento {{notification.action == "new" ? "creado" : "editado"}} correctamente.</div>
+        <a ng-show="notification.no_form_show" href="#/content/notification" class="btn btn-warning">Regresar</a>
     </div>
 
-    <div >
+    <div ng-show="!notification.no_form_show">
         <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()" ng-disabled="!isSaving">
             
 
-            <div class="row">
-                
+            <div class="row">                
                 <div class="col-sm-4">
                     <label for="inputEmail3" class="control-label">Imágen (pre-visualización) <br></label>
                     <br>

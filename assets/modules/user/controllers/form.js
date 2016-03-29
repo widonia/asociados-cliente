@@ -4,6 +4,7 @@ function UserFormCtrl($rootScope, $routeParams, $q, UserService, action, SweetAl
     this.data = {};
     this.action = action;
     this.form = false;
+    this.no_form_show = false;
 
     this.init = function(){
         if(this.action == 'edit'){
@@ -41,6 +42,11 @@ function UserFormCtrl($rootScope, $routeParams, $q, UserService, action, SweetAl
     this.onSubmit = function(response){
         this.form.success = true;
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
+        if (this.action == "new"){
+            this.no_form_show = true;
+        }else{
+            this.no_form_show = false;
+        }
     }
 
     this.onSubmitErr = function(response){
