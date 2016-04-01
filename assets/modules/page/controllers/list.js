@@ -106,17 +106,17 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       var scope = scope;
       this.nodeData = scope.$modelValue;      
       this.data = this.nodeData;
+      this.status.is_form = true;
+      this.data.parent = null;
+      this.data.parentName = null;
       this.action = "edit";
-      var onSuccesGet = function(response){
-        console.log(response);
-        this.data = response;
-        this.status.is_form = true;
-        // this.data.parent = null;
-        // this.data.parentName = null;        
-        this.nodeData.title = this.data.title;
-        // console.log(id);
-      }
-      PageService.get({id:this.data.id}, onSuccesGet.bind(this));
+      // console.log(id);
+
+      // var onSuccesGet = function(response){
+      //   // this.data = response;
+      // }     
+      // PageService.get({id:this.data.id}, onSuccesGet.bind(this));
+
     }
 
 
