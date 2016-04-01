@@ -112,7 +112,6 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         this.status.is_form = true;
         // this.data.parent = null;
         // this.data.parentName = null;
-        this.data.title = "Shit of shit";
         this.action = "edit";
         // console.log(id);
       }
