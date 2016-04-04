@@ -237,14 +237,14 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     this.onSubmit = function(response){
         $rootScope.$broadcast('loading-hide');
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
-        this.form.success = true;
-        this.status.is_form=false;
+        this.form.success = true;        
         if(this.action == 'new'){
           if (this.nodeData == null){
             this.data_nodes.push(response);  
           }else{
             this.nodeData.nodes.push(response);  
           }          
+          this.status.is_form=false;
         }
     }
 
