@@ -86,8 +86,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         this.data = response;
         
         // add actually users
-        for (var i = this.data.users.length - 1; i >= 0; i--) {            
-            this.addUser(this.data.users[i]);
+        for (var i = this.data.users.length - 1; i >= 0; i--) {
+            this.addUser(this.data.users_info[i]);
         };
         
 
@@ -209,7 +209,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         }
     }
 
-    this.addUser = function(user){        
+    this.addUser = function(user){
         var exists = false;
         for (var element in this.autocomplete.list){
             if(user.username == this.autocomplete.list[element]['username'] && user.username != undefined){
@@ -218,7 +218,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         }
         
         if (exists == false){
-            this.autocomplete.list.push(user);       
+            this.autocomplete.list.push(user);            
             this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
         }
 
