@@ -24,6 +24,19 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     }
 
     this.init = function(){
+        this.data = {
+            content: "",
+            parent: null,
+            position: "0",
+            title: null,
+            type: null,
+            published: true
+        };
+        this.nodeData = null;
+        this.data_nodes = [];
+        this.status = {
+            is_form:false
+        };
       this.getList();    
       this.tinymceOptions = {
           plugins: [
@@ -236,7 +249,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
 
     this.onSubmit = function(response){
         $rootScope.$broadcast('loading-hide');
-        SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
+        SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");        
         this.form.success = true;        
         if(this.action == 'new'){
           if (this.nodeData == null){
@@ -245,6 +258,8 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
             this.nodeData.nodes.push(response);  
           }          
           this.status.is_form=false;
+        }else{
+            this.init();
         }
     }
 
