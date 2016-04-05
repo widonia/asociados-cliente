@@ -62,7 +62,7 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
     }
 
     this.onGetList = function(response){
-        this.info = response;
+        this.info = response;        
 
         for(var element in this.data.db){
             for(var element2 in  this.info){

@@ -1,6 +1,6 @@
 "use strict";
 
-function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action){
+function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action, SweetAlert){
     this.data = {};
     this.action = action;
     this.form = false;
@@ -24,7 +24,7 @@ function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action)
     }
 
     this.onGetCategories = function(response){
-        this.categories = response.results;
+        this.categories = response.data;
         if(this.action == 'edit'){
             this.populate();
         }
@@ -63,12 +63,14 @@ function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action)
 
     this.onSubmit = function(response){
         $rootScope.$broadcast('loading-hide');
+        SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
         this.form.success = true;
     }
 
     this.onSubmitErr = function(response){
         $rootScope.$broadcast('loading-hide');
         this.form.success = false;
+        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
     }
 
     this.init();

@@ -1,6 +1,6 @@
 "use strict";
 
-function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService, Config){
+function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService, Config, SweetAlert){
 
     this.data = {};
     this.form = {};
@@ -33,35 +33,67 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService, C
 
     this.process = function(){
         var onSuccess = function(response){
-           
+           SweetAlert.swal({
+                title: "Listo", 
+                text: "Se cambió el estado.", 
+                type: "success",
+                timer: 1000
+            });
         }
 
         var onError = function(response){
             if (this.data.processed != undefined){
                 this.data.processed = !this.data.processed;
             }
+            SweetAlert.swal({
+                title: "Eroor", 
+                text: "Ocurrió un error.", 
+                type: "error"
+            });
         }
 
-        var confirmDelete = confirm('¿Está seguro que desea cambiar el estado?');
-
-        if (confirmDelete) {
-            CreditRequestService.proccess({'id':$routeParams.id}, 
-                onSuccess.bind(this), 
-                onError.bind(this)
-            );
-        }else{
-            if (this.data.processed != undefined){
-                this.data.processed = !this.data.processed;
+        var confirmation = function(isConfirm){ 
+           if (isConfirm) {
+                CreditRequestService.proccess({'id':$routeParams.id}, 
+                    onSuccess.bind(this), 
+                    onError.bind(this)
+                );                
+            } else {
+                if (this.data.processed != undefined){
+                    this.data.processed = !this.data.processed;
+                }
+                SweetAlert.swal({
+                    title: "Canecelado", 
+                    text: "No se cambió nada.", 
+                    type: "error",
+                    timer: 1000
+                });
             }
-        }        
+        }
+
+        SweetAlert.swal({
+           title: "¿Está seguro?",
+           text: "¿Está seguro que desea cambiar el estado?",
+           type: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#DD6B55",
+           confirmButtonText: "Si, ¡Cambiar estado!",
+           cancelButtonText: "Cancelar",
+           closeOnConfirm: false,
+           closeOnCancel: false 
+        },                    
+            confirmation.bind(this)
+        );
     }
 
    this.onSubmit = function(response){
         this.form.success = true;
+        SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
 
     this.onSubmitErr = function(response){
         this.form.success = false;
+        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error");     
     }
 
     this.submit = function(){

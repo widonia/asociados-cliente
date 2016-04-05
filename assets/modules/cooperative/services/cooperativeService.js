@@ -8,6 +8,7 @@ function CooperativeService($resource, Config){
         stats: { method:'GET', url:_url + 'stats'},
         get: { method:'GET', url:_url},
         bad_emails: { method:'GET', url:_url + "bad_emails"},
+        set_terms: { method:'POST', url:_url + "set_terms"},
     })
 }
 

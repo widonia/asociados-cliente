@@ -1,6 +1,6 @@
 
 <div class="user-box">    
-    <img src="{{home.MEDIA}}/{{home.cooperative_data.logo}}" alt="Logo" class="pull-right"/>        
+    <img src="{{home.MEDIA}}/{{home.cooperative_data.logo}}" alt="Logo" class="pull-right" width="171" height="141"/>        
 </div>
 <div class="user-box ">    
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>     
@@ -55,10 +55,10 @@
 
 <!-- Email information -->
 <div class="col-md-12">
-    <h3>Email</h3>    
+    <h3>Email fallidos</h3>    
     <hr>
 
-    <div class="col-md-12">
+    <div class="col-md-12" >
         <accordion close-others="true">
             <accordion-group is-open="home.accordion.email" >
                 <accordion-heading>
@@ -97,7 +97,11 @@
                         
                         <!-- when all is ok -->
                         <div class="col-md-12" ng-show="!home.bad_emails">
-                            <h1>Actualmente no hay información de envios fallidos.</h1>
+                            <h3>Actualmente no hay información de envios fallidos.</h3>
+                        </div>
+                        
+                        <div class="col-md-12" ng-show="home.bad_emails.length==0">
+                            <h3>No se encontraron correos errados</h3>
                         </div>
                     </div>      
 

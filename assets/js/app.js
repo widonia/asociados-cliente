@@ -7,9 +7,10 @@ angular.module('app', [
     'ui.bootstrap',
 	'ngResource',
     'file-model',
-    //'angularFileUpload',
     'ui.tinymce',
-
+    'oitozero.ngSweetAlert',
+    'ui.tree',
+    
 	// app modules
 	'app.auth',
 	'app.page',
@@ -24,7 +25,8 @@ angular.module('app', [
     'app.cooperative',
     'app.statistic',
     'app.groups',
-    'app.tasks'
+    'app.tasks',
+    'app.terms'
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
@@ -257,6 +259,15 @@ angular.module('app', [
                 controller: 'CreditRequestViewCtrl', controllerAs: 'creditView', role:AUTH_ROLES.editor
             })
 
+            //Terms urls
+            .when('/cooperative/terms', {
+                templateUrl: Config.STATIC + '/modules/terms&conditions/views/fill.html',
+                controller: 'TermsFillCtrl', controllerAs: 'ctrl', role:AUTH_ROLES.editor,
+                resolve: {                    
+                    action: function(){return 'edit';}
+                }
+            })
+
             //user urls
             // .when('/request/user', {
             //     templateUrl: Config.STATIC + '/modules/user/views/list.html',
@@ -317,7 +328,8 @@ angular.module('app', [
 	    // login success event
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
             console.log("Succes login");
-            AuthManager.login(data.data.token);
+            // document.body.style.background = "transparent";
+            AuthManager.login(data.token);
         });
 
 	    // logout succes event
@@ -328,9 +340,8 @@ angular.module('app', [
 
 	    // not authenticasted event
 	    $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
-			console.log("No authenticated");
-	        e.preventDefault();
-			// AuthManager.logout();
+			console.log("No authenticated");                        
+	        e.preventDefault();			
 	        if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
 	    });
 
@@ -350,30 +361,5 @@ angular.module('app', [
         $rootScope.$on("ERROR", function(e){
             e.preventDefault();
         });
-
-		// $rootScope.$on('$stateChangeStart',
-		// 	function(event, toState, toParams, fromState, fromParams){
-		// 		console.log("Entra");
-		// 		if (toState.authenticate && !AuthManager.isLogin ){
-		// 			event.preventDefault();
-		// 			if(fromState.name !='login'){
-		// 				console.log(AuthManager.isLogin);
-		// 				$state.transitionTo('login');
-		// 			}
-		// 		}
-		// 		//Seteamos las variables de errores
-		// 		$rootScope.succes = {
-		// 			'status': false,
-		// 			'data': null
-		// 		}
-		//
-		// 		$rootScope.error = {
-		// 			'status': false,
-		// 			'msg':null,
-		// 			'data': null,
-		// 			'hint':null
-		// 		}
-		// 	}
-		// );
 	}
 ]);

@@ -11,7 +11,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     this.accordion = {
         email: false
     };
-    this.bad_emails = {};
+    this.bad_emails = undefined;
 
     this.cooperative = AuthManager.get('cooperative');
     this.cooperative_data = {}

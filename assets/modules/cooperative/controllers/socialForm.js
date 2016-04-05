@@ -46,11 +46,10 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
 
     this.submit = function(){
         // $rootScope.$broadcast('loading-show');
-        // this.form.submitted = true;
+        this.form.submitted = true;
         this.data.type = this.data.type_selected.value;
         $rootScope.$broadcast('loading-show');
         if(this.action == 'new'){            
-            // console.log("Cambia todo new")
             SocialService.post({}, this.data,
                 this.onSubmitOk.bind(this),
                 this.onSubmitError.bind(this)

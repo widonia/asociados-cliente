@@ -1,9 +1,10 @@
 "use strict";
 
-function UserFormCtrl($rootScope, $routeParams, $q, UserService, action){
+function UserFormCtrl($rootScope, $routeParams, $q, UserService, action, SweetAlert){
     this.data = {};
     this.action = action;
     this.form = false;
+    this.no_form_show = false;
 
     this.init = function(){
         if(this.action == 'edit'){
@@ -40,10 +41,17 @@ function UserFormCtrl($rootScope, $routeParams, $q, UserService, action){
 
     this.onSubmit = function(response){
         this.form.success = true;
+        SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
+        if (this.action == "new"){
+            this.no_form_show = true;
+        }else{
+            this.no_form_show = false;
+        }
     }
 
     this.onSubmitErr = function(response){
         this.form.success = false;
+        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
     }
 
     this.init();

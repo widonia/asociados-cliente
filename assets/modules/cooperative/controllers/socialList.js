@@ -1,6 +1,6 @@
 "use strict";
 
-function SocialListCtrl($rootScope, $routeParams, SocialService){
+function SocialListCtrl($rootScope, $routeParams, SocialService, SweetAlert){
     this.data = {};
     this.form = false;
 
@@ -19,18 +19,39 @@ function SocialListCtrl($rootScope, $routeParams, SocialService){
         // console.log("Entra por aca");
         // $rootScope.$broadcast('loading-hide');
         // this.count = response.count;
-        // this.list = response.results;
+        // this.list = response.data;
         // window.scrollTo(0, 0);
     }
 
     this.delete = function(id, event){
         event.preventDefault();
-        var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
-
-        if (confirmDelete) {
-            $rootScope.$broadcast('loading-show');
-            SocialService.delete({id:id}, this.onDelete.bind(this));
+        var confirmation = function(isConfirm){ 
+           if (isConfirm) {
+                $rootScope.$broadcast('loading-show');
+                SocialService.delete({id:id}, this.onDelete.bind(this));
+                SweetAlert.swal("¡Eliminado!", "Elemento eliminado correctamente.", "success");
+            } else {
+                SweetAlert.swal({
+                    title: "Canecelado", 
+                    text: "No se eliminó nada.", 
+                    type: "error",
+                    timer: 2000
+                });
+            }
         }
+        SweetAlert.swal({
+           title: "¿Está seguro?",
+           text: "Se eliminará este elemento, ¿Esta seguro?",
+           type: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#DD6B55",
+           confirmButtonText: "Si, ¡quiero eliminarlo!",
+           cancelButtonText: "Cancelar",
+           closeOnConfirm: false,
+           closeOnCancel: false 
+        },                    
+            confirmation.bind(this)
+        );
     }
 
     this.onDelete = function(){
@@ -39,48 +60,6 @@ function SocialListCtrl($rootScope, $routeParams, SocialService){
 
     this.init();
 
-
-
-    // this.count = 0;
-    // this.page = 1;
-    // this.list = [];
-
-    // this.init = function(){
-    //     this.getList();
-    //     if(this.action == 'edit'){ this.populate(); }
-    // }
-
-    // this.setPage = function () {
-    //     this.getList();
-    // };
-
-    // this.getList = function(){
-    //     $rootScope.$broadcast('loading-show');
-    //     PageService.get({page:this.page, paginate:1}, this.onGetList.bind(this));
-    // }
-
-    // this.onGetList = function(response){
-    //     $rootScope.$broadcast('loading-hide');
-    //     this.count = response.count;
-    //     this.list = response.results;
-    //     window.scrollTo(0, 0);
-    // }
-
-    // this.delete = function(page_id, event){
-    //     event.preventDefault();
-    //     var confirmDelete = confirm('Esta seguro de querer borrar este elemento?');
-
-    //     if (confirmDelete) {
-    //         $rootScope.$broadcast('loading-show');
-    //         PageService.delete({id:page_id}, this.onDelete.bind(this));
-    //     }
-    // }
-
-    // this.onDelete = function(){
-    //     this.getList();
-    // }
-
-    // this.init();
 
 }
 
