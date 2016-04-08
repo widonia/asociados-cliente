@@ -1,6 +1,6 @@
 "use strict";
 
-function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
+function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, SweetAlert){
     return {
         request:function(request){
             // console.log(" request " + request);
@@ -25,13 +25,11 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
         response: function(response){
             // console.log(" response " + response);
             $rootScope.$broadcast('loading-hide2');
-            if(response.data.code == '01'){
-                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
-            }
+            // $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
 
-            if(response.data.code == '03'){
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            }
+            // if(response.data.code == '03'){
+            //     $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            // }
 
             return response;
         },
@@ -50,22 +48,38 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config){
                 //     }
                 // );
             }else if(response.status == 500){
-                $rootScope.$broadcast("ERROR", 
-                    {
-                        title:'Error Interno', 
-                        content: "El reporte se generó."
-                    }
-                );
+                SweetAlert.swal({
+                    title: "Error",
+                    text: "Ocurrió un error en nuestro servidor. El reporte fue generado. <br> Disculpa las molestias causadas.",
+                    type: "error",
+                    confirmButtonText: "Listo",
+                    closeOnConfirm: true,
+                   // imageUrl: "http:://oitozero.com/avatar/avatar.jpg" 
+                });
             }
 
-            if(response.status == 0){
-                $rootScope.$broadcast("ERROR", 
-                    {
-                        title:'No Internet', 
-                        content: "Error no hay conexión a internet."
-                    }
-                );
+            if (response.config.url.indexOf(Config.DATA) > -1){
+                SweetAlert.swal({
+                    title: "Estadísticas no disponibles",
+                    text: "Las estadisiticas no estan disponibles por el momento, intentenlo de nuevo más tarde.",
+                    type: "warning",
+                    confirmButtonText: "Entiendo",
+                    closeOnConfirm: true,
+                   // imageUrl: "http:://oitozero.com/avatar/avatar.jpg" 
+                });
+            }else{
+                if(response.status == 0){
+                    SweetAlert.swal({
+                        title: "Problema de conectividad",
+                        text: "Error no hay conexión a internet.",
+                        type: "warning",
+                        confirmButtonText: "Entiendo",
+                        closeOnConfirm: true,
+                       // imageUrl: "http:://oitozero.com/avatar/avatar.jpg" 
+                    });
+                }    
             }
+            
 
             return $q.reject(response);
 

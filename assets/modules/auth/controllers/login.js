@@ -18,6 +18,8 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
         );
     }
 
+    // ["#fbb4ae","#b3cde3","#ccebc5"]
+
     this.onCheckError = function(){
         this.error = false;
         this.form = true;
@@ -33,6 +35,7 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
     }
 
     this.onLoginOk = function(response){
+        AuthManager.login(response.data.token);
         this.get_coopList(response.data.username, response.data.last_login);
     }
 

@@ -20,7 +20,7 @@ function NotificationListCtrl(NotificationService){
 
     this.onGetList = function(response){
         this.count = response.count;
-        this.list = response.results;
+        this.list = response.data;
         window.scrollTo(0, 0);
     }
 

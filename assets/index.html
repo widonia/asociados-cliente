@@ -2,6 +2,28 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--
+                There is not a BUG
+
+              ,,                ,,
+            (((((              )))))
+           ((((((              ))))))
+           ((((((              ))))))
+            (((((,r@@@@@@@@@@e,)))))
+             (((@@@@@@@@@@@@@@@@)))
+              \@@/,:::,\/,:::,\@@
+             /@@@|:::::||:::::|@@@\
+            / @@@\':::'/\':::'/@@@ \
+           /  /@@@@@@@//\\@@@@@@@\  \
+          (  /  '@@@@@====@@@@@'  \  )
+           \(     /          \     )/
+             \   (            )   /
+                  \          /
+                  @camilortte
+-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" ng-app="app"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
@@ -18,6 +40,8 @@
         <!-- build:css ../public/css/css.min.css -->
         <!-- main module -->
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="lib/sweetalert/dist/sweetalert.css">
+        <link rel="stylesheet" href="lib/angular-ui-tree/angular-ui-tree.min.css">
 
         <!-- bootstrap module -->
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
@@ -27,6 +51,7 @@
         <!-- endbuild -->
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+        
 
     </head>
 
@@ -54,7 +79,7 @@
         <!-- endbuild -->
 
         <script type="text/javascript">
-            var ENV = 'Stage';
+            var ENV = 'Dev';
             var loading_screen = pleaseWait({
                   logo:  "http://i.imgur.com/iHf1TWN.png",
                   backgroundColor: '#22ba64',
@@ -83,6 +108,11 @@
         <script src="lib/angular/angular-sanitize.js"></script>
         <script src="lib/angular/angular-uibootstrap.js"></script>
         <script src="lib/angular/angular-file-model.js"></script>
+        <script src="lib/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="lib/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="lib/ngSweetAlert/SweetAlert.min.js"></script>
+        <script src="lib/angular-ui-tree/angular-ui-tree.min.js"></script>
+        
         <!--<script src="lib/angular/angular-file-upload.js"></script>-->
 
         <script src="js/util.js"></script>
@@ -171,6 +201,9 @@
         <script src="modules/tasks/module.js"></script>
         <script src="modules/tasks/controllers/list.js"></script>
         <script src="modules/tasks/services/taskService.js"></script>
+
+        <script src="modules/terms&conditions/module.js"></script>
+        <script src="modules/terms&conditions/controllers/fill.js"></script>
         <!-- endbuild -->
 
         <!-- jquery scripts -->

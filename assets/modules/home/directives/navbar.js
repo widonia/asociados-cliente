@@ -11,7 +11,10 @@ function navBar(AUTH_EVENTS, Config){
         controller: function($scope, $location, AuthService, AuthManager, $rootScope, AUTH_EVENTS, Config){
 
             $scope.logout = function(){
-                AuthService.get();
+                AuthService.logout();               
+                AuthManager.logout(); 
+                $location.url('/login/');
+                $scope.visible = AuthManager.isAuth;
             }
 
             $scope.onLogout = function(){
@@ -19,8 +22,8 @@ function navBar(AUTH_EVENTS, Config){
             }
 
             $scope.static = Config.STATIC;
-            $scope.visible = AuthManager.isAuth;
-            $rootScope.$on(AUTH_EVENTS.logoutSuccess, $scope.onLogout);
+            // $scope.visible = AuthManager.isAuth;
+            // $rootScope.$on(AUTH_EVENTS.logoutSuccess, $scope.onLogout);
         },
 
         link: function(scope){

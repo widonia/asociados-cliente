@@ -22,8 +22,13 @@
   box-shadow: 0 8px 6px -6px #000;
 }
 .login-page {
-  width: 260px;
+  padding: 5em;
+  border: 1px solid #d6d6d6;
+  -webkit-border-radius: 5px;
+  border-radius: 10px;
   margin: auto;
+  position: absolute;
+  margin-top: 10%;
 }
 .login-page h3 {
   margin: 40px auto 20px;
@@ -31,6 +36,24 @@
 }
 .login-page .form-signin {
   margin: 25px auto;
+}
+.login-page .btn-login {
+  background-color: #D8852E !important;
+  border-color: transparent  !important;
+}
+.login-page .btn-login:hover {
+  background-color: transparent!important;
+  border-color: #D8852E  !important;
+  color: #D8852E;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+h5 {
+  font-weight: 400 !important;
+  font-size: 15.5px !important;
 }
 #notification-page .autocomplete {
   border: 1px #CCC solid;
@@ -67,6 +90,13 @@
 }
 #notification-page .user-list li button {
   float: right;
+}
+#notification-page .thumbs-notification-blanck {
+  width: 160px;
+  height: 160px;
+  border-style: dotted;
+  border-color: currentColor;
+  border-radius: 20px;
 }
 #statistic-page .red {
   color: #E3515E;
@@ -125,6 +155,16 @@
 }
 .update-page .files i.success {
   color: #66cc33;
+}
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  background: url("http://api.thumbr.it/whitenoise-300x300.png?background=f2f2f2ff&noise=cccccc&density=7&opacity=48");
+}
+.container {
+  min-height: 100%;
 }
 body {
   padding-top: 50px;
@@ -212,7 +252,7 @@ body {
   height: 400px;
 }
 #loading-logo {
-  stroke-width: 0.9px ;
+  stroke-width: 1.6px ;
   stroke-dasharray: 100;
   -webkit-animation: dash 4s linear infinite;
   animation: dash 4s linear infinite;
@@ -262,4 +302,54 @@ body {
   to {
     stroke-dashoffset: 0;
   }
+}
+.angular-ui-tree-handle {
+  background: #f8faff;
+  border: 1px solid #dae2ea;
+  color: #7c9eb2;
+  padding: 10px 10px;
+}
+.angular-ui-tree-handle:hover {
+  color: #438eb9;
+  background: #f4f6f7;
+  border-color: #dce2e8;
+}
+.angular-ui-tree-placeholder {
+  background: #f0f9ff;
+  border: 2px dashed #bed2db;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+tr.angular-ui-tree-empty {
+  height: 100px;
+}
+.group-title {
+  background-color: #687074 !important;
+  color: #FFF !important;
+}
+/* --- Tree --- */
+.tree-node {
+  border: 1px solid #dae2ea;
+  background: #f8faff;
+  color: #7c9eb2;
+}
+.nodrop {
+  background-color: #f2dede;
+}
+.tree-node-content {
+  margin: 10px;
+}
+.tree-handle {
+  padding: 10px;
+  background: #428bca;
+  color: #FFF;
+  margin-right: 10px;
+}
+.angular-ui-tree-placeholder {
+  background: #f0f9ff;
+  border: 2px dashed #bed2db;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
