@@ -14,8 +14,7 @@
     </div>
 
     <div ng-show="!notification.no_form_show">
-        <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()" ng-disabled="!isSaving">
-            
+        <form novalidate name="notification.form" class="form" role="form" ng-submit="notification.submit()" ng-disabled="!isSaving">            
 
             <div class="row">                
                 <div class="col-sm-4">
@@ -55,16 +54,20 @@
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="inputEmail3" class="control-label">Título</label>
-                            <input name="title" type="input" class="form-control" ng-model="notification.data.title" required>
+                            <input name="title" type="input" class="form-control" ng-model="notification.data.title" required ng-focus="showTitleError">
                         
                             <div class="bg-danger error" ng-show="notification.form.title.$invalid && notification.form.submitted">
                                 <small ng-show="notification.form.title.$error.required">
                                     Debes ingresar un título.
                                 </small>
                             </div>
+                            <div class="bg-danger error" ng-show="showTitleError">
+                                <small>
+                                    {{notification.titleTooLong}}
+                                </small>
+                            </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="inputEmail3" class="control-label">Descripción</label>
@@ -109,7 +112,6 @@
                     </div>
                 </div>
             </div>
-
 
             <!-- <div ng-show="notification.action == 'new'"> -->
             <div >

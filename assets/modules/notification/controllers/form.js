@@ -10,6 +10,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     $scope.image = false;
     this.MEDIA = Config.MEDIA;
     this.no_form_show = false;
+    this.showTitleError = false;
+    var titleTooLong;
 
     this.init = function(){
 
@@ -188,7 +190,18 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.onSubmitError = function(response){
         this.form.success = false;
         $rootScope.$broadcast('loading-hide');
-        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
+        SweetAlert.swal({
+            title: "Error!",
+            text: "Lo sentimos, no se pudo completar la acción.",
+            type: "error",
+            confirmButtonText: "OK",
+            closeOnConfirm: true   
+        },
+        function(){
+            $scope.showTitleError = true;
+            return titleTooLong;
+        }); 
+        this.titleTooLong = response.data.title[0];
     }
 
 
