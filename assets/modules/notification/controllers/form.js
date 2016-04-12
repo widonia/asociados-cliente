@@ -13,14 +13,23 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
     this.init = function(){
 
-        if(this.action == 'edit'){ this.populate(); }
-        
+        if(this.action == 'edit'){ this.populate(); }        
         this.tinymceOptions = {
             plugins: [
-                "advlist autolink autosave link image lists textcolor paste textcolor"
+                'advlist autolink lists link image charmap  preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu ',
+                'emoticons template paste textcolor colorpicker textpattern imagetools '
             ],
-            min_height: 500,
-            toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
+            theme: 'modern',
+            min_height: 500,            
+            toolbar1: "insertfile undo redo | styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image",
+            toolbar2 : "searchreplace  | table |  emoticons | ",            
+            spellchecker_language: 'es', 
+            content_css: [              
+                '../../../css/tinimyci.css'
+            ],
+            image_advtab: true,
             // images_upload_url: '/camilomilo',
             // file_browser_callback: function(field_name, url, type, win) {
             //     // win.document.getElementById(field_name).value = 'my browser value';

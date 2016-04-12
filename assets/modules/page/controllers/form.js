@@ -9,14 +9,7 @@ function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action,
     this.init = function(){
         this.getCategories();
         this.populate();
-        this.tinymceOptions = {
-            plugins: [
-                "advlist autolink autosave link image lists textcolor paste media"
-            ],
-            theme: "modern",
-            toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
-            min_height: 500
-        };
+       
     }
 
     this.getCategories = function(){
