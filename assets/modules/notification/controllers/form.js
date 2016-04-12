@@ -10,6 +10,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     $scope.image = false;
     this.MEDIA = Config.MEDIA;
     this.no_form_show = false;
+    this.showTitleError = false;
+    var titleTooLong;
 
     this.init = function(){
 
@@ -86,7 +88,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // images_upload_url: 'postAcceptor.php'
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
-        console.log('Init');
     }
 
 
@@ -105,7 +106,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // $scope.image = this.data.image;
             this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
         }
-        console.log('onPopulateOk');
+        console.log(response);
     }
 
     this.onPopulateError = function(response){
@@ -115,6 +116,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
 
     this.onGroups = function(response){
+        this.groups = response.results;
         this.groups = response.data;
     }
 
@@ -197,7 +199,18 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.onSubmitError = function(response){
         this.form.success = false;
         $rootScope.$broadcast('loading-hide');
-        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
+        SweetAlert.swal({
+            title: "Error!",
+            text: "Lo sentimos, no se pudo completar la acción.",
+            type: "error",
+            confirmButtonText: "OK",
+            closeOnConfirm: true   
+        },
+        function(){
+            $scope.showTitleError = true;
+            return titleTooLong;
+        }); 
+        this.titleTooLong = response.data.title[0];
     }
 
 
