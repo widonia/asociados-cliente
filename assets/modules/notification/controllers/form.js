@@ -29,7 +29,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             toolbar2 : "searchreplace  | table |  emoticons | ",            
             spellchecker_language: 'es', 
             content_css: [              
-                '../../../css/tinimyci.css'
+                // '../../../css/tinimyci.css'
             ],
             image_advtab: true,
             // images_upload_url: '/camilomilo',

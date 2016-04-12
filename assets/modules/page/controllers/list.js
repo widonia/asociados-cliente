@@ -51,7 +51,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         toolbar2 : "searchreplace  | table |  emoticons | ",            
         spellchecker_language: 'es', 
         content_css: [              
-            '../../../css/tinimyci.css'
+            // '../../../css/tinimyci.css'
         ],
         image_advtab: true,
     };  
