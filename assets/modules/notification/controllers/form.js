@@ -188,6 +188,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onSubmitError = function(response){
+        console.log(response);
         this.form.success = false;
         $rootScope.$broadcast('loading-hide');
         SweetAlert.swal({
@@ -200,7 +201,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         function(){
             $scope.showTitleError = true;
             return titleTooLong;
-        }); 
+        });
+        console.log(this.titleTooLong); 
         this.titleTooLong = response.data.title[0];
     }
 
