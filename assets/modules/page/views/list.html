@@ -2,7 +2,7 @@
 
 <ol class="breadcrumb">
 	<li><a href="#">Inicio</a></li>
-	<li class="active">Páginas</li>
+  <li><a href="#/content/page">Páginas</a></li>  
 </ol>
 
 <!-- Nested node template -->
@@ -91,8 +91,11 @@
         
         <div >
           <div class="form-group col-sm-9">
-            <label for="inputEmail3" class="control-label">Página padre </label>
-            <input name="title" type="input" class="form-control" ng-model="pageList.data.parentName" ng-readonly="true" >
+            <label for="inputEmail3" class="control-label">Página padre </label>            
+            
+             <select id="sel" class="form-control" ng-model="pageList.data.parent" ng-options="obj.id as obj.title for obj in pageList.parents">    
+              <option value="">Sin padre</option>
+             </select>
           </div>
         </div>
 

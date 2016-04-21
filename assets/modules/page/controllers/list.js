@@ -10,6 +10,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       type: null,
       published: true
     };
+    this.parents = [];
     this.nodeData = null;
     this.data_nodes = [];
     this.status = {
@@ -67,6 +68,12 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
 
     var onGetList = function(data) {
         var lista = data[0].data;
+        
+        this.parents = lista.filter( function(obj) {
+            if (obj.type == 1) {
+                return true;
+            } 
+        });
 
         var principales = lista.filter(function (v) {
           return v.parent == null;
@@ -113,7 +120,8 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       };
       if (scope != undefined){
         var scope = scope;  
-        this.nodeData = scope.$modelValue; 
+        this.nodeData = scope.$modelValue;
+        this.data.parent_node = this.node; 
         this.data.parent = this.nodeData.id;
         this.data.parentName = this.nodeData.title;
       }else{
@@ -129,8 +137,8 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       this.nodeData = scope.$modelValue;      
       this.data = this.nodeData;
       this.status.is_form = true;
-      this.data.parent = null;
-      this.data.parentName = null;
+    //   this.data.parent = null;
+    //   this.data.parentName = null;
       this.action = "edit";
       // console.log(id);
 
