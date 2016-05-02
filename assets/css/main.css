@@ -353,3 +353,6 @@ tr.angular-ui-tree-empty {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.angular-ui-tree-handle {
+  cursor: default !important;
+}

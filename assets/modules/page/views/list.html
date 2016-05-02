@@ -7,7 +7,7 @@
 
 <!-- Nested node template -->
 <script type="text/ng-template" id="nodes_renderer2.html">
-  <div ui-tree-handle class="tree-node tree-node-content">
+  <div ui-tree-handle class="tree-node tree-node-content" data-nodrop-enabled >
     <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
         class="glyphicon"
         ng-class="{
@@ -28,8 +28,8 @@
     
   </div>
 
-  <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}" data-nodrop-enabled="false" data-clone-enabled="false" data-drag-enabled="true">
-    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer2.html'" collapsed="true;">
+  <ol ui-tree-nodes="" ng-model="node.nodes"  ng-class="{hidden: collapsed}" data-nodrop-enabled  data-clone-enabled="false" >
+    <li ng-repeat="node in node.nodes" ui-tree-node data-nodrag data-nodrop-enabled  data-drag-delay="50000" ng-include="'nodes_renderer2.html'" collapsed="true;">
     </li>
   </ol>
 
