@@ -1,0 +1,22 @@
+<h1>Encuestas</h1>
+
+<ol class="breadcrumb">
+	<li><a href="#">Inicio</a></li>
+  <li><a href="#/poll/list">Encuestas</a></li>  
+</ol>
+
+<list-view 
+    fields="[
+        {'name':'name', 'label':'Título', 'type': 'string', width:'40'},
+        {'name':'email', 'label':'Fecha', 'type': 'string'},
+        {'name':'type_field', 'label':'Tipo', 'type': 'string'},
+    ]"
+
+    filters="['search']" 
+
+    actions="['add', 'questions', 'edit', 'delete']"
+    
+    rest="polls"
+    >
+    
+</list-view>

@@ -26,7 +26,8 @@ angular.module('app', [
     'app.statistic',
     'app.groups',
     'app.tasks',
-    'app.terms'
+    'app.terms',
+    'app.poll'
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
@@ -290,7 +291,29 @@ angular.module('app', [
                 templateUrl: Config.STATIC + '/modules/tasks/views/list.html',
                 controller: 'TaskController', controllerAs: 'taskList', role:AUTH_ROLES.monitor
             })
-
+            
+            // Polls
+            .when('/poll', {
+                templateUrl: Config.STATIC + '/modules/poll/views/list.html',
+                controller: 'PollListController', controllerAs: 'pollLIst', role:AUTH_ROLES.monitor
+            })
+            
+            .when('/poll/new', {
+                templateUrl: Config.STATIC + '/modules/poll/views/form.html',
+                controller: 'PollController', controllerAs: 'pollForm', role:AUTH_ROLES.monitor,
+                resolve: {                    
+                    action: function(){return 'new';}
+                }
+            })
+            
+            .when('/poll/edit/:id', {
+                templateUrl: Config.STATIC + '/modules/poll/views/form.html',
+                controller: 'PollController', controllerAs: 'pollForm', role:AUTH_ROLES.monitor,
+                resolve: {                    
+                    action: function(){return 'edit';}
+                }
+            })
+            
 			.otherwise({redirectTo: '/'});
 	}
 ])
