@@ -18,6 +18,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     $scope.question = {};
     $scope.optionsAnswer = 0;
     $scope.idTypePoll;
+    $scope.addOptions = false; //flag to a add optiones to questios type 2 and 3
     
     this.init = function(){
         if($scope.action != 'new'){
@@ -26,11 +27,11 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
         }
     }
     
-    // Get poll when if action value is edit
+    // Get poll it $scope.action value is edit
     $scope.getPoll = function(){
         PollService.getOne({idPoll}, $scope.getPollSuccess, $scope.getPollErr);
     }
-    // If success, fill the form
+    // If success, fill the form with the poll and the answers
     $scope.getPollSuccess = function(response){
         $scope.pollQuestions = response.question_set;
         console.log($scope.pollQuestions);
@@ -40,7 +41,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
         }else{
             $scope.status = $scope.statusPoll[1];            
         }
-        //Full a new object to put the type of the question in the edit form
+        //Fill a new object to put the type of the question in the edit form's selects
         for(var i = 0; i<$scope.pollQuestions.length; i++){ 
             switch($scope.pollQuestions[i].type){
                 case 2:
@@ -51,6 +52,11 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
                     break;
                 default:
                     $scope.pollQuestions[i].actualType = $scope.typePoll[0];
+            }
+            $scope.pollQuestions[i].sizeOptions = $scope.pollQuestions[i].option_set.length;
+
+            if($scope.pollQuestions[i].option_set.length > 0){
+                $scope.addOptions = false; 
             }
         }
         
@@ -64,7 +70,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
         SweetAlert.swal("Ups!", "Tenemos un problema", "error");
     }
     
-    // Action when the form is submitted
+    // Do the new or edit petition when the form is submitted
     $scope.submit = function(){
         $scope.form = {
             name: $scope.form.name,
@@ -73,13 +79,13 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
         
         if($scope.action == 'new'){
             PollService.post($scope.form, $scope.onSubmitSuccess, $scope.onSubmitErr);
-        }else{            
+        }else{
             var theForm = $scope.form;
             PollService.put({idPoll:idPoll}, theForm, $scope.onUpdateSuccess(), $scope.onUpdateErr);
         }
     }
     
-    // new Poll
+    // If action is equal to new Poll
     $scope.onSubmitSuccess = function(response){
         $scope.created = true;
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
@@ -90,8 +96,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     }
     // Edit Poll
     $scope.onUpdateSuccess = function(response){
-        console.log('response put:');
-        console.log(response);
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
     
@@ -101,6 +105,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     
     // Answers to questions
     $scope.answerToQuestion = function(quest, action){
+        console.log(quest)
         $scope.question = {
             content: quest.content,
             type: quest.actualType.id,
@@ -108,19 +113,38 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
         }
         $scope.question.options = [];
         
-        if($scope.question.type == 2 || $scope.question.type == 3){
-            for(var i = 0; i<quest.option_set.length; i++){
-                $scope.question.options.push(quest.option_set[i].content);
-            }
-        }
+        // Fill options to send the data to update
+        // if($scope.question.type == 2 || $scope.question.type == 3){
+        //     if(quest.option_set.length == 0){
+        //         $scope.question.options.push(quest.option1);
+        //         $scope.question.options.push(quest.option2);
+        //     }else{
+        //         for(var i = 0; i<quest.option_set.length; i++){
+        //             $scope.question.options.push(quest.option_set[i].content);
+        //         }
+        //     }
+        // }
         
         $scope.action = action;
         
         if($scope.action == 'new'){
-            console.log($scope.question);
+            if($scope.question.type == 2 || $scope.question.type == 3){
+                $scope.question.options.push(quest.option1);
+                $scope.question.options.push(quest.option2);
+            }
             PollService.create($scope.question, $scope.onCreateSuccess, $scope.onCreateErr);
         }else{
             console.log('Editing');
+            if($scope.question.type == 2 || $scope.question.type == 3){
+                if(quest.option_set.length == 0){
+                    $scope.question.options.push(quest.option1);
+                    $scope.question.options.push(quest.option2);
+                }else{
+                    for(var i = 0; i<quest.option_set.length; i++){
+                        $scope.question.options.push(quest.option_set[i].content);
+                    }
+                }
+            }
             PollService.edit({idQ:quest.id}, $scope.question, $scope.onEditSuccess, $scope.onEditErr);
         }
     }
@@ -146,9 +170,9 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     }
     
     // Show options if the question is type closed, close with comments and multiple choise
-    $scope.showOptions = function(type){
-        $scope.idTypePoll = type.id;
-        if(type.id == 2 || type.id == 3){
+    $scope.showOptions = function(actualType){
+        $scope.idactualTypePoll = actualType.id;
+        if(actualType.id == 2 || actualType.id == 3){
             $scope.optionsAnswer = 1;
         }else $scope.optionsAnswer = 0;
     }

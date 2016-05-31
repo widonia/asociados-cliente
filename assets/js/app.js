@@ -314,6 +314,16 @@ angular.module('app', [
                 }
             })
             
+            .when('/poll/view/:id', {
+                templateUrl: Config.STATIC + '/modules/poll/views/view.html',
+                controller: 'PollViewController', controllerAs: 'pollView', role:AUTH_ROLES.monitor
+            })
+            
+            .when('/poll/answer/:id', {
+                templateUrl: Config.STATIC + '/modules/poll/views/answers.html',
+                controller: 'PollAnswerController', controllerAs: 'pollAnswer', role:AUTH_ROLES.monitor
+            })
+            
 			.otherwise({redirectTo: '/'});
 	}
 ])

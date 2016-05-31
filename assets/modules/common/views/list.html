@@ -27,6 +27,10 @@
             <td ng-repeat="field in listView.fields">{{element | fieldValue: field.name | fieldType: field.type | truncate:field.truncate}}</td>
 
             <td class="text-right">
+                <a href="#{{listView.url}}/view/{{element.id}}" class="btn btn-primary btn-sm" ng-if="listView.actions.view">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </a>
+                
                 <a href="#{{listView.url}}/edit/{{element.id}}" class="btn btn-primary btn-sm" ng-if="listView.actions.edit">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>

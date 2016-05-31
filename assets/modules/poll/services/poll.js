@@ -13,7 +13,8 @@ function PollService($resource, Config){
         delete: { method:'DELETE'},
         getOne: { method:'GET', params:{idPoll:"@idPoll"}, url:_url+':idPoll/'}, //Get one poll
         create: { method: 'POST', url:_urlA},
-        edit: {method: 'PUT', params:{idQ:"@idQ"}, url:_urlA+':idQ/'}
+        edit: {method: 'PUT', params:{idQ:"@idQ"}, url:_urlA+':idQ/'},
+        result: {method: 'GET', params:{idPoll:'@idPoll'}, url:_url+':idPoll/results/'}
     })
 }
 
