@@ -10,17 +10,28 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     $scope.image = false;
     this.MEDIA = Config.MEDIA;
     this.no_form_show = false;
+    this.showTitleError = false;
+    var titleTooLong;
 
     this.init = function(){
 
-        if(this.action == 'edit'){ this.populate(); }
-        
+        if(this.action == 'edit'){ this.populate(); }        
         this.tinymceOptions = {
             plugins: [
-                "advlist autolink autosave link image lists textcolor paste textcolor"
+                'advlist autolink lists link image charmap  preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu ',
+                'emoticons template paste textcolor colorpicker textpattern imagetools '
             ],
-            min_height: 500,
-            toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
+            theme: 'modern',
+            min_height: 500,            
+            toolbar1: "insertfile undo redo | styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image",
+            toolbar2 : "searchreplace  | table |  emoticons | ",            
+            spellchecker_language: 'es', 
+            content_css: [              
+                // '../../../css/tinimyci.css'
+            ],
+            image_advtab: true,
             // images_upload_url: '/camilomilo',
             // file_browser_callback: function(field_name, url, type, win) {
             //     // win.document.getElementById(field_name).value = 'my browser value';
@@ -77,7 +88,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // images_upload_url: 'postAcceptor.php'
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
-        console.log('Init');
     }
 
 
@@ -96,7 +106,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // $scope.image = this.data.image;
             this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
         }
-        console.log('onPopulateOk');
+        console.log(response);
     }
 
     this.onPopulateError = function(response){
@@ -106,6 +116,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
 
     this.onGroups = function(response){
+        this.groups = response.results;
         this.groups = response.data;
     }
 
@@ -186,9 +197,22 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onSubmitError = function(response){
+        console.log(response);
         this.form.success = false;
         $rootScope.$broadcast('loading-hide');
-        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
+        SweetAlert.swal({
+            title: "Error!",
+            text: "Lo sentimos, no se pudo completar la acción.",
+            type: "error",
+            confirmButtonText: "OK",
+            closeOnConfirm: true   
+        },
+        function(){
+            $scope.showTitleError = true;
+            return titleTooLong;
+        });
+        console.log(this.titleTooLong); 
+        this.titleTooLong = response.data.title[0];
     }
 
 

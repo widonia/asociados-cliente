@@ -10,6 +10,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       type: null,
       published: true
     };
+    this.parents = [];
     this.nodeData = null;
     this.data_nodes = [];
     this.status = {
@@ -39,13 +40,22 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         };
       this.getList();    
       this.tinymceOptions = {
-          plugins: [
-              "advlist autolink autosave link image lists textcolor paste media"
-          ],
-          theme: "modern",
-          toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
-          min_height: 500
-      };    
+        plugins: [
+            'advlist autolink lists link image charmap  preview hr anchor pagebreak',
+            'searchreplace wordcount visualblocks visualchars code fullscreen',
+            'insertdatetime media nonbreaking save table contextmenu ',
+            'emoticons template paste textcolor colorpicker textpattern imagetools '
+        ],
+        theme: 'modern',
+        min_height: 500,            
+        toolbar1: "insertfile undo redo | styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image",
+        toolbar2 : "searchreplace  | table |  emoticons | ",            
+        spellchecker_language: 'es', 
+        content_css: [              
+            // '../../../css/tinimyci.css'
+        ],
+        image_advtab: true,
+    };  
     }
     this.getList = function(id){
         var filter = {page_size:1000};
@@ -58,6 +68,12 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
 
     var onGetList = function(data) {
         var lista = data[0].data;
+        
+        this.parents = lista.filter( function(obj) {
+            if (obj.type == 1) {
+                return true;
+            } 
+        });
 
         var principales = lista.filter(function (v) {
           return v.parent == null;
@@ -104,7 +120,8 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       };
       if (scope != undefined){
         var scope = scope;  
-        this.nodeData = scope.$modelValue; 
+        this.nodeData = scope.$modelValue;
+        this.data.parent_node = this.node; 
         this.data.parent = this.nodeData.id;
         this.data.parentName = this.nodeData.title;
       }else{
@@ -120,8 +137,8 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       this.nodeData = scope.$modelValue;      
       this.data = this.nodeData;
       this.status.is_form = true;
-      this.data.parent = null;
-      this.data.parentName = null;
+    //   this.data.parent = null;
+    //   this.data.parentName = null;
       this.action = "edit";
       // console.log(id);
 

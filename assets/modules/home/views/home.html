@@ -1,6 +1,6 @@
 
 <div class="user-box">    
-    <img src="{{home.MEDIA}}/{{home.cooperative_data.logo}}" alt="Logo" class="pull-right" width="171" height="141"/>        
+    <img src="{{home.MEDIA}}/{{home.cooperative_data.logo}}" alt="Logo" class="pull-right"  height="41"/>        
 </div>
 <div class="user-box ">    
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>     
@@ -35,21 +35,27 @@
 
     </ul>
 
-    <h3>Inicio de sesión
+    <div ng-if="home.show_statistics">        
+        <h3>Inicio de sesión
 
-        <form class="form-inline pull-right">
-            <div class="input-group input-daterange">
-                <input type="text" class="form-control" ng-model="home.data.start">
-                <span class="input-group-addon">to</span>
-                <input type="text" class="form-control" ng-model="home.data.end">
-            </div>
+            <form class="form-inline pull-right">
+                <div class="input-group input-daterange">
+                    <input type="text" class="form-control" ng-model="home.data.start">
+                    <span class="input-group-addon">to</span>
+                    <input type="text" class="form-control" ng-model="home.data.end">
+                </div>
 
-            <button class="btn btn-primary" ng-click="home.getStatistics()">Ver</button>
+                <button class="btn btn-primary" ng-click="home.getStatistics()">Ver</button>
 
-        </form>
-    </h3>
+            </form>
+        </h3>        
+    </div>
+    <div ng-if="!home.show_statistics">        
+        <h3> ¡Estadisticas no Diponibles!  </h3>
+    </div>
+    <div id="time-chart" style="height: 250px;" ng-show="home.show_statistics"></div>
      
-    <div id="time-chart" style="height: 250px;"></div>
+    
    
 </div>
 

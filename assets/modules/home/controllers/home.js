@@ -3,7 +3,9 @@
 function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager, Config){
     this.username = AuthManager.username;
     this.last_login = AuthManager.last_login;
-
+    
+    this.show_statistics = true;
+    
     this.data = {};
     this.stats = {};
     this.chart = null;
@@ -63,6 +65,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
 
     this.onGetStatisticsError = function(response){
         $rootScope.$broadcast('loading-hide2');
+        this.show_statistics = false;
         // console.log(response)
     }
 
