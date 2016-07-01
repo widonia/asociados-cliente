@@ -10,7 +10,7 @@ angular.module('app', [
     'ui.tinymce',
     'oitozero.ngSweetAlert',
     'ui.tree',
-    
+    'ngImgCrop',
 	// app modules
 	'app.auth',
 	'app.page',
@@ -27,7 +27,7 @@ angular.module('app', [
     'app.groups',
     'app.tasks',
     'app.terms',
-    'app.poll'
+    'app.poll',
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
