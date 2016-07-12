@@ -76,7 +76,8 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
             // console.log(login);
             new_data.push({
                 'key':login,
-                'value':parseInt(data.login[login]),
+                'value':data.login[login],
+                // 'value':parseInt(data.login[login]),
             });
         }
 
