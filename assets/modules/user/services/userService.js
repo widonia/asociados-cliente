@@ -12,7 +12,8 @@ function UserService($resource, Config){
         download_data: { method:'GET', url:_url+'download/'},
         put: { method:'PUT'},
         imageReview: {method: 'GET', url:Config.REST + '/api/user/image_revision'},
-        rejectImage: {method: 'PUT', url:Config.REST + '/api/user/replace_image_revision/', headers: {'Content-Type': undefined }}
+        rejectImage: {method: 'PUT', url:Config.REST + '/api/user/replace_image_revision/', headers: {'Content-Type': undefined }},
+        listImageRevision: {method: 'GET', url: Config.REST + '/api/user/list_image_revision'}
     })
 }
 

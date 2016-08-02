@@ -89,13 +89,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <label class="control-label">Imágen por aprobar</label>
-                        <div class="content-image-to-crop">
-                            {{notImage}}
+                            {{notImage}} {{imageMessage}}
+                        <div class="content-image-to-crop" ng-show="finalCropped">
                             <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
                         </div>
                     </div>
                 </div>
-                <div class="row cropped-actions">
+                <div class="row cropped-actions" ng-if="actionButtons">
                     <div class="col-md-12">
                         <div class="form-group">
                             <button type="button" ng-click="approve(user.data.id)" class="btn btn-primary ng-binding">Aprobar</button>

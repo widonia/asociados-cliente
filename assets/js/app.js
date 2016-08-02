@@ -121,6 +121,14 @@ angular.module('app', [
                 }
             })
 
+            .when('/cooperative/users/image', {
+                templateUrl: Config.STATIC + '/modules/user/views/list-image.html',
+                controller: 'UserlistImageCtrl', controllerAs: 'userimage', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'new';}
+                }
+            })
+
             //credit urls
             .when('/cooperative/credits', {
                 templateUrl: Config.STATIC + '/modules/credit/views/list.html',

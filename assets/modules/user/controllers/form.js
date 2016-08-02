@@ -8,6 +8,8 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
     $scope.imageData = {};
     $scope.myImage='';
     $scope.myCroppedImage='';
+    $scope.finalCropped = true;
+    $scope.actionButtons = true;
 
     this.init = function(){
         if(this.action == 'edit'){
@@ -70,12 +72,15 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
 
     this.onImageReviewErr = function(response){
         $scope.notImage = "No hay imágen para aprobar";
+        $scope.actionButtons = false;
     }
 
     $scope.getTemporalImage = function(image){
         // var theImage = 'https://s3-us-west-2.amazonaws.com/asociados.stage/' + image;
         // $scope.myImage = Config.REST+ '/' + image;
-        $scope.myImage = 'img/beta.jpg';
+        console.log(image);
+        // $scope.myImage = 'img/beta.jpg';
+        $scope.myImage = 'https://s3-us-west-2.amazonaws.com/asociados.stage/' + image;
     }
 
     $scope.approve = function(userId){
@@ -86,7 +91,7 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
 
         fd.append('file', blob);
         fd.append("user_id", userId);
-        fd.append("accpet", true);
+        fd.append("accept", 1);
 
         $http.put(Config.REST + '/api/user/replace_image_revision/', fd,
         {   
@@ -95,16 +100,16 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
         })
         .success($scope.onApproveSuccess)
         .error($scope.onApproveErr);
-
-        // UserService.approveImage({user_id:user}, fd, this.onApproveSuccess, this.onApproveErr);
-
     }
 
-    this.onApproveSuccess = function(response){
-        console.log(response)
+    $scope.onApproveSuccess = function(response){
+        console.log(response);
+        $scope.finalCropped = false;
+        $scope.actionButtons = false;
+        $scope.imageMessage = "Imagen aprobada!";
     }
 
-    this.onApproveErr = function(response){
+    $scope.onApproveErr = function(response){
         console.log(response)
     }
 
@@ -113,7 +118,7 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
 
         fd.append('file', null);
         fd.append("user_id", userId);
-        fd.append("accpet", false);
+        fd.append("accept", false);
 
         $http.put(Config.REST + '/api/user/replace_image_revision/', fd,
         {   
@@ -128,10 +133,16 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
 
     $scope.onRejectSuccess = function(response){
         console.log(response);
+        $scope.finalCropped = false;
+        $scope.actionButtons = false;
+        $scope.imageMessage = "Imagen rechazada!";
     }
 
     $scope.onRejectErr = function(response){
         console.log(response);
+        $scope.finalCropped = false;
+        $scope.actionButtons = false;
+        $scope.imageMessage = "Imagen rechazada!";
     }
 
     this.init();

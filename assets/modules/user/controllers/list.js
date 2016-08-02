@@ -54,6 +54,18 @@ function UserListCtrl($rootScope, UserService, SweetAlert){
             confirmation.bind(this)
         );        
     }
+
+    this.filterImageUser = function () {
+        UserService.listImageRevision(this.onImageSuccess, this.onImageError);
+    }
+
+    this.onImageSuccess = function(response){
+        console.log(response);
+    }
+
+    this.onImageError = function(response){
+        console.log(response);
+    }
 }
 
 
