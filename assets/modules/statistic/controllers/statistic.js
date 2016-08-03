@@ -22,6 +22,7 @@ function StatisticCtrl($rootScope, StatisticService, CooperativeService, AuthMan
     }
 
     this.onGetStatsSuccess = function(response){
+        console.log(response);
         this.stats = response;
     }
 
@@ -44,6 +45,7 @@ function StatisticCtrl($rootScope, StatisticService, CooperativeService, AuthMan
     }
 
     this.updateChart = function(data){
+        console.log(data);
         var new_data = [];
 
         for (var login in data.login){

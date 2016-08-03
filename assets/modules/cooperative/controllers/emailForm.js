@@ -16,9 +16,6 @@ function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
 
         }
         EmailService.options({}, onOptionsOk.bind(this), onOptionsError.bind(this));
-
-
-        
     }
 
 

@@ -10,7 +10,7 @@ angular.module('app', [
     'ui.tinymce',
     'oitozero.ngSweetAlert',
     'ui.tree',
-    
+    'ngImgCrop',
 	// app modules
 	'app.auth',
 	'app.page',
@@ -26,7 +26,8 @@ angular.module('app', [
     'app.statistic',
     'app.groups',
     'app.tasks',
-    'app.terms'
+    'app.terms',
+    'app.poll',
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
@@ -117,6 +118,14 @@ angular.module('app', [
                 controller: 'UserFormCtrl', controllerAs: 'user', role:AUTH_ROLES.editor,
                 resolve: {
                     action: function(){return 'edit';}
+                }
+            })
+
+            .when('/cooperative/users/image', {
+                templateUrl: Config.STATIC + '/modules/user/views/list-image.html',
+                controller: 'UserlistImageCtrl', controllerAs: 'userimage', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'new';}
                 }
             })
 
@@ -290,7 +299,39 @@ angular.module('app', [
                 templateUrl: Config.STATIC + '/modules/tasks/views/list.html',
                 controller: 'TaskController', controllerAs: 'taskList', role:AUTH_ROLES.monitor
             })
-
+            
+            // Polls
+            .when('/poll', {
+                templateUrl: Config.STATIC + '/modules/poll/views/list.html',
+                controller: 'PollListController', controllerAs: 'pollLIst', role:AUTH_ROLES.monitor
+            })
+            
+            .when('/poll/new', {
+                templateUrl: Config.STATIC + '/modules/poll/views/form.html',
+                controller: 'PollController', controllerAs: 'pollForm', role:AUTH_ROLES.monitor,
+                resolve: {                    
+                    action: function(){return 'new';}
+                }
+            })
+            
+            .when('/poll/edit/:id', {
+                templateUrl: Config.STATIC + '/modules/poll/views/form.html',
+                controller: 'PollController', controllerAs: 'pollForm', role:AUTH_ROLES.monitor,
+                resolve: {                    
+                    action: function(){return 'edit';}
+                }
+            })
+            
+            .when('/poll/view/:id', {
+                templateUrl: Config.STATIC + '/modules/poll/views/view.html',
+                controller: 'PollViewController', controllerAs: 'pollView', role:AUTH_ROLES.monitor
+            })
+            
+            .when('/poll/answer/:id', {
+                templateUrl: Config.STATIC + '/modules/poll/views/answers.html',
+                controller: 'PollAnswerController', controllerAs: 'pollAnswer', role:AUTH_ROLES.monitor
+            })
+            
 			.otherwise({redirectTo: '/'});
 	}
 ])

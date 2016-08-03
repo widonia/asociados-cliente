@@ -4,6 +4,7 @@ function StatisticService($resource, Config){
     
     var _url = Config.DATA  + '/daily';
     
+    
     return $resource(_url, {}, {
         get: { method:'GET'},
     })

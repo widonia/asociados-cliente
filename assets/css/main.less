@@ -238,3 +238,48 @@ tr.angular-ui-tree-empty {
 .angular-ui-tree-handle {
     cursor:default !important;
 }
+// Poll
+.answer-action-buttons{
+    margin-top:25px
+}
+.save-poll{padding-top: 20px;}
+.separated-line{
+    border-bottom:1px solid #e7e7e7
+}
+
+// Image Review
+.image-review{
+    // img{width: 100%;}
+    .content-image-to-crop{
+        width: 300px;
+        height: 400px;
+        overflow: hidden;
+    }
+    img-crop {
+        width:100%;
+        height:100%;
+        display:block;
+        position:relative;
+        overflow:hidden;
+        canvas {
+            display:block;
+            position:absolute;
+            top:50%;
+            left:50%;
+
+            // Disable Outline
+            outline: none;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+        }
+    }
+    #croppedImage, .croppedImage{
+        visibility: hidden;
+    }
+    .cropped-actions{
+        margin-top: 10px;
+    }
+}
+.btn-image-asociados{
+    float: right;
+    margin-left: 10px;
+}
