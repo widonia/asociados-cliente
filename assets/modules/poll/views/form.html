@@ -1,0 +1,128 @@
+<h1>{{action == "new" ? "Nuevo" : "Editar"}} Encuesta</h1>
+
+<ol class="breadcrumb">
+	<li><a href="#">Inicio</a></li>
+	<li><a href="#/cooperative/polls">Asociados</a></li>
+	<li class="active">{{poll.action == "new" ? "Nuevo" : "Editar"}}</li>
+</ol>
+
+<div ng-show="poll.form.success">
+    <div class="alert alert-success" role="alert">Elemento {{poll.action == "new" ? "creado" : "editado"}} correctamente.</div>
+    <a ng-show="poll.no_form_show" href="#/cooperative/polls" class="btn btn-warning">Regresar</a>
+</div>
+<div ng-show="!poll.no_form_show">
+    <!-- New Poll or Edit Poll  -->
+    <form novalidate name="pollForm" class="form" role="form" ng-submit="submit()">
+
+        <div class="row">
+            <div class="form-group col-sm-8">
+                <label class="control-label">Nombre de la encuesta:</label>
+                <input name="name" type="input" class="form-control" ng-model="form.name" required>
+                <div class="bg-danger error" ng-show="poll.form.pollname.$invalid && poll.form.submitted">
+                    <small ng-show="poll.form.pollname.$error.required">
+                        Ingresa el nombre de la encuesta.
+                    </small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group col-sm-8">
+                <label class="control-label">Estado:</label>
+                <select class="form-control" ng-model="status" ng-options="status.name for status in statusPoll">
+                </select>
+                
+                <div class="bg-danger error" ng-show="poll.form.pollname.$invalid && poll.form.submitted">
+                    <small ng-show="poll.form.pollname.$error.required">
+                        Elige un estado para la encuesta.
+                    </small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <button type="submit" class="btn btn-primary">{{action == "new" ? "Enviar" : "Editar"}}</button>
+                &nbsp;
+                <a href="#/poll" class="btn btn-warning">Regresar</a>
+            </div>
+        </div>
+        
+    </form>
+    <div class="row">
+        <div class="col-xs-8">
+            <hr class="separated-line">
+        </div> 
+    </div>
+    <!-- New Question -->
+    <form novalidate name="questi" class="form" ng-submit="answerToQuestion(quest, 'new')">
+        <h3>Nueva Pregunta</h3>
+        <div class="row">
+            <div class="form-group col-xs-8">
+                <label class="control-label">Enunciado de la pregunta:</label>
+                <input type="text" class="form-control" required name="content" ng-model="quest.content">        
+            </div>
+            <div class="form-group col-xs-8">
+                <label class="control-label">Tipo de pregunta:</label>
+                <select class="form-control" required ng-model="quest.actualType" ng-options="actualType.name for actualType in typePoll" ng-change="showOptions(quest.actualType)">
+                </select>
+            </div>
+        </div>
+        <div class="row" ng-if="optionsAnswer == 1">
+            <div class="form-group col-xs-4">
+                <label class="control-label">Escribe la segunda opción</label>
+                <input type="text" class="form-control" name="option2" ng-model="quest.option1">
+            </div>
+            <div class="form-group col-xs-4">
+                <label class="control-label">Escribe la segunda opción</label>
+                <input type="text" class="form-control" name="option2" ng-model="quest.option2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-8 save-poll">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <hr class="separated-line">
+            </div>
+        </div>
+    </form>
+    <!-- Edit actual questions of the poll -->
+    <div ng-if="created">
+        <h3>Preguntas actuales</h3>
+        <form novalidate name="questi" class="form" ng-submit="answerToQuestion(quest, 'edit')" ng-repeat="quest in pollQuestions">
+            <div class="row">
+                <div class="form-group col-xs-8">
+                    <label class="control-label">Enunciado de la pregunta:</label>
+                    <input type="text" class="form-control" required name="content" ng-model="quest.content">
+                    <input type="hidden" ng-model="quest.id">
+                </div>
+                <div class="form-group col-xs-8">
+                    <label class="control-label">Tipo de pregunta:</label>
+                    <select class="form-control" required ng-model="quest.actualType" ng-options="type.name for type in typePoll" ng-change="showOptions(quest.type)">
+                    </select>
+                    <div class="row">
+                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3" ng-repeat="options in quest.option_set">
+                            <h6>Opciones de respuesta</h6>
+                            <input type="text" class="form-control" name="options" ng-model="options.content">
+                        </div>
+                    </div>
+                    <div class="row" ng-if="addOptions">
+                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3">
+                            <h6>Opciones de respuesta</h6>
+                            <input type="text" class="form-control" name="options" ng-model="quest.option1">
+                        </div>
+                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3">
+                            <h6>Opciones de respuesta</h6>
+                            <input type="text" class="form-control" name="options" ng-model="quest.option2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12 save-poll">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <hr class="separated-line">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
