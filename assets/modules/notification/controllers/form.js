@@ -139,6 +139,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         if (this.form.$valid) {
             if(this.action == 'new'){; 
                 console.log('new')
+                console.log(this.data.users);
                 NotificationService.post({}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -147,6 +148,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
             if(this.action == 'edit'){
                 console.log('edit')
+                console.log(this.data.users);
                 NotificationService.put({id:$routeParams.id}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -163,15 +165,17 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onSuggestOk = function(response){
+        console.log(response)
         this.autocomplete.suggest = response.data;   
     }
 
     this.onSuggestError = function(response){
-
+        console.log(response);
     }
 
 
     this.onSubmitOk = function(response){
+        console.log(response);
         if($scope.image != false){
             var fd = new FormData();
 
@@ -234,16 +238,20 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.addUser = function(user){
+        console.log(user);
         var exists = false;
         for (var element in this.autocomplete.list){
             if(user.username == this.autocomplete.list[element]['username'] && user.username != undefined){
                 exists = true;
+                console.log('if for');
             }
         }
         
         if (exists == false){
+            console.log('if');
             this.autocomplete.list.push(user);            
-            this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
+            this.data.users.push( ((user.id == undefined) ? user.user_id : user.user_id) );
+            console.log(this.data.users);
         }
 
         // console.log(this.data.users);
