@@ -78,9 +78,10 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
     $scope.getTemporalImage = function(image){
         // var theImage = 'https://s3-us-west-2.amazonaws.com/asociados.stage/' + image;
         // $scope.myImage = Config.REST+ '/' + image;
+        console.log($scope.myImage);
         console.log(image);
         // $scope.myImage = 'img/beta.jpg';
-        $scope.myImage = 'https://s3-us-west-2.amazonaws.com/asociados.stage/' + image;
+        $scope.myImage = 'http://asociados.prod.s3.amazonaws.com/' + image;
     }
 
     $scope.approve = function(userId){
