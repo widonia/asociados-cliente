@@ -118,6 +118,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.onGroups = function(response){
         this.groups = response.results;
         this.groups = response.data;
+        console.log(response.data);
     }
 
     this.onGroupsErr = function(){
@@ -240,7 +241,9 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.addUser = function(user){
         console.log(user);
         var exists = false;
-        for (var element in this.autocomplete.list){
+        for (var element in this.autocomplete.list){            
+            console.log(this.autocomplete.list[element]['username']);
+            console.log(this.autocomplete.list[element]['username'])
             if(user.username == this.autocomplete.list[element]['username'] && user.username != undefined){
                 exists = true;
                 console.log('if for');
@@ -249,8 +252,10 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         
         if (exists == false){
             console.log('if');
+            console.log(user.id);
             this.autocomplete.list.push(user);            
-            this.data.users.push( ((user.id == undefined) ? user.user_id : user.user_id) );
+            this.data.users.push( ((user.id == undefined) ? user.id : user.id) );
+            console.log('this.data.users');
             console.log(this.data.users);
         }
 
