@@ -19,12 +19,18 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     $scope.optionsAnswer = 0;
     $scope.idTypePoll;
     $scope.addOptions = false; //flag to a add optiones to questios type 2 and 3
+    $scope.hours = [];
     
     this.init = function(){
         if($scope.action != 'new'){
           $scope.getPoll();  
           $scope.created = true;
         }
+
+        for(var i=1; i<24; i++){
+            $scope.hours[i] = i + ':00';
+        }
+   
     }
     
     // Get poll it $scope.action value is edit
@@ -72,17 +78,26 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     
     // Do the new or edit petition when the form is submitted
     $scope.submit = function(){
-        $scope.form = {
-            name: $scope.form.name,
-            state: $scope.status.id
-        };
-        
-        if($scope.action == 'new'){
-            PollService.post($scope.form, $scope.onSubmitSuccess, $scope.onSubmitErr);
+        if($scope.form.name == undefined){
+            SweetAlert.swal("Ups!", "El nombre de la encuesta es obligatorio.", "error");
+        }else if($scope.form.date_start == undefined || $scope.form.hoursPublish == undefined){
+            SweetAlert.swal("Ups!", "La fecha y la hora son obligatorios.", "error");
         }else{
-            var theForm = $scope.form;
-            PollService.put({idPoll:idPoll}, theForm, $scope.onUpdateSuccess(), $scope.onUpdateErr);
+            $scope.form = {
+                name: $scope.form.name,
+                state: $scope.status.id,
+                date_start: $scope.form.date_start + ' ' + $scope.form.hoursPublish
+            };
+            
+            if($scope.action == 'new'){
+                PollService.post($scope.form, $scope.onSubmitSuccess, $scope.onSubmitErr);
+            }else{
+                var theForm = $scope.form;
+                PollService.put({idPoll:idPoll}, theForm, $scope.onUpdateSuccess(), $scope.onUpdateErr);
+            }
         }
+        console.log($scope.form)
+        // YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z]
     }
     
     // If action is equal to new Poll

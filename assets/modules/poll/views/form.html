@@ -29,8 +29,36 @@
         <div class="row">
             <div class="form-group col-sm-8">
                 <label class="control-label">Estado:</label>
-                <select class="form-control" ng-model="status" ng-options="status.name for status in statusPoll">
+                <select class="form-control" ng-model="status" ng-options="status.name for status in statusPoll" required>
                 </select>
+                
+                <div class="bg-danger error" ng-show="poll.form.pollname.$invalid && poll.form.submitted">
+                    <small ng-show="poll.form.pollname.$error.required">
+                        Elige un estado para la encuesta.
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-8 date-to-publish">
+                <div class="col-sm-3 the-date">
+                    <label class="control-label">Fecha de publicación:</label>
+                    <div class="input-group date publish-data" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                        <input type="text" class="form-control" ng-model="form.date_start">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Hora de publicación:</label>
+                    <div class="input-group publish-data">
+                        <select name="hour" id="hour" class="form-control" ng-model="form.hoursPublish" required>
+                            <option value="h" ng-repeat="h in hours" ng-value="h" ng-selected="h">{{h}}</option>
+                        </select>
+                    </div>
+                </div>
                 
                 <div class="bg-danger error" ng-show="poll.form.pollname.$invalid && poll.form.submitted">
                     <small ng-show="poll.form.pollname.$error.required">
