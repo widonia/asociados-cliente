@@ -55,7 +55,7 @@
                     <label class="control-label">Hora de publicación:</label>
                     <div class="input-group publish-data">
                         <select name="hour" id="hour" class="form-control" ng-model="form.hoursPublish" required>
-                            <option value="h" ng-repeat="h in hours" ng-value="h" ng-selected="h">{{h}}</option>
+                            <option ng-repeat="h in hours" ng-value="h">{{h}}</option>
                         </select>
                     </div>
                 </div>

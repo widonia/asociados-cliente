@@ -39,6 +39,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     }
     // If success, fill the form with the poll and the answers
     $scope.getPollSuccess = function(response){
+        console.log(response);
         $scope.pollQuestions = response.question_set;
         console.log($scope.pollQuestions);
         
@@ -66,9 +67,13 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
             }
         }
         
-        $scope.form = {
-            name: response.name
+        $scope.form = { 
+            name: response.name,
+            date_start: response.date_start.slice(0,10),
+            hoursPublish: response.date_start.slice(11,16)
         };
+
+        console.log($scope.form);
     }
     
     $scope.getPollErr = function(response){
@@ -83,21 +88,19 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
         }else if($scope.form.date_start == undefined || $scope.form.hoursPublish == undefined){
             SweetAlert.swal("Ups!", "La fecha y la hora son obligatorios.", "error");
         }else{
-            $scope.form = {
+            var dataPoll = {
                 name: $scope.form.name,
                 state: $scope.status.id,
                 date_start: $scope.form.date_start + ' ' + $scope.form.hoursPublish
             };
             
             if($scope.action == 'new'){
-                PollService.post($scope.form, $scope.onSubmitSuccess, $scope.onSubmitErr);
+                PollService.post(dataPoll, $scope.onSubmitSuccess, $scope.onSubmitErr);
             }else{
-                var theForm = $scope.form;
+                var theForm = dataPoll;
                 PollService.put({idPoll:idPoll}, theForm, $scope.onUpdateSuccess(), $scope.onUpdateErr);
             }
         }
-        console.log($scope.form)
-        // YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z]
     }
     
     // If action is equal to new Poll
@@ -127,18 +130,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
             poll: idPoll 
         }
         $scope.question.options = [];
-        
-        // Fill options to send the data to update
-        // if($scope.question.type == 2 || $scope.question.type == 3){
-        //     if(quest.option_set.length == 0){
-        //         $scope.question.options.push(quest.option1);
-        //         $scope.question.options.push(quest.option2);
-        //     }else{
-        //         for(var i = 0; i<quest.option_set.length; i++){
-        //             $scope.question.options.push(quest.option_set[i].content);
-        //         }
-        //     }
-        // }
         
         $scope.action = action;
         
