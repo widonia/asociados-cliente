@@ -39,9 +39,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     }
     // If success, fill the form with the poll and the answers
     $scope.getPollSuccess = function(response){
-        console.log(response);
         $scope.pollQuestions = response.question_set;
-        console.log($scope.pollQuestions);
         
         if(response.state == 1){ //Set the poll state
             $scope.status = $scope.statusPoll[0];   
@@ -72,12 +70,9 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
             date_start: response.date_start.slice(0,10),
             hoursPublish: response.date_start.slice(11,16)
         };
-
-        console.log($scope.form);
     }
     
     $scope.getPollErr = function(response){
-        console.log(response);
         SweetAlert.swal("Ups!", "Tenemos un problema", "error");
     }
     
@@ -105,7 +100,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     
     // If action is equal to new Poll
     $scope.onSubmitSuccess = function(response){
-        $scope.created = true;
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
     
@@ -140,7 +134,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
             }
             PollService.create($scope.question, $scope.onCreateSuccess, $scope.onCreateErr);
         }else{
-            console.log('Editing');
             if($scope.question.type == 2 || $scope.question.type == 3){
                 if(quest.option_set.length == 0){
                     $scope.question.options.push(quest.option1);
@@ -153,26 +146,25 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
             }
             PollService.edit({idQ:quest.id}, $scope.question, $scope.onEditSuccess, $scope.onEditErr);
         }
+        $scope.getPoll();
+        $scope.quest = {};
     }
     // Create question
     $scope.onCreateSuccess = function(response){
-        console.log(response);
+        $scope.created = true;
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
     
     $scope.onCreateErr = function(response){
-        console.log(response);
         SweetAlert.swal("¡Ups!", "Sucedio algo inesperado.", "error");
     }
     // Edit Question
     $scope.onEditSuccess = function(response){
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
-        console.log(response);
     }
     
     $scope.onEditErr = function(response){
         SweetAlert.swal("¡Ups!", "Sucedio algo inesperado.", "error");
-        console.log(response);
     }
     
     // Show options if the question is type closed, close with comments and multiple choise

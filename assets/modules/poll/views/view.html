@@ -5,8 +5,9 @@
   <li><a href="#/poll">Encuestas</a></li>  
 </ol>
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default" ng-repeat="answer in answers">
+<div class="panel-group view-poll" id="accordion" role="tablist" aria-multiselectable="true">
+  <p class="bg-warning" ng-show="messagePoll">Esta encuesta aún no tiene preguntas</p>
+  <!--<div class="panel panel-default" ng-repeat="answer in answers">
     <div class="panel-heading" role="tab" id="heading{{$index}}">
       <h4 class="panel-title">
           {{answer.question}}
@@ -14,13 +15,11 @@
       <h6>Tipo de pregunta: {{answer.type}}</h6>
     </div>
     <div id="$index" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$index}}" ng-repeat="response in answer.responses">
-      <div class="panel-body">
+      <div class="panel-body user-response">
         <label>Usuario:</label> {{response.user.username}}
       </div>
-      <div class="panel-body" ng-if="answer.type == 'Close'">
-        <div ng-repeat="resp in response.close_responses">
-          <label>Respuesta:</label> {{resp}}
-        </div>
+      <div class="panel-body" ng-if="answer.type == 'Cerrada'">
+          <label>Respuesta:</label> <span>{{response.close_responses}}</span>
       </div>
       <div class="panel-body" ng-if="answer.type == 'Close with comment'">
         <div ng-repeat="resp in response.close_responses">
@@ -32,6 +31,15 @@
           <label for="">Respuesta:</label>
           {{response.open_response}}
       </div>
+    </div>
+
+
+    
+  </div>-->
+  <div class="row">
+    <div class="col-sm-6 show-answers" ng-repeat="an in answers">
+        <h4 class="title">{{an.questions}}</h4>
+        <canvas id="bar" class="chart chart-bar" chart-data="an.answers" chart-series="series" chart-labels="labels" chart-colors="colors"></canvas>
     </div>
   </div>
 </div>

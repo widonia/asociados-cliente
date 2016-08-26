@@ -2,7 +2,7 @@
 
 <ol class="breadcrumb">
 	<li><a href="#">Inicio</a></li>
-	<li><a href="#/cooperative/polls">Asociados</a></li>
+	<li><a href="#/cooperative/polls">Encuestas</a></li>
 	<li class="active">{{poll.action == "new" ? "Nuevo" : "Editar"}}</li>
 </ol>
 
@@ -42,7 +42,7 @@
 
         <div class="row">
             <div class="form-group col-sm-8 date-to-publish">
-                <div class="col-sm-3 the-date">
+                <div class="col-sm-4 the-date">
                     <label class="control-label">Fecha de publicación:</label>
                     <div class="input-group date publish-data" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                         <input type="text" class="form-control" ng-model="form.date_start">
