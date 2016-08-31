@@ -169,12 +169,26 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     
     // Show options if the question is type closed, close with comments and multiple choise
     $scope.showOptions = function(actualType){
+        console.log(actualType);
+        console.log(actualType.id);
         $scope.idactualTypePoll = actualType.id;
         if(actualType.id == 2 || actualType.id == 3){
             $scope.optionsAnswer = 1;
         }else $scope.optionsAnswer = 0;
     }
+
+    $scope.deleteQuestion = function(id){
+        PollService.delete({'id': id}, $scope.onDeleteQuestionSuccess, $scope.onDeleteQuestionErr);
+    }
     
+    $scope.onDeleteQuestionSuccess = function(response){
+        SweetAlert.swal("¡Realizado!", "La pregunta se ha borrado correctamente.", "success");
+    }
+
+    $scope.onDeleteQuestionErr = function(response){
+        SweetAlert.swal("Ups!", "Sucedio algo inesperado, inténtalo de nuevo.", "error");
+    }
+
     this.init();
 }
 

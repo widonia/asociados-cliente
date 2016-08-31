@@ -18,7 +18,7 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
         // console.log(response);
         $rootScope.$broadcast('loading-hide');
         this.data = response;
-        this.parseHStore();
+        if(this.action === "edit") this.parseHStore();
     }
 
     this.parseHStore = function(){
@@ -26,6 +26,7 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
             this.hstore.push({key:element, value:this.data.data[element]});
         }
     }
+    console.log(this.hstore);
 
     this.applyHStore = function(){
         this.data.data = {};

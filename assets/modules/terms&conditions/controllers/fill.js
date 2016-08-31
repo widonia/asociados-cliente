@@ -54,8 +54,8 @@ function TermsFillCtrl($scope, $rootScope,  $http, $routeParams, Config,  Cooper
            text: "¿Esta seguro de editar los términos y condiciones?",
            type: "warning",
            showCancelButton: true,
-           confirmButtonColor: "#DD6B55",
-           confirmButtonText: "Si, ¡quiero eliminarlo!",
+           confirmButtonColor: "#5cb85c",
+           confirmButtonText: "Si, ¡quiero editarlo!",
            cancelButtonText: "Cancelar",
            closeOnConfirm: false,
            closeOnCancel: true 

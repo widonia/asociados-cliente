@@ -1,6 +1,6 @@
 "use strict";
 
-function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
+function SocialFormCtrl($rootScope, $routeParams, SocialService, action, SweetAlert){
     this.data = {};
     this.form = false;
     this.action = action;
@@ -72,6 +72,10 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action){
     }
 
     this.onSubmitError = function(response){
+        console.log(response);
+        if(response.data.errors.URL === "BadURL"){
+            SweetAlert.swal("Ups!", "Esta no es una URL válida.", "error");
+        }
         $rootScope.$broadcast('loading-hide');
         this.form.success = false;
     }

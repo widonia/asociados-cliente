@@ -90,6 +90,7 @@ function listView(Config){
             }
 
             this.onGetList = function(response){
+                console.log(response);
                 this.count = response.count;
 
                 // apply callback to make specific modifications to the result list

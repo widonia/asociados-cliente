@@ -91,7 +91,7 @@
                 <input type="text" class="form-control" required name="content" ng-model="quest.content">        
             </div>
             <div class="form-group col-xs-8">
-                <label class="control-label">Tipo de pregunta:</label>
+                <label class="control-label">Tipo de pregunta:</label>{{quest.actualType}}
                 <select class="form-control" required ng-model="quest.actualType" ng-options="actualType.name for actualType in typePoll" ng-change="showOptions(quest.actualType)">
                 </select>
             </div>
@@ -108,7 +108,7 @@
         </div>
         <div class="row">
             <div class="form-group col-xs-8 save-poll">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>                
                 <hr class="separated-line">
             </div>
         </div>
@@ -125,20 +125,20 @@
                 </div>
                 <div class="form-group col-xs-8">
                     <label class="control-label">Tipo de pregunta:</label>
-                    <select class="form-control" required ng-model="quest.actualType" ng-options="type.name for type in typePoll" ng-change="showOptions(quest.type)">
+                    <select class="form-control" required ng-model="quest.actualType" ng-options="type.name for type in typePoll" ng-change="showOptions(quest.actualType)">
                     </select>
                     <div class="row">
-                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3" ng-repeat="options in quest.option_set">
+                        <div class="form-group col-xs-6" ng-if="quest.actualType.id == 2 || quest.actualType.id == 3" ng-repeat="options in quest.option_set">
                             <h6>Opciones de respuesta</h6>
                             <input type="text" class="form-control" name="options" ng-model="options.content">
                         </div>
                     </div>
                     <div class="row" ng-if="addOptions">
-                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3">
+                        <div class="form-group col-xs-6" ng-if="quest.actualType.id == 2 || quest.actualType.id == 3">
                             <h6>Opciones de respuesta</h6>
                             <input type="text" class="form-control" name="options" ng-model="quest.option1">
                         </div>
-                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3">
+                        <div class="form-group col-xs-6" ng-if="quest.actualType.id == 2 || quest.actualType.id == 3">
                             <h6>Opciones de respuesta</h6>
                             <input type="text" class="form-control" name="options" ng-model="quest.option2">
                         </div>
@@ -146,6 +146,7 @@
                     <div class="row">
                         <div class="form-group col-xs-12 save-poll">
                             <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-primary" ng-click="deleteQuestion(quest.id)">Borrar</button>
                             <hr class="separated-line">
                         </div>
                     </div>
