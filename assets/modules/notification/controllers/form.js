@@ -252,7 +252,16 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             console.log('if');
             this.autocomplete.list.push(user);            
             console.log(this.autocomplete);
-            this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
+            if(user.id == undefined){
+                if(this.data.users.indexOf(user.user_id)){
+                    this.data.users.push(user.user_id);        
+                }
+            }else{
+                if(this.data.users.indexOf(user.id)){
+                    this.data.users.push(user.id);
+                }
+            }
+            // this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
             console.log(this.data.users);
         }
 
@@ -263,13 +272,15 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.removeUser = function(username){
+        console.log(this.data.users);
         for (var user in this.autocomplete.list){
             if(username == this.autocomplete.list[user]['username']){
                 this.autocomplete.list.splice(user, 1);
                 this.data.users.splice(user, 1);
-                break;
+                // break;
             }
         }
+        console.log(this.data.users);
     }
 
     this.init();
