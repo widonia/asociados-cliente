@@ -1,6 +1,6 @@
 "use strict";
 
-function PollController($scope, PollService, action, $routeParams, SweetAlert){
+function PollController($scope, PollService, action, $routeParams, SweetAlert, $window){
     $scope.action = action;
     var idPoll = $routeParams.id;
     $scope.statusPoll = [
@@ -20,6 +20,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     $scope.idTypePoll;
     $scope.addOptions = false; //flag to a add optiones to questios type 2 and 3
     $scope.hours = [];
+    $scope.disable = false;
     
     this.init = function(){
         if($scope.action != 'new'){
@@ -39,6 +40,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     }
     // If success, fill the form with the poll and the answers
     $scope.getPollSuccess = function(response){
+        console.log(response);
         $scope.pollQuestions = response.question_set;
         
         if(response.state == 1){ //Set the poll state
@@ -53,7 +55,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
                     $scope.pollQuestions[i].actualType = $scope.typePoll[1];
                     break;
                 case 3:
-                    $scope.pollQuestions[i].actualType = $scope.typePoll[1];
+                    $scope.pollQuestions[i].actualType = $scope.typePoll[2];
                     break;
                 default:
                     $scope.pollQuestions[i].actualType = $scope.typePoll[0];
@@ -62,6 +64,10 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
 
             if($scope.pollQuestions[i].option_set.length > 0){
                 $scope.addOptions = false; 
+            }
+
+            if($scope.pollQuestions[i].users_response.length > 0){
+                $scope.disable = true;
             }
         }
         
@@ -100,7 +106,22 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     
     // If action is equal to new Poll
     $scope.onSubmitSuccess = function(response){
-        SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
+        // SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
+
+        SweetAlert.swal({
+            title: "¡Realizado!",
+            text: "Acción realizada correctamente.",
+            type: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ok",
+            closeOnConfirm: true,
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                $window.location.href = '/#/poll';
+            }
+        });
     }
     
     $scope.onSubmitErr = function(response){
@@ -118,6 +139,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     // Answers to questions
     $scope.answerToQuestion = function(quest, action){
         console.log(quest)
+        console.log(action)
         $scope.question = {
             content: quest.content,
             type: quest.actualType.id,
@@ -133,6 +155,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
                 $scope.question.options.push(quest.option2);
             }
             PollService.create($scope.question, $scope.onCreateSuccess, $scope.onCreateErr);
+            $scope.optionsAnswer = 0;
         }else{
             if($scope.question.type == 2 || $scope.question.type == 3){
                 if(quest.option_set.length == 0){
@@ -146,12 +169,12 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
             }
             PollService.edit({idQ:quest.id}, $scope.question, $scope.onEditSuccess, $scope.onEditErr);
         }
-        $scope.getPoll();
         $scope.quest = {};
     }
     // Create question
     $scope.onCreateSuccess = function(response){
         $scope.created = true;
+        $scope.getPoll();
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
     
@@ -160,6 +183,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     }
     // Edit Question
     $scope.onEditSuccess = function(response){
+        $scope.getPoll();
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
     
@@ -172,6 +196,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
         console.log(actualType);
         console.log(actualType.id);
         $scope.idactualTypePoll = actualType.id;
+        $scope.typePoll.type = actualType.id;
         if(actualType.id == 2 || actualType.id == 3){
             $scope.optionsAnswer = 1;
         }else $scope.optionsAnswer = 0;
@@ -182,6 +207,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert){
     }
     
     $scope.onDeleteQuestionSuccess = function(response){
+        $scope.getPoll();
         SweetAlert.swal("¡Realizado!", "La pregunta se ha borrado correctamente.", "success");
     }
 
