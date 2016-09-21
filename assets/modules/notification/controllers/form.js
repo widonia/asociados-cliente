@@ -104,7 +104,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         // Set image thumbnail if exist
         if (this.data.image != undefined  && this.data.image != ""){
             // $scope.image = this.data.image;
-            this.data.image = this.data.image + ".150x150." + this.data.image.split(".").pop(-1)
+            this.data.image = this.data.image
         }
         console.log(response);
     }
@@ -140,7 +140,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         if (this.form.$valid) {
             if(this.action == 'new'){; 
                 console.log('new')
-                console.log(this.data.users);
+                console.log(this.data);
                 NotificationService.post({}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -234,6 +234,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.addUserByGroup = function(){            
         for(var user in this.groups[this.data.group].users){
             // console.log("iterando", user);
+            console.log(this.groups[this.data.group].users[user])
             this.addUser(this.groups[this.data.group].users[user]);
         }
     }
@@ -254,8 +255,17 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             console.log('if');
             console.log(user.id);
             this.autocomplete.list.push(user);            
-            this.data.users.push( ((user.id == undefined) ? user.id : user.id) );
-            console.log('this.data.users');
+            console.log(this.autocomplete);
+            if(user.id == undefined){
+                if(this.data.users.indexOf(user.user_id)){
+                    this.data.users.push(user.user_id);        
+                }
+            }else{
+                if(this.data.users.indexOf(user.id)){
+                    this.data.users.push(user.id);
+                }
+            }
+            // this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
             console.log(this.data.users);
         }
 
@@ -266,13 +276,15 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.removeUser = function(username){
+        console.log(this.data.users);
         for (var user in this.autocomplete.list){
             if(username == this.autocomplete.list[user]['username']){
                 this.autocomplete.list.splice(user, 1);
                 this.data.users.splice(user, 1);
-                break;
+                // break;
             }
         }
+        console.log(this.data.users);
     }
 
     this.init();

@@ -1,9 +1,9 @@
-<h1>{{action == "new" ? "Nuevo" : "Editar"}} Encuesta</h1>
+<h1>{{poll.action == "new" ? "Nueva" : "Editar"}} Encuesta</h1>
 
 <ol class="breadcrumb">
 	<li><a href="#">Inicio</a></li>
-	<li><a href="#/cooperative/polls">Asociados</a></li>
-	<li class="active">{{poll.action == "new" ? "Nuevo" : "Editar"}}</li>
+	<li><a href="#/cooperative/polls">Encuestas</a></li>
+	<li class="active">{{poll.action == "new" ? "Nuevo" : "Editar"}}</li>{{poll.action}}
 </ol>
 
 <div ng-show="poll.form.success">
@@ -29,8 +29,36 @@
         <div class="row">
             <div class="form-group col-sm-8">
                 <label class="control-label">Estado:</label>
-                <select class="form-control" ng-model="status" ng-options="status.name for status in statusPoll">
+                <select class="form-control" ng-model="status" ng-options="status.name for status in statusPoll" required>
                 </select>
+                
+                <div class="bg-danger error" ng-show="poll.form.pollname.$invalid && poll.form.submitted">
+                    <small ng-show="poll.form.pollname.$error.required">
+                        Elige un estado para la encuesta.
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-8 date-to-publish">
+                <div class="col-sm-4 the-date">
+                    <label class="control-label">Fecha de publicación:</label>
+                    <div class="input-group date publish-data" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                        <input type="text" class="form-control" ng-model="form.date_start">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label">Hora de publicación:</label>
+                    <div class="input-group publish-data">
+                        <select name="hour" id="hour" class="form-control" ng-model="form.hoursPublish" required>
+                            <option ng-repeat="h in hours" ng-value="h">{{h}}</option>
+                        </select>
+                    </div>
+                </div>
                 
                 <div class="bg-danger error" ng-show="poll.form.pollname.$invalid && poll.form.submitted">
                     <small ng-show="poll.form.pollname.$error.required">
@@ -55,7 +83,7 @@
         </div> 
     </div>
     <!-- New Question -->
-    <form novalidate name="questi" class="form" ng-submit="answerToQuestion(quest, 'new')">
+    <form novalidate name="questi" class="form" ng-submit="answerToQuestion(quest, 'new')" ng-hide="poll.action == 'new'">
         <h3>Nueva Pregunta</h3>
         <div class="row">
             <div class="form-group col-xs-8">
@@ -80,7 +108,7 @@
         </div>
         <div class="row">
             <div class="form-group col-xs-8 save-poll">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>                
                 <hr class="separated-line">
             </div>
         </div>
@@ -92,32 +120,33 @@
             <div class="row">
                 <div class="form-group col-xs-8">
                     <label class="control-label">Enunciado de la pregunta:</label>
-                    <input type="text" class="form-control" required name="content" ng-model="quest.content">
+                    <input type="text" class="form-control" required name="content" ng-model="quest.content" ng-disabled="disable">
                     <input type="hidden" ng-model="quest.id">
                 </div>
                 <div class="form-group col-xs-8">
                     <label class="control-label">Tipo de pregunta:</label>
-                    <select class="form-control" required ng-model="quest.actualType" ng-options="type.name for type in typePoll" ng-change="showOptions(quest.type)">
+                    <select class="form-control" required ng-model="quest.actualType" ng-options="type.name for type in typePoll" ng-change="showOptions(quest.actualType)" ng-disabled="disable">
                     </select>
                     <div class="row">
-                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3" ng-repeat="options in quest.option_set">
+                        <div class="form-group col-xs-6" ng-if="quest.actualType.id == 2 || quest.actualType.id == 3" ng-repeat="options in quest.option_set">
                             <h6>Opciones de respuesta</h6>
-                            <input type="text" class="form-control" name="options" ng-model="options.content">
+                            <input type="text" class="form-control" name="options" ng-model="options.content" ng-disabled="disable">
                         </div>
                     </div>
                     <div class="row" ng-if="addOptions">
-                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3">
+                        <div class="form-group col-xs-6" ng-if="quest.actualType.id == 2 || quest.actualType.id == 3">
                             <h6>Opciones de respuesta</h6>
-                            <input type="text" class="form-control" name="options" ng-model="quest.option1">
+                            <input type="text" class="form-control" name="options" ng-model="quest.option1" ng-disabled="disable">
                         </div>
-                        <div class="form-group col-xs-6" ng-if="quest.type == 2 || quest.type == 3">
+                        <div class="form-group col-xs-6" ng-if="quest.actualType.id == 2 || quest.actualType.id == 3">
                             <h6>Opciones de respuesta</h6>
-                            <input type="text" class="form-control" name="options" ng-model="quest.option2">
+                            <input type="text" class="form-control" name="options" ng-model="quest.option2" ng-disabled="disable">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12 save-poll">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" ng-disabled="disable">Guardar</button>
+                            <button type="button" class="btn btn-primary" ng-click="deleteQuestion(quest.id)" ng-disabled="disable">Borrar</button>
                             <hr class="separated-line">
                         </div>
                     </div>

@@ -28,6 +28,7 @@ angular.module('app', [
     'app.tasks',
     'app.terms',
     'app.poll',
+    'chart.js'
 ])
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',

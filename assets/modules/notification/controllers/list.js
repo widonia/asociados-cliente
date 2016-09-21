@@ -45,7 +45,7 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
             NotificationService.delete({id:id}, this.onDelete.bind(this));
               SweetAlert.swal("¡Eliminado!", "Notificación eliminada correctamente.", "success");
            } else {
-              SweetAlert.swal("Canecelado", "No se eliminó nada.", "error");
+              SweetAlert.swal("Cancelado", "No se eliminó nada.", "error");
            }
         });
     }
