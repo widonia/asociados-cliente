@@ -59,11 +59,13 @@ function PollViewController($scope, PollService, $routeParams){
             answers.push(temporalAnswers);
             // Empty array to add the new answers
             temporalAnswers = [];
-            // Create an array to do the data-binding and to iterate in the view 
-            $scope.answers.push({
-                questions: listanswers[i].question,
-                answers: answers[i]
-            })
+            // Create an array to do the data-binding and to iterate in the view
+            if(answers[i].length != 0){
+                $scope.answers.push({
+                    questions: listanswers[i].question,
+                    answers: answers[i]
+                })
+            }
         }
         $scope.data = answers;
         console.log($scope.answers);

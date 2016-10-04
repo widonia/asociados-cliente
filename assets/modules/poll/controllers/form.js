@@ -84,6 +84,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
     
     // Do the new or edit petition when the form is submitted
     $scope.submit = function(){
+        console.log($scope.form.hoursPublish);
         if($scope.form.name == undefined){
             SweetAlert.swal("Ups!", "El nombre de la encuesta es obligatorio.", "error");
         }else if($scope.form.date_start == undefined || $scope.form.hoursPublish == undefined){
@@ -119,7 +120,8 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
         },
         function(isConfirm){
             if (isConfirm) {
-                $window.location.href = '/#/poll';
+                $window.location.href = '/#/poll'; //localhost
+                // $window.location.href = '/cliente/#/poll'; //Server
             }
         });
     }
