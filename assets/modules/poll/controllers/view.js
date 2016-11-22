@@ -72,6 +72,25 @@ function PollViewController($scope, PollService, $routeParams){
     $scope.getshowResutlsByPollErr = function(response){
         console.log(response);
     }
+
+    // Download poll results like CVS
+    $scope.downloadCvs = function(){
+        PollService.cvsPoll({idPoll}, $scope.downloadCvsSuccess, $scope.downloadCvsError);
+    }
+
+    $scope.downloadCvsSuccess = function(response){
+        console.log(response);
+        // var arrayResponse = [response];
+        // console.log(arrayResponse)
+        // console.log(typeof response);
+        // console.log(Object.keys( response ).length);
+
+        JSONToCSVConvertor(response, "1Encuestas", true);
+    }
+
+    $scope.downloadCvsError = function(response){
+        console.log(response);
+    }
     
     this.init();
 }

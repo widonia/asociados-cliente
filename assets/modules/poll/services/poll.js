@@ -16,6 +16,7 @@ function PollService($resource, Config){
         edit: {method: 'PUT', params:{idQ:"@idQ"}, url:_urlA+':idQ/'},
         result: {method: 'GET', params:{idPoll:'@idPoll'}, url:_url+':idPoll/results/'},
         showResutlsByPoll: {method: 'GET', params:{idPoll:'@idPoll'}, url:_url+':idPoll/stats/'},
+        cvsPoll: {method: 'GET', params:{'idPoll': '@idPoll'}, url:_url+':idPoll/results_csv/'}
     })
 }
 

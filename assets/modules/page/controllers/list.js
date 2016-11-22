@@ -67,6 +67,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     }
 
     var onGetList = function(data) {
+        console.log(data);
         var lista = data[0].data;
         
         this.parents = lista.filter( function(obj) {
@@ -83,7 +84,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         });      
 
         //recursive, get childres for a id
-        var getChildrens = function(id){              
+        var getChildrens = function(id){   
           var hijos = lista.filter(function(v){
             return v.parent == id;
           });
@@ -106,6 +107,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
           principales[i].nodes = getChildrens(principales[i].id);
         }
         this.data_nodes = principales;
+        console.log(principales)
     }
     
 
@@ -146,7 +148,6 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       //   // this.data = response;
       // }     
       // PageService.get({id:this.data.id}, onSuccesGet.bind(this));
-
     }
 
 
@@ -256,6 +257,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
             }
 
             if(this.action == 'edit'){
+                console.log(this.data.id)
                 PageService.put({id:this.data.id}, this.data,
                     this.onSubmit.bind(this),
                     this.onSubmitErr.bind(this)

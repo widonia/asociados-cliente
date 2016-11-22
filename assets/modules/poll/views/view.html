@@ -6,36 +6,12 @@
 </ol>
 
 <div class="panel-group view-poll" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-9">
+      <button type="button" class="btn btn-success" ng-click="downloadCvs()">Descargar</button>
+    </div>
+  </div>
   <p class="bg-warning" ng-show="messagePoll">Esta encuesta aún no tiene preguntas</p>
-  <!--<div class="panel panel-default" ng-repeat="answer in answers">
-    <div class="panel-heading" role="tab" id="heading{{$index}}">
-      <h4 class="panel-title">
-          {{answer.question}}
-      </h4>
-      <h6>Tipo de pregunta: {{answer.type}}</h6>
-    </div>
-    <div id="$index" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$index}}" ng-repeat="response in answer.responses">
-      <div class="panel-body user-response">
-        <label>Usuario:</label> {{response.user.username}}
-      </div>
-      <div class="panel-body" ng-if="answer.type == 'Cerrada'">
-          <label>Respuesta:</label> <span>{{response.close_responses}}</span>
-      </div>
-      <div class="panel-body" ng-if="answer.type == 'Close with comment'">
-        <div ng-repeat="resp in response.close_responses">
-          <label>Respuesta:</label> {{resp}}<br>
-        </div>
-        <label>Opinión:</label> {{response.open_response}}
-      </div>
-      <div class="panel-body" ng-if="answer.type == 'Open'">
-          <label for="">Respuesta:</label>
-          {{response.open_response}}
-      </div>
-    </div>
-
-
-    
-  </div>-->
   <div class="row">
     <div class="col-sm-6 show-answers" ng-repeat="an in answers">
         <h4 class="title">{{an.questions}}</h4>
