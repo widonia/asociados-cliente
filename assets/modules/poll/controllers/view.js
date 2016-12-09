@@ -19,7 +19,6 @@ function PollViewController($scope, PollService, $routeParams){
     $scope.getResultsSuccess = function(response){
         console.log(response);
         $scope.answers = response.data;
-        console.log(response.data.length);
         for(var i = 0; i<$scope.answers.length; i++){
             if($scope.answers[i].type == 'Close'){
                 $scope.answers[i].type = 'Cerrada';

@@ -55,7 +55,7 @@
                     <label class="control-label">Hora de publicación:</label>
                     <div class="input-group publish-data">
                         <select name="hour" id="hour" class="form-control" ng-model="form.hoursPublish" required>
-                            <option ng-repeat="h in hours" ng-value="h">{{h}}</option>
+                            <option ng-repeat="h in hours" ng-value="{{form.hoursPublish}}">{{h}}</option>
                         </select>
                     </div>
                 </div>
@@ -80,10 +80,11 @@
     <div class="row">
         <div class="col-xs-8">
             <hr class="separated-line">
+            {{poll.action}}
         </div> 
     </div>
     <!-- New Question -->
-    <form novalidate name="questi" class="form" ng-submit="answerToQuestion(quest, 'new')" ng-hide="poll.action == 'new'">
+    <form ng-if="action == 'edit'" novalidate name="questi" class="form" ng-submit="answerToQuestion(quest, 'new')">
         <h3>Nueva Pregunta</h3>
         <div class="row">
             <div class="form-group col-xs-8">
