@@ -77,15 +77,14 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
         
         //2nd loop will extract each column and convert it in string comma-seprated
         for (var index in arrData[i]) {
-            // console.log(arrData[i])
-            // row += '"' + arrData[i][index] + '",';
-            // if(arrData[i][index] != '"' && arrData[i][index] != ' ', arrData[i][index] != ' '){
-            //     row += '"' + arrData[i][index] + '",';
-            // }
+            console.log(arrData[i])
+            row += '"' + arrData[i][index] + '",';
+            if(arrData[i][index] != '"' && arrData[i][index] != ' ', arrData[i][index] != ' '){
+                 row += '"' + arrData[i][index] + '",';
+            }
         }
 
         row.slice(0, row.length - 1);
-        console.log("slice")
         // console.log(row)
         
         //add a line break after each row
