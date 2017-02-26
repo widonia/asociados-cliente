@@ -25,7 +25,7 @@ if(ENV == 'Stage'){
 
 if(ENV == 'Prod'){
     angular.module('app.common.services').constant('Config', {
-        REST: 'http://52.11.113.25',
+        REST: 'https://www.asociados.com.co',
         DATA: 'http://52.11.113.25/statistics',
         STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/prod',
         MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.prod'
