@@ -155,6 +155,9 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
             if($scope.question.type == 2 || $scope.question.type == 3){
                 $scope.question.options.push(quest.option1);
                 $scope.question.options.push(quest.option2);
+                $scope.question.options.push(quest.option3);
+                $scope.question.options.push(quest.option4);
+                $scope.question.options.push(quest.option5);
             }
             PollService.create($scope.question, $scope.onCreateSuccess, $scope.onCreateErr);
             $scope.optionsAnswer = 0;
@@ -163,6 +166,9 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
                 if(quest.option_set.length == 0){
                     $scope.question.options.push(quest.option1);
                     $scope.question.options.push(quest.option2);
+                    $scope.question.options.push(quest.option3);
+                    $scope.question.options.push(quest.option4);
+                    $scope.question.options.push(quest.option5);
                 }else{
                     for(var i = 0; i<quest.option_set.length; i++){
                         $scope.question.options.push(quest.option_set[i].content);
