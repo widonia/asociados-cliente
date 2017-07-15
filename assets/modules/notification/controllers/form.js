@@ -3,7 +3,11 @@
 function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, NotificationService, action, UserService, Config, GroupsService, SweetAlert){
 
     this.autocomplete = {'key':'', 'suggest':[], 'list':[]};
-    this.data = {'public':true, 'users':[]};
+    this.data = {
+        'public':true,
+        'users':[],
+        content: ""
+    };
     this.action = action;
     this.form = false;
     this.groups = {};
@@ -14,6 +18,15 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     var titleTooLong;
 
     this.init = function(){
+
+        this.data = {
+            content: "",
+            parent: null,
+            position: "0",
+            title: null,
+            type: null,
+            published: true
+        };
 
         if(this.action == 'edit'){ this.populate(); }        
         this.tinymceOptions = {
@@ -32,64 +45,17 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
                 // '../../../css/tinimyci.css'
             ],
             image_advtab: true,
-            // images_upload_url: '/camilomilo',
-            // file_browser_callback: function(field_name, url, type, win) {
-            //     // win.document.getElementById(field_name).value = 'my browser value';
-            //     console.log("Hola que hace todo bien o que hace");
-            // },
-            // file_picker_callback: function(callback, value, meta) {
-            //     // Provide file and text for the link dialog
-            //     if (meta.filetype == 'file') {
-            //       callback('mypage.html', {text: 'My text'});
-            //     }
-
-            //     // Provide image and alt text for the image dialog
-            //     if (meta.filetype == 'image') {
-            //       callback('myimage.jpg', {alt: 'My alt text'});
-            //     }
-
-            //     // Provide alternative source and posted for the media dialog
-            //     if (meta.filetype == 'media') {
-            //       callback('movie.mp4', {source2: 'alt.ogg', poster: 'image.jpg'});
-            //     }
-            // },
-            // images_upload_base_path: '/some/basepath',
-            // images_upload_credentials: true,
-            // images_upload_handler: function (blobInfo, success, failure) {
-            //     var xhr, formData;
-
-            //     xhr = new XMLHttpRequest();
-            //     xhr.withCredentials = false;
-            //     xhr.open('POST', 'postAcceptor.php');
-
-            //     xhr.onload = function() {
-            //         var json;
-
-            //         if (xhr.status != 200) {
-            //             failure('HTTP Error: ' + xhr.status);
-            //             return;
-            //         }
-
-            //         json = JSON.parse(xhr.responseText);
-
-            //         if (!json || typeof json.location != 'string') {
-            //             failure('Invalid JSON: ' + xhr.responseText);
-            //             return;
-            //         }
-
-            //         success(json.location);
-            //     };
-
-            //     formData = new FormData();
-            //     formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-            //     xhr.send(formData);
-            // },
-            // images_upload_url: 'postAcceptor.php'
         };
         GroupsService.get({}, this.onGroups.bind(this), this.onGroupsErr.bind(this));
     }
 
+    this.populate = function(){
+        $rootScope.$broadcast('loading-show');
+        NotificationService.get({id:$routeParams.id},
+            this.onPopulateOk.bind(this),
+            this.onPopulateError.bind(this)
+        );
+    }
 
     this.onPopulateOk = function(response){
         $rootScope.$broadcast('loading-hide');        
@@ -106,7 +72,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             // $scope.image = this.data.image;
             this.data.image = this.data.image
         }
-        console.log(response);
     }
 
     this.onPopulateError = function(response){
@@ -123,14 +88,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
     this.onGroupsErr = function(){
         console.log('On groups Err')
-    }
-
-    this.populate = function(){
-        $rootScope.$broadcast('loading-show');
-        NotificationService.get({id:$routeParams.id},
-            this.onPopulateOk.bind(this),
-            this.onPopulateError.bind(this)
-        );
     }
 
     this.submit = function(){

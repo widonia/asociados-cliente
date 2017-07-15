@@ -2,14 +2,6 @@
 
 function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
 
-    this.data = {
-      content: "",
-      parent: null,
-      position: "0",
-      title: null,
-      type: null,
-      published: true
-    };
     this.parents = [];
     this.nodeData = null;
     this.data_nodes = [];
