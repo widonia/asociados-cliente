@@ -1,6 +1,6 @@
 "use strict";
 
-function PollViewController($scope, PollService, $routeParams){
+function PollViewController($scope, PollService, $routeParams, $q, $http){
     var idPoll = $routeParams.id;
     $scope.answers = [];
     $scope.messagePoll = false;
@@ -19,7 +19,6 @@ function PollViewController($scope, PollService, $routeParams){
     $scope.getResultsSuccess = function(response){
         console.log(response);
         $scope.answers = response.data;
-        console.log(response.data.length);
         for(var i = 0; i<$scope.answers.length; i++){
             if($scope.answers[i].type == 'Close'){
                 $scope.answers[i].type = 'Cerrada';
@@ -72,6 +71,34 @@ function PollViewController($scope, PollService, $routeParams){
     }
 
     $scope.getshowResutlsByPollErr = function(response){
+        console.log(response);
+    }
+
+    // Download poll results like excel file
+    $scope.downloadCvs = function(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://54.187.171.36/api/polls/37/results_excel/?cooperative_id=5', true);
+        xhr.withCredentials = true;
+        xhr.setRequestHeader('Authorization', 'token b55edd7a5f5b9e47cec057b1356bc0f22506dcc5')
+        xhr.responseType = 'blob';
+
+        xhr.onload = function(e) {
+            if (this.status == 200) {
+                var blob = new Blob([this.response], {
+                    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8',
+                    /*responseType: "arraybuffer"*/
+                });
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "resultados.xlsx";
+                link.click();       
+            }
+        };
+
+        xhr.send();
+    }
+
+    $scope.downloadCvsError = function(response){
         console.log(response);
     }
     

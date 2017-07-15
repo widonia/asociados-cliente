@@ -76,6 +76,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
             date_start: response.date_start.slice(0,10),
             hoursPublish: response.date_start.slice(11,16)
         };
+        console.log($scope.form)
     }
     
     $scope.getPollErr = function(response){
@@ -100,6 +101,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
                 PollService.post(dataPoll, $scope.onSubmitSuccess, $scope.onSubmitErr);
             }else{
                 var theForm = dataPoll;
+                console.log(theForm)
                 PollService.put({idPoll:idPoll}, theForm, $scope.onUpdateSuccess(), $scope.onUpdateErr);
             }
         }
@@ -131,6 +133,7 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
     }
     // Edit Poll
     $scope.onUpdateSuccess = function(response){
+        console.log(response);
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
     

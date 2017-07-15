@@ -43,6 +43,7 @@ angular.module('app', [
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'https://s3-us-west-2.amazonaws.com/**',
 			'http://127.0.0.1:4000',
+			// 'http://192.168.0.22:4000',
         ]);
 
 		//auth interceptor
