@@ -20,13 +20,15 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.init = function(){
 
         this.data = {
-            content: "",
-            parent: null,
-            position: "0",
-            title: null,
-            type: null,
-            published: true
-        };
+            "content": "",
+            "parent": null,
+            "position": "0",
+            "title": "",
+            "published": false,
+            "description": "",
+            "observation": "",
+            "users":[]
+        }
 
         if(this.action == 'edit'){ this.populate(); }        
         this.tinymceOptions = {
