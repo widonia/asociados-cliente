@@ -105,7 +105,7 @@ function listView(Config){
             }
 
             this.delete = function(id){
-                event.preventDefault();
+                // event.preventDefault();
                 var confirmation = function(isConfirm){ 
                    if (isConfirm) {
                         CRUDService.delete({object:this.rest, id:id}, this.onDelete.bind(this));

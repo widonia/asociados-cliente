@@ -30,6 +30,7 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){
+                console.log('new');
                 UserService.save({}, this.data,
                     this.onSubmit.bind(this),
                     this.onSubmitErr.bind(this)
@@ -46,6 +47,8 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
     }
 
     this.onSubmit = function(response){
+        console.log('success')
+        console.log(response);
         this.form.success = true;
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
         if (this.action == "new"){
@@ -56,6 +59,8 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
     }
 
     this.onSubmitErr = function(response){
+        console.log('error')
+        console.log(response);
         this.form.success = false;
         SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
     }
@@ -78,9 +83,10 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
     $scope.getTemporalImage = function(image){
         // var theImage = 'https://s3-us-west-2.amazonaws.com/asociados.stage/' + image;
         // $scope.myImage = Config.REST+ '/' + image;
+        console.log($scope.myImage);
         console.log(image);
         // $scope.myImage = 'img/beta.jpg';
-        $scope.myImage = 'https://s3-us-west-2.amazonaws.com/asociados.stage/' + image;
+        $scope.myImage = 'http://asociados.prod.s3.amazonaws.com/' + image;
     }
 
     $scope.approve = function(userId){

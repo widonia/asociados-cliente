@@ -57,7 +57,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, Sweet
                    // imageUrl: "http:://oitozero.com/avatar/avatar.jpg" 
                 });
             }
-
+            console.log(Config.DATA);
             if (response.config.url.indexOf(Config.DATA) > -1){
                 SweetAlert.swal({
                     title: "Estadísticas no disponibles",

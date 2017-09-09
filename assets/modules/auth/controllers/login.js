@@ -1,6 +1,6 @@
 "use strict";
 
-function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, AuthManager, UserService, AUTH_EVENTS){
+function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, AuthManager, UserService, AUTH_EVENTS, SweetAlert){
 
     this.form = false;
     this.error = false;
@@ -40,6 +40,7 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
     }
 
     this.onLoginError = function(response){
+        console.log('asdf');
         this.error = true;
         this.form = true;
         AuthManager.logout();
@@ -55,7 +56,12 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
     }
 
     this.onCoopListOk = function(response, username, last_login){
-        this.selectCoop(response.data[0].cooperative.id, response.data[0].role, username, last_login);
+        if(response.data.length <= 0){
+            SweetAlert.swal("Error", "Este usuario no tiene acceso a esta cooperativa o la cooperativa esta desactivada.", "error");
+        }else{
+             this.selectCoop(response.data[0].cooperative.id, response.data[0].role, username, last_login);
+        }
+        
         // var size = Object.keys(response.data).length;
 
         // if(size == 1){
