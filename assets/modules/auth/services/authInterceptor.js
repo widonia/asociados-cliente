@@ -11,7 +11,8 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, Sweet
                 
                 if(!request.cache){
                     request.url = fixURL(request.url);
-                    request.url = addParameter(request.url, 'cooperative_id=' + AuthManager.get('cooperative'));
+                    request.url = addParameter(request.url, 'entity_id=' + AuthManager.get('cooperative'));
+                    request.headers['version'] = '2.0.0';
 
                     if(AuthManager.get('token') != undefined){
                         request.headers['Authorization'] = 'token '+AuthManager.get('token');

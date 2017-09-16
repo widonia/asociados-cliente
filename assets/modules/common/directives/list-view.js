@@ -83,7 +83,7 @@ function listView(Config){
                     query = this.getQuery();
                 }
 
-                var request = Config.REST + '/api/' + this.rest + '/?page='+this.page + query;             
+                var request = Config.REST + '/' + this.rest + '/?page='+this.page + query;             
                 $http.get(request)
                     .success(this.onGetList.bind(this))
                     .error(this.onGetListErr.bind(this));

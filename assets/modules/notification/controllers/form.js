@@ -141,7 +141,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
             fd.append('file', $scope.image);
 
-            $http.put(Config.REST + '/api/notification_client/'+response.id+'/add_image', fd,
+            $http.put(Config.REST + '/notification/'+response.id+'/add_image', fd,
             {   
                 transformRequest:angular.identity,
                 headers:{'Content-Type':undefined}

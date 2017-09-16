@@ -1,7 +1,9 @@
 "use strict";
 
 function NotificationService($resource, Config){
-    var _url = Config.REST + '/api/notification_client/:id/';
+    var _url = Config.REST + '/notification/:id/';
+    console.log("_url");
+    console.log(_url);
     
     return $resource(_url + '?fn=none&type=1', {}, {
         get: { method:'GET'},

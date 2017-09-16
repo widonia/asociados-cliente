@@ -59,7 +59,7 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
         if(response.data.length <= 0){
             SweetAlert.swal("Error", "Este usuario no tiene acceso a esta cooperativa o la cooperativa esta desactivada.", "error");
         }else{
-             this.selectCoop(response.data[0].cooperative.id, response.data[0].role, username, last_login);
+             this.selectCoop(response.data[0].entity_id, response.data[0].role, username, last_login);
         }
         
         // var size = Object.keys(response.data).length;

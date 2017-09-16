@@ -2,7 +2,7 @@
 
 function EmailService($resource, Config){
 
-    var _url = Config.REST + '/api/cooperative/email/:id/';
+    var _url = Config.REST + '/cooperative/email/:id/';
     
     return $resource(_url, {}, {
         get: { method:'GET'},
