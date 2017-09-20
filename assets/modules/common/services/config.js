@@ -21,7 +21,7 @@ if(ENV == 'Stage'){
         REST: 'http://54.187.171.36',
         DATA: 'http://54.187.171.36/statistics',
         // STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage', 
-        STATIC: 'http://localhost:4000',
+        STATIC: 'http://54.187.171.36',
         MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
 }
