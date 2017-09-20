@@ -2,7 +2,7 @@
 
 function AuthService($resource, Config){
     
-    var _url = Config.REST + '/api/auth/';
+    var _url = Config.REST + '/auth/';
     
     return $resource(_url, {}, {
         post: { method:'POST', url:_url+"login/"},

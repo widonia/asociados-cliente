@@ -2,7 +2,7 @@
 
 function SocialService($resource, Config){
 
-    var _url = Config.REST + '/api/social/:id';
+    var _url = Config.REST + '/social/:id';
 
     
     return $resource(_url + '?fn=none', {}, {
