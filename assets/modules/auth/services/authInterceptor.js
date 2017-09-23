@@ -11,7 +11,8 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, Sweet
                 
                 if(!request.cache){
                     request.url = fixURL(request.url);
-                    request.url = addParameter(request.url, 'cooperative_id=' + AuthManager.get('cooperative'));
+                    request.url = addParameter(request.url, 'entity_id=' + AuthManager.get('cooperative'));
+                    request.headers['version'] = '2.0.0';
 
                     if(AuthManager.get('token') != undefined){
                         request.headers['Authorization'] = 'token '+AuthManager.get('token');
@@ -57,7 +58,7 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, Sweet
                    // imageUrl: "http:://oitozero.com/avatar/avatar.jpg" 
                 });
             }
-
+            console.log(Config.DATA);
             if (response.config.url.indexOf(Config.DATA) > -1){
                 SweetAlert.swal({
                     title: "Estadísticas no disponibles",

@@ -2,7 +2,7 @@
 
 function NewsService($resource, Config){
     
-    var _url = Config.REST + '/api/news/:id/';
+    var _url = Config.REST + '/news/:id/';
     
     return $resource(_url, {}, {
         get: { method:'GET'},
