@@ -1,14 +1,14 @@
 "use strict";
 
 function CRUDService($resource, Config){
-    var _url = Config.REST + '/api/:object/:id/';
+    var _url = Config.REST + '/:object/:id/';
     
     return $resource(_url + '?fn=none', {}, {
         // get: { method:'GET'},
         // post: { method:'POST'},
         // put: { method:'PUT'},
         // delete: { mehod}
-        // delete: { method:'DELETE'}
+        delete: { method:'DELETE', url: _url}
     })
 }
 

@@ -19,16 +19,24 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
     this.init = function(){
 
+        var self = this;
+
         this.data = {
             "content": "",
             "parent": null,
             "position": "0",
             "title": "",
-            "published": false,
             "description": "",
             "observation": "",
-            "users":[]
-        }
+            "users":[],
+            "access_level": []
+        };
+
+        this.accessLevel = {
+            private: false,
+            semiPublic: false,
+            public: false
+        };
 
         if(this.action == 'edit'){ this.populate(); }        
         this.tinymceOptions = {
@@ -60,8 +68,21 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onPopulateOk = function(response){
-        $rootScope.$broadcast('loading-hide');        
+        $rootScope.$broadcast('loading-hide');
+        console.log(response);
         this.data = response;
+
+        if(response.access_level.indexOf("1") > -1){
+            this.accessLevel.public = true;
+        }
+
+        if(response.access_level.indexOf("2") > -1){
+            this.accessLevel.semiPublic = true;
+        }
+
+        if(response.access_level.indexOf("3") > -1){
+            this.accessLevel.private = true;
+        }
         
         // add actually users
         for (var i = this.data.users.length - 1; i >= 0; i--) {
@@ -93,14 +114,22 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.submit = function(){
+        var access_level = [];
+        var theData = {};
+        access_level = this.setAccessLevel(this.accessLevel);
+
         $rootScope.$broadcast('loading-show');
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){; 
                 console.log('new')
-                console.log(this.data);
-                NotificationService.post({}, this.data,
+                if(this.accessLevel.length > 0){
+                    this.data["access_level"] = access_level;
+                }
+                theData = this.data;
+                console.log(theData);
+                NotificationService.post({}, theData,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
                 );
@@ -109,6 +138,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             if(this.action == 'edit'){
                 console.log('edit')
                 console.log(this.data.users);
+                this.data["access_level"] = this.setAccessLevel(this.accessLevel);
+                console.log(this.data);
                 NotificationService.put({id:$routeParams.id}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -190,12 +221,29 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error");        
     }
 
-    this.addUserByGroup = function(){            
-        for(var user in this.groups[this.data.group].users){
-            // console.log("iterando", user);
-            console.log(this.groups[this.data.group].users[user])
-            this.addUser(this.groups[this.data.group].users[user]);
+    this.addUserByGroup = function(){
+        console.log(this.groups)
+        console.log(this.groups[this.data.group]);
+        
+        var group = this.groups[this.data.group];
+        GroupsService.groupId(group, this.onGroupIdSuccess, this.onGroupIdError);
+
+        // for(var user in this.groups[this.data.group].users){
+        //     console.log("iterando", user);
+        //     console.log(this.groups[this.data.group].users[user])
+        //     this.addUser(this.groups[this.data.group].users[user]);
+        // }
+    }
+
+    this.onGroupIdSuccess = function(response){
+        console.log(response);
+        for(var i=0; i<response.data.length; i++){
+            self.addUser(response.data[i]);
         }
+    }
+
+    this.onGroupIdError = function(response){
+        console.log(response);
     }
 
     this.addUser = function(user){
@@ -244,6 +292,21 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }
         }
         console.log(this.data.users);
+    }
+
+    this.setAccessLevel = function(access){
+        console.log(access);
+        var access_level = [];
+        if(access.private){
+            access_level.push("1");
+        }
+        if(access.semiPublic){
+            access_level.push("2");
+        }
+        if(access.public){
+            access_level.push("3");
+        }
+        return access_level;
     }
 
     this.init();

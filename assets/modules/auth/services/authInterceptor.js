@@ -1,6 +1,7 @@
 "use strict";
 
 function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, SweetAlert){
+    console.log(AuthManager.get('token'));
     return {
         request:function(request){
             // console.log(" request " + request);

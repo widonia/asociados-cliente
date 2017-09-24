@@ -115,6 +115,12 @@
 
             <!-- <div ng-show="notification.action == 'new'"> -->
             <div >
+                <access-level
+                    accessLevel="[
+                        {'private': accessLevel.private, 'semiPublic': accessLevel.semiPublic, 'public': accessLevel.public}
+                    ]"
+                >
+                </access-level>
                 <div class="row">
                     <div class="form-group col-sm-10">
                         <label for="inputEmail3" class="control-label">Tipo de notificación</label>

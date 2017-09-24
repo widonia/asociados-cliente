@@ -18,6 +18,7 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
         // console.log(response);
         $rootScope.$broadcast('loading-hide');
         this.data = response;
+        console.log(response);
         if(this.action === "edit") this.parseHStore();
     }
 

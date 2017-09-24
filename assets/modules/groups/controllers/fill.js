@@ -33,7 +33,7 @@ function GroupsFillCtrl($scope, $rootScope,  $http, $routeParams, Config, Groups
         fd.append('file', $scope.file);
 
         //send file
-        $http.post(Config.REST + '/api/group/' + $routeParams.id + '/fill_users/', fd,
+        $http.post(Config.REST + '/group/' + $routeParams.id + '/fill_users/', fd,
         {   
             transformRequest:angular.identity,
             headers:{'Content-Type':undefined}

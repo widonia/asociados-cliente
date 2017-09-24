@@ -11,14 +11,22 @@ function navBar(AUTH_EVENTS, Config){
         controller: function($scope, $location, AuthService, AuthManager, $rootScope, AUTH_EVENTS, Config){
 
             $scope.logout = function(){
-                AuthService.logout();               
-                AuthManager.logout(); 
-                $location.url('/login/');
-                $scope.visible = AuthManager.isAuth;
+                console.log(AuthManager.get('token'));
+                AuthService.logout({}, $scope.onLogoutSuccess, $scope.onLogoutError);               
             }
 
             $scope.onLogout = function(){
                 $location.url('/login/');
+            }
+
+            $scope.onLogoutSuccess = function(){
+                AuthManager.logout(); 
+                $location.url('/login/');
+                $scope.visible = AuthManager.isAuth;
+            }
+            
+            $scope.onLogoutError = function(){
+
             }
 
             $scope.static = Config.STATIC;
