@@ -10,11 +10,11 @@ if(ENV == 'Dev'){
 
 if(ENV == 'Stage'){
     angular.module('app.common.services').constant('Config', {
-        REST: 'http://www.administradorapp.com/api/cliente',
-        DATA: 'http://www.administradorapp.com/statistics',
+        REST: 'http://54.187.171.36/api/cliente',
+        DATA: 'http://54.187.171.36/statistics',
         // STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage', 
-        STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/prod',
-        MEDIA: 'https://s3-us-west-2.amazonaws.com/staticfiles-app'
+        STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage',
+        MEDIA: MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
 }
 
