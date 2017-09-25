@@ -14,7 +14,7 @@ if(ENV == 'Stage'){
         DATA: 'http://54.187.171.36/statistics',
         // STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage', 
         STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage',
-        MEDIA: MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
+        MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
 }
 
