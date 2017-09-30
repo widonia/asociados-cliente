@@ -16,10 +16,10 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.no_form_show = false;
     this.showTitleError = false;
     var titleTooLong;
+    var self = this;
 
     this.init = function(){
 
-        var self = this;
 
         this.data = {
             "content": "",
@@ -31,6 +31,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             "users":[],
             "access_level": []
         };
+        console.log('this.data.users');
+        console.log(this.data.users);
 
         this.accessLevel = {
             private: false,
@@ -84,10 +86,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             this.accessLevel.private = true;
         }
         
-        // add actually users
-        for (var i = this.data.users.length - 1; i >= 0; i--) {
-            this.addUser(this.data.users_info[i]);
-        };
+        // Get users
+        this.getListUsers();
         
 
         // Set image thumbnail if exist
@@ -102,6 +102,20 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         console.log('onPopulateError');
     }
 
+    this.getListUsers = function(){
+        NotificationService.users({id:$routeParams.id}, this.onGetListUsersOk, this.onGetListUsersError);
+    }
+
+    this.onGetListUsersOk = function(response){
+        console.log(response);
+        for (var i = response.data.length - 1; i >= 0; i--) {
+            self.addUser(response.data[i]);
+        };
+    }
+
+    this.onGetListUsersError = function(response){
+        console.log(response);
+    }
 
     this.onGroups = function(response){
         this.groups = response.results;
@@ -136,8 +150,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }
 
             if(this.action == 'edit'){
-                console.log('edit')
-                console.log(this.data.users);
                 this.data["access_level"] = this.setAccessLevel(this.accessLevel);
                 console.log(this.data);
                 NotificationService.put({id:$routeParams.id}, this.data,
@@ -259,10 +271,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         }
         
         if (exists == false){
-            console.log('if');
-            console.log(user.id);
             this.autocomplete.list.push(user);            
-            console.log(this.autocomplete);
+            this.data['users'] = [];
             if(user.id == undefined){
                 if(this.data.users.indexOf(user.user_id)){
                     this.data.users.push(user.user_id);        

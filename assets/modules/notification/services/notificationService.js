@@ -10,7 +10,8 @@ function NotificationService($resource, Config){
         post: { method:'POST'},
         put: { method:'PUT'},
         // add_image: { method:'PUT', url:_url + 'add_image'},
-        delete: { method:'DELETE'}
+        delete: { method:'DELETE'},
+        users: {method: 'GET', url:_url +'users/'}
     })
 }
 
