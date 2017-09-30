@@ -2,18 +2,18 @@
 
 angular.module('app', [
 
-	// angular modules
-	'ngRoute',
+    // angular modules
+    'ngRoute',
     'ui.bootstrap',
-	'ngResource',
+    'ngResource',
     'file-model',
     'ui.tinymce',
     'oitozero.ngSweetAlert',
     'ui.tree',
     'ngImgCrop',
-	// app modules
-	'app.auth',
-	'app.page',
+    // app modules
+    'app.auth',
+    'app.page',
     'app.news',
     'app.document',
     'app.update',
@@ -33,7 +33,7 @@ angular.module('app', [
 
 .config(['$routeProvider', '$httpProvider',  '$locationProvider', '$sceDelegateProvider', 'AUTH_ROLES', 'Config',
 
-	function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider, AUTH_ROLES, Config){
+    function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider, AUTH_ROLES, Config){
 
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
@@ -42,15 +42,18 @@ angular.module('app', [
             'self',
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'https://s3-us-west-2.amazonaws.com/**',
-            'http://54.187.171.36/'
-			// 'http://127.0.0.1:4000',
-			// 'http://192.168.0.22:4000',
+            'http://54.187.171.36/**',
+            'http://www.administradorapp.com/**',
+            'http://administradorapp.com/**',
+            'http://34.212.251.179/**'
+            // 'http://127.0.0.1:4000',
+            // 'http://192.168.0.22:4000',
         ]);
 
-		//auth interceptor
-		$httpProvider.interceptors.push('AuthInterceptor');
+        //auth interceptor
+        $httpProvider.interceptors.push('AuthInterceptor');
 
-		$routeProvider
+        $routeProvider
 
             .when('/', {
                 templateUrl: Config.STATIC + '/modules/home/views/home.html',
@@ -58,10 +61,10 @@ angular.module('app', [
             })
 
             //news urls
-			.when('/content/news', {
+            .when('/content/news', {
                 templateUrl: Config.STATIC + '/modules/news/views/list.html',
                 controller: 'NewsListCtrl', controllerAs: 'newsList', role:AUTH_ROLES.monitor
-			})
+            })
 
             .when('/content/news/new', {
                 templateUrl: Config.STATIC + '/modules/news/views/form.html',
@@ -80,10 +83,10 @@ angular.module('app', [
             })
 
             //page urls
-			.when('/content/page', {
-				templateUrl: Config.STATIC + '/modules/page/views/list.html',
+            .when('/content/page', {
+                templateUrl: Config.STATIC + '/modules/page/views/list.html',
                 controller: 'PageListCtrl', controllerAs: 'pageList', role:AUTH_ROLES.monitor
-			})
+            })
 
             .when('/content/page/new', {
                 templateUrl: Config.STATIC + '/modules/page/views/form.html',
@@ -292,8 +295,8 @@ angular.module('app', [
             // })
 
             .when('/login', {
-				templateUrl: Config.STATIC + '/modules/auth/views/login.html',
-			    controller: 'LoginCtrl', controllerAs: 'login', role:AUTH_ROLES.guest
+                templateUrl: Config.STATIC + '/modules/auth/views/login.html',
+                controller: 'LoginCtrl', controllerAs: 'login', role:AUTH_ROLES.guest
             })
 
 
@@ -335,75 +338,75 @@ angular.module('app', [
                 controller: 'PollAnswerController', controllerAs: 'pollAnswer', role:AUTH_ROLES.monitor
             })
             
-			.otherwise({redirectTo: '/'});
-	}
+            .otherwise({redirectTo: '/'});
+    }
 ])
 
 .run(['$rootScope', '$location', 'AuthManager', 'AuthService', 'AUTH_EVENTS',
-	function($rootScope, $location, AuthManager, AuthService, AUTH_EVENTS){
+    function($rootScope, $location, AuthManager, AuthService, AUTH_EVENTS){
 
-		// finish loading page
-	    try {
-	        loading_screen.finish();
-	    } catch (e) {
-	        console.log("Error on finnish Screen loading.")
-	    }
+        // finish loading page
+        try {
+            loading_screen.finish();
+        } catch (e) {
+            console.log("Error on finnish Screen loading.")
+        }
 
-		// Firs of all check if is authenticated
-	    AuthService.check(
-	        function success(response){
-	            AuthManager.isLogin = true;
+        // Firs of all check if is authenticated
+        AuthService.check(
+            function success(response){
+                AuthManager.isLogin = true;
                 AuthManager.username = response.data.username;
                 AuthManager.last_login = response.data.last_login;
 
                 $rootScope.user = {};
                 $rootScope.user.username = AuthManager.username.charAt(0).toUpperCase() +  AuthManager.username.substr(1).toLowerCase();
                 
-	        },
-	        function onError(){
-	            AuthManager.isLogin = false;
-	            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-	        }
-	    );
+            },
+            function onError(){
+                AuthManager.isLogin = false;
+                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+            }
+        );
 
-		// fix data transfer bug
-	    $.event.props.push('dataTransfer');
+        // fix data transfer bug
+        $.event.props.push('dataTransfer');
 
-	    // login success event
+        // login success event
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
             console.log("Succes login");
             // document.body.style.background = "transparent";
             AuthManager.login(data.token);
         });
 
-	    // logout succes event
-	    $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
-			console.log("Succes logout");
-	        AuthManager.logout();
-	    });
+        // logout succes event
+        $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
+            console.log("Succes logout");
+            AuthManager.logout();
+        });
 
-	    // not authenticasted event
-	    $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
-			console.log("No authenticated");                        
-	        e.preventDefault();			
-	        if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
-	    });
+        // not authenticasted event
+        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
+            console.log("No authenticated");                        
+            e.preventDefault();         
+            if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
+        });
 
-		// not authenticasted event
-	    $rootScope.$on(AUTH_EVENTS.notAuthorized, function(e){
-			console.log("No authorized")
-	        e.preventDefault();
-			// AuthManager.logout();
-	        // if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
-	    });
+        // not authenticasted event
+        $rootScope.$on(AUTH_EVENTS.notAuthorized, function(e){
+            console.log("No authorized")
+            e.preventDefault();
+            // AuthManager.logout();
+            // if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
+        });
 
-	    $rootScope.$on('$routeChangeStart', function(event, current, prev){
-	        AuthManager.check(current, prev);
-	    });
+        $rootScope.$on('$routeChangeStart', function(event, current, prev){
+            AuthManager.check(current, prev);
+        });
 
 
         $rootScope.$on("ERROR", function(e){
             e.preventDefault();
         });
-	}
+    }
 ]);
