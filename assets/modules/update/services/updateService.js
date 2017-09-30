@@ -2,7 +2,7 @@
 
 function UpdateService($resource, Config){
 
-    var _url = Config.REST + '/api/update/';
+    var _url = Config.REST + '/update/';
     
     return $resource(_url + '?', {}, {
         info: { method: 'GET', url:_url+'info', isArray:true}

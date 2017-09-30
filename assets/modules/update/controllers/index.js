@@ -93,7 +93,8 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
         fd.append('delimiter', this.data.delimiter);
 
         //send file
-        $http.post(Config.REST + '/api/update/load/'+this.current.method+ '/', fd,
+        // $http.post(Config.REST + '/api/update/load/'+this.current.method+ '/', fd,
+        $http.post(Config.REST + '/update/'+this.current.method+ '/', fd,
         {   
             transformRequest:angular.identity,
             headers:{'Content-Type':undefined}
