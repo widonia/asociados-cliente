@@ -25,7 +25,8 @@ try {
 var awsUrl = 'https://s3-us-west-2.amazonaws.com/asociados-client';
 var ENV = {
     'Stage': '/stage/',
-    'Prod': '/prod/',
+    'Prod': '/stage/',
+    // 'Prod': '/prod/',
 }
 
 
