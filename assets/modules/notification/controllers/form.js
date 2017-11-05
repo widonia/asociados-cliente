@@ -31,8 +31,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             "users":[],
             "access_level": []
         };
-        console.log('this.data.users');
-        console.log(this.data.users);
+        console.log('this.data');
+        console.log(this.data);
 
         this.accessLevel = {
             private: false,
@@ -75,15 +75,15 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         this.data = response;
 
         if(response.access_level.indexOf("1") > -1){
-            this.accessLevel.public = true;
+            this.accessLevel.private = true;
         }
-
+        
         if(response.access_level.indexOf("2") > -1){
             this.accessLevel.semiPublic = true;
         }
-
+        
         if(response.access_level.indexOf("3") > -1){
-            this.accessLevel.private = true;
+            this.accessLevel.public = true;
         }
         
         // Get users
@@ -141,6 +141,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
                     this.data["access_level"] = access_level;
                 }
                 theData = this.data;
+                console.log("this.data");
+                console.log(this.data);
                 NotificationService.post({}, theData,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
