@@ -3,3 +3,6 @@ node_modules
 gulp/deploy
 dev/node_modules
 gulp/aws.json
+.git/**/*
+.DS_Store
+cliente/**/*

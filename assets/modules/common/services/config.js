@@ -12,7 +12,6 @@ if(ENV == 'Stage'){
     angular.module('app.common.services').constant('Config', {
         REST: 'http://54.187.171.36/api/cliente',
         DATA: 'http://54.187.171.36/statistics',
-        // STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage', 
         STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage',
         MEDIA: 'https://s3-us-west-2.amazonaws.com/asociados.stage'
     });
@@ -22,7 +21,7 @@ if(ENV == 'Prod'){
     angular.module('app.common.services').constant('Config', {
         REST: 'http://www.administradorapp.com/api/cliente',
         DATA: 'http://www.administradorapp.com/statistics',
-        STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/prod',
+        STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage',
         MEDIA: 'https://s3-us-west-2.amazonaws.com/staticfiles-app'
     });
 }
