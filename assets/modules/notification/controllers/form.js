@@ -137,12 +137,10 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         this.form.submitted = true;
         if (this.form.$valid) {
             if(this.action == 'new'){; 
-                console.log('new')
-                if(this.accessLevel.length > 0){
+                if(Object.keys(this.accessLevel).length > 0){
                     this.data["access_level"] = access_level;
                 }
                 theData = this.data;
-                console.log(theData);
                 NotificationService.post({}, theData,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -151,7 +149,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
             if(this.action == 'edit'){
                 this.data["access_level"] = this.setAccessLevel(this.accessLevel);
-                console.log(this.data);
                 NotificationService.put({id:$routeParams.id}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)

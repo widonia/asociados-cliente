@@ -2,8 +2,8 @@
 
 function PollService($resource, Config){
 
-    var _url = Config.REST + '/api/polls/';
-    var _urlA = Config.REST + '/api/questions/';
+    var _url = Config.REST + '/polls/';
+    var _urlA = Config.REST + '/questions/';
     
     return $resource(_url, {}, {
         get: { method:'GET'},
@@ -15,7 +15,7 @@ function PollService($resource, Config){
         create: { method: 'POST', url:_urlA},
         edit: {method: 'PUT', params:{idQ:"@idQ"}, url:_urlA+':idQ/'},
         result: {method: 'GET', params:{idPoll:'@idPoll'}, url:_url+':idPoll/results/'},
-        showResutlsByPoll: {method: 'GET', params:{idPoll:'@idPoll'}, url:_url+':idPoll/stats/'},
+        showResutlsByPoll: {method: 'GET', params:{idPoll:'@idPoll'}, url:_url+':idPoll/'},
         /*cvsPoll: {method: 'GET', params:{'idPoll': '@idPoll'}, url:_url+':idPoll/results_csv/'}*/
         cvsPoll: {method: 'GET', params:{'idPoll': '@idPoll'}, url:_url+':idPoll/results_excel/', responseType: "arraybuffer"}
     })

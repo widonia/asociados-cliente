@@ -66,9 +66,9 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
                 $scope.addOptions = false; 
             }
 
-            if($scope.pollQuestions[i].users_response.length > 0){
-                $scope.disable = true;
-            }
+            // if($scope.pollQuestions[i].users_response.length > 0){
+            //     $scope.disable = true;
+            // }
         }
         
         $scope.form = { 

@@ -18,10 +18,10 @@ function accessLevelCtrl($scope){
     this.levels = [];
 
     this.setPrivacy = function(level){
-        console.log(level);
         if(this.levels.indexOf(level) === -1){
             this.levels.push(level);
         }
+        console.log("this.level");
         console.log(this.levels);
     }
 }

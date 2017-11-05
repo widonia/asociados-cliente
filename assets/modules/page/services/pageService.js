@@ -2,7 +2,7 @@
 
 function PageService($resource, Config){
     
-    var _url = Config.REST + '/api/pages/:id/';
+    var _url = Config.REST + '/pages/:id/';
     
     return $resource(_url + '?fn=none', {}, {
         get: { method:'GET'},
