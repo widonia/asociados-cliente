@@ -4,16 +4,17 @@
 
         <div class="radio">
             <label class="radio-inline">
-                <input type="checkbox" ng-model="notification.accessLevel.private" ng-checked="notification.accessLevel.private" ng-change="accessLevel.setPrivacy('1')" name="type" value="1"> Privado
+                <input type="checkbox" ng-model="accessLevel.private" ng-change="setPrivacy(accessLevel.private, '1')" name="type" value="1"> Privado
              </label>
 
            <label class="radio-inline">
-                <input type="checkbox" ng-model="notification.accessLevel.semiPublic" ng-checked="notification.accessLevel.semiPublic" ng-change="accessLevel.setPrivacy('2')" name="type" value="2"> Semi Privado
+                <input type="checkbox" ng-model="accessLevel.semiPublic" ng-change="setPrivacy(accessLevel.semiPublic, '2')" name="type" value="2"> Semi Privado
             </label>
 
             <label class="radio-inline">
-                <input type="checkbox" ng-model="notification.accessLevel.public" ng-checked="notification.accessLevel.public" ng-change="accessLevel.setPrivacy('3')" name="type" value="3"> Público
+                <input type="checkbox" ng-model="accessLevel.public" ng-change="setPrivacy(accessLevel.public, '3')" name="type" value="3"> Público
              </label>
+             <input type="hidden" ng-model="lvl">
         </div>
     </div>
 </div>

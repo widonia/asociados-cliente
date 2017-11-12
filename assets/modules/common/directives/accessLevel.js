@@ -1,31 +1,38 @@
 "use strict";
 
-function accessLevel(){
+function accessLevel($timeout){
     return {
         restrict: 'E',
-        $scope: {
-            accessLevel: "="
+        scope: {
+            accessLevel: "=?level",
+            lvl: "="
         },
-        templateUrl: '/modules/common/views/accessLevel.html',
         controller: accessLevelCtrl,
-        controllerAs: 'accessLevel'
+        link: link,
+        templateUrl: '/modules/common/views/accessLevel.html'
     }
 }
 
 function accessLevelCtrl($scope){
-    this.accessLevel = $scope.accessLevel;
-    
     this.levels = [];
 
-    this.setPrivacy = function(level){
-        if(this.levels.indexOf(level) === -1){
-            this.levels.push(level);
+    $scope.setPrivacy = function(authLevel, lvl){
+        if(authLevel){
+            $scope.lvl.push(lvl);
+        }else if(!authLevel && $scope.lvl.indexOf(lvl) > -1){
+            $scope.lvl.splice($scope.lvl.indexOf(lvl), 1);
         }
-        console.log("this.level");
-        console.log(this.levels);
     }
 }
 
+function link($scope){
+    var levels = {};
+    setTimeout(function(){
+        console.log($scope.lvl);
+
+    }, 1000);
+}
+
 angular
-.module('app.common.directives')
+.module('app.common.directives', [])
 .directive('accessLevel', accessLevel);
