@@ -8,15 +8,23 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     this.status = {
       is_form:false
     };
-
-
+    
+    
     this.search = function (list) {
-      return list.filter(function (v) {
-          return v.parent == null;
-      });
+        return list.filter(function (v) {
+            return v.parent == null;
+        });
     }
-
+    
     this.init = function(){
+        // Access level directive
+        this.accessLevel = {
+            public:false,
+            semiPublic: false,
+            private: false,
+        };
+        $scope.lvl = [];
+
         this.data = {
             content: "",
             parent: null,
@@ -25,6 +33,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
             type: null,
             published: true
         };
+
         this.nodeData = null;
         this.data_nodes = [];
         this.status = {
@@ -128,8 +137,9 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
 
     this.edit = function(scope, node){
       var scope = scope;
-      this.nodeData = scope.$modelValue;      
+      this.nodeData = scope.$modelValue;
       this.data = this.nodeData;
+      this.data['access_level'] = this.nodeData.access_level || [];
       this.status.is_form = true;
     //   this.data.parent = null;
     //   this.data.parentName = null;
@@ -240,8 +250,14 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         $rootScope.$broadcast('loading-show');
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
+        access_level = this.setAccessLevel(this.accessLevel);
+        var access_level = [];
         if (this.form.$valid) {
+            this.data["access_level"] = $scope.lvl;
             if(this.action == 'new'){
+                if(Object.keys(this.accessLevel).length > 0){
+                }
+                console.log
                 PageService.post({}, this.data,
                     this.onSubmit.bind(this),
                     this.onSubmitErr.bind(this)
@@ -278,6 +294,21 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         $rootScope.$broadcast('loading-hide');
         this.form.success = false;
         SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
+    }
+
+    this.setAccessLevel = function(access){
+        console.log(access);
+        var access_level = [];
+        if(access.private){
+            access_level.push("1");
+        }
+        if(access.semiPublic){
+            access_level.push("2");
+        }
+        if(access.public){
+            access_level.push("3");
+        }
+        return access_level;
     }
 
     // this.init();

@@ -18,6 +18,14 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     var titleTooLong;
     var self = this;
 
+    $scope.accessLevel = {
+        public:false,
+        semiPublic: false,
+        private: false,
+    };
+
+    $scope.lvl = [];
+
     this.init = function(){
 
 
@@ -30,14 +38,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             "observation": "",
             "users":[],
             "access_level": []
-        };
-        console.log('this.data');
-        console.log(this.data);
-
-        this.accessLevel = {
-            private: false,
-            semiPublic: false,
-            public: false
         };
 
         if(this.action == 'edit'){ this.populate(); }        
@@ -69,22 +69,12 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         );
     }
 
+    $scope.ctrl = "notification";
     this.onPopulateOk = function(response){
         $rootScope.$broadcast('loading-hide');
-        console.log(response);
         this.data = response;
 
-        if(response.access_level.indexOf("1") > -1){
-            this.accessLevel.private = true;
-        }
-        
-        if(response.access_level.indexOf("2") > -1){
-            this.accessLevel.semiPublic = true;
-        }
-        
-        if(response.access_level.indexOf("3") > -1){
-            this.accessLevel.public = true;
-        }
+        this.fillDirective(response.access_level);
         
         // Get users
         this.getListUsers();
@@ -101,6 +91,22 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         $rootScope.$broadcast('loading-hide');
         console.log('onPopulateError');
     }
+
+    this.fillDirective = function(levels){
+        $scope.lvl = levels;
+        if(levels.indexOf("1") > -1){
+            $scope.accessLevel['private'] = true;
+        }
+        
+        if(levels.indexOf("2") > -1){
+            $scope.accessLevel['semiPublic'] = true;
+        }
+        
+        if(levels.indexOf("3") > -1){
+            $scope.accessLevel['public'] = true;
+        }
+    }
+
 
     this.getListUsers = function(){
         NotificationService.users({id:$routeParams.id}, this.onGetListUsersOk, this.onGetListUsersError);
@@ -130,15 +136,15 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.submit = function(){
         var access_level = [];
         var theData = {};
-        access_level = this.setAccessLevel(this.accessLevel);
 
         $rootScope.$broadcast('loading-show');
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
+            console.log($scope.lvl)
+            this.data["access_level"] = $scope.lvl;
             if(this.action == 'new'){; 
                 if(Object.keys(this.accessLevel).length > 0){
-                    this.data["access_level"] = access_level;
                 }
                 theData = this.data;
                 console.log("this.data");
@@ -150,7 +156,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }
 
             if(this.action == 'edit'){
-                this.data["access_level"] = this.setAccessLevel(this.accessLevel);
+                console.log("this.data");
+                console.log(this.data);
                 NotificationService.put({id:$routeParams.id}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -301,21 +308,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }
         }
         console.log(this.data.users);
-    }
-
-    this.setAccessLevel = function(access){
-        console.log(access);
-        var access_level = [];
-        if(access.private){
-            access_level.push("1");
-        }
-        if(access.semiPublic){
-            access_level.push("2");
-        }
-        if(access.public){
-            access_level.push("3");
-        }
-        return access_level;
     }
 
     this.init();
