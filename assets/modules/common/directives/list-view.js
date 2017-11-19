@@ -1,5 +1,5 @@
 "use strict";
-
+console.log("yo yo yo");
 function listView(Config){
     console.log('listView');
 

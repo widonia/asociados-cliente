@@ -40,5 +40,5 @@ function link($scope){
 }
 
 angular
-.module('app.common.directives', [])
+.module('app.common.directives')
 .directive('accessLevel', accessLevel);
