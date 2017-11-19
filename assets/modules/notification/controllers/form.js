@@ -239,12 +239,12 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error");        
     }
 
-    this.addUserByGroup = function(){
+    this.addUserByGroup = function(id){
         console.log(this.groups)
-        console.log(this.groups[this.data.group]);
+        console.log(this.groups.id);
         
         var group = this.groups[this.data.group];
-        GroupsService.groupId(group, this.onGroupIdSuccess, this.onGroupIdError);
+        GroupsService.groupId({id: this.groups.id}, this.onGroupIdSuccess, this.onGroupIdError);
 
         // for(var user in this.groups[this.data.group].users){
         //     console.log("iterando", user);

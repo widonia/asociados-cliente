@@ -6,6 +6,7 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
     this.page = 1;
     this.list = [];
 
+
     this.init = function(){
         console.log("ntra");
         this.getList();
@@ -21,10 +22,12 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
     }
 
     this.onGetList = function(response){
+        console.log(response);
         $rootScope.$broadcast('loading-hide');
 
         this.count = response.count;
         this.list = response.data;
+        console.log(this.list);
         window.scrollTo(0, 0);
     }
 

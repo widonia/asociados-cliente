@@ -25,7 +25,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
             end: moment().endOf("month").format('YYYY-MM-DD'),
         }
         this.getCooperative();
-        // this.getStatistics();   
+        this.getStatistics();   
     }
 
     this.getStatistics = function(){
@@ -33,7 +33,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
         CooperativeService.stats({id:this.cooperative}, this.onGetStatsSuccess.bind(this), this.onGetStatsError.bind(this));
         //Just for now
         this.show_statistics = false;
-        // StatisticService.get({start:this.data.start, end:this.data.end, cooperative:this.cooperative}, this.onGetStatisticsSuccess.bind(this), this.onGetStatisticsError.bind(this));
+        StatisticService.get({start:this.data.start, end:this.data.end, entity:this.cooperative}, this.onGetStatisticsSuccess.bind(this), this.onGetStatisticsError.bind(this));
     }
 
     this.getCooperative = function(){
@@ -58,6 +58,8 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     }
 
     this.onGetStatisticsSuccess = function(response){
+        console.log("response.data");
+        console.log(response.data);
         $rootScope.$broadcast('loading-hide2');
         if(response.data != null){
             // console.log(response)
@@ -82,30 +84,31 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
                 // 'value':parseInt(data.login[login]),
             });
         }
-
+        console.log("new_data");
+        console.log(new_data);
         this.chart.setData(new_data);
     }
 
-    // this.chart = new Morris.Area({
-    //     // ID of the element in which to draw the chart.
-    //     element: 'time-chart',
-    //     xkey: 'key',
-    //     ykeys: ['value'],
-    //     labels: ['Visitas'],
-    //     resize: true,
-    //     parseTime: false,
-    //     lineWidth: 1,
-    //     hideHover: 'auto',
-    //     lineColors: ['#ff4400', '#22aa22'],
-    //     pointSize: 4,
-    //     fillOpacity: 0.02,
-    //     // smooth: false,
-    //     // grid: true,
-    //     // axes: true,
-    //     // behaveLikeLine: false,
-    //     // goalStrokeWidth :1,
-    //     // yLabelFormat: function (y) { return y.toString().split(".")[0]}
-    // });
+    this.chart = new Morris.Area({
+        // ID of the element in which to draw the chart.
+        element: 'time-chart',
+        xkey: 'key',
+        ykeys: ['value'],
+        labels: ['Visitas'],
+        resize: true,
+        parseTime: false,
+        lineWidth: 1,
+        hideHover: 'auto',
+        lineColors: ['#ff4400', '#22aa22'],
+        pointSize: 4,
+        fillOpacity: 0.02,
+        // smooth: false,
+        // grid: true,
+        // axes: true,
+        // behaveLikeLine: false,
+        // goalStrokeWidth :1,
+        // yLabelFormat: function (y) { return y.toString().split(".")[0]}
+    });
 
     $('.input-daterange input').datepicker({
         autoclose:true,

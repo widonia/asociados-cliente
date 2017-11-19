@@ -1,6 +1,6 @@
 "use strict";
 
-function StatisticService($resource, Config){
+function StatisticService($resource, Config, AuthManager){
     
     var _url = Config.DATA  + '/daily';
     
