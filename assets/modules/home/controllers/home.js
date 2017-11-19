@@ -49,23 +49,21 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     }
 
     this.onGetStatsSuccess = function(response){
+        console.log("onGetStatsSuccess");
+        console.log(response);
         this.stats = response;
     }
 
     this.onGetStatsError = function(response){
         $rootScope.$broadcast('loading-hide2');
-        // console.log(response)
     }
 
     this.onGetStatisticsSuccess = function(response){
-        console.log("response.data");
-        console.log(response.data);
         $rootScope.$broadcast('loading-hide2');
         if(response.data != null){
-            // console.log(response)
             this.updateChart(response.data);
         }
-        this.show_statistics = false;
+        this.show_statistics = true;
     }
 
     this.onGetStatisticsError = function(response){

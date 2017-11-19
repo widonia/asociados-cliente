@@ -244,8 +244,7 @@ angular.module('app', [
 
             .when('/content/notification', {
                 templateUrl: Config.STATIC + '/modules/notification/views/list.html',
-                controller: 'NotificationListCtrl',
-                role:AUTH_ROLES.monitor
+                controller: 'NotificationListCtrl', controllerAs: 'notification', role:AUTH_ROLES.monitor,
             })
 
             .when('/content/notification/new', {

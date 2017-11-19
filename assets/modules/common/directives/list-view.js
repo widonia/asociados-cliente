@@ -1,6 +1,7 @@
 "use strict";
 
 function listView(Config){
+    console.log('listView');
 
     return {
         restrict: 'E',
@@ -20,6 +21,7 @@ function listView(Config){
         controllerAs: 'listView',
         controller: function($scope, $rootScope, $http, $location, CRUDService, SweetAlert){
 
+            console.log("asdlkfasjdñlfajsdñ")
             /* total elements */
             this.count = 0;
 

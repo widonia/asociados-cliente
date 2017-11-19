@@ -1,6 +1,6 @@
 "use strict";
 
-function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
+function NotificationListCtrl($rootScope, NotificationService, SweetAlert, $scope){
 
     this.count = 0;
     this.page = 1;
@@ -8,7 +8,6 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
 
 
     this.init = function(){
-        console.log("ntra");
         this.getList();
     }
 
@@ -27,6 +26,7 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert){
 
         this.count = response.count;
         this.list = response.data;
+        $scope.algo = response.data;
         console.log(this.list);
         window.scrollTo(0, 0);
     }

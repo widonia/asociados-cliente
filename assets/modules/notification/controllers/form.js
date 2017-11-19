@@ -166,21 +166,21 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         }
     }
 
-    this.suggest = function(){
-        UserService.suggest({suggest:this.autocomplete.key},
-            this.onSuggestOk.bind(this),
-            this.onSuggestError.bind(this)
-        );
-    }
+    // this.suggest = function(){
+    //     UserService.suggest({suggest:this.autocomplete.key},
+    //         this.onSuggestOk.bind(this),
+    //         this.onSuggestError.bind(this)
+    //     );
+    // }
 
-    this.onSuggestOk = function(response){
-        console.log(response)
-        this.autocomplete.suggest = response.data;   
-    }
+    // this.onSuggestOk = function(response){
+    //     console.log(response)
+    //     this.autocomplete.suggest = response.data;   
+    // }
 
-    this.onSuggestError = function(response){
-        console.log(response);
-    }
+    // this.onSuggestError = function(response){
+    //     console.log(response);
+    // }
 
 
     this.onSubmitOk = function(response){
