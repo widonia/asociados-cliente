@@ -7,16 +7,18 @@ function EmailListCtrl($rootScope, EmailService, SweetAlert){
     this.list = [];
 
     this.init = function(){
+        console.log("setPage");
         this.getList();
     }
 
     this.setPage = function () {
+        console.log("setPage");
         this.getList();
     };
 
     this.getList = function(){
         $rootScope.$broadcast('loading-show');
-        EmailService.get({page:this.page}, this.onGetList.bind(this));   
+        EmailService.get({page:this.page}, this.onGetList.bind(this));
     }
 
     this.onGetList = function(response){

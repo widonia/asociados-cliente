@@ -8,6 +8,7 @@ function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
     this.init = function(){
                 
         var onOptionsOk = function(response){
+            console.log(response);
             this.data.options_type = response.actions.POST.type.choices
             if(this.action == 'edit'){ this.populate(); }
         };
@@ -34,7 +35,7 @@ function EmailFormCtrl($rootScope, $routeParams, EmailService, action){
         this.data.name = response.name;
         this.data.email = response.email;
         this.data.type_selected = this.data.options_type.filter(function(v){ return v.value==response.type;})[0]
-
+        console.log(this.data);
     }
 
     this.onPopulateError = function(response){
