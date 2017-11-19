@@ -32,7 +32,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
         $rootScope.$broadcast('loading-show2');
         CooperativeService.stats({id:this.cooperative}, this.onGetStatsSuccess.bind(this), this.onGetStatsError.bind(this));
         //Just for now
-        this.show_statistics = false;
+        //this.show_statistics = false;
         StatisticService.get({start:this.data.start, end:this.data.end, entity:this.cooperative}, this.onGetStatisticsSuccess.bind(this), this.onGetStatisticsError.bind(this));
     }
 
@@ -65,6 +65,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
             // console.log(response)
             this.updateChart(response.data);
         }
+        this.show_statistics = false;
     }
 
     this.onGetStatisticsError = function(response){
