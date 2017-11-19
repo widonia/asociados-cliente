@@ -1,7 +1,6 @@
 "use strict";
-console.log("yo yo yo");
+
 function listView(Config){
-    console.log('listView');
 
     return {
         restrict: 'E',
@@ -21,7 +20,6 @@ function listView(Config){
         controllerAs: 'listView',
         controller: function($scope, $rootScope, $http, $location, CRUDService, SweetAlert){
 
-            console.log("asdlkfasjdñlfajsdñ")
             /* total elements */
             this.count = 0;
 
@@ -93,7 +91,6 @@ function listView(Config){
             }
 
             this.onGetList = function(response){
-                console.log(response);
                 this.count = response.count;
 
                 // apply callback to make specific modifications to the result list

@@ -93,7 +93,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.fillDirective = function(levels){
-        console.log(levels);
         $scope.lvl = levels;
         if(levels.indexOf("1") > -1){
             $scope.accessLevel['private'] = true;
@@ -114,7 +113,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onGetListUsersOk = function(response){
-        console.log(response);
         for (var i = response.data.length - 1; i >= 0; i--) {
             self.addUser(response.data[i]);
         };
@@ -127,7 +125,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.onGroups = function(response){
         this.groups = response.results;
         this.groups = response.data;
-        console.log(response.data);
     }
 
     this.onGroupsErr = function(){
@@ -142,13 +139,10 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
         if (this.form.$valid) {
-            console.log($scope.lvl)
             this.data["access_level"] = this.data.access_level;
             if(this.action == 'new'){; 
 
                 theData = this.data;
-                console.log("this.data");
-                console.log(this.data);
                 NotificationService.post({}, theData,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -156,8 +150,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }
 
             if(this.action == 'edit'){
-                console.log("this.data");
-                console.log(this.data);
                 NotificationService.put({id:$routeParams.id}, this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -167,7 +159,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onSubmitOk = function(response){
-        console.log(response);
         if($scope.image != false){
             var fd = new FormData();
 
@@ -193,7 +184,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onSubmitError = function(response){
-        console.log(response);
         this.form.success = false;
         $rootScope.$broadcast('loading-hide');
         SweetAlert.swal({
@@ -207,7 +197,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             $scope.showTitleError = true;
             return titleTooLong;
         });
-        console.log(this.titleTooLong); 
         this.titleTooLong = response.data.title[0];
     }
 
@@ -227,9 +216,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.onGroupIdSuccess = function(response){
-        var ids = response.data;
-        console.log(response.data);
-        self.data['users'] = ids;
+        self.data['users'] = response.data;
     }
 
     this.onGroupIdError = function(response){
@@ -237,7 +224,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.removeUser = function(username){
-        console.log(this.data.users);
         for (var user in this.autocomplete.list){
             if(username == this.autocomplete.list[user]['username']){
                 this.autocomplete.list.splice(user, 1);
@@ -245,7 +231,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
                 // break;
             }
         }
-        console.log(this.data.users);
     }
 
     this.init();
