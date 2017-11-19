@@ -93,6 +93,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.fillDirective = function(levels){
+        console.log(levels);
         $scope.lvl = levels;
         if(levels.indexOf("1") > -1){
             $scope.accessLevel['private'] = true;
@@ -142,10 +143,9 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         this.form.submitted = true;
         if (this.form.$valid) {
             console.log($scope.lvl)
-            this.data["access_level"] = $scope.lvl;
+            this.data["access_level"] = this.data.access_level;
             if(this.action == 'new'){; 
-                if(Object.keys(this.accessLevel).length > 0){
-                }
+
                 theData = this.data;
                 console.log("this.data");
                 console.log(this.data);
@@ -165,23 +165,6 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }
         }
     }
-
-    // this.suggest = function(){
-    //     UserService.suggest({suggest:this.autocomplete.key},
-    //         this.onSuggestOk.bind(this),
-    //         this.onSuggestError.bind(this)
-    //     );
-    // }
-
-    // this.onSuggestOk = function(response){
-    //     console.log(response)
-    //     this.autocomplete.suggest = response.data;   
-    // }
-
-    // this.onSuggestError = function(response){
-    //     console.log(response);
-    // }
-
 
     this.onSubmitOk = function(response){
         console.log(response);
@@ -240,62 +223,17 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     }
 
     this.addUserByGroup = function(id){
-        console.log(this.groups)
-        console.log(this.groups.id);
-        
-        var group = this.groups[this.data.group];
         GroupsService.groupId({id: this.groups.id}, this.onGroupIdSuccess, this.onGroupIdError);
-
-        // for(var user in this.groups[this.data.group].users){
-        //     console.log("iterando", user);
-        //     console.log(this.groups[this.data.group].users[user])
-        //     this.addUser(this.groups[this.data.group].users[user]);
-        // }
     }
 
     this.onGroupIdSuccess = function(response){
-        console.log(response);
-        for(var i=0; i<response.data.length; i++){
-            self.addUser(response.data[i]);
-        }
+        var ids = response.data;
+        console.log(response.data);
+        self.data['users'] = ids;
     }
 
     this.onGroupIdError = function(response){
         console.log(response);
-    }
-
-    this.addUser = function(user){
-        console.log(user);
-        var exists = false;
-        for (var element in this.autocomplete.list){            
-            console.log(this.autocomplete.list[element]['username']);
-            console.log(this.autocomplete.list[element]['username'])
-            if(user.username == this.autocomplete.list[element]['username'] && user.username != undefined){
-                exists = true;
-                console.log('if for');
-            }
-        }
-        
-        if (exists == false){
-            this.autocomplete.list.push(user);            
-            this.data['users'] = [];
-            if(user.id == undefined){
-                if(this.data.users.indexOf(user.user_id)){
-                    this.data.users.push(user.user_id);        
-                }
-            }else{
-                if(this.data.users.indexOf(user.id)){
-                    this.data.users.push(user.id);
-                }
-            }
-            // this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
-            console.log(this.data.users);
-        }
-
-        // console.log(this.data.users);
-        
-        this.autocomplete.key = '';
-        this.autocomplete.suggest = {};
     }
 
     this.removeUser = function(username){

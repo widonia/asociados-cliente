@@ -15,23 +15,23 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
             return v.parent == null;
         });
     }
+    $scope.lvl = [];
+    this.data = {
+        content: "",
+        parent: null,
+        position: "0",
+        title: null,
+        type: null,
+        published: true,
+        access_level: []
+    };
     
     this.init = function(){
         // Access level directive
-        this.accessLevel = {
+        $scope.accessLevel = {
             public:false,
             semiPublic: false,
             private: false,
-        };
-        $scope.lvl = [];
-
-        this.data = {
-            content: "",
-            parent: null,
-            position: "0",
-            title: null,
-            type: null,
-            published: true
         };
 
         this.nodeData = null;
@@ -68,7 +68,6 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     }
 
     var onGetList = function(data) {
-        console.log(data);
         var lista = data[0].data;
         
         this.parents = lista.filter( function(obj) {
@@ -108,18 +107,19 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
           principales[i].nodes = getChildrens(principales[i].id);
         }
         this.data_nodes = principales;
-        console.log(principales)
     }
     
 
     this.newSubItem = function(scope){
-      this.data = {
+        $scope.lvl = [];
+        this.data = {
         content: "",
         parent: null,
         position: "0",
         title: null,
         type: null,
-        published: true
+        published: true,
+        access_level: []
       };
       if (scope != undefined){
         var scope = scope;  
@@ -132,24 +132,37 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
       }
       this.status.is_form = true;            
       this.action = "new";
-      // console.log(id);
     }
 
     this.edit = function(scope, node){
       var scope = scope;
       this.nodeData = scope.$modelValue;
       this.data = this.nodeData;
-      this.data['access_level'] = this.nodeData.access_level || [];
+      this.data['access_level'] = [];
       this.status.is_form = true;
-    //   this.data.parent = null;
-    //   this.data.parentName = null;
       this.action = "edit";
-      // console.log(id);
+      
+      PageService.get({id:this.data.id}, this.onSuccesGet.bind(this));
+    }
 
-      // var onSuccesGet = function(response){
-      //   // this.data = response;
-      // }     
-      // PageService.get({id:this.data.id}, onSuccesGet.bind(this));
+    this.onSuccesGet = function(response){
+        this.data = response;
+        this.fillDirective(this.data['access_level'] || []);
+    }     
+
+    this.fillDirective = function(levels){
+        $scope.lvl = levels;
+        if(levels.indexOf("1") > -1){
+            $scope.accessLevel['private'] = true;
+        }
+        
+        if(levels.indexOf("2") > -1){
+            $scope.accessLevel['semiPublic'] = true;
+        }
+        
+        if(levels.indexOf("3") > -1){
+            $scope.accessLevel['public'] = true;
+        }
     }
 
 
@@ -189,13 +202,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
           confirmation.bind(this)
       );
     }
-    // $scope.resolveLink = function(page){
-    //     if(page.type == 1){
-    //         $state.go('app.tabs.info', {id: page.id});
-    //     }else{
-    //         $state.go('app.tabs.page', {id: page.id});
-    //     }
-    // }
+    
     this.init();
 
     // No here
@@ -206,58 +213,15 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         return results;
     }
 
-
-
-
-    /// forms     
-    // this.form = false;
-    
-    // this.init = function(){
-    //     this.getCategories();
-    //     this.populate();
-    //     this.tinymceOptions = {
-    //         plugins: [
-    //             "advlist autolink autosave link image lists textcolor paste media"
-    //         ],
-    //         theme: "modern",
-    //         toolbar1 : "bold italic underline, alignleft aligncenter alignright alignjustify, formatselect forecolor,link,unlink,bullist numlist,blockquote,undo,image", 
-    //         min_height: 500
-    //     };
-    // }
-
-    // this.getCategories = function(){
-    //     PageService.get({type:1}, this.onGetCategories.bind(this));
-    // }
-
-    // this.onGetCategories = function(response){
-    //     this.categories = response.data;
-    //     if(this.action == 'edit'){
-    //         this.populate();
-    //     }
-    // }
-
-    // this.populate = function(){
-    //     $rootScope.$broadcast('loading-show');
-    //     PageService.get({id:$routeParams.id}, this.onPopulate.bind(this));
-    // }
-
-    // this.onPopulate = function(response){
-    //     $rootScope.$broadcast('loading-hide');
-    //     this.data = response;
-    // }
-
     this.submit = function(){
         $rootScope.$broadcast('loading-show');
         this.data.content =  tinyMCE.activeEditor.getContent();
         this.form.submitted = true;
-        access_level = this.setAccessLevel(this.accessLevel);
         var access_level = [];
+        
         if (this.form.$valid) {
-            this.data["access_level"] = $scope.lvl;
+            this.data["access_level"] = this.data.access_level;
             if(this.action == 'new'){
-                if(Object.keys(this.accessLevel).length > 0){
-                }
-                console.log
                 PageService.post({}, this.data,
                     this.onSubmit.bind(this),
                     this.onSubmitErr.bind(this)
@@ -265,7 +229,6 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
             }
 
             if(this.action == 'edit'){
-                console.log(this.data.id)
                 PageService.put({id:this.data.id}, this.data,
                     this.onSubmit.bind(this),
                     this.onSubmitErr.bind(this)
@@ -294,21 +257,6 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         $rootScope.$broadcast('loading-hide');
         this.form.success = false;
         SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
-    }
-
-    this.setAccessLevel = function(access){
-        console.log(access);
-        var access_level = [];
-        if(access.private){
-            access_level.push("1");
-        }
-        if(access.semiPublic){
-            access_level.push("2");
-        }
-        if(access.public){
-            access_level.push("3");
-        }
-        return access_level;
     }
 
     // this.init();

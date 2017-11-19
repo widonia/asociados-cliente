@@ -49,8 +49,6 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     }
 
     this.onGetStatsSuccess = function(response){
-        console.log("onGetStatsSuccess");
-        console.log(response);
         this.stats = response;
     }
 
@@ -83,8 +81,6 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
                 // 'value':parseInt(data.login[login]),
             });
         }
-        console.log("new_data");
-        console.log(new_data);
         this.chart.setData(new_data);
     }
 

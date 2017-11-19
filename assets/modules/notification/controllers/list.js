@@ -27,7 +27,6 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert, $scop
         this.count = response.count;
         this.list = response.data;
         $scope.algo = response.data;
-        console.log(this.list);
         window.scrollTo(0, 0);
     }
 
