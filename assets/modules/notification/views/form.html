@@ -122,7 +122,7 @@
 
                         <div class="radio">
                             <label class="radio-inline">
-                                <input type="radio" ng-model="notification.data.public" name="type" value="1"> Todos
+                                <input type="radio" ng-model="notification.data.public" name="type" value="1" ng-checked="true" ng-change="notification.data.public = true"> Todos
                              </label>
 
                            <label class="radio-inline">
@@ -132,7 +132,6 @@
 
                     </div>
                 </div>
-
                 <div ng-hide="notification.data.public">
                     <div class="row">
                         <div class="form-group col-sm-6">
@@ -143,7 +142,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" ng-show="notification.groups.id > -1">
                         <div class="form-group col-sm-6">
                             <label for="inputEmail3" class="control-label">Buscar asociados por documento</label>
                             <div class="row">

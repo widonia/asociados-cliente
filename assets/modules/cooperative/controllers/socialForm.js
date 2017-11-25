@@ -1,9 +1,17 @@
 "use strict";
 
-function SocialFormCtrl($rootScope, $routeParams, SocialService, action, SweetAlert){
-    this.data = {};
+function SocialFormCtrl($scope, $rootScope, $routeParams, SocialService, action, SweetAlert){
+    this.data = {
+        "access_level": []
+    };
     this.form = false;
     this.action = action;
+    $scope.accessLevel = {
+        public:false,
+        semiPublic: false,
+        private: false,
+    };
+    $scope.lvl = [];
 
     this.init = function(){    
         this.getSocialCategories()
@@ -33,10 +41,14 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action, SweetAl
     }
 
     this.onPopulateOk = function(response){
+        console.log(response);
+        this.fillDirective(response.access_level || []);
         var self = this;
         this.data.type_selected = this.data.options.filter(function(v){ return v.value==response.type;})[0]
-        this.data.url = response.url;
-        this.data.name = response.name;
+        this.data.url = response.data.url;
+        this.data.name = response.data.name;
+        this.data.access_level = response.data.access_level || [];
+
         $rootScope.$broadcast('loading-hide');
     }
 
@@ -47,6 +59,8 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action, SweetAl
     this.submit = function(){
         // $rootScope.$broadcast('loading-show');
         this.form.submitted = true;
+        console.log("this.data.type_selected");
+        console.log(this.data.type_selected);
         this.data.type = this.data.type_selected.value;
         $rootScope.$broadcast('loading-show');
         if(this.action == 'new'){            
@@ -78,6 +92,21 @@ function SocialFormCtrl($rootScope, $routeParams, SocialService, action, SweetAl
         }
         $rootScope.$broadcast('loading-hide');
         this.form.success = false;
+    }
+
+    this.fillDirective = function(levels){
+        $scope.lvl = levels;
+        if(levels.indexOf("1") > -1){
+            $scope.accessLevel['private'] = true;
+        }
+        
+        if(levels.indexOf("2") > -1){
+            $scope.accessLevel['semiPublic'] = true;
+        }
+        
+        if(levels.indexOf("3") > -1){
+            $scope.accessLevel['public'] = true;
+        }
     }
 
     this.init();
