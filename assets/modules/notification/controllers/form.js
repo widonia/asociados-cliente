@@ -37,7 +37,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             "description": "",
             "observation": "",
             "users":[],
-            "access_level": []
+            "access_level": [],
+            'public':true
         };
 
         if(this.action == 'edit'){ this.populate(); }        
@@ -125,6 +126,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     this.onGroups = function(response){
         this.groups = response.results;
         this.groups = response.data;
+        console.log(this.groups)
     }
 
     this.onGroupsErr = function(){
@@ -200,6 +202,22 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
         this.titleTooLong = response.data.title[0];
     }
 
+    this.suggest = function(){
+        UserService.suggest({search:this.autocomplete.key},
+            this.onSuggestOk.bind(this),
+            this.onSuggestError.bind(this)
+        );
+    }
+
+    this.onSuggestOk = function(response){
+        console.log(response)
+        this.autocomplete.suggest = response.data;   
+    }
+
+    this.onSuggestError = function(response){
+        console.log(response);
+    }
+
 
     this.onImageOk = function(response){    
         this.form.success = true;
@@ -213,6 +231,44 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
 
     this.addUserByGroup = function(id){
         GroupsService.groupId({id: this.groups.id}, this.onGroupIdSuccess, this.onGroupIdError);
+    }
+
+    this.addUser = function(user){
+        console.log(user);
+        var exists = false;
+        for (var element in this.autocomplete.list){            
+            console.log(this.autocomplete.list[element]['username']);
+            console.log(this.autocomplete.list[element]['username'])
+            if(user.username == this.autocomplete.list[element]['username'] && user.username != undefined){
+                exists = true;
+                console.log('if for');
+            }
+        }
+        
+        if (exists == false){
+            console.log('if');
+            console.log(user.id);
+            this.autocomplete.list.push(user);            
+            console.log(this.autocomplete);
+            if(user.id == undefined){
+                if(this.data.users.indexOf(user.user_id)){
+                    this.data.users.push(user.user_id);        
+                }
+            }else{
+                console.log("this.data");
+                console.log(this.data);
+                if(this.data.users.indexOf(user.id)){
+                    this.data.users.push(user.id);
+                }
+            }
+            // this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );
+            console.log(this.data.users);
+        }
+
+        // console.log(this.data.users);
+        
+        this.autocomplete.key = '';
+        this.autocomplete.suggest = {};
     }
 
     this.onGroupIdSuccess = function(response){

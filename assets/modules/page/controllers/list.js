@@ -39,25 +39,26 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         this.status = {
             is_form:false
         };
-      this.getList();    
-      this.tinymceOptions = {
-        plugins: [
-            'advlist autolink lists link image charmap  preview hr anchor pagebreak',
-            'searchreplace wordcount visualblocks visualchars code fullscreen',
-            'insertdatetime media nonbreaking save table contextmenu ',
-            'emoticons template paste textcolor colorpicker textpattern imagetools '
-        ],
-        theme: 'modern',
-        min_height: 500,            
-        toolbar1: "insertfile undo redo | styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image",
-        toolbar2 : "searchreplace  | table |  emoticons | ",            
-        spellchecker_language: 'es', 
-        content_css: [              
-            // '../../../css/tinimyci.css'
-        ],
-        image_advtab: true,
-    };  
+        this.getList();
+        this.tinymceOptions = {
+            plugins: [
+                'advlist autolink lists link image charmap  preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu ',
+                'emoticons template paste textcolor colorpicker textpattern imagetools '
+            ],
+            theme: 'modern',
+            min_height: 500,            
+            toolbar1: "insertfile undo redo | styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image",
+            toolbar2 : "searchreplace  | table |  emoticons | ",            
+            spellchecker_language: 'es', 
+            content_css: [              
+                // '../../../css/tinimyci.css'
+            ],
+            image_advtab: true,
+        };  
     }
+
     this.getList = function(id){
         var filter = {page_size:1000};
         var list = PageService.get(filter);
@@ -75,6 +76,8 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
                 return true;
             } 
         });
+        console.log("this.parents");
+        console.log(this.parents);
 
         var principales = lista.filter(function (v) {
           return v.parent == null;
@@ -111,16 +114,17 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     
 
     this.newSubItem = function(scope){
+        this.getList();
         $scope.lvl = [];
-        this.data = {
-        content: "",
-        parent: null,
-        position: "0",
-        title: null,
-        type: null,
-        published: true,
-        access_level: []
-      };
+            this.data = {
+            content: "",
+            parent: null,
+            position: "0",
+            title: null,
+            type: null,
+            published: true,
+            access_level: []
+        };
       if (scope != undefined){
         var scope = scope;  
         this.nodeData = scope.$modelValue;
@@ -135,17 +139,20 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     }
 
     this.edit = function(scope, node){
-      var scope = scope;
-      this.nodeData = scope.$modelValue;
-      this.data = this.nodeData;
-      this.data['access_level'] = [];
-      this.status.is_form = true;
-      this.action = "edit";
+        this.getList();
+        var scope = scope;
+        this.nodeData = scope.$modelValue;
+        this.data = this.nodeData;
+        this.data['access_level'] = [];
+        this.status.is_form = true;
+        this.action = "edit";
       
-      PageService.get({id:this.data.id}, this.onSuccesGet.bind(this));
+        PageService.get({id:this.data.id}, this.onSuccesGet.bind(this));
     }
 
     this.onSuccesGet = function(response){
+        console.log("response");
+        console.log(response);
         this.data = response;
         this.fillDirective(this.data['access_level'] || []);
     }     

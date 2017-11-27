@@ -6,7 +6,7 @@ function UserService($resource, Config){
     
     return $resource(_url, {}, {
         cooperative: { method:'GET', url: Config.REST + '/auth/entities/?fn=none'},
-        suggest: { method:'GET', url:_url+'suggest/?fn=none'},
+        suggest: { method:'GET', url:_url},
         download_data: { method:'GET', url:_url+'download/'},
         put: { method:'PUT'},
         imageReview: {method: 'GET', url:Config.REST + '/user/image_revision'},
