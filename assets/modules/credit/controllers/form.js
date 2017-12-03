@@ -1,18 +1,18 @@
 "use strict";
 
-function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, action){
+function CreditFormCtrl($scope, $rootScope, $routeParams, $q, $http,  CreditService, action){
     this.data = {};
     this.action = action;
     this.form = false;
     this.hstore = [];
-    this.test = {
-        yo: "yo"
-    }
-    this.accessLevel = {
+
+    $scope.accessLevel = {
         private: false,
         semiPublic: false,
         public: false
     };
+
+    $scope.lvl = [];
     
     this.init = function(){
         this.populate();
@@ -20,27 +20,23 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
 
     this.populate = function(){
         CreditService.get({id:$routeParams.id}, this.onPopulate.bind(this));
+        CreditService.getAll({id:$routeParams.id}, this.onPopulateAll.bind(this));
     }
 
     this.onPopulate = function(response){
-        // console.log(response);
+        console.log(response);
         $rootScope.$broadcast('loading-hide');
         this.data = response;
         
-        if(response.access_level.indexOf("1") > -1){
-            this.accessLevel.public = true;
-        }
+        this.fillDirective(response.access_level);
         
-        if(response.access_level.indexOf("2") > -1){
-            this.accessLevel.semiPublic = true;
-        }
-        
-        if(response.access_level.indexOf("3") > -1){
-            this.accessLevel.private = true;
-        }
-        console.log("this.accessLevel");
-        console.log(this.accessLevel);
         if(this.action === "edit") this.parseHStore();
+    }
+
+    this.onPopulateAll = function(response){
+        console.log(response.data);
+        this.parents = response.data.filter(credit => credit.type == 1);
+        console.log(this.parents);
     }
 
     this.parseHStore = function(){
@@ -48,7 +44,6 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
             this.hstore.push({key:element, value:this.data.data[element]});
         }
     }
-    console.log(this.hstore);
 
     this.applyHStore = function(){
         this.data.data = {};
@@ -67,17 +62,11 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
     }
 
     this.submit = function(){
-        var access_level = [];
-        console.log("this.accessLevel");
-        console.log(this.accessLevel);
-        access_level = this.setAccessLevel(this.accessLevel);
         this.applyHStore();
         this.form.submitted = true;
         if (this.form.$valid) {
-            if(this.action == 'new'){
-                if(Object.keys(this.accessLevel).length > 0){
-                    this.data["access_level"] = access_level;
-                }
+            this.data["access_level"] = this.data.access_level;
+            if(this.action == 'new'){                
                 CreditService.save({}, this.data,
                     this.onSubmit.bind(this),
                     this.onSubmitErr.bind(this)
@@ -85,8 +74,6 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
             }
 
             if(this.action == 'edit'){
-                this.data["access_level"] = this.setAccessLevel(this.accessLevel);
-                console.log(this.data);
                 CreditService.put({id:$routeParams.id}, this.data,
                     this.onSubmit.bind(this),
                     this.onSubmitErr.bind(this)
@@ -107,20 +94,19 @@ function CreditFormCtrl($rootScope, $routeParams, $q, $http,  CreditService, act
         // console.log(a,b);
     }
 
-    this.setAccessLevel = function(access){
-        var access_level = [];
-        if(access.private){
-            access_level.push("1");
+    this.fillDirective = function(levels){
+        $scope.lvl = levels;
+        if(levels.indexOf("1") > -1){
+            $scope.accessLevel['private'] = true;
         }
-        if(access.semiPublic){
-            access_level.push("2");
+        
+        if(levels.indexOf("2") > -1){
+            $scope.accessLevel['semiPublic'] = true;
         }
-        if(access.public){
-            access_level.push("3");
+        
+        if(levels.indexOf("3") > -1){
+            $scope.accessLevel['public'] = true;
         }
-        console.log("access");
-        console.log(access);
-        return access_level;
     }
 
     this.init();

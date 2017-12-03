@@ -5,7 +5,8 @@ function accessLevel($timeout){
         restrict: 'E',
         scope: {
             accessLevel: "=?level",
-            lvl: "="
+            lvl: "=",
+            section: "="
         },
         controller: accessLevelCtrl,
         link: link,
@@ -19,12 +20,8 @@ function accessLevelCtrl($scope){
     $scope.setPrivacy = function(authLevel, lvl){
         // $scope.lvl = [];
         if(authLevel){
-            console.log(authLevel)
-            console.log(authLevel, lvl)
             $scope.lvl.push(lvl);
         }else if(!authLevel && $scope.lvl.indexOf(lvl) > -1){
-            console.log(authLevel)
-            console.log(authLevel, lvl)
             $scope.lvl.splice($scope.lvl.indexOf(lvl), 1);
         }
     }

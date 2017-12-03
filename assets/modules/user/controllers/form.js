@@ -62,7 +62,13 @@ function UserFormCtrl($scope, $rootScope, $routeParams, $q, UserService, action,
         console.log('error')
         console.log(response);
         this.form.success = false;
-        SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
+        if(response.data.code == 11006){
+            SweetAlert.swal("Error!", "El usuario ya se encuentra creado.", "error"); 
+        }else if(response.data.code == 12010){
+            SweetAlert.swal("Error!", "Mail inválido.", "error"); 
+        }else{
+            SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
+        }
     }
 
     this.getImageToReview = function(data){

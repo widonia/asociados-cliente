@@ -11,7 +11,7 @@
                 <input type="checkbox" ng-model="accessLevel.semiPublic" ng-change="setPrivacy(accessLevel.semiPublic, '2')" name="type" value="2"> Semi Privado
             </label>
 
-            <label class="radio-inline">
+            <label class="radio-inline" ng-show="section">
                 <input type="checkbox" ng-model="accessLevel.public" ng-change="setPrivacy(accessLevel.public, '3')" name="type" value="3"> Público
              </label>
              <input type="hidden" ng-model="lvl">

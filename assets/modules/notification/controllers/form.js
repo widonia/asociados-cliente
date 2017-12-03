@@ -199,6 +199,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             $scope.showTitleError = true;
             return titleTooLong;
         });
+        console.log(response);
         this.titleTooLong = response.data.title[0];
     }
 
@@ -257,8 +258,8 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }else{
                 console.log("this.data");
                 console.log(this.data);
-                if(this.data.users.indexOf(user.id)){
-                    this.data.users.push(user.id);
+                if(this.data["users"].indexOf(user.id)){
+                    this.data["users"].push(user.id);
                 }
             }
             // this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );

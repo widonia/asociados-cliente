@@ -15,24 +15,24 @@ function UpdateIndexCtrl($rootScope, UpdateService, $http, Config){
         // array with db properties
         db:[ 
             {
-                name:'asociados',
+                name:'Asociados',
                 method: 'user_data',
             },
 
-            {
-                name:'creditos',
-                method: 'credit',
-            },
+            // {
+            //     name:'creditos',
+            //     method: 'credit',
+            // },
 
             {
-                name:'obligaciones',
+                name:'Estado de cuenta',
                 method: 'obligation',
             },
 
-            {
-                name:'extractos',
-                method: 'statement',
-            },
+            // {
+            //     name:'extractos',
+            //     method: 'statement',
+            // },
         ],
     };
 

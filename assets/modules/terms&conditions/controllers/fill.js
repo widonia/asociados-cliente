@@ -19,7 +19,7 @@ function TermsFillCtrl($scope, $rootScope,  $http, $routeParams, Config,  Cooper
     }
 
     this.populate = function(){        
-        CooperativeService.get(
+        CooperativeService.get_terms(
             {id:this.cooperative}, 
             this.onPopulate.bind(this), 
             this.onPopulateErr.bind(this)
@@ -27,7 +27,8 @@ function TermsFillCtrl($scope, $rootScope,  $http, $routeParams, Config,  Cooper
     }
 
     this.onPopulate = function(response){
-        this.data.terms = response.terms;
+        console.log(response);
+        this.data.terms = response.data.terms;
     }
 
     this.onPopulateErr = function(response){
@@ -42,7 +43,7 @@ function TermsFillCtrl($scope, $rootScope,  $http, $routeParams, Config,  Cooper
                 if (this.data.terms == "" || this.data.terms == undefined || this.data.terms == null) {
                     this.data.terms = null;
                 }
-                CooperativeService.set_terms({id:this.cooperative}, 
+                CooperativeService.update_terms({id:this.cooperative}, 
                     this.data,
                     this.onSubmitOk.bind(this),
                     this.onSubmitError.bind(this)
@@ -57,7 +58,7 @@ function TermsFillCtrl($scope, $rootScope,  $http, $routeParams, Config,  Cooper
            confirmButtonColor: "#5cb85c",
            confirmButtonText: "Si, ¡quiero editarlo!",
            cancelButtonText: "Cancelar",
-           closeOnConfirm: false,
+           closeOnConfirm: true,
            closeOnCancel: true 
         },                    
             confirmation.bind(this)

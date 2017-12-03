@@ -9,6 +9,8 @@ function CooperativeService($resource, Config){
         get: { method:'GET', url:_url},
         bad_emails: { method:'GET', url:_url + "bad_emails"},
         set_terms: { method:'POST', url:_url + "set_terms"},
+        get_terms: { method:'GET', url:Config.REST + '/entity/terms'},
+        update_terms: {method: 'PUT', url: Config.REST + '/entity/save_terms'}
     })
 }
 

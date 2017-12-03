@@ -41,13 +41,12 @@ function SocialFormCtrl($scope, $rootScope, $routeParams, SocialService, action,
     }
 
     this.onPopulateOk = function(response){
-        console.log(response);
         this.fillDirective(response.access_level || []);
         var self = this;
         this.data.type_selected = this.data.options.filter(function(v){ return v.value==response.type;})[0]
-        this.data.url = response.data.url;
-        this.data.name = response.data.name;
-        this.data.access_level = response.data.access_level || [];
+        this.data.url = response.url;
+        this.data.name = response.name;
+        this.data.access_level = response.access_level || [];
 
         $rootScope.$broadcast('loading-hide');
     }
@@ -59,8 +58,6 @@ function SocialFormCtrl($scope, $rootScope, $routeParams, SocialService, action,
     this.submit = function(){
         // $rootScope.$broadcast('loading-show');
         this.form.submitted = true;
-        console.log("this.data.type_selected");
-        console.log(this.data.type_selected);
         this.data.type = this.data.type_selected.value;
         $rootScope.$broadcast('loading-show');
         if(this.action == 'new'){            
@@ -86,7 +83,6 @@ function SocialFormCtrl($scope, $rootScope, $routeParams, SocialService, action,
     }
 
     this.onSubmitError = function(response){
-        console.log(response);
         if(response.data.errors.URL === "BadURL"){
             SweetAlert.swal("Ups!", "Esta no es una URL válida.", "error");
         }
