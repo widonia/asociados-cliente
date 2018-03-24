@@ -25,6 +25,7 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
     };
 
     $scope.lvl = [];
+    $scope.selectedUsers = [];
 
     this.init = function(){
 
@@ -258,8 +259,10 @@ function NotificationFormCtrl($scope, $rootScope, $routeParams, $http, Notificat
             }else{
                 console.log("this.data");
                 console.log(this.data);
-                if(this.data["users"].indexOf(user.id)){
-                    this.data["users"].push(user.id);
+                if(this.data["users"].indexOf(user.user_id)){
+                    this.data["users"].push(user.user_id);
+                    $scope.selectedUsers.push(user);
+                    console.log($scope.selectedUsers);
                 }
             }
             // this.data.users.push( ((user.id == undefined) ? user.user_id : user.id) );

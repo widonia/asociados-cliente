@@ -32,7 +32,7 @@ function UserListCtrl($rootScope, UserService, SweetAlert){
                 UserService.download_data(this.onDonwnloadSucces.bind(this), this.onDonwnloadError.bind(this));               
             } else {
                 SweetAlert.swal({
-                    title: "Canecelado", 
+                    title: "Cancelado", 
                     text: "Cancelado", 
                     type: "error",
                     timer: 1000

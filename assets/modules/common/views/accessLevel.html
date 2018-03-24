@@ -4,15 +4,15 @@
 
         <div class="radio">
             <label class="radio-inline">
-                <input type="checkbox" ng-model="accessLevel.private" ng-change="setPrivacy(accessLevel.private, '1')" name="type" value="1"> Privado
+                <input type="checkbox" ng-model="accessLevel.private" ng-change="setPrivacy(accessLevel.private, '1')" name="type" value="1" id="check_private"> Privado
              </label>
 
-           <label class="radio-inline">
+           <!-- <label class="radio-inline">
                 <input type="checkbox" ng-model="accessLevel.semiPublic" ng-change="setPrivacy(accessLevel.semiPublic, '2')" name="type" value="2"> Semi Privado
-            </label>
+            </label> -->
 
             <label class="radio-inline" ng-show="section">
-                <input type="checkbox" ng-model="accessLevel.public" ng-change="setPrivacy(accessLevel.public, '3')" name="type" value="3"> Público
+                <input type="checkbox" ng-model="accessLevel.public" ng-change="setPrivacy(accessLevel.public, '3')" name="type" value="3" id="check_public"> Público
              </label>
              <input type="hidden" ng-model="lvl">
         </div>

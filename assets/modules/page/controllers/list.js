@@ -7,8 +7,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     this.data_nodes = [];
     this.status = {
       is_form:false
-    };
-    
+    };    
     
     this.search = function (list) {
         return list.filter(function (v) {
@@ -76,8 +75,12 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
                 return true;
             } 
         });
-        console.log("this.parents");
-        console.log(this.parents);
+        console.log("$scope.action");
+        console.log(this.action);
+        if(this.action == 'new'){
+            document.getElementById("check_public").checked = false;
+            document.getElementById("check_private").checked = false;
+        }
 
         var principales = lista.filter(function (v) {
           return v.parent == null;
@@ -186,7 +189,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
               PageService.delete({id:id}, onDelete.bind(this));              
           } else {
               SweetAlert.swal({
-                  title: "Canecelado", 
+                  title: "Cancelado", 
                   text: "No se eliminó nada.", 
                   type: "error",
                   timer: 2000

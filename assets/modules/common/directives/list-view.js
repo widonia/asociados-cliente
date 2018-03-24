@@ -112,7 +112,7 @@ function listView(Config){
                         SweetAlert.swal("¡Eliminado!", "Elemento eliminado correctamente.", "success");
                     } else {
                         SweetAlert.swal({
-                            title: "Canecelado", 
+                            title: "Cancelado", 
                             text: "No se eliminó nada.", 
                             type: "error",
                             timer: 2000

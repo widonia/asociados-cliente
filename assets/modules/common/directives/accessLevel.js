@@ -16,6 +16,17 @@ function accessLevel($timeout){
 
 function accessLevelCtrl($scope){
     this.levels = [];
+
+    $scope.$watch('accessLevel', function(oldVal, newVal){
+        console.log("watch");
+        console.log(oldVal, newVal);
+    })
+    
+    $scope.setDefault = function(){
+        $scope.accessLevel.public = false;
+        $scope.accessLevel.semiPublic = false;
+        $scope.accessLevel.private = false;
+    }
     
     $scope.setPrivacy = function(authLevel, lvl){
         // $scope.lvl = [];
@@ -25,6 +36,7 @@ function accessLevelCtrl($scope){
             $scope.lvl.splice($scope.lvl.indexOf(lvl), 1);
         }
     }
+    $scope.setDefault();
 }
 
 function link($scope){

@@ -1,7 +1,7 @@
 .user-box {
   margin: 40px 0 ;
   position: relative;
-  padding-left: 70px;
+  padding-left: 0px;
 }
 .user-box .glyphicon {
   left: 0px;
@@ -176,6 +176,11 @@ body {
 .navbar-brand-header {
   padding-top: 8px;
   display: inline-flex;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  line-height: 32px;
+  font-size: 1.3em;
+  color: #5d5d5d;
 }
 .navbar-brand-header img {
   height: 30px;

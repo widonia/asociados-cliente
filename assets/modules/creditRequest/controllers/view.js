@@ -63,7 +63,7 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService, C
                     this.data.processed = !this.data.processed;
                 }
                 SweetAlert.swal({
-                    title: "Canecelado", 
+                    title: "Cancelado", 
                     text: "No se cambió nada.", 
                     type: "error",
                     timer: 1000

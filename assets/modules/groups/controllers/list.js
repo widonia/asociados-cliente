@@ -40,7 +40,7 @@ function GroupsListCtrl($rootScope, GroupsService, SweetAlert){
                 });
             } else {
                 SweetAlert.swal({
-                    title: "Canecelado", 
+                    title: "Cancelado", 
                     text: "Cancelado", 
                     type: "error",
                     timer: 1000
