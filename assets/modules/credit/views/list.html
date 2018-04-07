@@ -5,22 +5,48 @@
     <li class="active">Créditos</li>
 </ol>
 
-<list-view 
-    fields="[
-        {'name':'id', 'label':'Código', 'type': 'string'},
-        {'name':'name', 'label':'Nombre', 'type': 'string', width:'40'},
-        {'name':'rate', 'label':'Tasa', 'type': 'string'},
-        {'name':'insurance', 'label':'Seguro', 'type': 'string'},
-    ]"
+<!-- Nested node template -->
+<script type="text/ng-template" id="nodes_renderer2.html">
+    <div ui-tree-handle class="tree-node tree-node-content" data-nodrop-enabled >
+        <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+          class="glyphicon"
+          ng-class="{
+            'glyphicon-chevron-right': collapsed,
+            'glyphicon-chevron-down': !collapsed
+          }"></span></a>
+        <a class="" ng-if="node.type==2" data-nodrag ng-click="toggle(this)">
+            <spanclass="glyphicon glyphicon-align-justify"></span>
+        </a>
+      
+        {{node.name}}
+      
+        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="creditList.removing(this, node.id)"><span
+            class="glyphicon glyphicon-remove"></span></a>
+        <a class="pull-right btn btn-primary btn-xs" data-nodrag  ng-click="creditList.edit(this, node.id)" style="margin-right: 8px;"><span
+            class="glyphicon glyphicon-pencil"></span></a>
+        <a class="pull-right btn btn-primary btn-xs" ng-if="node.type==1" data-nodrag ng-click="creditList.newSubItem(this)" style="margin-right: 8px;"><span
+          class="glyphicon glyphicon-plus"></span></a>
+      
+    </div>
+  
+    <ol ui-tree-nodes="" ng-model="node.nodes"  ng-class="{hidden: collapsed}" data-nodrop-enabled  data-clone-enabled="false" >
+        <li ng-repeat="node in node.nodes" ui-tree-node data-nodrag data-nodrop-enabled  data-drag-delay="50000" ng-include="'nodes_renderer2.html'" collapsed="true;">
+        </li>
+    </ol>
+  
+</script>
 
-    filters="['search']" 
-
-    actions="['add', 'edit', 'delete', 'search']"
-
-    rest="credit"
-    
-    default-order="position"
-    >
-
-</list-view>
+<div class="row" ng-show="!creditList.status.is_form">
+    <p class="pull-right" >
+        <a  class="btn btn-success" ng-click="creditList.newSubItem()">Agregar página principal</a>
+    </p>
+    <div class="col-sm-12">
+        <div ui-tree id="tree-root">
+        <ol ui-tree-nodes ng-model="creditList.data_nodes" data-nodrop-enabled="false" data-clone-enabled="false" data-drag-enabled="false" data-drag-delay="1" data-empty-placeholder-enabled="false">
+            <li ng-repeat="node in creditList.data_nodes" ui-tree-node ng-include="'nodes_renderer2.html'" collapsed="true;"></li>
+        </ol>
+        </div>
+    </div>
+</div>
+      
 

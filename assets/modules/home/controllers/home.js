@@ -20,6 +20,7 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     this.MEDIA = Config.MEDIA;
     
     this.init = function(){
+        console.log("init home")
         this.data = {
             start: moment().startOf('month').format('YYYY-MM-DD'),
             end: moment().endOf("month").format('YYYY-MM-DD'),
@@ -37,14 +38,18 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     }
 
     this.getCooperative = function(){
-        CooperativeService.get({id:this.cooperative}, this.onGetCooperativeSucces.bind(this), this.onGetCooperativeError.bind(this));
+        CooperativeService.getLogo({id:this.cooperative}, this.onGetCooperativeSucces.bind(this), this.onGetCooperativeError.bind(this));
     }
 
-    this.onGetCooperativeSucces = function(response){        
-        this.cooperative_data = response;
+    this.onGetCooperativeSucces = function(response){
+        console.log("success");
+        console.log(response);
+        this.cooperative_data = response.data;
     }
 
      this.onGetCooperativeError = function(response){
+        console.log("error");
+        console.log(response);
         $rootScope.$broadcast('loading-hide2');
     }
 

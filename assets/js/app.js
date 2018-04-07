@@ -138,7 +138,7 @@ angular.module('app', [
             //credit urls
             .when('/cooperative/credits', {
                 templateUrl: Config.STATIC + '/modules/credit/views/list.html',
-                role:AUTH_ROLES.monitor
+                controller: 'CreditListCtrl', controllerAs: 'creditList', role:AUTH_ROLES.monitor
             })
 
             .when('/cooperative/credits/new', {

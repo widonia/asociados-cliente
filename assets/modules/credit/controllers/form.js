@@ -6,16 +6,16 @@ function CreditFormCtrl($scope, $rootScope, $routeParams, $q, $http,  CreditServ
     this.form = false;
     this.hstore = [];
 
-    $scope.accessLevel = {
-        private: false,
-        semiPublic: false,
-        public: false
-    };
-
+    
     $scope.lvl = [];
     
     this.init = function(){
         this.populate();
+        $scope.accessLevel = {
+            private: false,
+            semiPublic: false,
+            public: false
+        };
     }
 
     this.populate = function(){
@@ -24,19 +24,20 @@ function CreditFormCtrl($scope, $rootScope, $routeParams, $q, $http,  CreditServ
     }
 
     this.onPopulate = function(response){
-        console.log(response);
         $rootScope.$broadcast('loading-hide');
+        console.log(response);
         this.data = response;
+        if(response.access_level == undefined) this.data['access_level'] = [];
+        console.log(this.data.access_level);
         
-        this.fillDirective(response.access_level);
+        this.fillDirective(this.data.access_level || []);
         
         if(this.action === "edit") this.parseHStore();
     }
 
     this.onPopulateAll = function(response){
-        console.log(response.data);
+        var respArr = [response];
         this.parents = response.data.filter(credit => credit.type == 1);
-        console.log(this.parents);
     }
 
     this.parseHStore = function(){
@@ -95,6 +96,7 @@ function CreditFormCtrl($scope, $rootScope, $routeParams, $q, $http,  CreditServ
     }
 
     this.fillDirective = function(levels){
+        console.log(levels);
         $scope.lvl = levels;
         if(levels.indexOf("1") > -1){
             $scope.accessLevel['private'] = true;

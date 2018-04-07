@@ -6,11 +6,8 @@ function CreditService($resource, Config){
     
     return $resource(_url, {}, {
         getAll: { method:'GET', url: Config.REST + '/credit/'},
-        // proccess: { method:'POST', url:_url + 'processed' , params: {id: "@id"}},
-        // post: { method:'POST'},
-        put: { method:'PUT'},
-        // delete: { method:'DELETE'},
-        
+        query: { method:'GET', url: Config.REST + 'credit-request/:id', params: {id: '@id'}},
+        put: { method:'PUT'},        
     })
 }
 

@@ -40,10 +40,26 @@
 
         <div class="row">
             <div class="form-group col-sm-8">
+                <label for="inputEmail3" class="control-label">Tipo</label>
+                <div class="error" ng-show="credit.form.type.$invalid && credit.form.submitted">
+                    <small class="error" ng-show="credit.form.type.$error.required">
+                        Seleccione un tipo
+                    </small>
+                </div>
+                <select name="type" ng-model="credit.data.type" class="form-control" required>
+                    <option value="">Selecicone</option>
+                    <option value="1">Categoria</option>
+                    <option value="2">Contenido</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group col-sm-8">
                 <label class="control-label">Crédito Padre</label>{{credit.data.parent}}
                 <select class="form-control" ng-model="credit.data.parent">
 					<option value="">Sin padre</option>
-					<option value="{{val.id}}" ng-repeat="(key,val) in credit.parents">{{val.name}}</option>
+					<option value="{{val.id}}" ng-repeat="(key,val) in credit.parents">{{val.name}} {{val.id}}</option>
 				</select>
             </div>
         </div>
@@ -88,8 +104,10 @@
                 </div>
             </div>
         </div>
-
-        <access-level level="accessLevel" lvl="credit.data.access_level" section="false"></access-level>
+        <div>
+            {{credit.data.access_level}}
+            <access-level level="accessLevel" lvl="credit.data.access_level" section="true"></access-level>
+        </div>
 
         <div class="dinamyc-forms">
 

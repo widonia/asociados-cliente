@@ -8,7 +8,6 @@ function CreditRequestListCtrl($rootScope, CreditRequestService, SweetAlert){
 
     this.init = function(){
         this.getList();
-        console.log('init');
     }
 
     this.setPage = function () {

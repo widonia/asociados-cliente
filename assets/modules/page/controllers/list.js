@@ -75,8 +75,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
                 return true;
             } 
         });
-        console.log("$scope.action");
-        console.log(this.action);
+        
         if(this.action == 'new'){
             document.getElementById("check_public").checked = false;
             document.getElementById("check_private").checked = false;
@@ -84,13 +83,13 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
 
         var principales = lista.filter(function (v) {
           return v.parent == null;
-        });    
+        });
         principales =  principales.sort(function(a, b) { 
           return  a.position - b.position;
-        });      
+        });
 
         //recursive, get childres for a id
-        var getChildrens = function(id){   
+        var getChildrens = function(id){
           var hijos = lista.filter(function(v){
             return v.parent == id;
           });
@@ -109,7 +108,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
           }
         }
 
-        for(var i=0;i<principales.length;i++){           
+        for(var i=0;i<principales.length;i++){
           principales[i].nodes = getChildrens(principales[i].id);
         }
         this.data_nodes = principales;
@@ -154,8 +153,6 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     }
 
     this.onSuccesGet = function(response){
-        console.log("response");
-        console.log(response);
         this.data = response;
         this.fillDirective(this.data['access_level'] || []);
     }     

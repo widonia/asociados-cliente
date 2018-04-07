@@ -132,38 +132,26 @@
 
                     </div>
                 </div>
-                <div ng-hide="notification.data.public">
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <label for="inputEmail3" class="control-label">Agregar asociados por grupo</label>
-                            <select class="form-control" ng-model="notification.groups.id" ng-change="notification.addUserByGroup(notification.data.group_id)">
-                                <option value="{{val.id}}" ng-repeat="(key,val) in notification.groups">{{val.name}}</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="row" >
+                    <div class="form-group col-sm-6">
+                        <label for="inputEmail3" class="control-label">Buscar asociados por documento</label>
+                        <div class="row">
+                            <div class="form-group col-sm-10">
+                                <input type="input" class="form-control" ng-model="notification.autocomplete.key">
 
-                    <div class="row" ng-show="notification.groups.id > -1">
-                        <div class="form-group col-sm-6">
-                            <label for="inputEmail3" class="control-label">Buscar asociados por documento</label>
-                            <div class="row">
-                                <div class="form-group col-sm-10">
-                                    <input type="input" class="form-control" ng-model="notification.autocomplete.key">
-
-                                    <ul ng-show="notification.autocomplete.suggest" class="autocomplete">
-                                        <li ng-click="notification.addUser(user)" ng-repeat="user in notification.autocomplete.suggest"><span>{{user.username}}</span> {{user.name}}</li>
-                                    </ul>
+                                <ul ng-show="notification.autocomplete.suggest" class="autocomplete">
+                                    <li ng-click="notification.addUser(user)" ng-repeat="user in notification.autocomplete.suggest"><span>{{user.username}}</span> {{user.name}}</li>
+                                </ul>
 
 
-                                </div>
-                                <div class="form-group col-sm-2">
-                                    <button ng-click="notification.suggest()" type="button" class="btn btn-success btn-sm">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <button ng-click="notification.suggest()" type="button" class="btn btn-success btn-sm">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
                             </div>
                         </div>
                     </div>
-
                     <div ng-show="notification.autocomplete.list.0">
                         <div class="row">
                             <div class="form-group col-sm-12">
@@ -191,6 +179,16 @@
                                     </table>
                                 </div>                                
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="notification.data.public">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="inputEmail3" class="control-label">Agregar asociados por grupo</label>
+                            <select class="form-control" ng-model="notification.groups.id" ng-change="notification.addUserByGroup(notification.data.group_id)">
+                                <option value="{{val.id}}" ng-repeat="(key,val) in notification.groups">{{val.name}}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
