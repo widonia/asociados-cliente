@@ -24,7 +24,6 @@ function GroupsFillCtrl($scope, $rootScope,  $http, $routeParams, Config, Groups
 
     this.onPopulateErr = function(response){
         $rootScope.$broadcast('loading-hide');
-        // console.log(response);
     }
 
     this.submit = function(){

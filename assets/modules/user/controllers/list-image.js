@@ -9,12 +9,10 @@ function UserlistImageCtrl($scope, $rootScope, UserService, SweetAlert){
     }
 
     this.onImageSuccess = function(response){
-        console.log(response.data);
         $scope.user = response.data;
     }
 
     this.onImageError = function(response){
-        console.log(response);
     }
 
     this.init();

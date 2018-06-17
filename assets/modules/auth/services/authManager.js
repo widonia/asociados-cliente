@@ -31,7 +31,6 @@ function AuthManager($rootScope, $location, AUTH_EVENTS, AUTH_ROLES){
     }
 
     this.logout = function(){
-        // console.log("entraras");
         this.isLogin = false;
         this.isAuth = false;
         this.username = null;

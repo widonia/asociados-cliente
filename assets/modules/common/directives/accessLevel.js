@@ -19,7 +19,6 @@ function accessLevelCtrl($scope){
 
     $scope.$watch('accessLevel', function(oldVal, newVal){
         
-        console.log(oldVal, newVal);
     })
     
     $scope.setDefault = function(){

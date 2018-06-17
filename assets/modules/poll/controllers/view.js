@@ -17,7 +17,6 @@ function PollViewController($scope, PollService, $routeParams, $q, $http){
     }
     
     $scope.getResultsSuccess = function(response){
-        console.log(response);
         $scope.answers = response.data;
         for(var i = 0; i<$scope.answers.length; i++){
             if($scope.answers[i].type == 'Close'){
@@ -28,17 +27,14 @@ function PollViewController($scope, PollService, $routeParams, $q, $http){
                 $scope.answers[i].type = 'Cerrada con comentarios';
             }
         }
-        console.log($scope.answers);
     }
     
     $scope.getResultsErr = function(response){
-        console.log(response);
         if(response.data.msg === "Poll no tiene questions relacionados.")
             $scope.messagePoll = true; 
     }
 
     $scope.getshowResutlsByPollSuccess = function(response){
-        console.log(response);
         var listanswers = response.data;
         var temporalAnswers = [];
         var answers = [];
@@ -67,11 +63,9 @@ function PollViewController($scope, PollService, $routeParams, $q, $http){
             }
         }
         $scope.data = answers;
-        console.log($scope.answers);
     }
 
     $scope.getshowResutlsByPollErr = function(response){
-        console.log(response);
     }
 
     // Download poll results like excel file
@@ -99,7 +93,6 @@ function PollViewController($scope, PollService, $routeParams, $q, $http){
     }
 
     $scope.downloadCvsError = function(response){
-        console.log(response);
     }
     
     this.init();

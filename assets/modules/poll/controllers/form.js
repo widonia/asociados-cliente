@@ -40,7 +40,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
     }
     // If success, fill the form with the poll and the answers
     $scope.getPollSuccess = function(response){
-        console.log(response);
         $scope.pollQuestions = response.question_set;
         
         if(response.state == 1){ //Set the poll state
@@ -76,7 +75,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
             date_start: response.date_start.slice(0,10),
             hoursPublish: response.date_start.slice(11,16)
         };
-        console.log($scope.form)
     }
     
     $scope.getPollErr = function(response){
@@ -85,7 +83,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
     
     // Do the new or edit petition when the form is submitted
     $scope.submit = function(){
-        console.log($scope.form.hoursPublish);
         if($scope.form.name == undefined){
             SweetAlert.swal("Ups!", "El nombre de la encuesta es obligatorio.", "error");
         }else if($scope.form.date_start == undefined || $scope.form.hoursPublish == undefined){
@@ -101,7 +98,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
                 PollService.post(dataPoll, $scope.onSubmitSuccess, $scope.onSubmitErr);
             }else{
                 var theForm = dataPoll;
-                console.log(theForm)
                 PollService.put({idPoll:idPoll}, theForm, $scope.onUpdateSuccess(), $scope.onUpdateErr);
             }
         }
@@ -133,7 +129,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
     }
     // Edit Poll
     $scope.onUpdateSuccess = function(response){
-        console.log(response);
         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
     }
     
@@ -143,8 +138,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
     
     // Answers to questions
     $scope.answerToQuestion = function(quest, action){
-        console.log(quest)
-        console.log(action)
         $scope.question = {
             content: quest.content,
             type: quest.actualType.id,
@@ -204,8 +197,6 @@ function PollController($scope, PollService, action, $routeParams, SweetAlert, $
     
     // Show options if the question is type closed, close with comments and multiple choise
     $scope.showOptions = function(actualType){
-        console.log(actualType);
-        console.log(actualType.id);
         $scope.idactualTypePoll = actualType.id;
         $scope.typePoll.type = actualType.id;
         if(actualType.id == 2 || actualType.id == 3){

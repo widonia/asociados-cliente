@@ -40,7 +40,6 @@ function LoginCtrl($rootScope, $routeParams, $location, Config, AuthService, Aut
     }
 
     this.onLoginError = function(response){
-        console.log('asdf');
         this.error = true;
         this.form = true;
         AuthManager.logout();

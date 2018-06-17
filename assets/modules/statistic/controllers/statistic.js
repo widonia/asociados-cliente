@@ -22,34 +22,28 @@ function StatisticCtrl($rootScope, StatisticService, CooperativeService, AuthMan
     }
 
     this.onGetStatsSuccess = function(response){
-        console.log(response);
         this.stats = response;
     }
 
     this.onGetStatsError = function(response){
         $rootScope.$broadcast('loading-hide2');
-        // console.log(response)
     }
 
     this.onGetStatisticsSuccess = function(response){
         $rootScope.$broadcast('loading-hide2');
         if(response.data != null){
-            // console.log(response)
             this.updateChart(response.data);
         }
     }
 
     this.onGetStatisticsError = function(response){
         $rootScope.$broadcast('loading-hide2');
-        // console.log(response)
     }
 
     this.updateChart = function(data){
-        console.log(data);
         var new_data = [];
 
         for (var login in data.login){
-            // console.log(login);
             new_data.push({
                 'key':login,
                 'value':parseInt(data.login[login]),

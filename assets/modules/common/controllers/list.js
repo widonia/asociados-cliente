@@ -31,7 +31,6 @@ function CRUDListCtrl($rootScope, CRUDService, settings, SweetAlert){
         event.preventDefault();
         var confirmation = function(isConfirm){ 
            if (isConfirm) {
-               console.log(id);
                 CRUDService.delete({object:settings.object, id:id}, this.onDelete.bind(this));
                 SweetAlert.swal("¡Eliminado!", "Elemento eliminado correctamente.", "success");
             } else {

@@ -25,10 +25,8 @@ function CreditFormCtrl($scope, $rootScope, $routeParams, $q, $http,  CreditServ
 
     this.onPopulate = function(response){
         $rootScope.$broadcast('loading-hide');
-        console.log(response);
         this.data = response;
         if(response.access_level == undefined) this.data['access_level'] = [];
-        console.log(this.data.access_level);
         
         this.fillDirective(this.data.access_level || []);
         
@@ -92,11 +90,9 @@ function CreditFormCtrl($scope, $rootScope, $routeParams, $q, $http,  CreditServ
     }
 
     this.changeHstore = function(a,b){
-        // console.log(a,b);
     }
 
     this.fillDirective = function(levels){
-        console.log(levels);
         $scope.lvl = levels;
         if(levels.indexOf("1") > -1){
             $scope.accessLevel['private'] = true;

@@ -31,7 +31,6 @@ function listView(Config){
 
             /* Fields to show */
             this.fields = $scope.fields;
-            console.log(this.fields);
 
             /* Fields to show */
             this.searchFilters = $scope.filters;

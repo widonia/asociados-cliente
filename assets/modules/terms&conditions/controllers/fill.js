@@ -27,12 +27,10 @@ function TermsFillCtrl($scope, $rootScope,  $http, $routeParams, Config,  Cooper
     }
 
     this.onPopulate = function(response){
-        console.log(response);
         this.data.terms = response.data.terms;
     }
 
     this.onPopulateErr = function(response){
-        // console.log(response);
     }
 
     this.submit = function(){

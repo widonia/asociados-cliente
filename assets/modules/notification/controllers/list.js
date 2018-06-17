@@ -21,7 +21,6 @@ function NotificationListCtrl($rootScope, NotificationService, SweetAlert, $scop
     }
 
     this.onGetList = function(response){
-        console.log(response);
         $rootScope.$broadcast('loading-hide');
 
         this.count = response.count;

@@ -25,7 +25,6 @@ function GroupsFormCtrl($rootScope, $routeParams, GroupsService, action){
 
     this.onPopulateErr = function(response){
         $rootScope.$broadcast('loading-hide');
-        // console.log(response);
     }
 
     this.submit = function(){

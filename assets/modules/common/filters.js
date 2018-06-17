@@ -1,6 +1,5 @@
 function fieldType(){
     return function (input, type) {
-        // console.log('element ' +input);
         if(type == 'date'){
             return moment(input).format('YYYY-MM-DD hh:mm a');
         }

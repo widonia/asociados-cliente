@@ -30,7 +30,6 @@ gulp.task('browserify', ['jshint'], function() {
         'title': 'Browserify Build Failed',
         'message': path.relative(__dirname, error.filename)
       });
-      console.log(error.message);
       this.emit('end');
     })
     .pipe(source('./trianglify.min.js'))

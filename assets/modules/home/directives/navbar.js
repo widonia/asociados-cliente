@@ -11,7 +11,6 @@ function navBar(AUTH_EVENTS, Config){
         controller: function($scope, $location, AuthService, AuthManager, $rootScope, AUTH_EVENTS, Config){
 
             $scope.logout = function(){
-                console.log(AuthManager.get('token'));
                 AuthService.logout({}, $scope.onLogoutSuccess, $scope.onLogoutError);               
             }
 

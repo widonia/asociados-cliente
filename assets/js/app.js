@@ -374,27 +374,23 @@ angular.module('app', [
 
         // login success event
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function(e, data){
-            console.log("Succes login");
             // document.body.style.background = "transparent";
             AuthManager.login(data.token);
         });
 
         // logout succes event
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
-            console.log("Succes logout");
             AuthManager.logout();
         });
 
         // not authenticasted event
-        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){
-            console.log("No authenticated");                        
+        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(e){                     
             e.preventDefault();         
             if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }
         });
 
         // not authenticasted event
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function(e){
-            console.log("No authorized")
             e.preventDefault();
             // AuthManager.logout();
             // if($location.$$path != '/login'){ $location.url('/login/?next=' + $location.$$path); }

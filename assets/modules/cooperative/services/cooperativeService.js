@@ -4,8 +4,6 @@ function CooperativeService($resource, Config){
 
     var _url = Config.REST + '/entity/:id/';
     const _url2 = 'http://54.187.171.36/api/entity/?entity_id=:id'
-    console.log('Config.REST');
-    console.log(Config.REST);
     
     return $resource(_url, {}, {
         stats: { method:'GET', url:_url + 'stats'},

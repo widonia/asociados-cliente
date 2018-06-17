@@ -20,7 +20,6 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     this.MEDIA = Config.MEDIA;
     
     this.init = function(){
-        console.log("init home")
         this.data = {
             start: moment().startOf('month').format('YYYY-MM-DD'),
             end: moment().endOf("month").format('YYYY-MM-DD'),
@@ -42,14 +41,10 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     }
 
     this.onGetCooperativeSucces = function(response){
-        console.log("success");
-        console.log(response);
         this.cooperative_data = response.data;
     }
 
      this.onGetCooperativeError = function(response){
-        console.log("error");
-        console.log(response);
         $rootScope.$broadcast('loading-hide2');
     }
 
@@ -72,14 +67,12 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
     this.onGetStatisticsError = function(response){
         $rootScope.$broadcast('loading-hide2');
         this.show_statistics = false;
-        // console.log(response)
     }
 
     this.updateChart = function(data){
         var new_data = [];
 
         for (var login in data.login){
-            // console.log(login);
             new_data.push({
                 'key':login,
                 'value':data.login[login],
@@ -120,7 +113,6 @@ function HomeCtrl($rootScope, StatisticService, CooperativeService, AuthManager,
         this.bad_emails = res.data;
     }
     this.onGetBadEmailsError = function(res){    
-        console.log("Error");
     }
 
     this.getBadEmails = function(){

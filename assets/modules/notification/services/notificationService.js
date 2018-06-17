@@ -2,8 +2,6 @@
 
 function NotificationService($resource, Config){
     var _url = Config.REST + '/notification/:id/';
-    console.log("_url");
-    console.log(_url);
     
     return $resource(_url + '?fn=none&type=1', {}, {
         get: { method:'GET'},

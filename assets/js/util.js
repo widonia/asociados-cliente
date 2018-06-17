@@ -43,7 +43,6 @@ function dataURItoBlob(dataURI) {
 // Convert an object to a csv
 function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
-    console.log(JSONData.length)
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     
     var CSV = '';    
@@ -69,15 +68,11 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     }
     
     //1st loop is to extract each row
-    console.log(arrData)
-    console.log(Object.keys( arrData ).length);
     for (var i = 0; i < Object.keys( arrData ).length; i++) {
         var row = "";
-        console.log(arrData[i]);
         
         //2nd loop will extract each column and convert it in string comma-seprated
         for (var index in arrData[i]) {
-            console.log(arrData[i])
             row += '"' + arrData[i][index] + '",';
             if(arrData[i][index] != '"' && arrData[i][index] != ' ', arrData[i][index] != ' '){
                  row += '"' + arrData[i][index] + '",';
@@ -85,7 +80,6 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
         }
 
         row.slice(0, row.length - 1);
-        // console.log(row)
         
         //add a line break after each row
         CSV += row + '\r\n';

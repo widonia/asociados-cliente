@@ -60,11 +60,9 @@ function UserListCtrl($rootScope, UserService, SweetAlert){
     }
 
     this.onImageSuccess = function(response){
-        console.log(response);
     }
 
     this.onImageError = function(response){
-        console.log(response);
     }
 }
 

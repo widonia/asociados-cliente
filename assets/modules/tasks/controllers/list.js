@@ -16,7 +16,6 @@ function TaskController($rootScope, TaskService, AuthManager){
 
     this.onGetList = function(response){
         this.data = response.data;
-        console.log(response);
     }
 
     this.init();

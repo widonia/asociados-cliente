@@ -17,7 +17,6 @@ function EmailFormCtrl($scope, $rootScope, $routeParams, EmailService, action){
     this.init = function(){
                 
         var onOptionsOk = function(response){
-            console.log(response)
             this.data.options_type = response.actions.POST.type.choices
             if(this.action == 'edit'){ this.populate(); }
         };

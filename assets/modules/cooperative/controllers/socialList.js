@@ -16,7 +16,6 @@ function SocialListCtrl($rootScope, $routeParams, SocialService, SweetAlert){
 
     this.onGetList = function(response){
         this.data = response;
-        // console.log("Entra por aca");
         // $rootScope.$broadcast('loading-hide');
         // this.count = response.count;
         // this.list = response.data;

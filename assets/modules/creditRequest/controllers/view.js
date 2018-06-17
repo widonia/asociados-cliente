@@ -28,7 +28,6 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService, C
 
     this.onPopulateError = function(response){
         $rootScope.$broadcast('loading-hide');
-        // console.log(response);
     }
 
     this.process = function(){

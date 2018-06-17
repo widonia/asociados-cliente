@@ -3,7 +3,6 @@
 function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, SweetAlert){
     return {
         request:function(request){
-            // console.log(" request " + request);
             // 
             $rootScope.$broadcast('loading-show2');
             var n = request.url.indexOf(Config.REST);
@@ -24,7 +23,6 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, Sweet
         },
 
         response: function(response){
-            // console.log(" response " + response);
             $rootScope.$broadcast('loading-hide2');
             // $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, response.data);
 
@@ -58,7 +56,6 @@ function AuthInterceptor($q, $rootScope, AUTH_EVENTS, AuthManager, Config, Sweet
                    // imageUrl: "http:://oitozero.com/avatar/avatar.jpg" 
                 });
             }
-            console.log(Config.DATA);
             if (response.config.url.indexOf(Config.DATA) > -1){
                 SweetAlert.swal({
                     title: "Estadísticas no disponibles",
