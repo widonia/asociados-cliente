@@ -18,7 +18,7 @@ function accessLevelCtrl($scope){
     this.levels = [];
 
     $scope.$watch('accessLevel', function(oldVal, newVal){
-        console.log("watch");
+        
         console.log(oldVal, newVal);
     })
     
@@ -29,7 +29,6 @@ function accessLevelCtrl($scope){
     }
     
     $scope.setPrivacy = function(authLevel, lvl){
-        // $scope.lvl = [];
         if(authLevel){
             $scope.lvl.push(lvl);
         }else if(!authLevel && $scope.lvl.indexOf(lvl) > -1){
