@@ -1,0 +1,26 @@
+[11:47:26] Using gulpfile ~/work/asociados/cliente/gulp/gulpfile.js
+(node:2961) ExperimentalWarning: The fs.promises API is experimental
+[11:47:26] Starting 'less'...
+[11:47:26] Starting 'index'...
+[11:47:29] Starting 'fonts'...
+[11:47:29] Starting 'images'...
+[11:47:29] Starting 'views'...
+[11:47:29] Finished 'less' after 3.44 s
+[11:47:29] Finished 'images' after 506 ms
+[11:47:30] Finished 'fonts' after 1.47 s
+[11:47:31] Finished 'views' after 1.66 s
+/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/properties/optimizer.js:134
+        var longhandToShorthand = toRemove.name != _name;
+                                           ^
+
+TypeError: Cannot read property 'name' of undefined
+    at _optimize (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/properties/optimizer.js:134:44)
+    at optimize (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/properties/optimizer.js:198:3)
+    at recursivelyOptimizeProperties (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/selectors/advanced.js:51:9)
+    at optimize (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/selectors/advanced.js:61:3)
+    at minify (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/clean.js:228:5)
+    at whenSourceMapReady (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/clean.js:135:7)
+    at Object.whenDone (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/clean.js:155:14)
+    at processNext (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/imports/inliner.js:105:13)
+    at importFrom (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/imports/inliner.js:79:10)
+    at ImportInliner.process (/Users/jonathan/work/asociados/cliente/gulp/node_modules/clean-css/lib/imports/inliner.js:38:10)

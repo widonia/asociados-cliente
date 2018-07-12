@@ -1,0 +1,31 @@
+npm WARN deprecated gulp-minify-css@1.2.4: Please use gulp-clean-css
+npm WARN deprecated gulp-util@3.0.8: gulp-util is deprecated - replace it, following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5
+npm WARN deprecated gulp-util@2.2.20: gulp-util is deprecated - replace it, following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5
+npm WARN deprecated connect@2.30.2: connect 2.x series is deprecated
+npm WARN deprecated graceful-fs@3.0.11: please upgrade to graceful-fs 4 for compatibility with current and future versions of Node.js
+npm WARN deprecated node-uuid@1.4.8: Use uuid module instead
+npm WARN deprecated minimatch@1.0.0: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+npm WARN deprecated minimatch@0.2.14: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+npm WARN deprecated graceful-fs@1.2.3: please upgrade to graceful-fs 4 for compatibility with current and future versions of Node.js
+
+> fsevents@1.2.4 install /Users/jonathan/work/asociados/cliente/gulp/node_modules/fsevents
+> node install
+
+[fsevents] Success: "/Users/jonathan/work/asociados/cliente/gulp/node_modules/fsevents/lib/binding/Release/node-v64-darwin-x64/fse.node" already installed
+Pass --update-binary to reinstall or --build-from-source to recompile
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN dev@1.0.0 No description
+npm WARN dev@1.0.0 No repository field.
+npm WARN The package gulp-awspublish is included as both a dev and production dependency.
+npm WARN The package gulp-connect is included as both a dev and production dependency.
+npm WARN The package gulp-less is included as both a dev and production dependency.
+npm WARN The package gulp-minify-css is included as both a dev and production dependency.
+npm WARN The package gulp-minify-html is included as both a dev and production dependency.
+npm WARN The package gulp-replace is included as both a dev and production dependency.
+npm WARN The package gulp-s3 is included as both a dev and production dependency.
+npm WARN The package gulp-useref is included as both a dev and production dependency.
+npm WARN The package gulp-watch is included as both a dev and production dependency.
+npm WARN The package yargs is included as both a dev and production dependency.
+
+added 1120 packages in 142.425s
