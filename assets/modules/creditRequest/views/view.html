@@ -22,14 +22,14 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Tasa de interés</label>
             <div class="col-sm-10">
-                <h6>{{creditView.data.data.rate}}</h6>
+                <h6>{{creditView.data.credit.rate}}</h6>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Interés seguros</label>
             <div class="col-sm-10">
-                <h6>{{creditView.data.data.insurance}}</h6>
+                <h6>{{creditView.data.credit.insurance}}</h6>
             </div>
         </div>
         
@@ -65,21 +65,21 @@
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">Monto: </label>
             <div class="col-sm-10">
-                <input type="number" step="0.1"  required="true" class="form-control" ng-model="creditView.data.data.amount" />
+                <input type="number" step="0.1"  required="true" class="form-control" ng-model="creditView.data.data.amount" readonly/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">Período (Meses):</label>
             <div class="col-sm-10">
-                <input type="number" step="1" required="true" class="form-control" ng-model="creditView.data.data.months"/>
+                <input type="number" step="1" required="true" class="form-control" ng-model="creditView.data.data.months" readonly/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">Observación:</label>
             <div class="col-sm-10">
-                <textarea class="form-control" ng-model="creditView.data.observation" name="" id="" cols="30" rows="10" required="false"></textarea>
+                <textarea class="form-control" ng-model="creditView.data.observation" name="" id="" cols="30" rows="10" required="false" readonly></textarea>
             </div>
         </div>
 

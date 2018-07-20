@@ -67,7 +67,6 @@ function SocialFormCtrl($scope, $rootScope, $routeParams, SocialService, action,
             );
         }
         else if(this.action == 'edit'){
-            // console.log("Cambia todo edit")
             SocialService.put({'id':$routeParams.id}, this.data,
                 this.onSubmitOk.bind(this),
                 this.onSubmitError.bind(this)

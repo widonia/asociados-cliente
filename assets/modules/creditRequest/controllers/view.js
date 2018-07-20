@@ -45,7 +45,7 @@ function CreditRequestViewCtrl($rootScope, $routeParams, CreditRequestService, C
                 this.data.processed = !this.data.processed;
             }
             SweetAlert.swal({
-                title: "Eroor", 
+                title: "Error", 
                 text: "Ocurrió un error.", 
                 type: "error"
             });
