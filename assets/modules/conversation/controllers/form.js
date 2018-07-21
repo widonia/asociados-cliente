@@ -1,6 +1,6 @@
 "use strict";
 
-function PageFormCtrl($routeParams, PageService, action){
+function FormCtrl($routeParams, PageService, action){
 
     this.data = {};
     this.action = action;
@@ -59,4 +59,4 @@ function PageFormCtrl($routeParams, PageService, action){
 
 angular
     .module('app.page.controllers')
-    .controller('PageFormCtrl', PageFormCtrl);
+    .controller('FormCtrl', FormCtrl);

@@ -1,14 +1,30 @@
 // "use strict";
 
 // function PageFormCtrl($rootScope, $routeParams, $q, $http,  PageService, action, SweetAlert){
-//     this.data = {};
-//     this.action = action;
-//     this.form = false;
-//     this.categories = [];
-    
+//     $scope.lvl = [];
+//     this.data = {
+//         content: "",
+//         parent: null,
+//         position: "0",
+//         title: null,
+//         type: null,
+//         published: true,
+//         access_level: []
+//     };
+
 //     this.init = function(){
-//         this.getCategories();
-//         this.populate();
+//         // Access level directive
+//         $scope.accessLevel = {
+//             public:false,
+//             semiPublic: false,
+//             private: false,
+//         };
+
+//         this.nodeData = null;
+//         this.data_nodes = [];
+//         this.status = {
+//             is_form:false
+//         };
 //         this.tinymceOptions = {
 //             plugins: [
 //                 'advlist autolink lists link image charmap  preview hr anchor pagebreak',
@@ -25,61 +41,7 @@
 //                 // '../../../css/tinimyci.css'
 //             ],
 //             image_advtab: true,
-//         };
-//     }
-
-//     this.getCategories = function(){
-//         PageService.get({type:1}, this.onGetCategories.bind(this));
-//     }
-
-//     this.onGetCategories = function(response){
-//         this.categories = response.data;
-//         if(this.action == 'edit'){
-//             this.populate();
-//         }
-//     }
-
-//     this.populate = function(){
-//         $rootScope.$broadcast('loading-show');
-//         PageService.get({id:$routeParams.id}, this.onPopulate.bind(this));
-//     }
-
-//     this.onPopulate = function(response){
-//         $rootScope.$broadcast('loading-hide');
-//         this.data = response;
-//     }
-
-//     this.submit = function(){
-//         $rootScope.$broadcast('loading-show');
-//         this.data.content =  tinyMCE.activeEditor.getContent();
-//         this.form.submitted = true;
-//         if (this.form.$valid) {
-//             if(this.action == 'new'){
-//                 PageService.post({}, this.data,
-//                     this.onSubmit.bind(this),
-//                     this.onSubmitErr.bind(this)
-//                 );
-//             }
-
-//             if(this.action == 'edit'){
-//                 PageService.put({id:$routeParams.id}, this.data,
-//                     this.onSubmit.bind(this),
-//                     this.onSubmitErr.bind(this)
-//                 );
-//             }
-//         }
-//     }
-
-//     this.onSubmit = function(response){
-//         $rootScope.$broadcast('loading-hide');
-//         SweetAlert.swal("¡Realizado!", "Acción realizada correctamente.", "success");
-//         this.form.success = true;
-//     }
-
-//     this.onSubmitErr = function(response){
-//         $rootScope.$broadcast('loading-hide');
-//         this.form.success = false;
-//         SweetAlert.swal("Error!", "Lo sentimos, no se pudo completar la acción.", "error"); 
+//         }; 
 //     }
 
 //     this.init();

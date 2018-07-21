@@ -47,7 +47,7 @@
                     </small>
                 </div>
                 <select name="type" ng-model="credit.data.type" class="form-control" required>
-                    <option value="">Selecicone</option>
+                    <option value="">Seleccione</option>
                     <option value="1">Categoria</option>
                     <option value="2">Contenido</option>
                 </select>
@@ -59,7 +59,7 @@
                 <label class="control-label">Crédito Padre</label>{{credit.data.parent}}
                 <select class="form-control" ng-model="credit.data.parent">
 					<option value="">Sin padre</option>
-					<option value="{{val.id}}" ng-repeat="(key,val) in credit.parents">{{val.name}} {{val.id}}</option>
+					<option value="{{val.id}}" ng-repeat="(key,val) in credit.parents">{{val.name}}</option>
 				</select>
             </div>
         </div>
@@ -104,9 +104,9 @@
                 </div>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <access-level level="accessLevel" lvl="credit.data.access_level" section="true"></access-level>
-        </div>
+        </div> -->
 
         <div class="dinamyc-forms">
 

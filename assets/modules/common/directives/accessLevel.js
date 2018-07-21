@@ -28,6 +28,7 @@ function accessLevelCtrl($scope){
     }
     
     $scope.setPrivacy = function(authLevel, lvl){
+        console.log(lvl);
         if(authLevel){
             $scope.lvl.push(lvl);
         }else if(!authLevel && $scope.lvl.indexOf(lvl) > -1){

@@ -103,6 +103,28 @@ angular.module('app', [
                     action: function(){return 'edit';}
                 }
             })
+            
+            //notification urls
+            .when('/content/notification', {
+                templateUrl: Config.STATIC + '/modules/notification/views/list.html',
+                controller: 'NotificationListCtrl', controllerAs: 'notification', role:AUTH_ROLES.monitor,
+            })
+
+            .when('/content/notification/new', {
+                templateUrl: Config.STATIC + '/modules/notification/views/form.html',
+                controller: 'NotificationFormCtrl', controllerAs: 'notification', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'new';}
+                }
+            })
+
+            .when('/content/notification/edit/:id', {
+                templateUrl: Config.STATIC + '/modules/notification/views/form.html',
+                controller: 'NotificationFormCtrl', controllerAs: 'notification', role:AUTH_ROLES.editor,
+                resolve: {
+                    action: function(){return 'edit';}
+                }
+            })
 
             //user urls
             .when('/cooperative/users', {
@@ -237,32 +259,6 @@ angular.module('app', [
                 controller: 'UpdateIndexCtrl', controllerAs: 'update', role:AUTH_ROLES.admin
             })
 
-            // .when('/cooperative/statistic', {
-            //     templateUrl: Config.STATIC + '/modules/statistic/views/statistic.html',
-            //     controller: 'StatisticCtrl', controllerAs: 'statistic', role:AUTH_ROLES.monitor
-            // })
-
-            .when('/content/notification', {
-                templateUrl: Config.STATIC + '/modules/notification/views/list.html',
-                controller: 'NotificationListCtrl', controllerAs: 'notification', role:AUTH_ROLES.monitor,
-            })
-
-            .when('/content/notification/new', {
-                templateUrl: Config.STATIC + '/modules/notification/views/form.html',
-                controller: 'NotificationFormCtrl', controllerAs: 'notification', role:AUTH_ROLES.editor,
-                resolve: {
-                    action: function(){return 'new';}
-                }
-            })
-
-            .when('/content/notification/edit/:id', {
-                templateUrl: Config.STATIC + '/modules/notification/views/form.html',
-                controller: 'NotificationFormCtrl', controllerAs: 'notification', role:AUTH_ROLES.editor,
-                resolve: {
-                    action: function(){return 'edit';}
-                }
-            })
-
             //credit request urls
             .when('/request/credit', {
                 templateUrl: Config.STATIC + '/modules/creditRequest/views/list.html',
@@ -282,17 +278,6 @@ angular.module('app', [
                     action: function(){return 'edit';}
                 }
             })
-
-            //user urls
-            // .when('/request/user', {
-            //     templateUrl: Config.STATIC + '/modules/user/views/list.html',
-            //     controller: 'UserListCtrl', controllerAs: 'userList', role:AUTH_ROLES.monitor
-            // })
-
-            // .when('/request/user/view/:id/:type', {
-            //     templateUrl: Config.STATIC + '/modules/user/views/view.html',
-            //     controller: 'UserViewCtrl', controllerAs: 'userView', role:AUTH_ROLES.editor
-            // })
 
             .when('/login', {
                 templateUrl: Config.STATIC + '/modules/auth/views/login.html',
