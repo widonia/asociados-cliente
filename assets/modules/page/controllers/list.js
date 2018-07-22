@@ -77,6 +77,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         });
         
         if(this.action == 'new'){
+            console.log("newww")
             document.getElementById("check_public").checked = false;
             document.getElementById("check_private").checked = false;
         }
@@ -258,6 +259,7 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
         }else{
             this.init();
         }
+        this.back();
     }
 
     this.onSubmitErr = function(response){
@@ -267,6 +269,10 @@ function PageListCtrl($rootScope, PageService,  $q, $scope, SweetAlert){
     }
 
     // this.init();
+
+    this.back = function(){
+        location.reload();
+    }
 }
 
 angular

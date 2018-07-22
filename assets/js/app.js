@@ -43,9 +43,9 @@ angular.module('app', [
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'https://s3-us-west-2.amazonaws.com/**',
             'http://54.187.171.36/**',
-            'http://www.administradorapp.com/**',
-            'http://administradorapp.com/**',
-            'http://34.212.251.179/**'
+            // 'http://www.administradorapp.com/**',
+            // 'http://administradorapp.com/**',
+            // 'http://34.212.251.179/**'
             // 'http://127.0.0.1:4000',
             // 'http://192.168.0.22:4000',
         ]);

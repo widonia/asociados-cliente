@@ -113,7 +113,7 @@
         <div class="form-group col-xs-12">
           <button type="submit" class="btn btn-primary">{{pageList.action == "new" ? "Enviar" : "Editar"}}</button>
                 &nbsp;
-          <a href="#/content/page" class="btn btn-warning" ng-click="pageList.status.is_form=false;">Regresar</a>
+          <button type="button" class="btn btn-warning" ng-click="pageList.back()">Regresar</button>
         </div>
       </div>
     </form>
