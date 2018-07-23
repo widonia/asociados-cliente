@@ -21,7 +21,7 @@ if(ENV == 'Prod'){
     angular.module('app.common.services').constant('Config', {
         REST: 'http://www.administradorapp.com/api/cliente',
         DATA: 'http://www.administradorapp.com/statistics',
-        STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/stage',
+        STATIC: 'https://s3-us-west-2.amazonaws.com/asociados-client/v2',
         MEDIA: 'https://s3-us-west-2.amazonaws.com/staticfiles-app'
     });
 }
