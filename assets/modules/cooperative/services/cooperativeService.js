@@ -12,7 +12,7 @@ function CooperativeService($resource, Config){
         set_terms: { method:'POST', url:_url + "set_terms"},
         get_terms: { method:'GET', url:Config.REST + '/entity/terms'},
         update_terms: {method: 'PUT', url: Config.REST + '/entity/save_terms'},
-        getLogo : {method: 'GET', url: 'http://54.187.171.36/api/entity/terms/?entity_id=:id', headers: {'version': '2.0.0'}}
+        getLogo : {method: 'GET', url: Config.REST + '/entity/terms/?entity_id=:id', headers: {'version': '2.0.0'}}
     })
 }
 
